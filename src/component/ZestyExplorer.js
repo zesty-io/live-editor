@@ -45,7 +45,7 @@ function deepen(obj) {
 }
 
 // renanme content to contentData
-var ZestyExplorerBrowser = ({ contentData, children }) => {
+const ZestyExplorerBrowser = ({ contentData, children }) => {
   const content = contentData || dummydata;
   // const [modal, setModal] = React.useState(false);
   const [search, setSearch] = React.useState();

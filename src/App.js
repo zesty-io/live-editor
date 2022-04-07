@@ -1,6 +1,7 @@
 import "./App.css";
 import ZestyExplorer from "./component/ZestyExplorer";
 
-var App = () => <ZestyExplorer />;
+const App = () => <ZestyExplorer />;
 
+console.log(window.location, 123123);
 export default App;
