@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 import React from "react";
 import ReactJson from "react-json-view-ssr";
 import Fuse from "fuse.js";
@@ -43,8 +44,9 @@ function deepen(obj) {
   return result;
 }
 
-const ZestyExplorerBrowser = ({ children }) => {
-  const content = dummydata;
+// renanme content to contentData
+const ZestyExplorerBrowser = ({ contentData, children }) => {
+  const content = contentData || dummydata;
   // const [modal, setModal] = React.useState(false);
   const [search, setSearch] = React.useState();
   // convert obj to dot

@@ -1,8 +1,6 @@
 import "./App.css";
 import ZestyExplorer from "./component/ZestyExplorer";
 
-function App() {
-  return <ZestyExplorer />;
-}
+const App = () => <ZestyExplorer />;
 
 export default App;
