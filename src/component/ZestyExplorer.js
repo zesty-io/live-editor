@@ -192,7 +192,8 @@ function canUseDOM() {
     window.document.createElement
   );
 }
-export const ZestyExplorer = ({ content }) => {
+export const ZestyExplorer = ({ cookie, content }) => {
+  console.log(cookie);
   const [open, setOpen] = React.useState(false);
   let searchObject = { ...content };
   // unset navigations for faster search
