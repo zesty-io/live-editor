@@ -22,6 +22,26 @@ Using NPM
 
 Using CDN
 
+- add this in the body of main.html file
+
+```
+   <div id="zesty-explorer"></div>
+```
+
+- copy the script and link tag below and paste it in the head of your main.html file
+
+```
+   <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/gh/zesty-io/explorer@main/build/static/js/main.e8f2da91.min.js"
+      defer="defer"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/gh/zesty-io/explorer@main/build/static/css/main.073c9b0a.min.css"
+      rel="stylesheet"
+    />
+```
+
 ` CND LINK`
 
 ## Explorer Sections
