@@ -20,8 +20,6 @@ Using NPM
 
 `npm install @zesty-io/explorer`
 
-`npm install @darwin808/zesty-explorer`
-
 Using CDN
 
 - copy the script tag below and paste it in the head of your main.html file
@@ -29,7 +27,7 @@ Using CDN
 ```
    <script
       type="text/javascript"
-      src="https://cdn.jsdelivr.net/gh/zesty-io/explorer@main/dist/zesty-explorer.cjs.production.min.js"
+      src="https://cdn.jsdelivr.net/gh/zesty-io/explorer@main/dist/explorer.cjs.production.min.js"
       defer="defer"
     ></script>
 ```
@@ -37,7 +35,7 @@ Using CDN
 Importing
 
 ```
-import {ZestyExplorer} from   '@darwin808/zesty-explorer';
+import {ZestyExplorer} from   '@zesty-io/explorer';
 ```
 
 ## Explorer Sections
@@ -45,14 +43,13 @@ import {ZestyExplorer} from   '@darwin808/zesty-explorer';
 - Page Data Explorer
 - Full Site Navigation and Explorer
 - Inline Editing (phases)
-- Website and PAge Health
+- Website and Page Health
 - Metadata
 - Link Scanning
 - Optimization Scanning
-
 
 ## Publishing to NPM
 
 Developer must have access to `zestyionpm` account
 
-```npm publish --access public``` 
+`npm publish --access public`
