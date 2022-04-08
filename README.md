@@ -27,9 +27,9 @@ Using CDN
 ```
    <script
       type="text/javascript"
-      src="https://cdn.jsdelivr.net/gh/zesty-io/explorer@main/dist/explorer.cjs.production.min.js"
+      src="https://cdn.jsdelivr.net/gh/zesty-io/explorer@cdn/build/static/js/main.min.js"
       defer="defer"
-    ></script>
+   ></script>
 ```
 
 Importing
