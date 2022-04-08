@@ -1403,7 +1403,7 @@ function canUseDOM() {
 
 var getPageData = /*#__PURE__*/function () {
   var _ref4 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee() {
-    var data, queryString, uri, res;
+    var data, queryString, prodUri, devUri, uri, res;
     return runtime_1.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -1412,31 +1412,32 @@ var getPageData = /*#__PURE__*/function () {
               error: true,
               production: true
             };
-            queryString = window.location.search.substring(1); // const uri = window.location.href + '?toJSON&' + queryString;
+            queryString = window.location.search.substring(1);
+            prodUri = window.location.href + '?toJSON&' + queryString;
+            devUri = 'https://www.zesty.io' + window.location.pathname + '?toJSON&' + queryString;
+            uri = process.env.NODE_ENV === 'development' ? devUri : prodUri; // Fetch data from Zesty.io toJSON API
 
-            uri = 'https://www.zesty.io' + window.location.pathname + '?toJSON&' + queryString; // Fetch data from Zesty.io toJSON API
-
-            _context.next = 5;
+            _context.next = 7;
             return fetch(uri);
 
-          case 5:
+          case 7:
             res = _context.sent;
 
             if (!(res.status == 200)) {
-              _context.next = 10;
+              _context.next = 12;
               break;
             }
 
-            _context.next = 9;
+            _context.next = 11;
             return res.json();
 
-          case 9:
+          case 11:
             data = _context.sent;
 
-          case 10:
+          case 12:
             return _context.abrupt("return", data);
 
-          case 11:
+          case 13:
           case "end":
             return _context.stop();
         }
