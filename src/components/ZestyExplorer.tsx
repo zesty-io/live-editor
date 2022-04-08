@@ -204,12 +204,14 @@ const getPageData = async () => {
   };
   const queryString = window.location.search.substring(1);
 
-  // const uri = window.location.href + '?toJSON&' + queryString;
-  const uri =
+  const prodUri = window.location.href + '?toJSON&' + queryString;
+  const devUri =
     'https://www.zesty.io' +
     window.location.pathname +
     '?toJSON&' +
     queryString;
+
+  const uri = process.env.NODE_ENV === 'development' ? devUri : prodUri;
 
   // Fetch data from Zesty.io toJSON API
   const res = await fetch(uri);
