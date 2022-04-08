@@ -1419,20 +1419,22 @@ function canUseDOM() {
 
 var ZestyExplorer = /*#__PURE__*/function () {
   var _ref5 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(_ref4) {
-    var _ref4$content, content, _React$useState2, open, setOpen, searchObject, buttonStyles, zestyStyles;
+    var _ref4$content, content, data, _React$useState2, open, setOpen, searchObject, buttonStyles, zestyStyles;
 
     return runtime_1.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             _ref4$content = _ref4.content, content = _ref4$content === void 0 ? {} : _ref4$content;
-            // if content is false run fetch
+            console.log(content || 'data');
+            data = dummydata; // if content is false run fetch
             // if (!content) {
             //   content = await getPageData();
             // }
+
             console.log('***********ZESTY EXPLORER LOADED *************');
             _React$useState2 = React.useState(false), open = _React$useState2[0], setOpen = _React$useState2[1];
-            searchObject = _extends({}, content); // unset navigations for faster search
+            searchObject = _extends({}, data); // unset navigations for faster search
 
             delete searchObject.navigationTree; // custom nav tree building
 
@@ -1461,13 +1463,13 @@ var ZestyExplorer = /*#__PURE__*/function () {
             };
 
             if (canUseDOM()) {
-              _context.next = 10;
+              _context.next = 12;
               break;
             }
 
             return _context.abrupt("return", null);
 
-          case 10:
+          case 12:
             return _context.abrupt("return", React.createElement("div", {
               style: {
                 overflow: 'hidden',
@@ -1500,7 +1502,7 @@ var ZestyExplorer = /*#__PURE__*/function () {
               }
             }, "Close")))));
 
-          case 11:
+          case 13:
           case "end":
             return _context.stop();
         }

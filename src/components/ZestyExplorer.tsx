@@ -217,6 +217,8 @@ function canUseDOM() {
 // };
 // api
 export const ZestyExplorer = async ({ content = {} }: any) => {
+  console.log(content || 'data');
+  const data = dummydata;
   // if content is false run fetch
   // if (!content) {
   //   content = await getPageData();
@@ -224,7 +226,7 @@ export const ZestyExplorer = async ({ content = {} }: any) => {
 
   console.log('***********ZESTY EXPLORER LOADED *************');
   const [open, setOpen] = React.useState(false);
-  let searchObject = { ...content };
+  let searchObject = { ...data };
   // unset navigations for faster search
   delete searchObject.navigationTree;
   // custom nav tree building
