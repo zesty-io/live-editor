@@ -20,29 +20,25 @@ Using NPM
 
 `npm install @zesty-io/explorer`
 
+`npm install @darwin808/zesty-explorer`
+
 Using CDN
 
-- add this in the body of main.html file
-
-```
-   <div id="zesty-explorer"></div>
-```
-
-- copy the script and link tag below and paste it in the head of your main.html file
+- copy the script tag below and paste it in the head of your main.html file
 
 ```
    <script
       type="text/javascript"
-      src="https://cdn.jsdelivr.net/gh/zesty-io/explorer@main/build/static/js/main.min.js"
+      src="https://cdn.jsdelivr.net/gh/zesty-io/explorer@main/dist/zesty-explorer.cjs.production.min.js"
       defer="defer"
     ></script>
-    <link
-      href="https://cdn.jsdelivr.net/gh/zesty-io/explorer@main/build/static/css/main.min.css"
-      rel="stylesheet"
-    />
 ```
 
-`CND LINK`
+Importing
+
+```
+import {ZestyExplorer} from   '@darwin808/zesty-explorer';
+```
 
 ## Explorer Sections
 
