@@ -31,9 +31,10 @@ Using CDN
 - copy the script and link tag below and paste it in the head of your main.html file
 
 ```
-   <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/gh/zesty-io/explorer@main/build/static/js/main.min.js"
+ <script
+
+     type="text/javascript"
+      src="https://cdn.jsdelivr.net/gh/zesty-io/explorer@old-main/build/static/js/main.min.js"
       defer="defer"
     ></script>
     <link
