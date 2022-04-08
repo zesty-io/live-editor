@@ -17,6 +17,7 @@
     "lint": "tsdx lint",
     "prepare": "tsdx build",
     "size": "size-limit",
+    "publish": "npm run publish --access public",
     "analyze": "size-limit --why"
   },
   "peerDependencies": {
