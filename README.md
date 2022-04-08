@@ -49,3 +49,10 @@ import {ZestyExplorer} from   '@darwin808/zesty-explorer';
 - Metadata
 - Link Scanning
 - Optimization Scanning
+
+
+## Publishing to NPM
+
+Developer must have access to `zestyionpm` account
+
+```npm publish --access public``` 

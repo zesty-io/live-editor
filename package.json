@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.1.3",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -17,7 +17,6 @@
     "lint": "tsdx lint",
     "prepare": "tsdx build",
     "size": "size-limit",
-    "publish": "npm run publish --access public",
     "analyze": "size-limit --why"
   },
   "peerDependencies": {
@@ -34,8 +33,8 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "@darwin808/zesty-explorer",
-  "author": "darwin.apolinario12",
+  "name": "@zesty-io/explorer",
+  "author": "zestyionpm",
   "module": "dist/zesty-explorer.esm.js",
   "size-limit": [
     {
