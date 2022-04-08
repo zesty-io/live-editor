@@ -197,7 +197,31 @@ function canUseDOM() {
   );
 }
 
-export const ZestyExplorer = ({ content }: any) => {
+// const getPageData = async () => {
+//   let data = {
+//     error: true,
+//     production: true,
+//   };
+//   const queryString = window.location.search.substring(1);
+//   const uri = window.location.href + '?toJSON&' + queryString;
+
+//   // Fetch data from Zesty.io toJSON API
+//   const res = await fetch(uri);
+
+//   // otherwise set response to data
+//   if (res.status == 200) {
+//     data = await res.json();
+//   }
+
+//   return data;
+// };
+// api
+export const ZestyExplorer = async ({ content = {} }: any) => {
+  // if content is false run fetch
+  // if (!content) {
+  //   content = await getPageData();
+  // }
+
   console.log('***********ZESTY EXPLORER LOADED *************');
   const [open, setOpen] = React.useState(false);
   let searchObject = { ...content };
