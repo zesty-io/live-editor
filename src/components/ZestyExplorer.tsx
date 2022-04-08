@@ -197,10 +197,50 @@ function canUseDOM() {
   );
 }
 
-export const ZestyExplorer = ({ content }: any) => {
-  console.log('***********ZESTY EXPLORER LOADED *************');
+const getPageData = async () => {
+  let data = {
+    error: true,
+    production: true,
+  };
+  const queryString = window.location.search.substring(1);
+
+  // const uri = window.location.href + '?toJSON&' + queryString;
+  const uri =
+    'https://www.zesty.io' +
+    window.location.pathname +
+    '?toJSON&' +
+    queryString;
+
+  // Fetch data from Zesty.io toJSON API
+  const res = await fetch(uri);
+
+  // otherwise set response to data
+  if (res.status == 200) {
+    data = await res.json();
+  }
+
+  return data;
+};
+
+export const ZestyExplorer = ({ content = {} }: any) => {
   const [open, setOpen] = React.useState(false);
-  let searchObject = { ...content };
+  const [pageData, setPageData] = React.useState<any>('');
+
+  const getData = async () => {
+    const res: any = await getPageData();
+    res && setPageData(res);
+  };
+
+  // check if content is available
+  React.useEffect(() => {
+    if (content && Object.keys(content).length === 0) {
+      getData();
+    } else {
+      setPageData(content);
+    }
+  }, []);
+
+  let searchObject = { ...pageData };
   // unset navigations for faster search
   delete searchObject.navigationTree;
   // custom nav tree building
