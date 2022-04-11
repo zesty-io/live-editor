@@ -22,7 +22,7 @@ Using NPM
 
 Using CDN
 
-- copy the script tag below and paste it in the head of your main.html file
+-  copy the script tag below and paste it in the head of your main.html file
 
 ```
     <script
@@ -40,13 +40,13 @@ import {ZestyExplorer} from   '@zesty-io/explorer';
 
 ## Explorer Sections
 
-- Page Data Explorer
-- Full Site Navigation and Explorer
-- Inline Editing (phases)
-- Website and Page Health
-- Metadata
-- Link Scanning
-- Optimization Scanning
+-  Page Data Explorer
+-  Full Site Navigation and Explorer
+-  Inline Editing (phases)
+-  Website and Page Health
+-  Metadata
+-  Link Scanning
+-  Optimization Scanning
 
 ## Publishing to NPM
 
