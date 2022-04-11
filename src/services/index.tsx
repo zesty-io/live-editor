@@ -18,6 +18,7 @@ export const getPageData = async () => {
    // Fetch data from Zesty.io toJSON API
    const res = await fetch(uri)
 
+   console.log(res.headers.get("z-zuid"), "headersssss")
    // otherwise set response to data
    if (res.status === 200) {
       data = await res.json()
