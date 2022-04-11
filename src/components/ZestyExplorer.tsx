@@ -208,6 +208,7 @@ const getPageData = async () => {
   const domain = process.env.REACT_APP_DOMAIN_OVERRIDE
     ? process.env.REACT_APP_DOMAIN_OVERRIDE
     : window.location.protocol + "//" + window.location.hostname;
+
   const uri = domain + window.location.pathname + "?toJSON&" + queryString;
   // const uri = window.location.href + "?toJSON&" + queryString;
 
