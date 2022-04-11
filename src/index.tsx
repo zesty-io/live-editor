@@ -4,8 +4,6 @@ import { ZestyExplorer } from "./views"
 import { canUseDOM } from "./utils/index"
 
 const main = () => {
-   const test = 123
-   console.log(test)
    if (!canUseDOM()) {
       return null
    }
