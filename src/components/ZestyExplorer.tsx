@@ -59,7 +59,7 @@ const ZestyExplorerBrowser = ({ contentData, children }: any) => {
   const flaten2 = convertToArray(flaten1);
 
   // generate columns for search
-  const columns = flaten2.map(e => {
+  const columns = flaten2.map((e) => {
     const res = Object.keys(e);
     return res.toString().replace(/.[0-9]/g, '');
   });
@@ -205,12 +205,13 @@ const getPageData = async () => {
   };
   const queryString = window.location.search.substring(1);
 
-  const domain = process.env.REACT_APP_DOMAIN_OVERRIDE
-    ? process.env.REACT_APP_DOMAIN_OVERRIDE
-    : window.location.protocol + '//' + window.location.hostname;
+  // const domain = process.env.REACT_APP_DOMAIN_OVERRIDE
+  //   ? process.env.REACT_APP_DOMAIN_OVERRIDE
+  //   : window.location.protocol + '//' + window.location.hostname;
 
-  const uri = domain + window.location.pathname + '?toJSON&' + queryString;
+  // const uri = domain + window.location.pathname + '?toJSON&' + queryString;
 
+  const uri = window.location.href + '?toJSON&' + queryString;
   // for testing only
   // const devUri =
   //   'https://www.zesty.io' +
