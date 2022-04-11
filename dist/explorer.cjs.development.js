@@ -1,6 +1,11 @@
-import React from 'react';
-import ReactJson from 'react-json-view-ssr';
-import Fuse from 'fuse.js';
+'use strict';
+
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
+var React = _interopDefault(require('react'));
+var ReactDOM = _interopDefault(require('react-dom'));
+var ReactJson = _interopDefault(require('react-json-view-ssr'));
+var Fuse = _interopDefault(require('fuse.js'));
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -1403,7 +1408,7 @@ function canUseDOM() {
 
 var getPageData = /*#__PURE__*/function () {
   var _ref4 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee() {
-    var data, queryString, prodUri, devUri, uri, res;
+    var data, queryString, uri, res;
     return runtime_1.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -1413,31 +1418,35 @@ var getPageData = /*#__PURE__*/function () {
               production: true
             };
             queryString = window.location.search.substring(1);
-            prodUri = window.location.href + '?toJSON&' + queryString;
-            devUri = 'https://www.zesty.io' + window.location.pathname + '?toJSON&' + queryString;
-            uri = process.env.NODE_ENV === 'development' ? devUri : prodUri; // Fetch data from Zesty.io toJSON API
+            uri = window.location.href + '?toJSON&' + queryString; // for testing only
+            // const devUri =
+            //   'https://www.zesty.io' +
+            //   window.location.pathname +
+            //   '?toJSON&' +
+            //   queryString;
+            // Fetch data from Zesty.io toJSON API
 
-            _context.next = 7;
+            _context.next = 5;
             return fetch(uri);
 
-          case 7:
+          case 5:
             res = _context.sent;
 
             if (!(res.status == 200)) {
-              _context.next = 12;
+              _context.next = 10;
               break;
             }
 
-            _context.next = 11;
+            _context.next = 9;
             return res.json();
 
-          case 11:
+          case 9:
             data = _context.sent;
 
-          case 12:
+          case 10:
             return _context.abrupt("return", data);
 
-          case 13:
+          case 11:
           case "end":
             return _context.stop();
         }
@@ -1564,5 +1573,20 @@ var ZestyExplorer = function ZestyExplorer(_ref5) {
   }, "Close"))));
 };
 
-export { ZestyExplorer };
-//# sourceMappingURL=explorer-dev.esm.js.map
+var canUseDOM$1 = function canUseDOM() {
+  return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+};
+
+// export * from './components/ZestyExplorer';
+
+var main = function main() {
+  if (!canUseDOM$1()) {
+    return null;
+  }
+
+  document.body.innerHTML += '<div id="zesty-explorer"></div>';
+  return ReactDOM.render(React.createElement(ZestyExplorer, null), document.getElementById('zesty-explorer'));
+};
+
+main();
+//# sourceMappingURL=explorer.cjs.development.js.map
