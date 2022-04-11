@@ -28,7 +28,7 @@ export const ContentViewer = ({ data, search, setSearch }: Props) => {
          <ReactJson
             style={{ height: "80vh", overflowY: "scroll" }}
             name={"data"}
-            //@ts-ignore
+            // @ts-ignore
             src={data}
             theme="flat"
             iconStyle="square"

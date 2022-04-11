@@ -1,3 +1,4 @@
+/* eslint-disable guard-for-in */
 export const canUseDOM = () => {
    return !!(
       typeof window !== "undefined" &&

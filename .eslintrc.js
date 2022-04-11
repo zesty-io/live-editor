@@ -49,16 +49,6 @@ module.exports = {
             },
          },
       ],
-      "prefer-arrow/prefer-arrow-functions": [
-         "error",
-         {
-            disallowPrototype: true,
-            singleReturnOnly: false,
-            classPropertiesAllowed: false,
-         },
-      ],
-      "prefer-arrow-callback": ["error", { allowNamedFunctions: true }],
-      "func-style": ["error", "expression", { allowArrowFunctions: true }],
    },
    settings: {
       react: {

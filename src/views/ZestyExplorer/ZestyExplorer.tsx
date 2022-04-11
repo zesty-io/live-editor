@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/no-children-prop */
 /* eslint-disable react/jsx-no-target-blank */
 import React from "react"
 import { dummydata } from "constants/index"
@@ -110,7 +110,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
       }
    }, [])
 
-   let searchObject = { ...pageData }
+   const searchObject = { ...pageData }
    // unset navigations for faster search
    delete searchObject.navigationTree
    // custom nav tree building
@@ -120,7 +120,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
       return null
    }
    return (
-      //@ts-ignore
+      // @ts-ignore
       <div style={zestyWrapper}>
          {/* ZESTY LOGO  bottom right*/}
          {!open && (
