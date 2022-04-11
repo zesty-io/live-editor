@@ -1,12 +1,6 @@
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
-var React = _interopDefault(require('react'));
-var ReactJson = _interopDefault(require('react-json-view-ssr'));
-var Fuse = _interopDefault(require('fuse.js'));
+import React from 'react';
+import ReactJson from 'react-json-view-ssr';
+import Fuse from 'fuse.js';
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -1409,7 +1403,7 @@ function canUseDOM() {
 
 var getPageData = /*#__PURE__*/function () {
   var _ref4 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee() {
-    var data, queryString, devUri, uri, res;
+    var data, queryString, domain, uri, res;
     return runtime_1.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -1419,30 +1413,36 @@ var getPageData = /*#__PURE__*/function () {
               production: true
             };
             queryString = window.location.search.substring(1);
-            devUri = 'https://www.zesty.io' + window.location.pathname + '?toJSON&' + queryString;
-            uri =  devUri ; // Fetch data from Zesty.io toJSON API
+            domain = process.env.REACT_APP_DOMAIN_OVERRIDE ? process.env.REACT_APP_DOMAIN_OVERRIDE : window.location.protocol + '//' + window.location.hostname;
+            uri = domain + window.location.pathname + '?toJSON&' + queryString; // for testing only
+            // const devUri =
+            //   'https://www.zesty.io' +
+            //   window.location.pathname +
+            //   '?toJSON&' +
+            //   queryString;
+            // Fetch data from Zesty.io toJSON API
 
-            _context.next = 7;
+            _context.next = 6;
             return fetch(uri);
 
-          case 7:
+          case 6:
             res = _context.sent;
 
             if (!(res.status == 200)) {
-              _context.next = 12;
+              _context.next = 11;
               break;
             }
 
-            _context.next = 11;
+            _context.next = 10;
             return res.json();
 
-          case 11:
+          case 10:
             data = _context.sent;
 
-          case 12:
+          case 11:
             return _context.abrupt("return", data);
 
-          case 13:
+          case 12:
           case "end":
             return _context.stop();
         }
@@ -1569,5 +1569,5 @@ var ZestyExplorer = function ZestyExplorer(_ref5) {
   }, "Close"))));
 };
 
-exports.ZestyExplorer = ZestyExplorer;
-//# sourceMappingURL=explorer-dev.cjs.development.js.map
+export { ZestyExplorer };
+//# sourceMappingURL=explorer.esm.js.map

@@ -54,3 +54,7 @@ import { ZestyExplorer } from   '@zesty-io/explorer';
 Developer must have access to `zestyionpm` account
 
 `npm publish --access public`
+
+## Testing Locally
+
+-Create .env with a value `REACT_APP_DOMAIN_OVERRIDE=https://www.zesty.io`
