@@ -25,9 +25,9 @@ Using CDN
 - copy the script tag below and paste it in the head of your main.html file
 
 ```
-   <script
+     <script
       type="text/javascript"
-      src="https://cdn.jsdelivr.net/gh/zesty-io/explorer@main/dist/explorer.cjs.production.min.js"
+      src="https://cdn.jsdelivr.net/gh/zesty-io/explorer@cdn/dist/explorer.production.js"
       defer="defer"
     ></script>
 ```
@@ -35,7 +35,8 @@ Using CDN
 Importing
 
 ```
-import {ZestyExplorer} from   '@zesty-io/explorer';
+import { ZestyExplorer } from   '@zesty-io/explorer';
+
 ```
 
 ## Explorer Sections
@@ -53,3 +54,7 @@ import {ZestyExplorer} from   '@zesty-io/explorer';
 Developer must have access to `zestyionpm` account
 
 `npm publish --access public`
+
+## Testing Locally
+
+-Create .env with a value `REACT_APP_DOMAIN_OVERRIDE=https://www.zesty.io`

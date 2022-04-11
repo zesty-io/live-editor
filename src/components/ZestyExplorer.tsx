@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-no-target-blank */
+
 import React from 'react';
 import ReactJson from 'react-json-view-ssr';
 import { dummydata } from './dummydata';
@@ -58,7 +59,7 @@ const ZestyExplorerBrowser = ({ contentData, children }: any) => {
   const flaten2 = convertToArray(flaten1);
 
   // generate columns for search
-  const columns = flaten2.map(e => {
+  const columns = flaten2.map((e) => {
     const res = Object.keys(e);
     return res.toString().replace(/.[0-9]/g, '');
   });
@@ -197,10 +198,57 @@ function canUseDOM() {
   );
 }
 
-export const ZestyExplorer = ({ content }: any) => {
-  console.log('***********ZESTY EXPLORER LOADED *************');
+const getPageData = async () => {
+  let data = {
+    error: true,
+    production: true,
+  };
+  const queryString = window.location.search.substring(1);
+
+  // const domain = process.env.REACT_APP_DOMAIN_OVERRIDE
+  //   ? process.env.REACT_APP_DOMAIN_OVERRIDE
+  //   : window.location.protocol + '//' + window.location.hostname;
+
+  // const uri = domain + window.location.pathname + '?toJSON&' + queryString;
+
+  const uri = window.location.href + '?toJSON&' + queryString;
+  // for testing only
+  // const devUri =
+  //   'https://www.zesty.io' +
+  //   window.location.pathname +
+  //   '?toJSON&' +
+  //   queryString;
+
+  // Fetch data from Zesty.io toJSON API
+  const res = await fetch(uri);
+
+  // otherwise set response to data
+  if (res.status == 200) {
+    data = await res.json();
+  }
+
+  return data;
+};
+
+export const ZestyExplorer = ({ content = {} }: any) => {
   const [open, setOpen] = React.useState(false);
-  let searchObject = { ...content };
+  const [pageData, setPageData] = React.useState<any>('');
+
+  const getData = async () => {
+    const res: any = await getPageData();
+    res && setPageData(res);
+  };
+
+  // check if content is available
+  React.useEffect(() => {
+    if (content && Object.keys(content).length === 0) {
+      getData();
+    } else {
+      setPageData(content);
+    }
+  }, []);
+
+  let searchObject = { ...pageData };
   // unset navigations for faster search
   delete searchObject.navigationTree;
   // custom nav tree building
