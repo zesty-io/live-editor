@@ -17,7 +17,7 @@ const tabList = [
 ]
 
 // renanme content to contentData
-const ZestyExplorerBrowser = ({ contentData, children }: any) => {
+const ZestyExplorerBrowser = ({ response, contentData, children }: any) => {
    const content = contentData || dummydata
    // const [modal, setModal] = React.useState(false);
    const [search, setSearch] = React.useState()
@@ -82,6 +82,7 @@ const ZestyExplorerBrowser = ({ contentData, children }: any) => {
             content={content}
             setcurrentTab={setcurrentTab}
             tabs={tabList}
+            response={response}
          />
          {currentTab === "Content Viewer" && (
             <ContentViewer data={data} search={search} setSearch={setSearch} />
@@ -95,11 +96,12 @@ const ZestyExplorerBrowser = ({ contentData, children }: any) => {
 export const ZestyExplorer = ({ content = {} }: any) => {
    const [open, setOpen] = React.useState(false)
    const [pageData, setPageData] = React.useState<any>("")
+   const [response, setResponse] = React.useState<any>("")
 
    const getData = async () => {
-      const res: any = await getPageData()
-      res && setPageData(res)
-      console.log(res, 123123123)
+      const { data, response } = await getPageData()
+      data && setPageData(data)
+      response && setResponse(response)
    }
 
    // check if content is available
@@ -138,7 +140,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
 
          {open && (
             <div>
-               <ZestyExplorerBrowser contentData={searchObject}>
+               <ZestyExplorerBrowser response={response} contentData={searchObject}>
                   <button onClick={() => setOpen(false)}>Close</button>
                </ZestyExplorerBrowser>
             </div>

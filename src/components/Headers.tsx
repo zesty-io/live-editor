@@ -11,6 +11,7 @@ interface Props {
    content: any
    setcurrentTab: (e: string) => void
    tabs: Tabs[]
+   response: any
 }
 
 const linkStyles = {
@@ -18,7 +19,8 @@ const linkStyles = {
    display: "inline-block",
    color: "#497edf",
 }
-export const Headers = ({ children, content, setcurrentTab, tabs }: Props) => {
+export const Headers = ({ response, children, content, setcurrentTab, tabs }: Props) => {
+   console.log(response, "darwin")
    return (
       <div style={{ width: "100%", margin: "0 auto", background: "aqua" }}>
          <div

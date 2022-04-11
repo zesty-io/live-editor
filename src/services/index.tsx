@@ -23,5 +23,5 @@ export const getPageData = async () => {
       data = await res.json()
    }
 
-   return data
+   return { data, response: res }
 }
