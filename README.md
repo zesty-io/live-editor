@@ -25,17 +25,18 @@ Using CDN
 - copy the script tag below and paste it in the head of your main.html file
 
 ```
-   <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/gh/zesty-io/explorer@cdn/build/static/js/main.min.js"
-      defer="defer"
-   ></script>
+      <script
+         type="text/javascript"
+         src="https://cdn.jsdelivr.net/gh/zesty-io/explorer@cdn/dist/explorer.production.min.js"
+         defer="defer"
+      ></script>
 ```
 
 Importing
 
 ```
-import {ZestyExplorer} from   '@zesty-io/explorer';
+import { ZestyExplorer } from   '@zesty-io/explorer';
+
 ```
 
 ## Explorer Sections
