@@ -20,7 +20,7 @@ const linkStyles = {
    color: "#497edf",
 }
 export const Headers = ({ response, children, content, setcurrentTab, tabs }: Props) => {
-   console.log(response, "darwin")
+   const headerZUID = response.headers.get("z-zuid")
    return (
       <div style={{ width: "100%", margin: "0 auto", background: "aqua" }}>
          <div
@@ -57,7 +57,11 @@ export const Headers = ({ response, children, content, setcurrentTab, tabs }: Pr
             <a
                style={linkStyles}
                target="_blank"
-               href={`https://${content.zestyInstanceZUID}.manager.zesty.io/content/${content.meta.model.zuid}/${content.meta.zuid}`}
+               href={`https://${
+                  content.zestyInstanceZUID || headerZUID
+               }.manager.zesty.io/content/${content.meta.model.zuid}/${
+                  content.meta.zuid
+               }`}
             >
                Open Zesty Manager
             </a>
@@ -65,7 +69,9 @@ export const Headers = ({ response, children, content, setcurrentTab, tabs }: Pr
             <a
                style={linkStyles}
                target="_blank"
-               href={`https://${content.zestyInstanceZUID}.manager.zesty.io/schema/${content.meta.model.zuid}`}
+               href={`https://${
+                  content.zestyInstanceZUID || headerZUID
+               }.manager.zesty.io/schema/${content.meta.model.zuid}`}
             >
                Open Schema
             </a>

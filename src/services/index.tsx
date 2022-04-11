@@ -18,9 +18,6 @@ export const getPageData = async () => {
    // Fetch data from Zesty.io toJSON API
    const res = await fetch(uri)
 
-   console.log(res.headers.get("z-zuid"), "headersssss")
-   console.log(res.headers, "headersssss")
-   console.log(process.env.REACT_APP_DOMAIN_OVERRIDE, "headersssss")
    // otherwise set response to data
    if (res.status === 200) {
       data = await res.json()
