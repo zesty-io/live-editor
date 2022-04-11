@@ -99,6 +99,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
    const getData = async () => {
       const res: any = await getPageData()
       res && setPageData(res)
+      console.log(res, 123123123)
    }
 
    // check if content is available
