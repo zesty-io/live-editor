@@ -27,7 +27,7 @@ Using CDN
 ```
     <script
       type="text/javascript"
-      src="https://cdn.jsdelivr.net/gh/zesty.io/explorer@cdn/dist/explorer.production.min.js"
+      src="https://cdn.jsdelivr.net/gh/zesty-io/explorer@cdn/dist/explorer.production.min.js"
       defer="defer"
     ></script>
 ```
