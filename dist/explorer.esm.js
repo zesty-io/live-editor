@@ -1,7 +1,7 @@
 import React from 'react';
 import { dummydata } from 'constants/index';
 import Fuse from 'fuse.js';
-import ReactJson from 'react-json-view-ssr';
+import { ContentViewer, MetaViewer } from 'views';
 import { Headers } from 'components';
 import { canUseDOM, flattenObj, convertToArray, deepen } from 'utils';
 import { getPageData } from 'services';
@@ -819,55 +819,6 @@ try {
   }
 }
 });
-
-var searchBarStyles = {
-  padding: "5px",
-  margin: "10px",
-  borderRadius: "28px"
-};
-var ContentViewer = function ContentViewer(_ref) {
-  var data = _ref.data,
-      search = _ref.search,
-      setSearch = _ref.setSearch;
-  return React.createElement("div", {
-    style: {
-      background: "red"
-    }
-  }, React.createElement("input", {
-    type: "text",
-    placeholder: "Search Content Values",
-    value: search,
-    onChange: function onChange(e) {
-      return setSearch(e.currentTarget.value);
-    },
-    autoFocus: true,
-    style: searchBarStyles
-  }), React.createElement(ReactJson, {
-    style: {
-      height: "80vh",
-      overflowY: "scroll"
-    },
-    name: "data",
-    // @ts-ignore
-    src: data,
-    theme: "flat",
-    iconStyle: "square",
-    indentWidth: 4,
-    collapsed: false,
-    displayObjectSize: true,
-    displayDataTypes: false,
-    enableClipboard: true
-  }));
-};
-
-var MetaViewer = function MetaViewer() {
-  return React.createElement("div", {
-    style: {
-      height: "80vh",
-      background: "pink"
-    }
-  }, "MetaViewer");
-};
 
 var buttonStyles = {
   borderRadius: "5px",

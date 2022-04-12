@@ -3,10 +3,9 @@
 import React from "react"
 import { dummydata } from "constants/index"
 import Fuse from "fuse.js"
-import { ContentViewer } from "../ContentViewer"
+import { ContentViewer, MetaViewer } from "views"
 import { Headers } from "components"
 import * as helper from "utils"
-import { MetaViewer } from "../MetaViewer"
 import { getPageData } from "services"
 import { buttonStyles, zestyStyles, zestyWrapper } from "./styles"
 

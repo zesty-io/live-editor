@@ -7,7 +7,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var React = _interopDefault(require('react'));
 var index = require('constants/index');
 var Fuse = _interopDefault(require('fuse.js'));
-var ReactJson = _interopDefault(require('react-json-view-ssr'));
+var views = require('views');
 var components = require('components');
 var helper = require('utils');
 var services = require('services');
@@ -826,55 +826,6 @@ try {
 }
 });
 
-var searchBarStyles = {
-  padding: "5px",
-  margin: "10px",
-  borderRadius: "28px"
-};
-var ContentViewer = function ContentViewer(_ref) {
-  var data = _ref.data,
-      search = _ref.search,
-      setSearch = _ref.setSearch;
-  return React.createElement("div", {
-    style: {
-      background: "red"
-    }
-  }, React.createElement("input", {
-    type: "text",
-    placeholder: "Search Content Values",
-    value: search,
-    onChange: function onChange(e) {
-      return setSearch(e.currentTarget.value);
-    },
-    autoFocus: true,
-    style: searchBarStyles
-  }), React.createElement(ReactJson, {
-    style: {
-      height: "80vh",
-      overflowY: "scroll"
-    },
-    name: "data",
-    // @ts-ignore
-    src: data,
-    theme: "flat",
-    iconStyle: "square",
-    indentWidth: 4,
-    collapsed: false,
-    displayObjectSize: true,
-    displayDataTypes: false,
-    enableClipboard: true
-  }));
-};
-
-var MetaViewer = function MetaViewer() {
-  return React.createElement("div", {
-    style: {
-      height: "80vh",
-      background: "pink"
-    }
-  }, "MetaViewer");
-};
-
 var buttonStyles = {
   borderRadius: "5px",
   padding: "12px 24px 12px 16px",
@@ -987,11 +938,11 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
     setcurrentTab: setcurrentTab,
     tabs: tabList,
     response: response
-  }), currentTab === "Content Viewer" && React.createElement(ContentViewer, {
+  }), currentTab === "Content Viewer" && React.createElement(views.ContentViewer, {
     data: data,
     search: search,
     setSearch: setSearch
-  }), currentTab === "Meta Viewer" && React.createElement(MetaViewer, null));
+  }), currentTab === "Meta Viewer" && React.createElement(views.MetaViewer, null));
 }; // Main ZESTY EXPLORER
 
 
