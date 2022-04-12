@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 interface Tabs {
     id: number;
     label: string;
@@ -11,5 +11,5 @@ interface Props {
     tabs: Tabs[];
     response: any;
 }
-export declare const Headers: ({ response, children, content, setcurrentTab, tabs }: Props) => JSX.Element;
+export declare const Headers: ({ response, children, content, setcurrentTab, tabs, }: Props) => JSX.Element;
 export {};
