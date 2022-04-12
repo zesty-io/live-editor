@@ -26,7 +26,7 @@ export const Headers = ({
   setcurrentTab,
   tabs,
 }: Props) => {
-  const headerZUID = response.headers.get('z-zuid');
+  const headerZUID = response?.headers?.get('z-zuid') || '';
   return (
     <div style={{ width: '100%', margin: '0 auto', background: 'aqua' }}>
       <div
