@@ -4,6 +4,7 @@ import ReactDOM from "react-dom"
 import { ZestyExplorer } from "./views"
 import { canUseDOM } from "./utils/index"
 
+console.log("latest")
 const main = () => {
    if (!canUseDOM()) {
       return null
