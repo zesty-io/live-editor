@@ -1,12 +1,12 @@
 /* eslint-disable react/no-children-prop */
 /* eslint-disable react/jsx-no-target-blank */
 import React from 'react';
-import { dummydata } from 'constants/index';
+import { dummydata } from '../../constants/index';
 import Fuse from 'fuse.js';
-import { ContentViewer, MetaViewer } from 'views/index';
-import { Headers } from 'components/index';
-import * as helper from 'utils/index';
-import { getPageData } from 'services/index';
+import { ContentViewer, MetaViewer } from '../../views/index';
+import { Headers } from '../../components/index';
+import * as helper from '../../utils/index';
+import { getPageData } from '../../services/index';
 import { buttonStyles, zestyStyles, zestyWrapper } from './styles';
 
 // list of tabs to render
