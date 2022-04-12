@@ -1,5 +1,5 @@
-import React from "react"
+import React from 'react';
 
 export const MetaViewer = () => {
-   return <div style={{ height: "80vh", background: "pink" }}>MetaViewer</div>
-}
+  return <div style={{ height: '80vh', background: 'pink' }}>MetaViewer</div>;
+};
