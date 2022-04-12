@@ -69,3 +69,15 @@ Developer must have access to `zestyionpm` account
 ## Testing Locally
 
 - Create .env with a value `REACT_APP_DOMAIN_OVERRIDE=https://www.zesty.io`
+
+## Testing using NPM
+
+- On origin/main do `git checkout -b explorer-dev-test`
+- Edit `package.json` change the name to @username/explorer-dev-test
+- Edit `package.json` increment the version number per publish
+- Npm publish --access public
+- In your react/next/app
+
+```
+import { ZestyExplorer } from   '@username/explorer-dev-test';
+```
