@@ -43,14 +43,14 @@ export const Headers = ({ response, children, content, setcurrentTab, tabs }: Pr
             </div>
 
             <span>
-               Browsing item <strong> {content.meta.web.seo_link_text} </strong>
-               from the <strong>{content.meta.model_alternate_name} </strong>
+               Browsing item <strong> {content?.meta?.web?.seo_link_text} </strong>
+               from the <strong>{content?.meta?.model_alternate_name} </strong>
                Content Model
             </span>
             <a
                style={linkStyles}
                target="_blank"
-               href={`https://accounts.zesty.io/instances/${content.zestyInstanceZUID}`}
+               href={`https://accounts.zesty.io/instances/${content?.zestyInstanceZUID}`}
             >
                Open Zesty Account
             </a>
@@ -58,9 +58,9 @@ export const Headers = ({ response, children, content, setcurrentTab, tabs }: Pr
                style={linkStyles}
                target="_blank"
                href={`https://${
-                  content.zestyInstanceZUID || headerZUID
-               }.manager.zesty.io/content/${content.meta.model.zuid}/${
-                  content.meta.zuid
+                  content?.zestyInstanceZUID || headerZUID
+               }.manager.zesty.io/content/${content?.meta?.model?.zuid}/${
+                  content?.meta?.zuid
                }`}
             >
                Open Zesty Manager
@@ -70,8 +70,8 @@ export const Headers = ({ response, children, content, setcurrentTab, tabs }: Pr
                style={linkStyles}
                target="_blank"
                href={`https://${
-                  content.zestyInstanceZUID || headerZUID
-               }.manager.zesty.io/schema/${content.meta.model.zuid}`}
+                  content?.zestyInstanceZUID || headerZUID
+               }.manager.zesty.io/schema/${content?.meta?.model?.zuid}`}
             >
                Open Schema
             </a>
