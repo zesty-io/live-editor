@@ -21,7 +21,7 @@
    "scripts": {
       "start": "react-scripts start",
       "build": "react-scripts build && yarn clean-build",
-      "clean-build": "rm -rf dist/* &&  cp -r build/static/js/*.js dist/explorer.production.min.js",
+      "clean-build": "rm -rf dist/* &&  cp -r build/static/js/*.js dist/explorer.production.js",
       "test": "react-scripts test",
       "eject": "react-scripts eject",
       "check-types": "tsc --pretty --noEmit",
