@@ -68,5 +68,9 @@
   "dependencies": {
     "fuse.js": "^6.5.3",
     "react-json-view-ssr": "^1.19.1"
-  }
+  },
+  "moduleDirectories": [
+    "node_modules",
+    "src"
+  ]
 }

@@ -1,1 +1,1 @@
-export * from './components/ZestyExplorer';
+export * from './views/ZestyExplorer';

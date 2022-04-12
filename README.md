@@ -27,7 +27,7 @@ Using CDN
 ```
      <script
       type="text/javascript"
-      src="https://cdn.jsdelivr.net/gh/zesty-io/explorer@cdn/dist/explorer.production.js"
+      src="https://cdn.jsdelivr.net/gh/zesty-io/explorer@1.0.0/dist/explorer.production.js"
       defer="defer"
     ></script>
 ```
@@ -36,7 +36,6 @@ Importing
 
 ```
 import { ZestyExplorer } from   '@zesty-io/explorer';
-
 ```
 
 ## Explorer Sections
@@ -57,4 +56,4 @@ Developer must have access to `zestyionpm` account
 
 ## Testing Locally
 
--Create .env with a value `REACT_APP_DOMAIN_OVERRIDE=https://www.zesty.io`
+- Create .env with a value `REACT_APP_DOMAIN_OVERRIDE=https://www.zesty.io`
