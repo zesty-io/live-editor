@@ -1,153 +1,169 @@
 /* eslint-disable react/no-children-prop */
 /* eslint-disable react/jsx-no-target-blank */
-import React from 'react';
-import { dummydata } from 'constants/index';
-import Fuse from 'fuse.js';
-import { ContentViewer, MetaViewer } from 'views/index';
-import { Headers } from 'components/index';
-import * as helper from 'utils/index';
-import { getPageData } from 'services/index';
-import { buttonStyles, zestyStyles, zestyWrapper } from './styles';
+import React from "react"
+import { dummydata } from "constants/index"
+import Fuse from "fuse.js"
+import { ContentViewer, MetaViewer, JsonDataViewer } from "views/index"
+import { Headers, Tabs, Loader } from "components/index"
+import * as helper from "utils/index"
+import { getPageData } from "services/index"
+import { buttonStyles, zestyStyles, zestyWrapper } from "./styles"
 
 // list of tabs to render
 const tabList = [
-  { id: 1, label: 'Content Viewer', value: 'Content Viewer' },
-  { id: 2, label: 'Meta Viewer', value: 'Meta Viewer' },
-];
+   { id: 1, label: "Content Viewer", value: "Content Viewer" },
+   { id: 2, label: "Meta Viewer", value: "Meta Viewer" },
+   { id: 3, label: "Json Data Viewer", value: "Json Data Viewer" },
+]
 
 // renanme content to contentData
-const ZestyExplorerBrowser = ({ response, contentData, children }: any) => {
-  const content = contentData || dummydata;
-  // const [modal, setModal] = React.useState(false);
-  const [search, setSearch] = React.useState();
-  // convert obj to dot
+const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any) => {
+   const content = contentData || dummydata
+   // const [modal, setModal] = React.useState(false);
+   const [search, setSearch] = React.useState()
 
-  // @ts-ignore
-  const flaten1 = helper.flattenObj(content);
+   const [time, settime] = React.useState(0)
+   React.useEffect(() => {
+      const timer = setTimeout(() => {
+         if (time > 0) {
+            settime(time - 1)
+         }
+      }, 1000)
 
-  // convert to array of objects
-  const flaten2 = helper.convertToArray(flaten1);
+      return () => clearTimeout(timer)
+   })
 
-  // generate columns for search
-  const columns = flaten2.map((e) => {
-    const res = Object.keys(e);
-    return res.toString().replace(/.[0-9]/g, '');
-  });
+   // convert obj to dot
 
-  // search options
-  const options = {
-    includeScore: true,
-    useExtendedSearch: true,
-    includeMatches: true,
-    ignoreLocation: true,
-    findAllMatches: true,
-    threshold: 0,
-    isCaseSensitive: false,
-    minMatchCharLength: 1,
-    keys: columns,
-  };
+   // @ts-ignore
+   const flaten1 = helper.flattenObj(content)
 
-  // search func
-  const fuse = new Fuse([content], options);
+   // convert to array of objects
+   const flaten2 = helper.convertToArray(flaten1)
 
-  const result = fuse.search(search || '');
+   // generate columns for search
+   const columns = flaten2.map((e) => {
+      const res = Object.keys(e)
+      return res.toString().replace(/.[0-9]/g, "")
+   })
 
-  // convert as key value pairs
-  const result2 =
-    result &&
-    result[0]?.matches
-      ?.map((e: any) => {
-        return { [`${e.key}`]: e.value };
-      })
-      .map((e: any) => helper.deepen(e));
+   // search options
+   const options = {
+      includeScore: true,
+      useExtendedSearch: true,
+      includeMatches: true,
+      ignoreLocation: true,
+      findAllMatches: true,
+      threshold: 0,
+      isCaseSensitive: false,
+      minMatchCharLength: 1,
+      keys: columns,
+   }
 
-  // display the result of search
-  const data = search ? result2 : { content };
+   // search func
+   const fuse = new Fuse([content], options)
 
-  const [currentTab, setcurrentTab] = React.useState('Content Viewer');
+   const result = fuse.search(search || "")
 
-  const containerStyle = {
-    background: '#ddd',
-    boxShadow: '0,0,5px,#333',
-    borderRadius: '4px',
-    width: '70vw',
-    height: '85vh',
-  };
+   // convert as key value pairs
+   const result2 =
+      result &&
+      result[0]?.matches
+         ?.map((e: any) => {
+            return { [`${e.key}`]: e.value }
+         })
+         .map((e: any) => helper.deepen(e))
 
-  return (
-    <div style={containerStyle}>
-      <Headers
-        children={children}
-        content={content}
-        setcurrentTab={setcurrentTab}
-        tabs={tabList}
-        response={response}
-      />
-      {currentTab === 'Content Viewer' && (
-        <ContentViewer data={data} search={search} setSearch={setSearch} />
-      )}
-      {currentTab === 'Meta Viewer' && <MetaViewer />}
-    </div>
-  );
-};
+   // display the result of search
+   const data = search ? result2 : { content }
 
+   const [currentTab, setcurrentTab] = React.useState("Content Viewer")
+
+   const containerStyle = {
+      background: "#ddd",
+      boxShadow: "0,0,5px,#333",
+      borderRadius: "4px",
+      width: "70vw",
+      height: "85vh",
+   }
+
+   console.log(pageData, "Pagedata")
+   return (
+      <div style={containerStyle}>
+         <Headers children={children} content={content} response={response} />
+         <Tabs setcurrentTab={setcurrentTab} tabs={tabList} settime={() => settime(2)} />
+         <div style={{ position: "relative" }}>
+            {time > 0 && <Loader />}
+            {currentTab === "Content Viewer" && (
+               <ContentViewer data={data} search={search} setSearch={setSearch} />
+            )}
+            {currentTab === "Meta Viewer" && (
+               <MetaViewer response={response} content={contentData} />
+            )}
+            {currentTab === "Json Data Viewer" && (
+               <JsonDataViewer data={data} search={search} setSearch={setSearch} />
+            )}
+         </div>
+      </div>
+   )
+}
 // Main ZESTY EXPLORER
 export const ZestyExplorer = ({ content = {} }: any) => {
-  const [open, setOpen] = React.useState(false);
-  const [pageData, setPageData] = React.useState<any>('');
-  const [response, setResponse] = React.useState<any>('');
+   const [open, setOpen] = React.useState(false)
+   const [pageData, setPageData] = React.useState<any>("")
+   const [response, setResponse] = React.useState<any>("")
 
-  const getData = async () => {
-    const { data, response } = await getPageData();
-    data && setPageData(data);
-    response && setResponse(response);
-  };
+   const getData = async () => {
+      const { data, response } = await getPageData()
+      data && setPageData(data)
+      response && setResponse(response)
+   }
 
-  // check if content is available
-  React.useEffect(() => {
-    if (content && Object.keys(content).length === 0) {
-      getData();
-    } else {
-      setPageData(content);
-    }
-  }, []);
+   // check if content is available
+   React.useEffect(() => {
+      if (content && Object.keys(content).length === 0) {
+         getData()
+      } else {
+         setPageData(content)
+      }
+   }, [])
 
-  const searchObject = { ...pageData };
-  // unset navigations for faster search
-  delete searchObject.navigationTree;
-  // custom nav tree building
-  delete searchObject.navigationCustom;
+   const searchObject = { ...pageData }
+   // unset navigations for faster search
+   delete searchObject.navigationTree
+   // custom nav tree building
+   delete searchObject.navigationCustom
 
-  if (!helper.canUseDOM()) {
-    return null;
-  }
-  return (
-    // @ts-ignore
-    <div style={zestyWrapper}>
-      {/* ZESTY LOGO  bottom right*/}
-      {!open && (
-        <button
-          type="button"
-          onClick={() => setOpen(true)}
-          style={buttonStyles}
-        >
-          <img
-            src="https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png"
-            width="32px"
-            height="32px"
-            alt="Zesty.io Logo"
-          />
-          <span style={zestyStyles}>Explorer</span>
-        </button>
-      )}
+   if (!helper.canUseDOM()) {
+      return null
+   }
+   return (
+      // @ts-ignore
+      <div style={zestyWrapper}>
+         {/* ZESTY LOGO  bottom right*/}
+         {!open && (
+            <button type="button" onClick={() => setOpen(true)} style={buttonStyles}>
+               <img
+                  src="https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png"
+                  width="32px"
+                  height="32px"
+                  alt="Zesty.io Logo"
+               />
+               <span style={zestyStyles}>Explorer</span>
+            </button>
+         )}
 
-      {open && (
-        <div>
-          <ZestyExplorerBrowser response={response} contentData={searchObject}>
-            <button onClick={() => setOpen(false)}>Close</button>
-          </ZestyExplorerBrowser>
-        </div>
-      )}
-    </div>
-  );
-};
+         {open && (
+            <div>
+               <ZestyExplorerBrowser
+                  response={response}
+                  pageData={pageData}
+                  contentData={searchObject}
+               >
+                  <button onClick={() => setOpen(false)}>Close</button>
+               </ZestyExplorerBrowser>
+            </div>
+         )}
+      </div>
+   )
+}
