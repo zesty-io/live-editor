@@ -3,24 +3,36 @@
 import React from "react"
 import { dummydata } from "constants/index"
 import Fuse from "fuse.js"
-import { ContentViewer, MetaViewer } from "views/index"
-import { Headers } from "components/index"
+import { ContentViewer, MetaViewer, JsonDataViewer } from "views/index"
+import { Headers, Tabs, Loader } from "components/index"
 import * as helper from "utils/index"
 import { getPageData } from "services/index"
 import { buttonStyles, zestyStyles, zestyWrapper } from "./styles"
 
-console.log(process.env, "ENV")
 // list of tabs to render
 const tabList = [
    { id: 1, label: "Content Viewer", value: "Content Viewer" },
    { id: 2, label: "Meta Viewer", value: "Meta Viewer" },
+   { id: 3, label: "Json Data Viewer", value: "Json Data Viewer" },
 ]
 
 // renanme content to contentData
-const ZestyExplorerBrowser = ({ response, contentData, children }: any) => {
+const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any) => {
    const content = contentData || dummydata
    // const [modal, setModal] = React.useState(false);
    const [search, setSearch] = React.useState()
+
+   const [time, settime] = React.useState(0)
+   React.useEffect(() => {
+      const timer = setTimeout(() => {
+         if (time > 0) {
+            settime(time - 1)
+         }
+      }, 1000)
+
+      return () => clearTimeout(timer)
+   })
+
    // convert obj to dot
 
    // @ts-ignore
@@ -75,23 +87,26 @@ const ZestyExplorerBrowser = ({ response, contentData, children }: any) => {
       height: "85vh",
    }
 
+   console.log(pageData, "Pagedata")
    return (
       <div style={containerStyle}>
-         <Headers
-            children={children}
-            content={content}
-            setcurrentTab={setcurrentTab}
-            tabs={tabList}
-            response={response}
-         />
-         {currentTab === "Content Viewer" && (
-            <ContentViewer data={data} search={search} setSearch={setSearch} />
-         )}
-         {currentTab === "Meta Viewer" && <MetaViewer />}
+         <Headers children={children} content={content} response={response} />
+         <Tabs setcurrentTab={setcurrentTab} tabs={tabList} settime={() => settime(2)} />
+         <div style={{ position: "relative" }}>
+            {time > 0 && <Loader />}
+            {currentTab === "Content Viewer" && (
+               <ContentViewer data={data} search={search} setSearch={setSearch} />
+            )}
+            {currentTab === "Meta Viewer" && (
+               <MetaViewer response={response} content={contentData} />
+            )}
+            {currentTab === "Json Data Viewer" && (
+               <JsonDataViewer data={data} search={search} setSearch={setSearch} />
+            )}
+         </div>
       </div>
    )
 }
-
 // Main ZESTY EXPLORER
 export const ZestyExplorer = ({ content = {} }: any) => {
    const [open, setOpen] = React.useState(false)
@@ -104,7 +119,6 @@ export const ZestyExplorer = ({ content = {} }: any) => {
       response && setResponse(response)
    }
 
-   console.log(content, "CONTEnt")
    // check if content is available
    React.useEffect(() => {
       if (content && Object.keys(content).length === 0) {
@@ -141,7 +155,11 @@ export const ZestyExplorer = ({ content = {} }: any) => {
 
          {open && (
             <div>
-               <ZestyExplorerBrowser response={response} contentData={searchObject}>
+               <ZestyExplorerBrowser
+                  response={response}
+                  pageData={pageData}
+                  contentData={searchObject}
+               >
                   <button onClick={() => setOpen(false)}>Close</button>
                </ZestyExplorerBrowser>
             </div>
