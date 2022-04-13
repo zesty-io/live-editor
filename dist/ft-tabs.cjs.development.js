@@ -7,6 +7,8 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var React = _interopDefault(require('react'));
 var Fuse = _interopDefault(require('fuse.js'));
 var ReactJson = _interopDefault(require('react-json-view-ssr'));
+var core = require('@material-ui/core');
+var reactCodeBlocks = require('react-code-blocks');
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -861,378 +863,378 @@ try {
 });
 
 var dummydata = {
-  hero_h1: 'Integrate Next.JS seamlessly',
-  hero_description: 'Zesty.io is the open-source, flexible API headless CMS to integrate with NextJS. Start your next project with just one line of code.',
+  hero_h1: "Integrate Next.JS seamlessly",
+  hero_description: "Zesty.io is the open-source, flexible API headless CMS to integrate with NextJS. Start your next project with just one line of code.",
   cta_primary_text: null,
   cta_secondary_text: null,
-  integration_benefits_h2: 'Zesty and Next: A Powerful Combination',
+  integration_benefits_h2: "Zesty and Next: A Powerful Combination",
   integration_benefits: null,
-  feature_description_1: '',
+  feature_description_1: "",
   feature_description_2: null,
   feature_description_3: '<p dir="ltr">The benefits extend to your marketing team as well:</p>\n<ul>\n<li dir="ltr" style="list-style-type: disc;" aria-level="1">\n<p dir="ltr" role="presentation">Marketers can fully control SEO components including the URL path without affecting the developer workflow</p>\n</li>\n<li dir="ltr" style="list-style-type: disc;" aria-level="1">\n<p dir="ltr" role="presentation">Leveraging NextJS server-side rendering means marketers gain a live preview for stage and development environments</p>\n</li>\n<li dir="ltr" style="list-style-type: disc;" aria-level="1">\n<p dir="ltr" role="presentation">Leveraging NextJS server-side rendering also means production can be automatically updated by marketers without waiting for a build process</p>\n</li>\n<li dir="ltr" style="list-style-type: disc;" aria-level="1">\n<p dir="ltr" role="presentation">Zesty enables marketer previews inside of the content management system - this can be done using Google Cloud, AWS or Vercel</p>\n</li>\n</ul>',
   testimonial: null,
-  logos_title: 'Join top companies',
+  logos_title: "Join top companies",
   logos: {
-    type: 'relationship',
-    model: 'customer_brands',
+    type: "relationship",
+    model: "customer_brands",
     totalItems: 5,
     data: [{
-      customer_name: 'Sony-homepage',
+      customer_name: "Sony-homepage",
       customer_logo: {
-        type: 'images',
+        type: "images",
         totalItems: 1,
         data: [{
-          type: 'image',
-          zuid: '3-d959bc7-wnj9b8',
-          url: 'https://kfg6bckb.media.zestyio.com/Sony-homepage150x50-fullcolor.png'
+          type: "image",
+          zuid: "3-d959bc7-wnj9b8",
+          url: "https://kfg6bckb.media.zestyio.com/Sony-homepage150x50-fullcolor.png"
         }]
       },
-      homepage_sort: '1',
+      homepage_sort: "1",
       background_image: null,
       customer_story_download: null,
       customer_story_short: null,
       products_in_use: null,
       customer_story_short_raw: null,
-      featured: '1',
-      customer_sort: '1',
+      featured: "1",
+      customer_sort: "1",
       url: null,
       grey_logo: {
-        type: 'images',
+        type: "images",
         totalItems: 1,
         data: [{
-          type: 'image',
-          zuid: '3-d959bc7-0xs8gd',
-          url: 'https://kfg6bckb.media.zestyio.com/Sony-homepage150x50-grey.png'
+          type: "image",
+          zuid: "3-d959bc7-0xs8gd",
+          url: "https://kfg6bckb.media.zestyio.com/Sony-homepage150x50-grey.png"
         }]
       },
       white_logo: {
-        type: 'images',
+        type: "images",
         totalItems: 1,
         data: [{
-          type: 'image',
-          zuid: '3-d95a31f-485ggg',
-          url: 'https://kfg6bckb.media.zestyio.com/sony-white.png'
+          type: "image",
+          zuid: "3-d95a31f-485ggg",
+          url: "https://kfg6bckb.media.zestyio.com/sony-white.png"
         }]
       },
       meta: {
-        type: 'item',
-        model_name: 'customer_brands',
-        model_alternate_name: 'CustomerBrand',
-        zuid: '7-c28c9fc9b1-st2xwm',
-        createdAt: '2022-03-22 20:27:17',
-        updatedAt: '2022-03-22 20:27:16',
-        listed: '1',
-        version: '3',
+        type: "item",
+        model_name: "customer_brands",
+        model_alternate_name: "CustomerBrand",
+        zuid: "7-c28c9fc9b1-st2xwm",
+        createdAt: "2022-03-22 20:27:17",
+        updatedAt: "2022-03-22 20:27:16",
+        listed: "1",
+        version: "3",
         locale: {
-          id: '1',
-          name: 'English (United States)',
-          code: 'en-US',
-          "default": '1',
-          active: '1',
-          enabled: '1'
+          id: "1",
+          name: "English (United States)",
+          code: "en-US",
+          "default": "1",
+          active: "1",
+          enabled: "1"
         },
         model: {
-          type: 'model',
-          zuid: '6-0888e8-0rv8xh',
-          name: 'customer_brands',
-          label: 'Customers',
-          resourceURI: 'https://www.zesty.io/-/instant/6-0888e8-0rv8xh.json'
+          type: "model",
+          zuid: "6-0888e8-0rv8xh",
+          name: "customer_brands",
+          label: "Customers",
+          resourceURI: "https://www.zesty.io/-/instant/6-0888e8-0rv8xh.json"
         }
       }
     }, {
-      customer_name: 'Rocket League-homepage',
+      customer_name: "Rocket League-homepage",
       customer_logo: {
-        type: 'images',
+        type: "images",
         totalItems: 1,
         data: [{
-          type: 'image',
-          zuid: '3-d9ffb35-46szwl',
-          url: 'https://kfg6bckb.media.zestyio.com/RL-black.H164YWM79.png'
+          type: "image",
+          zuid: "3-d9ffb35-46szwl",
+          url: "https://kfg6bckb.media.zestyio.com/RL-black.H164YWM79.png"
         }]
       },
-      homepage_sort: '1',
+      homepage_sort: "1",
       background_image: null,
       customer_story_download: null,
       customer_story_short: null,
       products_in_use: null,
       customer_story_short_raw: null,
-      featured: '1',
-      customer_sort: '1',
+      featured: "1",
+      customer_sort: "1",
       url: null,
       grey_logo: {
-        type: 'images',
+        type: "images",
         totalItems: 1,
         data: [{
-          type: 'image',
-          zuid: '3-d9ffb3c-k8d6js',
-          url: 'https://kfg6bckb.media.zestyio.com/RL-grey.png'
+          type: "image",
+          zuid: "3-d9ffb3c-k8d6js",
+          url: "https://kfg6bckb.media.zestyio.com/RL-grey.png"
         }]
       },
       white_logo: {
-        type: 'images',
+        type: "images",
         totalItems: 1,
         data: [{
-          type: 'image',
-          zuid: '3-d9ffb41-684jph',
-          url: 'https://kfg6bckb.media.zestyio.com/RL-white.png'
+          type: "image",
+          zuid: "3-d9ffb41-684jph",
+          url: "https://kfg6bckb.media.zestyio.com/RL-white.png"
         }]
       },
       meta: {
-        type: 'item',
-        model_name: 'customer_brands',
-        model_alternate_name: 'CustomerBrand',
-        zuid: '7-9ce7fddc9f-bqrt2r',
-        createdAt: '2022-03-30 16:45:56',
-        updatedAt: '2022-03-30 16:45:55',
-        listed: '1',
-        version: '5',
+        type: "item",
+        model_name: "customer_brands",
+        model_alternate_name: "CustomerBrand",
+        zuid: "7-9ce7fddc9f-bqrt2r",
+        createdAt: "2022-03-30 16:45:56",
+        updatedAt: "2022-03-30 16:45:55",
+        listed: "1",
+        version: "5",
         locale: {
-          id: '1',
-          name: 'English (United States)',
-          code: 'en-US',
-          "default": '1',
-          active: '1',
-          enabled: '1'
+          id: "1",
+          name: "English (United States)",
+          code: "en-US",
+          "default": "1",
+          active: "1",
+          enabled: "1"
         },
         model: {
-          type: 'model',
-          zuid: '6-0888e8-0rv8xh',
-          name: 'customer_brands',
-          label: 'Customers',
-          resourceURI: 'https://www.zesty.io/-/instant/6-0888e8-0rv8xh.json'
+          type: "model",
+          zuid: "6-0888e8-0rv8xh",
+          name: "customer_brands",
+          label: "Customers",
+          resourceURI: "https://www.zesty.io/-/instant/6-0888e8-0rv8xh.json"
         }
       }
     }, {
-      customer_name: 'Wattpad-homepage',
+      customer_name: "Wattpad-homepage",
       customer_logo: {
-        type: 'images',
+        type: "images",
         totalItems: 1,
         data: [{
-          type: 'image',
-          zuid: '3-d959b5d-6q0prf',
-          url: 'https://kfg6bckb.media.zestyio.com/Wattpad-homepage150x50-fullcolor.png'
+          type: "image",
+          zuid: "3-d959b5d-6q0prf",
+          url: "https://kfg6bckb.media.zestyio.com/Wattpad-homepage150x50-fullcolor.png"
         }]
       },
-      homepage_sort: '1',
+      homepage_sort: "1",
       background_image: null,
       customer_story_download: null,
       customer_story_short: null,
       products_in_use: null,
       customer_story_short_raw: null,
-      featured: '1',
-      customer_sort: '1',
+      featured: "1",
+      customer_sort: "1",
       url: null,
       grey_logo: {
-        type: 'images',
+        type: "images",
         totalItems: 1,
         data: [{
-          type: 'image',
-          zuid: '3-d959b5d-0xvjnf',
-          url: 'https://kfg6bckb.media.zestyio.com/Wattpad-homepage150x50-grey.png'
+          type: "image",
+          zuid: "3-d959b5d-0xvjnf",
+          url: "https://kfg6bckb.media.zestyio.com/Wattpad-homepage150x50-grey.png"
         }]
       },
       white_logo: {
-        type: 'images',
+        type: "images",
         totalItems: 1,
         data: [{
-          type: 'image',
-          zuid: '3-d95a442-b0kk0d',
-          url: 'https://kfg6bckb.media.zestyio.com/wattpad-white.png'
+          type: "image",
+          zuid: "3-d95a442-b0kk0d",
+          url: "https://kfg6bckb.media.zestyio.com/wattpad-white.png"
         }]
       },
       meta: {
-        type: 'item',
-        model_name: 'customer_brands',
-        model_alternate_name: 'CustomerBrand',
-        zuid: '7-dcf592b5fe-nz9r3t',
-        createdAt: '2022-03-22 20:32:09',
-        updatedAt: '2022-03-22 20:32:08',
-        listed: '1',
-        version: '3',
+        type: "item",
+        model_name: "customer_brands",
+        model_alternate_name: "CustomerBrand",
+        zuid: "7-dcf592b5fe-nz9r3t",
+        createdAt: "2022-03-22 20:32:09",
+        updatedAt: "2022-03-22 20:32:08",
+        listed: "1",
+        version: "3",
         locale: {
-          id: '1',
-          name: 'English (United States)',
-          code: 'en-US',
-          "default": '1',
-          active: '1',
-          enabled: '1'
+          id: "1",
+          name: "English (United States)",
+          code: "en-US",
+          "default": "1",
+          active: "1",
+          enabled: "1"
         },
         model: {
-          type: 'model',
-          zuid: '6-0888e8-0rv8xh',
-          name: 'customer_brands',
-          label: 'Customers',
-          resourceURI: 'https://www.zesty.io/-/instant/6-0888e8-0rv8xh.json'
+          type: "model",
+          zuid: "6-0888e8-0rv8xh",
+          name: "customer_brands",
+          label: "Customers",
+          resourceURI: "https://www.zesty.io/-/instant/6-0888e8-0rv8xh.json"
         }
       }
     }, {
-      customer_name: 'Petdesk-homepage',
+      customer_name: "Petdesk-homepage",
       customer_logo: {
-        type: 'images',
+        type: "images",
         totalItems: 1,
         data: [{
-          type: 'image',
-          zuid: '3-d959aed-tvdkr1',
-          url: 'https://kfg6bckb.media.zestyio.com/Petdesk-homepage150x50-fullcolor.png'
+          type: "image",
+          zuid: "3-d959aed-tvdkr1",
+          url: "https://kfg6bckb.media.zestyio.com/Petdesk-homepage150x50-fullcolor.png"
         }]
       },
-      homepage_sort: '1',
+      homepage_sort: "1",
       background_image: null,
       customer_story_download: null,
       customer_story_short: null,
       products_in_use: null,
       customer_story_short_raw: null,
-      featured: '1',
-      customer_sort: '1',
+      featured: "1",
+      customer_sort: "1",
       url: null,
       grey_logo: {
-        type: 'images',
+        type: "images",
         totalItems: 1,
         data: [{
-          type: 'image',
-          zuid: '3-d959aed-dqbvjd',
-          url: 'https://kfg6bckb.media.zestyio.com/Petdesk-homepage150x50-grey.png'
+          type: "image",
+          zuid: "3-d959aed-dqbvjd",
+          url: "https://kfg6bckb.media.zestyio.com/Petdesk-homepage150x50-grey.png"
         }]
       },
       white_logo: null,
       meta: {
-        type: 'item',
-        model_name: 'customer_brands',
-        model_alternate_name: 'CustomerBrand',
-        zuid: '7-9ef497ad9d-h232d8',
-        createdAt: '2022-03-22 19:52:46',
-        updatedAt: '2022-03-22 19:52:45',
-        listed: '1',
-        version: '3',
+        type: "item",
+        model_name: "customer_brands",
+        model_alternate_name: "CustomerBrand",
+        zuid: "7-9ef497ad9d-h232d8",
+        createdAt: "2022-03-22 19:52:46",
+        updatedAt: "2022-03-22 19:52:45",
+        listed: "1",
+        version: "3",
         locale: {
-          id: '1',
-          name: 'English (United States)',
-          code: 'en-US',
-          "default": '1',
-          active: '1',
-          enabled: '1'
+          id: "1",
+          name: "English (United States)",
+          code: "en-US",
+          "default": "1",
+          active: "1",
+          enabled: "1"
         },
         model: {
-          type: 'model',
-          zuid: '6-0888e8-0rv8xh',
-          name: 'customer_brands',
-          label: 'Customers',
-          resourceURI: 'https://www.zesty.io/-/instant/6-0888e8-0rv8xh.json'
+          type: "model",
+          zuid: "6-0888e8-0rv8xh",
+          name: "customer_brands",
+          label: "Customers",
+          resourceURI: "https://www.zesty.io/-/instant/6-0888e8-0rv8xh.json"
         }
       }
     }, {
-      customer_name: 'Acorns-homepage',
+      customer_name: "Acorns-homepage",
       customer_logo: {
-        type: 'images',
+        type: "images",
         totalItems: 1,
         data: [{
-          type: 'image',
-          zuid: '3-d959aa9-f62xz4',
-          url: 'https://kfg6bckb.media.zestyio.com/Acorns-homepage150x50-fullcolor.png'
+          type: "image",
+          zuid: "3-d959aa9-f62xz4",
+          url: "https://kfg6bckb.media.zestyio.com/Acorns-homepage150x50-fullcolor.png"
         }]
       },
-      homepage_sort: '1',
+      homepage_sort: "1",
       background_image: null,
       customer_story_download: null,
       customer_story_short: null,
       products_in_use: null,
       customer_story_short_raw: null,
-      featured: '1',
-      customer_sort: '1',
+      featured: "1",
+      customer_sort: "1",
       url: null,
       grey_logo: {
-        type: 'images',
+        type: "images",
         totalItems: 1,
         data: [{
-          type: 'image',
-          zuid: '3-d959aa9-0hm1ww',
-          url: 'https://kfg6bckb.media.zestyio.com/Acorns-homepage150x50-grey.png'
+          type: "image",
+          zuid: "3-d959aa9-0hm1ww",
+          url: "https://kfg6bckb.media.zestyio.com/Acorns-homepage150x50-grey.png"
         }]
       },
       white_logo: {
-        type: 'images',
+        type: "images",
         totalItems: 1,
         data: [{
-          type: 'image',
-          zuid: '3-d95a49c-6ks7n7',
-          url: 'https://kfg6bckb.media.zestyio.com/acorns-white.png'
+          type: "image",
+          zuid: "3-d95a49c-6ks7n7",
+          url: "https://kfg6bckb.media.zestyio.com/acorns-white.png"
         }]
       },
       meta: {
-        type: 'item',
-        model_name: 'customer_brands',
-        model_alternate_name: 'CustomerBrand',
-        zuid: '7-e2a8fcd0d0-pr31xg',
-        createdAt: '2022-03-22 20:33:36',
-        updatedAt: '2022-03-22 20:33:36',
-        listed: '1',
-        version: '3',
+        type: "item",
+        model_name: "customer_brands",
+        model_alternate_name: "CustomerBrand",
+        zuid: "7-e2a8fcd0d0-pr31xg",
+        createdAt: "2022-03-22 20:33:36",
+        updatedAt: "2022-03-22 20:33:36",
+        listed: "1",
+        version: "3",
         locale: {
-          id: '1',
-          name: 'English (United States)',
-          code: 'en-US',
-          "default": '1',
-          active: '1',
-          enabled: '1'
+          id: "1",
+          name: "English (United States)",
+          code: "en-US",
+          "default": "1",
+          active: "1",
+          enabled: "1"
         },
         model: {
-          type: 'model',
-          zuid: '6-0888e8-0rv8xh',
-          name: 'customer_brands',
-          label: 'Customers',
-          resourceURI: 'https://www.zesty.io/-/instant/6-0888e8-0rv8xh.json'
+          type: "model",
+          zuid: "6-0888e8-0rv8xh",
+          name: "customer_brands",
+          label: "Customers",
+          resourceURI: "https://www.zesty.io/-/instant/6-0888e8-0rv8xh.json"
         }
       }
     }]
   },
   meta: {
-    type: 'item',
-    model_name: 'integrations_individual_pages',
-    model_alternate_name: 'IntegrationsIndividualPage',
-    zuid: '7-d48acf90e9-pchhtq',
-    createdAt: '2022-04-06 17:43:27',
-    updatedAt: '2022-04-06 17:43:27',
-    listed: '1',
-    version: '2',
+    type: "item",
+    model_name: "integrations_individual_pages",
+    model_alternate_name: "IntegrationsIndividualPage",
+    zuid: "7-d48acf90e9-pchhtq",
+    createdAt: "2022-04-06 17:43:27",
+    updatedAt: "2022-04-06 17:43:27",
+    listed: "1",
+    version: "2",
     locale: {
-      id: '1',
-      name: 'English (United States)',
-      code: 'en-US',
-      "default": '1',
-      active: '1',
-      enabled: '1'
+      id: "1",
+      name: "English (United States)",
+      code: "en-US",
+      "default": "1",
+      active: "1",
+      enabled: "1"
     },
     model: {
-      type: 'model',
-      zuid: '6-88e5918e85-tmg13p',
-      name: 'integrations_individual_pages',
-      label: 'Integrations-Individual Pages',
-      resourceURI: 'https://www.zesty.io/-/instant/6-88e5918e85-tmg13p.json'
+      type: "model",
+      zuid: "6-88e5918e85-tmg13p",
+      name: "integrations_individual_pages",
+      label: "Integrations-Individual Pages",
+      resourceURI: "https://www.zesty.io/-/instant/6-88e5918e85-tmg13p.json"
     },
     web: {
-      url: 'https://www.zesty.io/integrations/nextjs-cms/',
-      uri: '/integrations/nextjs-cms/',
-      fragment: 'nextjs-cms',
-      canonical_tag_mode: '1',
-      sitemap_priority: '-1.0',
-      sitemap_last_updated: '2022-04-06 17:43:27',
+      url: "https://www.zesty.io/integrations/nextjs-cms/",
+      uri: "/integrations/nextjs-cms/",
+      fragment: "nextjs-cms",
+      canonical_tag_mode: "1",
+      sitemap_priority: "-1.0",
+      sitemap_last_updated: "2022-04-06 17:43:27",
       canonical_query_param_whitelist: null,
       canonical_tag_custom_value: null,
-      seo_link_text: 'Integrate Next.JS seamlessly',
-      seo_meta_title: 'Integrate Next.JS seamlessly',
-      seo_meta_description: '',
+      seo_link_text: "Integrate Next.JS seamlessly",
+      seo_meta_title: "Integrate Next.JS seamlessly",
+      seo_meta_description: "",
       seo_meta_keywords: null
     }
   },
   zestyProductionMode: true,
-  zestyInstanceZUID: '8-aaeffee09b-7w6v22',
-  zestyBaseURL: 'https://www.zesty.io'
+  zestyInstanceZUID: "8-aaeffee09b-7w6v22",
+  zestyBaseURL: "https://www.zesty.io"
 };
 
 var searchBarStyles = {
-  padding: '5px',
-  margin: '10px',
-  borderRadius: '28px'
+  padding: "5px",
+  margin: "10px",
+  borderRadius: "28px"
 };
 var ContentViewer = function ContentViewer(_ref) {
   var data = _ref.data,
@@ -1240,7 +1242,7 @@ var ContentViewer = function ContentViewer(_ref) {
       setSearch = _ref.setSearch;
   return React.createElement("div", {
     style: {
-      background: 'red'
+      background: "red"
     }
   }, React.createElement("input", {
     type: "text",
@@ -1253,87 +1255,25 @@ var ContentViewer = function ContentViewer(_ref) {
     style: searchBarStyles
   }), React.createElement(ReactJson, {
     style: {
-      height: '80vh',
-      overflowY: 'scroll'
+      height: "80vh",
+      overflowY: "scroll"
     },
-    name: 'data',
+    name: "data",
     // @ts-ignore
     src: data,
     theme: "flat",
     iconStyle: "square",
     indentWidth: 4,
-    collapsed: false,
+    collapsed: true,
     displayObjectSize: true,
     displayDataTypes: false,
     enableClipboard: true
   }));
 };
 
-var MetaViewer = function MetaViewer() {
-  return React.createElement("div", {
-    style: {
-      height: '80vh',
-      background: 'pink'
-    }
-  }, "MetaViewer");
-};
-
-/* eslint-disable array-callback-return */
-var linkStyles = {
-  padding: '5px',
-  display: 'inline-block',
-  color: '#497edf'
-};
-var Headers = function Headers(_ref) {
-  var _response$headers;
-
-  var response = _ref.response,
-      children = _ref.children,
-      content = _ref.content,
-      setcurrentTab = _ref.setcurrentTab,
-      tabs = _ref.tabs;
-  var headerZUID = (response == null ? void 0 : (_response$headers = response.headers) == null ? void 0 : _response$headers.get('z-zuid')) || '';
-  return React.createElement("div", {
-    style: {
-      width: '100%',
-      margin: '0 auto',
-      background: 'aqua'
-    }
-  }, React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-evenly'
-    }
-  }, React.createElement("img", {
-    src: "https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png",
-    width: "22px",
-    height: "22px",
-    alt: "Zesty.io Logo"
-  }), React.createElement("div", null, tabs.map(function (e) {
-    return React.createElement("button", {
-      onClick: function onClick() {
-        return setcurrentTab(e.value);
-      }
-    }, e.label);
-  })), React.createElement("span", null, "Browsing item ", React.createElement("strong", null, " ", content.meta.web.seo_link_text, " "), "from the ", React.createElement("strong", null, content.meta.model_alternate_name, " "), "Content Model"), React.createElement("a", {
-    style: linkStyles,
-    target: "_blank",
-    href: "https://accounts.zesty.io/instances/" + content.zestyInstanceZUID
-  }, "Open Zesty Account"), React.createElement("a", {
-    style: linkStyles,
-    target: "_blank",
-    href: "https://" + (content.zestyInstanceZUID || headerZUID) + ".manager.zesty.io/content/" + content.meta.model.zuid + "/" + content.meta.zuid
-  }, "Open Zesty Manager"), React.createElement("a", {
-    style: linkStyles,
-    target: "_blank",
-    href: "https://" + (content.zestyInstanceZUID || headerZUID) + ".manager.zesty.io/schema/" + content.meta.model.zuid
-  }, "Open Schema"), children));
-};
-
 /* eslint-disable guard-for-in */
 var canUseDOM = function canUseDOM() {
-  return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+  return !!(typeof window !== "undefined" && window.document && window.document.createElement);
 }; // convert the obj to array of objectsj
 
 var convertToArray = function convertToArray(content) {
@@ -1351,9 +1291,9 @@ var flattenObj = function flattenObj(obj, parent, res) {
 
   for (var _iterator = _createForOfIteratorHelperLoose(Object == null ? void 0 : Object.keys(obj || {})), _step; !(_step = _iterator()).done;) {
     var key = _step.value;
-    var propName = parent ? parent + '.' + key : key;
+    var propName = parent ? parent + "." + key : key;
 
-    if (typeof obj[key] === 'object') {
+    if (typeof obj[key] === "object") {
       flattenObj(obj[key], propName, res);
     } else {
       res[propName] = obj[key];
@@ -1368,7 +1308,7 @@ function deepen(obj) {
 
   for (var objectPath in obj) {
     // Split path into component parts
-    var parts = objectPath.split('.'); // Create sub-objects along path as needed
+    var parts = objectPath.split("."); // Create sub-objects along path as needed
 
     var target = result;
 
@@ -1383,6 +1323,164 @@ function deepen(obj) {
 
   return result;
 }
+var headerZUID = function headerZUID(response) {
+  var _response$headers;
+
+  return (response == null ? void 0 : (_response$headers = response.headers) == null ? void 0 : _response$headers.get("z-zuid")) || "";
+};
+
+var generatedScript = function generatedScript(content) {
+  var _content$content, _content$content$meta, _content$content$meta2, _content$meta, _content$meta$web, _content$meta2, _content$meta2$web, _content$meta3, _content$meta3$web, _content$meta4, _content$meta4$web, _content$meta5, _content$meta5$web, _content$meta6, _content$meta6$web, _content$meta7, _content$meta7$web, _content$meta8, _content$meta8$web, _content$meta9, _content$og_image, _content$og_image$dat, _content$og_image2, _content$og_image$dat2;
+
+  console.log(content, "contentdata");
+  console.log((content == null ? void 0 : (_content$content = content.content) == null ? void 0 : (_content$content$meta = _content$content.meta) == null ? void 0 : (_content$content$meta2 = _content$content$meta.web) == null ? void 0 : _content$content$meta2.url) || "");
+  return "<head>\n\n  <!-- Auto-generated Head Tags -->\n   <title>Zesty.io: Simplify digital. Maximize results.</title>\n  <link rel=\"canonical\" href=\"" + (content == null ? void 0 : (_content$meta = content.meta) == null ? void 0 : (_content$meta$web = _content$meta.web) == null ? void 0 : _content$meta$web.url) + "\" />\n\n   <meta name=\"description\" content=\"" + (content == null ? void 0 : (_content$meta2 = content.meta) == null ? void 0 : (_content$meta2$web = _content$meta2.web) == null ? void 0 : _content$meta2$web.seo_meta_description) + "\" />\n  <meta name=\"keywords\" content=\"" + (content == null ? void 0 : (_content$meta3 = content.meta) == null ? void 0 : (_content$meta3$web = _content$meta3.web) == null ? void 0 : _content$meta3$web.seo_meta_keywords) + "\" />\n  <meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\">\n  <meta property=\"og:type\" content=\"website\" />\n  <meta name=\"twitter:card\" content=\"summary\">\n  <meta property=\"og:title\" content=\"" + (content == null ? void 0 : (_content$meta4 = content.meta) == null ? void 0 : (_content$meta4$web = _content$meta4.web) == null ? void 0 : _content$meta4$web.seo_meta_title) + "\" />\n  <meta name=\"twitter:title\" content=\"" + (content == null ? void 0 : (_content$meta5 = content.meta) == null ? void 0 : (_content$meta5$web = _content$meta5.web) == null ? void 0 : _content$meta5$web.seo_meta_title) + "\">\n  <meta property=\"og:description\" content=\"" + (content == null ? void 0 : (_content$meta6 = content.meta) == null ? void 0 : (_content$meta6$web = _content$meta6.web) == null ? void 0 : _content$meta6$web.seo_meta_description) + "\" />\n  <meta property=\"twitter:description\" content=\"" + (content == null ? void 0 : (_content$meta7 = content.meta) == null ? void 0 : (_content$meta7$web = _content$meta7.web) == null ? void 0 : _content$meta7$web.seo_meta_description) + "\" />\n  <meta property=\"og:url\" content=\"" + (content == null ? void 0 : (_content$meta8 = content.meta) == null ? void 0 : (_content$meta8$web = _content$meta8.web) == null ? void 0 : _content$meta8$web.url) + "\" />\n  <meta property=\"og:image:width\" content=\"1200\">\n  <meta property=\"og:image:height\" content=\"630\">\n  <meta property=\"og:site_name\" content=\"" + (content == null ? void 0 : (_content$meta9 = content.meta) == null ? void 0 : _content$meta9.model_alternate_name) + "\" />\n\n  <!-- Custom Head Tags -->\n  <meta content=\"" + ((content == null ? void 0 : (_content$og_image = content.og_image) == null ? void 0 : _content$og_image.data) && (content == null ? void 0 : (_content$og_image$dat = content.og_image.data[0]) == null ? void 0 : _content$og_image$dat.url)) + "\" property=\"og:image\" />\n  <meta content=\"" + ((content == null ? void 0 : (_content$og_image2 = content.og_image) == null ? void 0 : _content$og_image2.data) && (content == null ? void 0 : (_content$og_image$dat2 = content.og_image.data[0]) == null ? void 0 : _content$og_image$dat2.url)) + "\" name=\"twitter:image\" />\n</head>\n";
+};
+
+var MetaViewer = function MetaViewer(_ref) {
+  var _content$meta10, _content$meta10$model, _content$meta11;
+
+  var content = _ref.content,
+      response = _ref.response;
+  console.log(content, "contentdata");
+  var uri = "https://" + ((content == null ? void 0 : content.zestyInstanceZUID) || headerZUID(response)) + ".manager.zesty.io/content/" + (content == null ? void 0 : (_content$meta10 = content.meta) == null ? void 0 : (_content$meta10$model = _content$meta10.model) == null ? void 0 : _content$meta10$model.zuid) + "/" + (content == null ? void 0 : (_content$meta11 = content.meta) == null ? void 0 : _content$meta11.zuid) + "/meta";
+  return React.createElement("div", {
+    style: {
+      height: "80vh",
+      background: "pink"
+    }
+  }, React.createElement(core.Button, {
+    href: uri,
+    variant: "contained"
+  }, "Edit in CMS"), React.createElement(reactCodeBlocks.CopyBlock, {
+    text: generatedScript(content),
+    language: "html",
+    showLineNumbers: false,
+    theme: reactCodeBlocks.anOldHope,
+    wrapLines: true
+  }));
+};
+
+var searchBarStyles$1 = {
+  padding: "5px",
+  margin: "10px",
+  borderRadius: "28px"
+};
+var JsonDataViewer = function JsonDataViewer(_ref) {
+  var data = _ref.data,
+      search = _ref.search,
+      setSearch = _ref.setSearch;
+  return React.createElement("div", {
+    style: {
+      background: "red"
+    }
+  }, React.createElement("input", {
+    type: "text",
+    placeholder: "Search Content Values",
+    value: search,
+    onChange: function onChange(e) {
+      return setSearch(e.currentTarget.value);
+    },
+    autoFocus: true,
+    style: searchBarStyles$1
+  }), React.createElement(ReactJson, {
+    style: {
+      height: "80vh",
+      overflowY: "scroll"
+    },
+    name: "data",
+    // @ts-ignore
+    src: data,
+    theme: "flat",
+    iconStyle: "square",
+    indentWidth: 4,
+    collapsed: true,
+    displayObjectSize: true,
+    displayDataTypes: false,
+    enableClipboard: true
+  }));
+};
+
+/* eslint-disable array-callback-return */
+var linkStyles = {
+  padding: "5px",
+  display: "inline-block",
+  color: "#497edf"
+};
+var Headers = function Headers(_ref) {
+  var _content$meta, _content$meta$web, _content$meta2, _content$meta3, _content$meta3$model, _content$meta4, _content$meta5, _content$meta5$model;
+
+  var response = _ref.response,
+      children = _ref.children,
+      content = _ref.content;
+  return React.createElement("div", {
+    style: {
+      width: "100%",
+      margin: "0 auto",
+      background: "aqua"
+    }
+  }, React.createElement("div", {
+    style: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-evenly"
+    }
+  }, React.createElement("img", {
+    src: "https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png",
+    width: "22px",
+    height: "22px",
+    alt: "Zesty.io Logo"
+  }), React.createElement("span", null, "Browsing item ", React.createElement("strong", null, " ", content == null ? void 0 : (_content$meta = content.meta) == null ? void 0 : (_content$meta$web = _content$meta.web) == null ? void 0 : _content$meta$web.seo_link_text, " "), "from the ", React.createElement("strong", null, content == null ? void 0 : (_content$meta2 = content.meta) == null ? void 0 : _content$meta2.model_alternate_name, " "), "Content Model"), React.createElement("a", {
+    style: linkStyles,
+    target: "_blank",
+    href: "https://accounts.zesty.io/instances/" + (content == null ? void 0 : content.zestyInstanceZUID)
+  }, "Open Zesty Account"), React.createElement("a", {
+    style: linkStyles,
+    target: "_blank",
+    href: "https://" + ((content == null ? void 0 : content.zestyInstanceZUID) || headerZUID(response)) + ".manager.zesty.io/content/" + (content == null ? void 0 : (_content$meta3 = content.meta) == null ? void 0 : (_content$meta3$model = _content$meta3.model) == null ? void 0 : _content$meta3$model.zuid) + "/" + (content == null ? void 0 : (_content$meta4 = content.meta) == null ? void 0 : _content$meta4.zuid)
+  }, "Open Zesty Manager"), React.createElement("a", {
+    style: linkStyles,
+    target: "_blank",
+    href: "https://" + ((content == null ? void 0 : content.zestyInstanceZUID) || headerZUID(response)) + ".manager.zesty.io/schema/" + (content == null ? void 0 : (_content$meta5 = content.meta) == null ? void 0 : (_content$meta5$model = _content$meta5.model) == null ? void 0 : _content$meta5$model.zuid)
+  }, "Open Schema"), children));
+};
+
+var Tabs = function Tabs(_ref) {
+  var tabs = _ref.tabs,
+      settime = _ref.settime,
+      setcurrentTab = _ref.setcurrentTab;
+  return React.createElement("div", {
+    style: {
+      display: "flex",
+      width: "100%"
+    }
+  }, tabs.map(function (e) {
+    return React.createElement(core.Button, {
+      fullWidth: true,
+      variant: "contained",
+      color: "primary",
+      size: "large",
+      onClick: function onClick() {
+        setcurrentTab(e.value);
+        settime();
+      }
+    }, e.label);
+  }));
+};
+
+var Loader = function Loader() {
+  return React.createElement("div", {
+    style: {
+      position: "absolute",
+      top: "0",
+      left: "0",
+      zIndex: "100",
+      height: "100%",
+      width: "100%",
+      background: "red"
+    }
+  }, React.createElement("h1", null, "Loading "), " ");
+};
 
 var getPageData = /*#__PURE__*/function () {
   var _ref = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee() {
@@ -1397,7 +1495,7 @@ var getPageData = /*#__PURE__*/function () {
             };
             queryString = window.location.search.substring(1);
             domain = process.env.REACT_APP_DOMAIN_OVERRIDE ? process.env.REACT_APP_DOMAIN_OVERRIDE : window.location.origin;
-            uri = domain + window.location.pathname + '?toJSON&' + queryString; // const uri = window.location.href + "?toJSON&" + queryString;
+            uri = domain + window.location.pathname + "?toJSON&" + queryString; // const uri = window.location.href + "?toJSON&" + queryString;
             // for testing only
             // const uri = "https://www.zesty.io?toJSON&" + queryString
             // Fetch data from Zesty.io toJSON API
@@ -1439,36 +1537,36 @@ var getPageData = /*#__PURE__*/function () {
 }();
 
 var buttonStyles = {
-  borderRadius: '5px',
-  padding: '12px 24px 12px 16px',
-  background: '#1b202c',
-  color: 'white',
-  border: '1px #5B667D solid',
-  boxShadow: '3px 3px 8px rgba(0,0,0,.5)',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  cursor: 'pointer'
+  borderRadius: "5px",
+  padding: "12px 24px 12px 16px",
+  background: "#1b202c",
+  color: "white",
+  border: "1px #5B667D solid",
+  boxShadow: "3px 3px 8px rgba(0,0,0,.5)",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  cursor: "pointer"
 };
 var zestyStyles = {
-  flex: '1',
-  display: 'inline-block',
-  alignSelf: 'center',
-  marginLeft: '12px',
-  fontSize: '18px',
-  color: '#C7D4EA',
-  letterSpacing: '1px',
+  flex: "1",
+  display: "inline-block",
+  alignSelf: "center",
+  marginLeft: "12px",
+  fontSize: "18px",
+  color: "#C7D4EA",
+  letterSpacing: "1px",
   fontFamily: "'Arial Rounded MT Bold','Helvetica Rounded',Arial,sans-serif"
 };
 var zestyWrapper = {
-  overflow: 'hidden',
-  width: 'auto',
-  background: 'transparent',
-  position: 'fixed',
-  bottom: '20px',
-  right: '20px',
-  zIndex: '9999999999999999',
-  padding: '2rem'
+  overflow: "hidden",
+  width: "auto",
+  background: "transparent",
+  position: "fixed",
+  bottom: "20px",
+  right: "20px",
+  zIndex: "9999999999999999",
+  padding: "2rem"
 };
 
 var tabList = [{
@@ -1479,21 +1577,40 @@ var tabList = [{
   id: 2,
   label: "Meta Viewer",
   value: "Meta Viewer"
+}, {
+  id: 3,
+  label: "Json Data Viewer",
+  value: "Json Data Viewer"
 }]; // renanme content to contentData
 
 var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
   var _result$, _result$$matches;
 
-  var response = _ref.response,
+  var pageData = _ref.pageData,
+      response = _ref.response,
       contentData = _ref.contentData,
       children = _ref.children;
   var content = contentData || dummydata; // const [modal, setModal] = React.useState(false);
 
   var _React$useState = React.useState(),
       search = _React$useState[0],
-      setSearch = _React$useState[1]; // convert obj to dot
-  // @ts-ignore
+      setSearch = _React$useState[1];
 
+  var _React$useState2 = React.useState(0),
+      time = _React$useState2[0],
+      _settime = _React$useState2[1];
+
+  React.useEffect(function () {
+    var timer = setTimeout(function () {
+      if (time > 0) {
+        _settime(time - 1);
+      }
+    }, 1000);
+    return function () {
+      return clearTimeout(timer);
+    };
+  }); // convert obj to dot
+  // @ts-ignore
 
   var flaten1 = flattenObj(content); // convert to array of objects
 
@@ -1531,9 +1648,9 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
     content: content
   };
 
-  var _React$useState2 = React.useState("Content Viewer"),
-      currentTab = _React$useState2[0],
-      setcurrentTab = _React$useState2[1];
+  var _React$useState3 = React.useState("Content Viewer"),
+      currentTab = _React$useState3[0],
+      setcurrentTab = _React$useState3[1];
 
   var containerStyle = {
     background: "#ddd",
@@ -1542,19 +1659,35 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
     width: "70vw",
     height: "85vh"
   };
+  console.log(pageData, "Pagedata");
   return React.createElement("div", {
     style: containerStyle
   }, React.createElement(Headers, {
     children: children,
     content: content,
+    response: response
+  }), React.createElement(Tabs, {
     setcurrentTab: setcurrentTab,
     tabs: tabList,
-    response: response
-  }), currentTab === "Content Viewer" && React.createElement(ContentViewer, {
+    settime: function settime() {
+      return _settime(2);
+    }
+  }), React.createElement("div", {
+    style: {
+      position: "relative"
+    }
+  }, time > 0 && React.createElement(Loader, null), currentTab === "Content Viewer" && React.createElement(ContentViewer, {
     data: data,
     search: search,
     setSearch: setSearch
-  }), currentTab === "Meta Viewer" && React.createElement(MetaViewer, null));
+  }), currentTab === "Meta Viewer" && React.createElement(MetaViewer, {
+    response: response,
+    content: contentData
+  }), currentTab === "Json Data Viewer" && React.createElement(JsonDataViewer, {
+    data: data,
+    search: search,
+    setSearch: setSearch
+  })));
 }; // Main ZESTY EXPLORER
 
 
@@ -1562,17 +1695,17 @@ var ZestyExplorer = function ZestyExplorer(_ref3) {
   var _ref3$content = _ref3.content,
       content = _ref3$content === void 0 ? {} : _ref3$content;
 
-  var _React$useState3 = React.useState(false),
-      open = _React$useState3[0],
-      setOpen = _React$useState3[1];
-
-  var _React$useState4 = React.useState(""),
-      pageData = _React$useState4[0],
-      setPageData = _React$useState4[1];
+  var _React$useState4 = React.useState(false),
+      open = _React$useState4[0],
+      setOpen = _React$useState4[1];
 
   var _React$useState5 = React.useState(""),
-      response = _React$useState5[0],
-      setResponse = _React$useState5[1];
+      pageData = _React$useState5[0],
+      setPageData = _React$useState5[1];
+
+  var _React$useState6 = React.useState(""),
+      response = _React$useState6[0],
+      setResponse = _React$useState6[1];
 
   var getData = /*#__PURE__*/function () {
     var _ref4 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee() {
@@ -1643,6 +1776,7 @@ var ZestyExplorer = function ZestyExplorer(_ref3) {
       style: zestyStyles
     }, "Explorer")), open && React.createElement("div", null, React.createElement(ZestyExplorerBrowser, {
       response: response,
+      pageData: pageData,
       contentData: searchObject
     }, React.createElement("button", {
       onClick: function onClick() {
@@ -1653,4 +1787,4 @@ var ZestyExplorer = function ZestyExplorer(_ref3) {
 };
 
 exports.ZestyExplorer = ZestyExplorer;
-//# sourceMappingURL=explorer.cjs.development.js.map
+//# sourceMappingURL=ft-tabs.cjs.development.js.map

@@ -1,16 +1,10 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable react/jsx-no-target-blank */
 import React from "react"
-interface Tabs {
-   id: number
-   label: string
-   value: string
-}
+import { headerZUID } from "utils"
 interface Props {
    children: React.ReactNode
    content: any
-   setcurrentTab: (e: string) => void
-   tabs: Tabs[]
    response: any
 }
 
@@ -19,8 +13,8 @@ const linkStyles = {
    display: "inline-block",
    color: "#497edf",
 }
-export const Headers = ({ response, children, content, setcurrentTab, tabs }: Props) => {
-   const headerZUID = response?.headers?.get("z-zuid") || ""
+
+export const Headers = ({ response, children, content }: Props) => {
    return (
       <div style={{ width: "100%", margin: "0 auto", background: "aqua" }}>
          <div
@@ -36,31 +30,26 @@ export const Headers = ({ response, children, content, setcurrentTab, tabs }: Pr
                height="22px"
                alt="Zesty.io Logo"
             />
-            <div>
-               {tabs.map((e: Tabs) => {
-                  return <button onClick={() => setcurrentTab(e.value)}>{e.label}</button>
-               })}
-            </div>
 
             <span>
-               Browsing item <strong> {content.meta.web.seo_link_text} </strong>
-               from the <strong>{content.meta.model_alternate_name} </strong>
+               Browsing item <strong> {content?.meta?.web?.seo_link_text} </strong>
+               from the <strong>{content?.meta?.model_alternate_name} </strong>
                Content Model
             </span>
             <a
                style={linkStyles}
                target="_blank"
-               href={`https://accounts.zesty.io/instances/${content.zestyInstanceZUID}`}
+               href={`https://accounts.zesty.io/instances/${content?.zestyInstanceZUID}`}
             >
                Open Zesty Account
             </a>
             <a
                style={linkStyles}
                target="_blank"
-               href={`https://${content.zestyInstanceZUID ||
-                  headerZUID}.manager.zesty.io/content/${content.meta.model.zuid}/${
-                  content.meta.zuid
-               }`}
+               href={`https://${content?.zestyInstanceZUID ||
+                  headerZUID(response)}.manager.zesty.io/content/${
+                  content?.meta?.model?.zuid
+               }/${content?.meta?.zuid}`}
             >
                Open Zesty Manager
             </a>
@@ -68,8 +57,10 @@ export const Headers = ({ response, children, content, setcurrentTab, tabs }: Pr
             <a
                style={linkStyles}
                target="_blank"
-               href={`https://${content.zestyInstanceZUID ||
-                  headerZUID}.manager.zesty.io/schema/${content.meta.model.zuid}`}
+               href={`https://${content?.zestyInstanceZUID ||
+                  headerZUID(response)}.manager.zesty.io/schema/${
+                  content?.meta?.model?.zuid
+               }`}
             >
                Open Schema
             </a>

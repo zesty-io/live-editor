@@ -47,3 +47,7 @@ export function deepen(obj: any) {
 
    return result
 }
+
+export const headerZUID = (response: any) => {
+   return response?.headers?.get("z-zuid") || ""
+}
