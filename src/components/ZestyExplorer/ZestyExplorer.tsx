@@ -3,12 +3,13 @@
 import React from "react"
 import { dummydata } from "constants/index"
 import Fuse from "fuse.js"
-import { ContentViewer, MetaViewer } from "views"
-import { Headers } from "components"
-import * as helper from "utils"
-import { getPageData } from "services"
+import { ContentViewer, MetaViewer } from "views/index"
+import { Headers } from "components/index"
+import * as helper from "utils/index"
+import { getPageData } from "services/index"
 import { buttonStyles, zestyStyles, zestyWrapper } from "./styles"
 
+console.log(process.env, "ENV")
 // list of tabs to render
 const tabList = [
    { id: 1, label: "Content Viewer", value: "Content Viewer" },
@@ -103,6 +104,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
       response && setResponse(response)
    }
 
+   console.log(content, "CONTEnt")
    // check if content is available
    React.useEffect(() => {
       if (content && Object.keys(content).length === 0) {
