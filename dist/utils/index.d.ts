@@ -4,3 +4,4 @@ export declare const convertToArray: (content: any) => {
 }[];
 export declare const flattenObj: (obj: any, parent: any, res?: any) => any;
 export declare function deepen(obj: any): {};
+export declare const headerZUID: (response: any) => any;

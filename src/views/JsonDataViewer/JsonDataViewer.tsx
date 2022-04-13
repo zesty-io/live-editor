@@ -12,7 +12,7 @@ const searchBarStyles = {
    borderRadius: "28px",
 }
 
-export const ContentViewer = ({ data, search, setSearch }: Props) => {
+export const JsonDataViewer = ({ data, search, setSearch }: Props) => {
    return (
       <div style={{ background: "red" }}>
          <input

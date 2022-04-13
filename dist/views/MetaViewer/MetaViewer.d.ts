@@ -1,2 +1,2 @@
 /// <reference types="react" />
-export declare const MetaViewer: () => JSX.Element;
+export declare const MetaViewer: ({ content, response }: any) => JSX.Element;
