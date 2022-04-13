@@ -1473,12 +1473,12 @@ var zestyWrapper = {
 
 var tabList = [{
   id: 1,
-  label: 'Content Viewer',
-  value: 'Content Viewer'
+  label: "Content Viewer",
+  value: "Content Viewer"
 }, {
   id: 2,
-  label: 'Meta Viewer',
-  value: 'Meta Viewer'
+  label: "Meta Viewer",
+  value: "Meta Viewer"
 }]; // renanme content to contentData
 
 var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
@@ -1501,7 +1501,7 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
 
   var columns = flaten2.map(function (e) {
     var res = Object.keys(e);
-    return res.toString().replace(/.[0-9]/g, '');
+    return res.toString().replace(/.[0-9]/g, "");
   }); // search options
 
   var options = {
@@ -1517,7 +1517,7 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
   }; // search func
 
   var fuse = new Fuse([content], options);
-  var result = fuse.search(search || ''); // convert as key value pairs
+  var result = fuse.search(search || ""); // convert as key value pairs
 
   var result2 = result && ((_result$ = result[0]) == null ? void 0 : (_result$$matches = _result$.matches) == null ? void 0 : _result$$matches.map(function (e) {
     var _ref2;
@@ -1531,16 +1531,16 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
     content: content
   };
 
-  var _React$useState2 = React.useState('Content Viewer'),
+  var _React$useState2 = React.useState("Content Viewer"),
       currentTab = _React$useState2[0],
       setcurrentTab = _React$useState2[1];
 
   var containerStyle = {
-    background: '#ddd',
-    boxShadow: '0,0,5px,#333',
-    borderRadius: '4px',
-    width: '70vw',
-    height: '85vh'
+    background: "#ddd",
+    boxShadow: "0,0,5px,#333",
+    borderRadius: "4px",
+    width: "70vw",
+    height: "85vh"
   };
   return React.createElement("div", {
     style: containerStyle
@@ -1550,11 +1550,11 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
     setcurrentTab: setcurrentTab,
     tabs: tabList,
     response: response
-  }), currentTab === 'Content Viewer' && React.createElement(ContentViewer, {
+  }), currentTab === "Content Viewer" && React.createElement(ContentViewer, {
     data: data,
     search: search,
     setSearch: setSearch
-  }), currentTab === 'Meta Viewer' && React.createElement(MetaViewer, null));
+  }), currentTab === "Meta Viewer" && React.createElement(MetaViewer, null));
 }; // Main ZESTY EXPLORER
 
 
@@ -1566,11 +1566,11 @@ var ZestyExplorer = function ZestyExplorer(_ref3) {
       open = _React$useState3[0],
       setOpen = _React$useState3[1];
 
-  var _React$useState4 = React.useState(''),
+  var _React$useState4 = React.useState(""),
       pageData = _React$useState4[0],
       setPageData = _React$useState4[1];
 
-  var _React$useState5 = React.useState(''),
+  var _React$useState5 = React.useState(""),
       response = _React$useState5[0],
       setResponse = _React$useState5[1];
 

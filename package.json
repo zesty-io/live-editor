@@ -35,10 +35,15 @@
     }
   },
   "prettier": {
-    "printWidth": 80,
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "es5"
+    "endOfLine": "lf",
+    "printWidth": 90,
+    "tabWidth": 3,
+    "trailingComma": "all",
+    "semi": false,
+    "singleQuote": false,
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "bracketSameLine": false
   },
   "name": "@zesty-io/explorer",
   "author": "zestyionpm",
