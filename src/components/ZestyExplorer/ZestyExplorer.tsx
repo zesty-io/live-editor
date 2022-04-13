@@ -9,6 +9,7 @@ import * as helper from 'utils/index';
 import { getPageData } from 'services/index';
 import { buttonStyles, zestyStyles, zestyWrapper } from './styles';
 
+console.log(process.env, 'ENV');
 // list of tabs to render
 const tabList = [
   { id: 1, label: 'Content Viewer', value: 'Content Viewer' },
@@ -29,7 +30,7 @@ const ZestyExplorerBrowser = ({ response, contentData, children }: any) => {
   const flaten2 = helper.convertToArray(flaten1);
 
   // generate columns for search
-  const columns = flaten2.map((e) => {
+  const columns = flaten2.map(e => {
     const res = Object.keys(e);
     return res.toString().replace(/.[0-9]/g, '');
   });
@@ -103,6 +104,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
     response && setResponse(response);
   };
 
+  console.log(content, 'CONTEnt');
   // check if content is available
   React.useEffect(() => {
     if (content && Object.keys(content).length === 0) {

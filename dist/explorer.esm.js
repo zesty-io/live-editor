@@ -1279,7 +1279,7 @@ var linkStyles = {
   color: '#497edf'
 };
 var Headers = function Headers(_ref) {
-  var _response$headers;
+  var _response$headers, _content$meta, _content$meta$web, _content$meta2, _content$meta3, _content$meta3$model, _content$meta4, _content$meta5, _content$meta5$model;
 
   var response = _ref.response,
       children = _ref.children,
@@ -1310,18 +1310,18 @@ var Headers = function Headers(_ref) {
         return setcurrentTab(e.value);
       }
     }, e.label);
-  })), React.createElement("span", null, "Browsing item ", React.createElement("strong", null, " ", content.meta.web.seo_link_text, " "), "from the ", React.createElement("strong", null, content.meta.model_alternate_name, " "), "Content Model"), React.createElement("a", {
+  })), React.createElement("span", null, "Browsing item ", React.createElement("strong", null, " ", content == null ? void 0 : (_content$meta = content.meta) == null ? void 0 : (_content$meta$web = _content$meta.web) == null ? void 0 : _content$meta$web.seo_link_text, " "), "from the ", React.createElement("strong", null, content == null ? void 0 : (_content$meta2 = content.meta) == null ? void 0 : _content$meta2.model_alternate_name, " "), "Content Model"), React.createElement("a", {
     style: linkStyles,
     target: "_blank",
-    href: "https://accounts.zesty.io/instances/" + content.zestyInstanceZUID
+    href: "https://accounts.zesty.io/instances/" + (content == null ? void 0 : content.zestyInstanceZUID)
   }, "Open Zesty Account"), React.createElement("a", {
     style: linkStyles,
     target: "_blank",
-    href: "https://" + (content.zestyInstanceZUID || headerZUID) + ".manager.zesty.io/content/" + content.meta.model.zuid + "/" + content.meta.zuid
+    href: "https://" + ((content == null ? void 0 : content.zestyInstanceZUID) || headerZUID) + ".manager.zesty.io/content/" + (content == null ? void 0 : (_content$meta3 = content.meta) == null ? void 0 : (_content$meta3$model = _content$meta3.model) == null ? void 0 : _content$meta3$model.zuid) + "/" + (content == null ? void 0 : (_content$meta4 = content.meta) == null ? void 0 : _content$meta4.zuid)
   }, "Open Zesty Manager"), React.createElement("a", {
     style: linkStyles,
     target: "_blank",
-    href: "https://" + (content.zestyInstanceZUID || headerZUID) + ".manager.zesty.io/schema/" + content.meta.model.zuid
+    href: "https://" + ((content == null ? void 0 : content.zestyInstanceZUID) || headerZUID) + ".manager.zesty.io/schema/" + (content == null ? void 0 : (_content$meta5 = content.meta) == null ? void 0 : (_content$meta5$model = _content$meta5.model) == null ? void 0 : _content$meta5$model.zuid)
   }, "Open Schema"), children));
 };
 
@@ -1390,7 +1390,7 @@ var getPageData = /*#__PURE__*/function () {
               production: true
             };
             queryString = window.location.search.substring(1);
-            domain = process.env.REACT_APP_DOMAIN_OVERRIDE ? process.env.REACT_APP_DOMAIN_OVERRIDE : window.location.origin;
+            domain = process.env.REACT_APP_DOMAIN_OVERRIDE || process.env.NEXT_PUBLIC_DOMAIN_OVERRIDE ? process.env.REACT_APP_DOMAIN_OVERRIDE || process.env.NEXT_PUBLIC_DOMAIN_OVERRIDE : window.location.origin;
             uri = domain + window.location.pathname + '?toJSON&' + queryString; // const uri = window.location.href + "?toJSON&" + queryString;
             // for testing only
             // const uri = "https://www.zesty.io?toJSON&" + queryString
@@ -1464,6 +1464,8 @@ var zestyWrapper = {
   zIndex: '9999999999999999',
   padding: '2rem'
 };
+
+console.log(process.env, 'ENV'); // list of tabs to render
 
 var tabList = [{
   id: 1,
@@ -1597,8 +1599,9 @@ var ZestyExplorer = function ZestyExplorer(_ref3) {
     return function getData() {
       return _ref4.apply(this, arguments);
     };
-  }(); // check if content is available
+  }();
 
+  console.log(content, 'CONTEnt'); // check if content is available
 
   React.useEffect(function () {
     if (content && Object.keys(content).length === 0) {

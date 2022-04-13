@@ -51,25 +51,24 @@ export const Headers = ({
         </div>
 
         <span>
-          Browsing item <strong> {content.meta.web.seo_link_text} </strong>
-          from the <strong>{content.meta.model_alternate_name} </strong>
+          Browsing item <strong> {content?.meta?.web?.seo_link_text} </strong>
+          from the <strong>{content?.meta?.model_alternate_name} </strong>
           Content Model
         </span>
         <a
           style={linkStyles}
           target="_blank"
-          href={`https://accounts.zesty.io/instances/${content.zestyInstanceZUID}`}
+          href={`https://accounts.zesty.io/instances/${content?.zestyInstanceZUID}`}
         >
           Open Zesty Account
         </a>
         <a
           style={linkStyles}
           target="_blank"
-          href={`https://${
-            content.zestyInstanceZUID || headerZUID
-          }.manager.zesty.io/content/${content.meta.model.zuid}/${
-            content.meta.zuid
-          }`}
+          href={`https://${content?.zestyInstanceZUID ||
+            headerZUID}.manager.zesty.io/content/${
+            content?.meta?.model?.zuid
+          }/${content?.meta?.zuid}`}
         >
           Open Zesty Manager
         </a>
@@ -77,9 +76,8 @@ export const Headers = ({
         <a
           style={linkStyles}
           target="_blank"
-          href={`https://${
-            content.zestyInstanceZUID || headerZUID
-          }.manager.zesty.io/schema/${content.meta.model.zuid}`}
+          href={`https://${content?.zestyInstanceZUID ||
+            headerZUID}.manager.zesty.io/schema/${content?.meta?.model?.zuid}`}
         >
           Open Schema
         </a>
