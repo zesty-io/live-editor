@@ -1,14 +1,9 @@
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
-var React = _interopDefault(require('react'));
-var Fuse = _interopDefault(require('fuse.js'));
-var ReactJson = _interopDefault(require('react-json-view-ssr'));
-var core = require('@material-ui/core');
-var reactCodeBlocks = require('react-code-blocks');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Button } from '@material-ui/core';
+import Fuse from 'fuse.js';
+import ReactJson from 'react-json-view-ssr';
+import { CopyBlock, anOldHope } from 'react-code-blocks';
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -101,6 +96,131 @@ function _createForOfIteratorHelperLoose(o, allowArrayLike) {
 
   throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
+
+/* eslint-disable guard-for-in */
+var canUseDOM = function canUseDOM() {
+  return !!(typeof window !== "undefined" && window.document && window.document.createElement);
+}; // convert the obj to array of objectsj
+
+var convertToArray = function convertToArray(content) {
+  return Object.entries(content).map(function (e) {
+    var _ref;
+
+    return _ref = {}, _ref["" + e[0]] = e[1], _ref;
+  });
+}; // convert obj to dot
+
+var flattenObj = function flattenObj(obj, parent, res) {
+  if (res === void 0) {
+    res = {};
+  }
+
+  for (var _iterator = _createForOfIteratorHelperLoose(Object == null ? void 0 : Object.keys(obj || {})), _step; !(_step = _iterator()).done;) {
+    var key = _step.value;
+    var propName = parent ? parent + "." + key : key;
+
+    if (typeof obj[key] === "object") {
+      flattenObj(obj[key], propName, res);
+    } else {
+      res[propName] = obj[key];
+    }
+  }
+
+  return res;
+}; // convert dot to object
+
+function deepen(obj) {
+  var result = {}; // For each object path (property key) in the object
+
+  for (var objectPath in obj) {
+    // Split path into component parts
+    var parts = objectPath.split("."); // Create sub-objects along path as needed
+
+    var target = result;
+
+    while (parts.length > 1) {
+      var part = parts.shift();
+      target = target[part] = target[part] || {};
+    } // Set value at end of path
+
+
+    target[parts[0]] = obj[objectPath];
+  }
+
+  return result;
+}
+var headerZUID = function headerZUID(response) {
+  var _response$headers;
+
+  return (response == null ? void 0 : (_response$headers = response.headers) == null ? void 0 : _response$headers.get("z-zuid")) || "";
+};
+
+/* eslint-disable array-callback-return */
+var linkStyles = {
+  padding: "5px",
+  display: "inline-block",
+  color: "#497edf"
+};
+var Headers = function Headers(_ref) {
+  var _content$meta, _content$meta$web, _content$meta2, _content$meta3, _content$meta3$model, _content$meta4, _content$meta5, _content$meta5$model;
+
+  var response = _ref.response,
+      children = _ref.children,
+      content = _ref.content;
+  return React.createElement("div", {
+    style: {
+      width: "100%",
+      margin: "0 auto",
+      background: "aqua"
+    }
+  }, React.createElement("div", {
+    style: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-evenly"
+    }
+  }, React.createElement("img", {
+    src: "https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png",
+    width: "22px",
+    height: "22px",
+    alt: "Zesty.io Logo"
+  }), React.createElement("span", null, "Browsing item ", React.createElement("strong", null, " ", content == null ? void 0 : (_content$meta = content.meta) == null ? void 0 : (_content$meta$web = _content$meta.web) == null ? void 0 : _content$meta$web.seo_link_text, " "), "from the ", React.createElement("strong", null, content == null ? void 0 : (_content$meta2 = content.meta) == null ? void 0 : _content$meta2.model_alternate_name, " "), "Content Model"), React.createElement("a", {
+    style: linkStyles,
+    target: "_blank",
+    href: "https://accounts.zesty.io/instances/" + (content == null ? void 0 : content.zestyInstanceZUID)
+  }, "Open Zesty Account"), React.createElement("a", {
+    style: linkStyles,
+    target: "_blank",
+    href: "https://" + ((content == null ? void 0 : content.zestyInstanceZUID) || headerZUID(response)) + ".manager.zesty.io/content/" + (content == null ? void 0 : (_content$meta3 = content.meta) == null ? void 0 : (_content$meta3$model = _content$meta3.model) == null ? void 0 : _content$meta3$model.zuid) + "/" + (content == null ? void 0 : (_content$meta4 = content.meta) == null ? void 0 : _content$meta4.zuid)
+  }, "Open Zesty Manager"), React.createElement("a", {
+    style: linkStyles,
+    target: "_blank",
+    href: "https://" + ((content == null ? void 0 : content.zestyInstanceZUID) || headerZUID(response)) + ".manager.zesty.io/schema/" + (content == null ? void 0 : (_content$meta5 = content.meta) == null ? void 0 : (_content$meta5$model = _content$meta5.model) == null ? void 0 : _content$meta5$model.zuid)
+  }, "Open Schema"), children));
+};
+
+var Tabs = function Tabs(_ref) {
+  var tabs = _ref.tabs,
+      settime = _ref.settime,
+      setcurrentTab = _ref.setcurrentTab;
+  return React.createElement("div", {
+    style: {
+      display: "flex",
+      width: "100%"
+    }
+  }, tabs.map(function (e) {
+    return React.createElement(Button, {
+      fullWidth: true,
+      variant: "contained",
+      color: "primary",
+      size: "large",
+      onClick: function onClick() {
+        setcurrentTab(e.value);
+        settime();
+      }
+    }, e.label);
+  }));
+};
 
 function createCommonjsModule(fn, module) {
 	return module = { exports: {} }, fn(module, module.exports), module.exports;
@@ -1271,64 +1391,6 @@ var ContentViewer = function ContentViewer(_ref) {
   }));
 };
 
-/* eslint-disable guard-for-in */
-var canUseDOM = function canUseDOM() {
-  return !!(typeof window !== "undefined" && window.document && window.document.createElement);
-}; // convert the obj to array of objectsj
-
-var convertToArray = function convertToArray(content) {
-  return Object.entries(content).map(function (e) {
-    var _ref;
-
-    return _ref = {}, _ref["" + e[0]] = e[1], _ref;
-  });
-}; // convert obj to dot
-
-var flattenObj = function flattenObj(obj, parent, res) {
-  if (res === void 0) {
-    res = {};
-  }
-
-  for (var _iterator = _createForOfIteratorHelperLoose(Object == null ? void 0 : Object.keys(obj || {})), _step; !(_step = _iterator()).done;) {
-    var key = _step.value;
-    var propName = parent ? parent + "." + key : key;
-
-    if (typeof obj[key] === "object") {
-      flattenObj(obj[key], propName, res);
-    } else {
-      res[propName] = obj[key];
-    }
-  }
-
-  return res;
-}; // convert dot to object
-
-function deepen(obj) {
-  var result = {}; // For each object path (property key) in the object
-
-  for (var objectPath in obj) {
-    // Split path into component parts
-    var parts = objectPath.split("."); // Create sub-objects along path as needed
-
-    var target = result;
-
-    while (parts.length > 1) {
-      var part = parts.shift();
-      target = target[part] = target[part] || {};
-    } // Set value at end of path
-
-
-    target[parts[0]] = obj[objectPath];
-  }
-
-  return result;
-}
-var headerZUID = function headerZUID(response) {
-  var _response$headers;
-
-  return (response == null ? void 0 : (_response$headers = response.headers) == null ? void 0 : _response$headers.get("z-zuid")) || "";
-};
-
 var generatedScript = function generatedScript(content) {
   var _content$content, _content$content$meta, _content$content$meta2, _content$meta, _content$meta$web, _content$meta2, _content$meta2$web, _content$meta3, _content$meta3$web, _content$meta4, _content$meta4$web, _content$meta5, _content$meta5$web, _content$meta6, _content$meta6$web, _content$meta7, _content$meta7$web, _content$meta8, _content$meta8$web, _content$meta9, _content$og_image, _content$og_image$dat, _content$og_image2, _content$og_image$dat2;
 
@@ -1349,14 +1411,14 @@ var MetaViewer = function MetaViewer(_ref) {
       height: "80vh",
       background: "pink"
     }
-  }, React.createElement(core.Button, {
+  }, React.createElement(Button, {
     href: uri,
     variant: "contained"
-  }, "Edit in CMS"), React.createElement(reactCodeBlocks.CopyBlock, {
+  }, "Edit in CMS"), React.createElement(CopyBlock, {
     text: generatedScript(content),
     language: "html",
     showLineNumbers: false,
-    theme: reactCodeBlocks.anOldHope,
+    theme: anOldHope,
     wrapLines: true
   }));
 };
@@ -1399,87 +1461,6 @@ var JsonDataViewer = function JsonDataViewer(_ref) {
     displayDataTypes: false,
     enableClipboard: true
   }));
-};
-
-/* eslint-disable array-callback-return */
-var linkStyles = {
-  padding: "5px",
-  display: "inline-block",
-  color: "#497edf"
-};
-var Headers = function Headers(_ref) {
-  var _content$meta, _content$meta$web, _content$meta2, _content$meta3, _content$meta3$model, _content$meta4, _content$meta5, _content$meta5$model;
-
-  var response = _ref.response,
-      children = _ref.children,
-      content = _ref.content;
-  return React.createElement("div", {
-    style: {
-      width: "100%",
-      margin: "0 auto",
-      background: "aqua"
-    }
-  }, React.createElement("div", {
-    style: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-evenly"
-    }
-  }, React.createElement("img", {
-    src: "https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png",
-    width: "22px",
-    height: "22px",
-    alt: "Zesty.io Logo"
-  }), React.createElement("span", null, "Browsing item ", React.createElement("strong", null, " ", content == null ? void 0 : (_content$meta = content.meta) == null ? void 0 : (_content$meta$web = _content$meta.web) == null ? void 0 : _content$meta$web.seo_link_text, " "), "from the ", React.createElement("strong", null, content == null ? void 0 : (_content$meta2 = content.meta) == null ? void 0 : _content$meta2.model_alternate_name, " "), "Content Model"), React.createElement("a", {
-    style: linkStyles,
-    target: "_blank",
-    href: "https://accounts.zesty.io/instances/" + (content == null ? void 0 : content.zestyInstanceZUID)
-  }, "Open Zesty Account"), React.createElement("a", {
-    style: linkStyles,
-    target: "_blank",
-    href: "https://" + ((content == null ? void 0 : content.zestyInstanceZUID) || headerZUID(response)) + ".manager.zesty.io/content/" + (content == null ? void 0 : (_content$meta3 = content.meta) == null ? void 0 : (_content$meta3$model = _content$meta3.model) == null ? void 0 : _content$meta3$model.zuid) + "/" + (content == null ? void 0 : (_content$meta4 = content.meta) == null ? void 0 : _content$meta4.zuid)
-  }, "Open Zesty Manager"), React.createElement("a", {
-    style: linkStyles,
-    target: "_blank",
-    href: "https://" + ((content == null ? void 0 : content.zestyInstanceZUID) || headerZUID(response)) + ".manager.zesty.io/schema/" + (content == null ? void 0 : (_content$meta5 = content.meta) == null ? void 0 : (_content$meta5$model = _content$meta5.model) == null ? void 0 : _content$meta5$model.zuid)
-  }, "Open Schema"), children));
-};
-
-var Tabs = function Tabs(_ref) {
-  var tabs = _ref.tabs,
-      settime = _ref.settime,
-      setcurrentTab = _ref.setcurrentTab;
-  return React.createElement("div", {
-    style: {
-      display: "flex",
-      width: "100%"
-    }
-  }, tabs.map(function (e) {
-    return React.createElement(core.Button, {
-      fullWidth: true,
-      variant: "contained",
-      color: "primary",
-      size: "large",
-      onClick: function onClick() {
-        setcurrentTab(e.value);
-        settime();
-      }
-    }, e.label);
-  }));
-};
-
-var Loader = function Loader() {
-  return React.createElement("div", {
-    style: {
-      position: "absolute",
-      top: "0",
-      left: "0",
-      zIndex: "100",
-      height: "100%",
-      width: "100%",
-      background: "red"
-    }
-  }, React.createElement("h1", null, "Loading "), " ");
 };
 
 var getPageData = /*#__PURE__*/function () {
@@ -1786,5 +1767,31 @@ var ZestyExplorer = function ZestyExplorer(_ref3) {
   );
 };
 
-exports.ZestyExplorer = ZestyExplorer;
-//# sourceMappingURL=ft-tabs.cjs.development.js.map
+var Loader = function Loader() {
+  return React.createElement("div", {
+    style: {
+      position: "absolute",
+      top: "0",
+      left: "0",
+      zIndex: "100",
+      height: "100%",
+      width: "100%",
+      background: "red"
+    }
+  }, React.createElement("h1", null, "Loading "), " ");
+};
+
+/* eslint-disable react/no-render-return-value */
+console.log("latest apr 12");
+
+var main = function main() {
+  if (!canUseDOM()) {
+    return null;
+  }
+
+  document.body.innerHTML += '<div id="zesty-explorer"></div>';
+  return ReactDOM.render(React.createElement(ZestyExplorer, null), document.getElementById("zesty-explorer"));
+};
+
+main();
+//# sourceMappingURL=explorer.esm.js.map
