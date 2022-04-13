@@ -33,7 +33,7 @@ export const ContentViewer = ({ data, search, setSearch }: Props) => {
             theme="flat"
             iconStyle="square"
             indentWidth={4}
-            collapsed={false}
+            collapsed={true}
             displayObjectSize
             displayDataTypes={false}
             enableClipboard={true}
