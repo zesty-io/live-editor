@@ -22,7 +22,7 @@ Using NPM
 
 Using CDN
 
-- copy the script tag below and paste it in the head of your main.html file
+-  copy the script tag below and paste it in the head of your main.html file
 
 ```
      <script
@@ -52,13 +52,13 @@ import { ZestyExplorer } from   '@zesty-io/explorer';
 
 ## Explorer Sections
 
-- Page Data Explorer
-- Full Site Navigation and Explorer
-- Inline Editing (phases)
-- Website and Page Health
-- Metadata
-- Link Scanning
-- Optimization Scanning
+-  Page Data Explorer
+-  Full Site Navigation and Explorer
+-  Inline Editing (phases)
+-  Website and Page Health
+-  Metadata
+-  Link Scanning
+-  Optimization Scanning
 
 ## Publishing to NPM
 
@@ -66,17 +66,31 @@ Developer must have access to `zestyionpm` account
 
 `npm publish --access public`
 
-## Testing Locally
+## Testing Locally using NextJs/CRA
 
-- Create .env with a value `REACT_APP_DOMAIN_OVERRIDE=https://www.zesty.io`
+-  Clone the [Zesty Explorer](https://github.com/zesty-io/explorer.git "Zesty Explorer") and your [NextJs App](https://github.com/zesty-io/nextjs-website.git "Zesty Nextjs-website") on the same folder
+
+-  Create .env with a value `NEXT_PUBLIC_DOMAIN_OVERRIDE=https://www.zesty.io`
+-  cd in the Zesty Explorer folder
+-  run `yarn install`
+-  cd in the Nextjs app folder
+-  run `npm install`
+-  cd in the Zesty Explorer folder
+-  run `npm link ../${YOUR_NEXTJS_APP_FOLDER}/node_modules/react/`
+-  run `yarn build`
+-  run `yarn start`
+-  cd in the Nextjs app folder
+-  run `npm i ../${YOUR_EXPLORER_FOLDER}`
+-  you can now import the ZestyExplorer in your next js app
+-  run `npm run dev`
 
 ## Testing using NPM
 
-- On origin/main do `git checkout -b explorer-dev-test`
-- Edit `package.json` change the name to @username/explorer-dev-test
-- Edit `package.json` increment the version number per publish
-- Npm publish --access public
-- In your react/next/app
+-  On origin/main do `git checkout -b explorer-dev-test`
+-  Edit `package.json` change the name to @username/explorer-dev-test
+-  Edit `package.json` increment the version number per publish
+-  Npm publish --access public
+-  In your react/next/app
 
 ```
 import { ZestyExplorer } from   '@username/explorer-dev-test';
