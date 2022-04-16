@@ -70,23 +70,33 @@ Developer must have access to `zestyionpm` account
 
 -  Clone the [Zesty Explorer](https://github.com/zesty-io/explorer.git "Zesty Explorer") and your [NextJs App](https://github.com/zesty-io/nextjs-website.git "Zesty Nextjs-website") on the same folder
 
--  Create .env with a value `NEXT_PUBLIC_DOMAIN_OVERRIDE=https://www.zesty.io`
--  cd in the Zesty Explorer folder
--  run `yarn install`
+-  Create .env file with a value `NEXT_PUBLIC_DOMAIN_OVERRIDE=https://www.zesty.io`
 -  cd in the Nextjs app folder
 -  run `npm install`
 -  cd in the Zesty Explorer folder
+-  run `yarn install`
 -  run `npm link ../${YOUR_NEXTJS_APP_FOLDER}/node_modules/react/`
 -  run `yarn build`
 -  run `yarn start`
 -  cd in the Nextjs app folder
 -  run `npm i ../${YOUR_EXPLORER_FOLDER}`
--  you can now import the ZestyExplorer in your next js app
+
+### You can now import the ZestyExplorer in your next js app 🎉🎉🎉
+
+```
+import { ZestyExplorer } from '@zesty-io/explorer';
+```
+
 -  run `npm run dev`
 
 ## Testing using NPM
 
--  On origin/main do `git checkout -b explorer-dev-test`
+-  On origin/main
+
+```
+git checkout -b explorer-dev-test
+```
+
 -  Edit `package.json` change the name to @username/explorer-dev-test
 -  Edit `package.json` increment the version number per publish
 -  Npm publish --access public
