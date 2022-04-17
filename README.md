@@ -66,6 +66,20 @@ Developer must have access to `zestyionpm` account
 
 `npm publish --access public`
 
+## Deploying the cdn
+
+-  `git checkout cdn`
+-  run `yarn release` or `npm run release`
+
+#### In the prompts
+
+-  press 'n' to not publish to npm then the rest press 'y'
+
+#### It will open new window
+
+-  press ok
+-  then update the readme version of cdn to current version
+
 ## Testing using NPM
 
 -  On origin/main
