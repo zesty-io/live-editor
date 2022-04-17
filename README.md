@@ -66,29 +66,6 @@ Developer must have access to `zestyionpm` account
 
 `npm publish --access public`
 
-## Testing Locally using NextJs/CRA
-
--  Clone the [Zesty Explorer](https://github.com/zesty-io/explorer.git "Zesty Explorer") and your [NextJs App](https://github.com/zesty-io/nextjs-website.git "Zesty Nextjs-website") on the same folder
-
--  Create .env file with a value `NEXT_PUBLIC_DOMAIN_OVERRIDE=https://www.zesty.io`
--  cd in the Nextjs app folder
--  run `npm install`
--  cd in the Zesty Explorer folder
--  run `yarn install`
--  run `npm link ../${YOUR_NEXTJS_APP_FOLDER}/node_modules/react/`
--  run `yarn build`
--  run `yarn start`
--  cd in the Nextjs app folder
--  run `npm i ../${YOUR_EXPLORER_FOLDER}`
-
-### You can now import the ZestyExplorer in your next js app 🎉🎉🎉
-
-```
-import { ZestyExplorer } from '@zesty-io/explorer';
-```
-
--  run `npm run dev`
-
 ## Testing using NPM
 
 -  On origin/main
@@ -105,3 +82,26 @@ git checkout -b explorer-dev-test
 ```
 import { ZestyExplorer } from   '@username/explorer-dev-test';
 ```
+
+## Testing Locally using NextJs/CRA
+
+-  Clone the [Zesty Explorer](https://github.com/zesty-io/explorer.git "Zesty Explorer") and [NextJs App](https://github.com/zesty-io/nextjs-website.git "Zesty Nextjs-website") on the same folder
+
+-  cd in the Nextjs app folder
+-  Create .env file with a value `NEXT_PUBLIC_DOMAIN_OVERRIDE=https://www.zesty.io`
+-  run `npm install`
+-  cd in the Zesty Explorer folder
+-  run `yarn install`
+-  run `npm link ../${YOUR_NEXTJS_APP_FOLDER}/node_modules/react/`
+-  run `yarn build`
+-  run `yarn start`
+-  cd in the Nextjs app folder
+-  run `npm i ../${YOUR_EXPLORER_FOLDER}`
+
+#### You can now import the ZestyExplorer in your next js app 🎉🎉🎉
+
+```
+import { ZestyExplorer } from '@zesty-io/explorer';
+```
+
+-  run `npm run dev`
