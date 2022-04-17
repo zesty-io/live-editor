@@ -1,5 +1,5 @@
 {
-   "version": "0.1.0",
+   "version": "1.2.11",
    "license": "MIT",
    "keywords": [
       "zesty-io",
@@ -46,8 +46,8 @@
       "arrowParens": "always",
       "bracketSameLine": false
    },
-   "name": "@darwin808/explorer-release123",
-   "author": "darwin.apolinario12",
+   "name": "@zesty-io/explorer",
+   "author": "zestyionpm",
    "module": "dist/zesty-explorer.esm.js",
    "size-limit": [
       {
