@@ -1,5 +1,5 @@
 {
-   "version": "1.2.11",
+   "version": "v0.0.1",
    "license": "MIT",
    "keywords": [
       "zesty-io",
@@ -24,7 +24,8 @@
       "lint": "tsdx lint",
       "prepare": "tsdx build",
       "size": "size-limit",
-      "analyze": "size-limit --why"
+      "analyze": "size-limit --why",
+      "release": "release-it"
    },
    "peerDependencies": {
       "react": ">=16"
@@ -45,8 +46,8 @@
       "arrowParens": "always",
       "bracketSameLine": false
    },
-   "name": "@zesty-io/explorer",
-   "author": "zestyionpm",
+   "name": "@darwin808/explorer-release123",
+   "author": "darwin.apolinario12",
    "module": "dist/zesty-explorer.esm.js",
    "size-limit": [
       {
@@ -66,6 +67,7 @@
       "husky": "^7.0.4",
       "react": "^18.0.0",
       "react-dom": "^18.0.0",
+      "release-it": "^14.14.2",
       "size-limit": "^7.0.8",
       "tsdx": "^0.14.1",
       "tslib": "^2.3.1",
