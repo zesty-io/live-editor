@@ -80,6 +80,17 @@ Developer must have access to `zestyionpm` account
 -  press ok
 -  then update the readme version of cdn to current version
 
+#### This is your current updated script tag / cdnjs
+
+```
+     <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/gh/zesty-io/explorer@${RELEASE_VERSION_CDN_BRANCH}/dist/explorer.production.js"
+      defer="defer"
+    ></script>
+
+```
+
 ## Testing using NPM
 
 -  On origin/main
