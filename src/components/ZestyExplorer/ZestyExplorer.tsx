@@ -1,13 +1,18 @@
 /* eslint-disable react/no-children-prop */
 /* eslint-disable react/jsx-no-target-blank */
 import React from "react"
+// import { ThemeProvider } from "@mui/material/styles"
 import { dummydata } from "constants/index"
 import Fuse from "fuse.js"
 import { ContentViewer, MetaViewer, JsonDataViewer } from "views/index"
-import { Headers, Tabs, Loader } from "components/index"
+import { Headers, Loader } from "components/index"
 import * as helper from "utils/index"
 import { getPageData } from "services/index"
 import { buttonStyles, zestyStyles, zestyWrapper } from "./styles"
+import { TabContainer } from "components/Tabs"
+import Button from "@mui/material/Button"
+import { Box } from "@material-ui/core"
+// import getTheme from "theme/index"
 
 // list of tabs to render
 const tabList = [
@@ -91,7 +96,11 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
    return (
       <div style={containerStyle}>
          <Headers children={children} content={content} response={response} />
-         <Tabs setcurrentTab={setcurrentTab} tabs={tabList} settime={() => settime(2)} />
+         <TabContainer
+            setcurrentTab={setcurrentTab}
+            tabList={tabList}
+            settime={() => settime(2)}
+         />
          <div style={{ position: "relative" }}>
             {time > 0 && <Loader />}
             {currentTab === "Content Viewer" && (
@@ -137,6 +146,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
    if (!helper.canUseDOM()) {
       return null
    }
+   // const [themeMode, themeToggler, mountedComponent] = useDarkMode()
    return (
       // @ts-ignore
       <div style={zestyWrapper}>
@@ -154,16 +164,62 @@ export const ZestyExplorer = ({ content = {} }: any) => {
          )}
 
          {open && (
-            <div>
+            <Box>
                <ZestyExplorerBrowser
                   response={response}
                   pageData={pageData}
                   contentData={searchObject}
                >
-                  <button onClick={() => setOpen(false)}>Close</button>
+                  <Button
+                     onClick={() => setOpen(false)}
+                     variant="contained"
+                     color="error"
+                     size="small"
+                     sx={{ fontSize: "12px", whiteSpace: "nowrap" }}
+                  >
+                     <Box paddingY={1} paddingX={2}>
+                        close
+                     </Box>
+                  </Button>
                </ZestyExplorerBrowser>
-            </div>
+            </Box>
          )}
       </div>
    )
 }
+
+// export const useDarkMode = () => {
+//    // set the initial theme from localstorage or 'light'
+//    const [themeMode, setTheme] = React.useState(
+//       window.localStorage.getItem("themeMode") || "light",
+//    )
+
+//    const [mountedComponent, setMountedComponent] = React.useState(false)
+
+//    const setMode = (mode: any) => {
+//       try {
+//          window.localStorage.setItem("themeMode", mode)
+//       } catch {
+//          /* do nothing */
+//       }
+
+//       setTheme(mode)
+//    }
+
+//    const themeToggler = () => {
+//       themeMode === "light" ? setMode("dark") : setMode("light")
+//    }
+
+//    React.useEffect(() => {
+//       try {
+//          const localTheme = window.localStorage.getItem("themeMode")
+//          localTheme ? setTheme(localTheme) : setMode("light")
+//       } catch {
+//          setMode("light")
+//       }
+
+//       setMountedComponent(true)
+//    }, [])
+
+//    return [themeMode, themeToggler, mountedComponent]
+// }

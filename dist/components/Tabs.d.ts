@@ -1,2 +1,2 @@
 /// <reference types="react" />
-export declare const Tabs: ({ tabs, settime, setcurrentTab }: any) => JSX.Element;
+export declare const TabContainer: ({ tabList, settime, setcurrentTab }: any) => JSX.Element;

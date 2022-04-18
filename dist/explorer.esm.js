@@ -1,7 +1,18 @@
-import React from 'react';
+import React__default, { createElement } from 'react';
 import Fuse from 'fuse.js';
 import ReactJson from 'react-json-view-ssr';
-import { Button } from '@material-ui/core';
+import AppBar from '@mui/material/AppBar';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import { useTheme, styled, alpha } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Container from '@mui/material/Container';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import InputBase from '@mui/material/InputBase';
+import { Button as Button$1, Box as Box$1 } from '@material-ui/core';
 import { CopyBlock, anOldHope } from 'react-code-blocks';
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
@@ -1225,46 +1236,6 @@ var dummydata = {
   zestyBaseURL: "https://www.zesty.io"
 };
 
-var searchBarStyles = {
-  padding: "5px",
-  margin: "10px",
-  borderRadius: "28px"
-};
-var ContentViewer = function ContentViewer(_ref) {
-  var data = _ref.data,
-      search = _ref.search,
-      setSearch = _ref.setSearch;
-  return React.createElement("div", {
-    style: {
-      background: "red"
-    }
-  }, React.createElement("input", {
-    type: "text",
-    placeholder: "Search Content Values",
-    value: search,
-    onChange: function onChange(e) {
-      return setSearch(e.currentTarget.value);
-    },
-    autoFocus: true,
-    style: searchBarStyles
-  }), React.createElement(ReactJson, {
-    style: {
-      height: "80vh",
-      overflowY: "scroll"
-    },
-    name: "data",
-    // @ts-ignore
-    src: data,
-    theme: "flat",
-    iconStyle: "square",
-    indentWidth: 4,
-    collapsed: true,
-    displayObjectSize: true,
-    displayDataTypes: false,
-    enableClipboard: true
-  }));
-};
-
 /* eslint-disable guard-for-in */
 var canUseDOM = function canUseDOM() {
   return !!(typeof window !== "undefined" && window.document && window.document.createElement);
@@ -1323,61 +1294,243 @@ var headerZUID = function headerZUID(response) {
   return (response == null ? void 0 : (_response$headers = response.headers) == null ? void 0 : _response$headers.get("z-zuid")) || "";
 };
 
-var generatedScript = function generatedScript(content) {
-  var _content$content, _content$content$meta, _content$content$meta2, _content$meta, _content$meta$web, _content$meta2, _content$meta2$web, _content$meta3, _content$meta3$web, _content$meta4, _content$meta4$web, _content$meta5, _content$meta5$web, _content$meta6, _content$meta6$web, _content$meta7, _content$meta7$web, _content$meta8, _content$meta8$web, _content$meta9, _content$og_image, _content$og_image$dat, _content$og_image2, _content$og_image$dat2;
+/* eslint-disable array-callback-return */
+//    padding: "5px",
+//    display: "inline-block",
+//    color: "#497edf",
+// }
 
-  console.log(content, "contentdata");
-  console.log((content == null ? void 0 : (_content$content = content.content) == null ? void 0 : (_content$content$meta = _content$content.meta) == null ? void 0 : (_content$content$meta2 = _content$content$meta.web) == null ? void 0 : _content$content$meta2.url) || "");
-  return "<head>\n\n  <!-- Auto-generated Head Tags -->\n   <title>Zesty.io: Simplify digital. Maximize results.</title>\n  <link rel=\"canonical\" href=\"" + (content == null ? void 0 : (_content$meta = content.meta) == null ? void 0 : (_content$meta$web = _content$meta.web) == null ? void 0 : _content$meta$web.url) + "\" />\n\n   <meta name=\"description\" content=\"" + (content == null ? void 0 : (_content$meta2 = content.meta) == null ? void 0 : (_content$meta2$web = _content$meta2.web) == null ? void 0 : _content$meta2$web.seo_meta_description) + "\" />\n  <meta name=\"keywords\" content=\"" + (content == null ? void 0 : (_content$meta3 = content.meta) == null ? void 0 : (_content$meta3$web = _content$meta3.web) == null ? void 0 : _content$meta3$web.seo_meta_keywords) + "\" />\n  <meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\">\n  <meta property=\"og:type\" content=\"website\" />\n  <meta name=\"twitter:card\" content=\"summary\">\n  <meta property=\"og:title\" content=\"" + (content == null ? void 0 : (_content$meta4 = content.meta) == null ? void 0 : (_content$meta4$web = _content$meta4.web) == null ? void 0 : _content$meta4$web.seo_meta_title) + "\" />\n  <meta name=\"twitter:title\" content=\"" + (content == null ? void 0 : (_content$meta5 = content.meta) == null ? void 0 : (_content$meta5$web = _content$meta5.web) == null ? void 0 : _content$meta5$web.seo_meta_title) + "\">\n  <meta property=\"og:description\" content=\"" + (content == null ? void 0 : (_content$meta6 = content.meta) == null ? void 0 : (_content$meta6$web = _content$meta6.web) == null ? void 0 : _content$meta6$web.seo_meta_description) + "\" />\n  <meta property=\"twitter:description\" content=\"" + (content == null ? void 0 : (_content$meta7 = content.meta) == null ? void 0 : (_content$meta7$web = _content$meta7.web) == null ? void 0 : _content$meta7$web.seo_meta_description) + "\" />\n  <meta property=\"og:url\" content=\"" + (content == null ? void 0 : (_content$meta8 = content.meta) == null ? void 0 : (_content$meta8$web = _content$meta8.web) == null ? void 0 : _content$meta8$web.url) + "\" />\n  <meta property=\"og:image:width\" content=\"1200\">\n  <meta property=\"og:image:height\" content=\"630\">\n  <meta property=\"og:site_name\" content=\"" + (content == null ? void 0 : (_content$meta9 = content.meta) == null ? void 0 : _content$meta9.model_alternate_name) + "\" />\n\n  <!-- Custom Head Tags -->\n  <meta content=\"" + ((content == null ? void 0 : (_content$og_image = content.og_image) == null ? void 0 : _content$og_image.data) && (content == null ? void 0 : (_content$og_image$dat = content.og_image.data[0]) == null ? void 0 : _content$og_image$dat.url)) + "\" property=\"og:image\" />\n  <meta content=\"" + ((content == null ? void 0 : (_content$og_image2 = content.og_image) == null ? void 0 : _content$og_image2.data) && (content == null ? void 0 : (_content$og_image$dat2 = content.og_image.data[0]) == null ? void 0 : _content$og_image$dat2.url)) + "\" name=\"twitter:image\" />\n</head>\n";
-};
+var Headers = function Headers(_ref) {
+  var _content$meta, _content$meta$web, _content$meta2, _content$meta3, _content$meta3$model, _content$meta4, _content$meta5, _content$meta5$model;
 
-var MetaViewer = function MetaViewer(_ref) {
-  var _content$meta10, _content$meta10$model, _content$meta11;
-
-  var content = _ref.content,
-      response = _ref.response;
-  console.log(content, "contentdata");
-  var uri = "https://" + ((content == null ? void 0 : content.zestyInstanceZUID) || headerZUID(response)) + ".manager.zesty.io/content/" + (content == null ? void 0 : (_content$meta10 = content.meta) == null ? void 0 : (_content$meta10$model = _content$meta10.model) == null ? void 0 : _content$meta10$model.zuid) + "/" + (content == null ? void 0 : (_content$meta11 = content.meta) == null ? void 0 : _content$meta11.zuid) + "/meta";
-  return React.createElement("div", {
+  var response = _ref.response,
+      children = _ref.children,
+      content = _ref.content;
+  var theme = useTheme();
+  return React__default.createElement(AppBar, {
+    position: "static"
+  }, React__default.createElement(Box, {
+    paddingX: 4,
+    paddingY: 2,
     style: {
-      height: "80vh",
-      background: "pink"
+      display: "flex",
+      width: "100%",
+      margin: "0 auto",
+      background: theme.palette.background.paper
     }
-  }, React.createElement(Button, {
-    href: uri,
-    variant: "contained"
-  }, "Edit in CMS"), React.createElement(CopyBlock, {
-    text: generatedScript(content),
-    language: "html",
-    showLineNumbers: false,
-    theme: anOldHope,
-    wrapLines: true
-  }));
+  }, React__default.createElement(Box, {
+    style: {
+      display: "flex",
+      gap: "1rem",
+      alignItems: "center",
+      justifyContent: "space-evenly"
+    }
+  }, React__default.createElement(Typography, {
+    variant: "h6",
+    noWrap: true,
+    component: "div",
+    sx: {
+      mr: 2,
+      display: {
+        xs: "none",
+        md: "flex"
+      }
+    }
+  }, React__default.createElement("img", {
+    src: "https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png",
+    width: "42px",
+    height: "42px",
+    alt: "Zesty.io Logo"
+  })), React__default.createElement(Typography, {
+    sx: {
+      fontSize: "14px",
+      whiteSpace: "normal"
+    },
+    color: theme.palette.common.black,
+    component: "h6"
+  }, "Browsing item ", React__default.createElement("strong", null, " ", content == null ? void 0 : (_content$meta = content.meta) == null ? void 0 : (_content$meta$web = _content$meta.web) == null ? void 0 : _content$meta$web.seo_link_text, " "), "from the ", React__default.createElement("strong", null, content == null ? void 0 : (_content$meta2 = content.meta) == null ? void 0 : _content$meta2.model_alternate_name, " "), "Content Model"), React__default.createElement(Button, {
+    href: "https://accounts.zesty.io/instances/" + (content == null ? void 0 : content.zestyInstanceZUID),
+    variant: "contained",
+    color: "primary",
+    size: "small",
+    sx: {
+      fontSize: "12px",
+      whiteSpace: "nowrap"
+    }
+  }, React__default.createElement(Box, {
+    paddingX: 2,
+    paddingY: 1
+  }, "Open Zesty Account")), React__default.createElement(Button, {
+    href: "https://" + ((content == null ? void 0 : content.zestyInstanceZUID) || headerZUID(response)) + ".manager.zesty.io/content/" + (content == null ? void 0 : (_content$meta3 = content.meta) == null ? void 0 : (_content$meta3$model = _content$meta3.model) == null ? void 0 : _content$meta3$model.zuid) + "/" + (content == null ? void 0 : (_content$meta4 = content.meta) == null ? void 0 : _content$meta4.zuid),
+    variant: "contained",
+    color: "primary",
+    size: "small",
+    sx: {
+      fontSize: "12px",
+      whiteSpace: "nowrap"
+    }
+  }, React__default.createElement(Box, {
+    paddingX: 2,
+    paddingY: 1
+  }, "Open Zesty Manager")), React__default.createElement(Button, {
+    href: "https://" + ((content == null ? void 0 : content.zestyInstanceZUID) || headerZUID(response)) + ".manager.zesty.io/schema/" + (content == null ? void 0 : (_content$meta5 = content.meta) == null ? void 0 : (_content$meta5$model = _content$meta5.model) == null ? void 0 : _content$meta5$model.zuid),
+    variant: "contained",
+    color: "primary",
+    size: "small",
+    sx: {
+      fontSize: "12px",
+      whiteSpace: "nowrap"
+    }
+  }, React__default.createElement(Box, {
+    paddingY: 1,
+    paddingX: 2
+  }, "Open Schema")), children)));
 };
 
-var searchBarStyles$1 = {
-  padding: "5px",
-  margin: "10px",
-  borderRadius: "28px"
+var TabContainer = function TabContainer(_ref) {
+  var tabList = _ref.tabList,
+      settime = _ref.settime,
+      setcurrentTab = _ref.setcurrentTab;
+
+  var _React$useState = React__default.useState(0),
+      value = _React$useState[0],
+      setValue = _React$useState[1];
+
+  var handleChange = function handleChange(event, newValue) {
+    console.log(event);
+    console.log(newValue, 123123123);
+    setcurrentTab(newValue);
+    setValue(newValue);
+    settime();
+  };
+
+  return React__default.createElement(Container, null, React__default.createElement(Box, {
+    sx: {
+      maxWidth: {
+        xs: 320,
+        sm: 480
+      },
+      bgcolor: "background.paper"
+    }
+  }, " ", React__default.createElement(Tabs, {
+    value: value,
+    onChange: handleChange,
+    variant: "scrollable",
+    scrollButtons: "auto",
+    "aria-label": "scrollable auto tabs example"
+  }, tabList.map(function (e) {
+    return React__default.createElement(Tab, {
+      label: e.label,
+      value: e.value
+    });
+  }))));
 };
-var JsonDataViewer = function JsonDataViewer(_ref) {
+
+var Loader = function Loader() {
+  return React__default.createElement("div", {
+    style: {
+      position: "absolute",
+      top: "0",
+      left: "0",
+      zIndex: "100",
+      height: "100%",
+      width: "100%",
+      background: "red"
+    }
+  }, React__default.createElement("h1", null, "Loading "), " ");
+};
+
+// import SearchIcon from "@mui/icons-material/Search"
+
+var Search = /*#__PURE__*/styled("div")(function (_ref) {
+  var _ref2;
+
+  var theme = _ref.theme;
+  return _ref2 = {
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: alpha(theme.palette.common.white, 0.25)
+    },
+    marginLeft: 0,
+    width: "100%"
+  }, _ref2[theme.breakpoints.up("sm")] = {
+    marginLeft: theme.spacing(1),
+    width: "auto"
+  }, _ref2;
+});
+var SearchIconWrapper = /*#__PURE__*/styled("div")(function (_ref3) {
+  var theme = _ref3.theme;
+  return {
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  };
+});
+var StyledInputBase = /*#__PURE__*/styled(InputBase)(function (_ref4) {
+  var _MuiInputBaseInpu;
+
+  var theme = _ref4.theme;
+  return {
+    color: "inherit",
+    "& .MuiInputBase-input": (_MuiInputBaseInpu = {
+      padding: theme.spacing(1, 1, 1, 0),
+      // vertical padding + font size from searchIcon
+      paddingLeft: "calc(1em + " + theme.spacing(4) + ")",
+      transition: theme.transitions.create("width"),
+      width: "100%"
+    }, _MuiInputBaseInpu[theme.breakpoints.up("sm")] = {
+      width: "12ch",
+      "&:focus": {
+        width: "20ch"
+      }
+    }, _MuiInputBaseInpu)
+  };
+});
+var SearchAppBar = function SearchAppBar(_ref5) {
+  var value = _ref5.value,
+      _onChange = _ref5.onChange;
+  console.log(value, _onChange);
+  return createElement(Box, {
+    sx: {
+      flexGrow: 1
+    }
+  }, createElement(AppBar, {
+    position: "static"
+  }, createElement(Toolbar, null, createElement(IconButton, {
+    size: "large",
+    edge: "start",
+    color: "inherit",
+    "aria-label": "open drawer",
+    sx: {
+      mr: 2
+    }
+  }), createElement(Search, null, createElement(SearchIconWrapper, null), createElement(StyledInputBase, {
+    placeholder: "Search\u2026",
+    inputProps: {
+      "aria-label": "search"
+    },
+    value: value,
+    onChange: function onChange(e) {
+      return _onChange(e.target.value);
+    }
+  })))));
+};
+
+var ContentViewer = function ContentViewer(_ref) {
   var data = _ref.data,
       search = _ref.search,
       setSearch = _ref.setSearch;
-  return React.createElement("div", {
-    style: {
-      background: "red"
-    }
-  }, React.createElement("input", {
-    type: "text",
-    placeholder: "Search Content Values",
+  console.log(search, setSearch);
+  return React__default.createElement("div", null, React__default.createElement(SearchAppBar, {
     value: search,
-    onChange: function onChange(e) {
-      return setSearch(e.currentTarget.value);
-    },
-    autoFocus: true,
-    style: searchBarStyles$1
-  }), React.createElement(ReactJson, {
+    onChange: setSearch
+  }), React__default.createElement(ReactJson, {
     style: {
       height: "80vh",
       overflowY: "scroll"
@@ -1395,85 +1548,65 @@ var JsonDataViewer = function JsonDataViewer(_ref) {
   }));
 };
 
-/* eslint-disable array-callback-return */
-var linkStyles = {
-  padding: "5px",
-  display: "inline-block",
-  color: "#497edf"
-};
-var Headers = function Headers(_ref) {
-  var _content$meta, _content$meta$web, _content$meta2, _content$meta3, _content$meta3$model, _content$meta4, _content$meta5, _content$meta5$model;
+var generatedScript = function generatedScript(content) {
+  var _content$content, _content$content$meta, _content$content$meta2, _content$meta, _content$meta$web, _content$meta2, _content$meta2$web, _content$meta3, _content$meta3$web, _content$meta4, _content$meta4$web, _content$meta5, _content$meta5$web, _content$meta6, _content$meta6$web, _content$meta7, _content$meta7$web, _content$meta8, _content$meta8$web, _content$meta9, _content$og_image, _content$og_image$dat, _content$og_image2, _content$og_image$dat2;
 
-  var response = _ref.response,
-      children = _ref.children,
-      content = _ref.content;
-  return React.createElement("div", {
-    style: {
-      width: "100%",
-      margin: "0 auto",
-      background: "aqua"
-    }
-  }, React.createElement("div", {
-    style: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-evenly"
-    }
-  }, React.createElement("img", {
-    src: "https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png",
-    width: "22px",
-    height: "22px",
-    alt: "Zesty.io Logo"
-  }), React.createElement("span", null, "Browsing item ", React.createElement("strong", null, " ", content == null ? void 0 : (_content$meta = content.meta) == null ? void 0 : (_content$meta$web = _content$meta.web) == null ? void 0 : _content$meta$web.seo_link_text, " "), "from the ", React.createElement("strong", null, content == null ? void 0 : (_content$meta2 = content.meta) == null ? void 0 : _content$meta2.model_alternate_name, " "), "Content Model"), React.createElement("a", {
-    style: linkStyles,
-    target: "_blank",
-    href: "https://accounts.zesty.io/instances/" + (content == null ? void 0 : content.zestyInstanceZUID)
-  }, "Open Zesty Account"), React.createElement("a", {
-    style: linkStyles,
-    target: "_blank",
-    href: "https://" + ((content == null ? void 0 : content.zestyInstanceZUID) || headerZUID(response)) + ".manager.zesty.io/content/" + (content == null ? void 0 : (_content$meta3 = content.meta) == null ? void 0 : (_content$meta3$model = _content$meta3.model) == null ? void 0 : _content$meta3$model.zuid) + "/" + (content == null ? void 0 : (_content$meta4 = content.meta) == null ? void 0 : _content$meta4.zuid)
-  }, "Open Zesty Manager"), React.createElement("a", {
-    style: linkStyles,
-    target: "_blank",
-    href: "https://" + ((content == null ? void 0 : content.zestyInstanceZUID) || headerZUID(response)) + ".manager.zesty.io/schema/" + (content == null ? void 0 : (_content$meta5 = content.meta) == null ? void 0 : (_content$meta5$model = _content$meta5.model) == null ? void 0 : _content$meta5$model.zuid)
-  }, "Open Schema"), children));
+  console.log(content, "contentdata");
+  console.log((content == null ? void 0 : (_content$content = content.content) == null ? void 0 : (_content$content$meta = _content$content.meta) == null ? void 0 : (_content$content$meta2 = _content$content$meta.web) == null ? void 0 : _content$content$meta2.url) || "");
+  return "<head>\n\n  <!-- Auto-generated Head Tags -->\n   <title>Zesty.io: Simplify digital. Maximize results.</title>\n  <link rel=\"canonical\" href=\"" + (content == null ? void 0 : (_content$meta = content.meta) == null ? void 0 : (_content$meta$web = _content$meta.web) == null ? void 0 : _content$meta$web.url) + "\" />\n\n   <meta name=\"description\" content=\"" + (content == null ? void 0 : (_content$meta2 = content.meta) == null ? void 0 : (_content$meta2$web = _content$meta2.web) == null ? void 0 : _content$meta2$web.seo_meta_description) + "\" />\n  <meta name=\"keywords\" content=\"" + (content == null ? void 0 : (_content$meta3 = content.meta) == null ? void 0 : (_content$meta3$web = _content$meta3.web) == null ? void 0 : _content$meta3$web.seo_meta_keywords) + "\" />\n  <meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\">\n  <meta property=\"og:type\" content=\"website\" />\n  <meta name=\"twitter:card\" content=\"summary\">\n  <meta property=\"og:title\" content=\"" + (content == null ? void 0 : (_content$meta4 = content.meta) == null ? void 0 : (_content$meta4$web = _content$meta4.web) == null ? void 0 : _content$meta4$web.seo_meta_title) + "\" />\n  <meta name=\"twitter:title\" content=\"" + (content == null ? void 0 : (_content$meta5 = content.meta) == null ? void 0 : (_content$meta5$web = _content$meta5.web) == null ? void 0 : _content$meta5$web.seo_meta_title) + "\">\n  <meta property=\"og:description\" content=\"" + (content == null ? void 0 : (_content$meta6 = content.meta) == null ? void 0 : (_content$meta6$web = _content$meta6.web) == null ? void 0 : _content$meta6$web.seo_meta_description) + "\" />\n  <meta property=\"twitter:description\" content=\"" + (content == null ? void 0 : (_content$meta7 = content.meta) == null ? void 0 : (_content$meta7$web = _content$meta7.web) == null ? void 0 : _content$meta7$web.seo_meta_description) + "\" />\n  <meta property=\"og:url\" content=\"" + (content == null ? void 0 : (_content$meta8 = content.meta) == null ? void 0 : (_content$meta8$web = _content$meta8.web) == null ? void 0 : _content$meta8$web.url) + "\" />\n  <meta property=\"og:image:width\" content=\"1200\">\n  <meta property=\"og:image:height\" content=\"630\">\n  <meta property=\"og:site_name\" content=\"" + (content == null ? void 0 : (_content$meta9 = content.meta) == null ? void 0 : _content$meta9.model_alternate_name) + "\" />\n\n  <!-- Custom Head Tags -->\n  <meta content=\"" + ((content == null ? void 0 : (_content$og_image = content.og_image) == null ? void 0 : _content$og_image.data) && (content == null ? void 0 : (_content$og_image$dat = content.og_image.data[0]) == null ? void 0 : _content$og_image$dat.url)) + "\" property=\"og:image\" />\n  <meta content=\"" + ((content == null ? void 0 : (_content$og_image2 = content.og_image) == null ? void 0 : _content$og_image2.data) && (content == null ? void 0 : (_content$og_image$dat2 = content.og_image.data[0]) == null ? void 0 : _content$og_image$dat2.url)) + "\" name=\"twitter:image\" />\n</head>\n";
 };
 
-var Tabs = function Tabs(_ref) {
-  var tabs = _ref.tabs,
-      settime = _ref.settime,
-      setcurrentTab = _ref.setcurrentTab;
-  return React.createElement("div", {
+var MetaViewer = function MetaViewer(_ref) {
+  var _content$meta10, _content$meta10$model, _content$meta11;
+
+  var content = _ref.content,
+      response = _ref.response;
+  console.log(content, "contentdata");
+  var uri = "https://" + ((content == null ? void 0 : content.zestyInstanceZUID) || headerZUID(response)) + ".manager.zesty.io/content/" + (content == null ? void 0 : (_content$meta10 = content.meta) == null ? void 0 : (_content$meta10$model = _content$meta10.model) == null ? void 0 : _content$meta10$model.zuid) + "/" + (content == null ? void 0 : (_content$meta11 = content.meta) == null ? void 0 : _content$meta11.zuid) + "/meta";
+  return React__default.createElement("div", {
     style: {
-      display: "flex",
-      width: "100%"
+      height: "80vh",
+      background: "pink"
     }
-  }, tabs.map(function (e) {
-    return React.createElement(Button, {
-      fullWidth: true,
-      variant: "contained",
-      color: "primary",
-      size: "large",
-      onClick: function onClick() {
-        setcurrentTab(e.value);
-        settime();
-      }
-    }, e.label);
+  }, React__default.createElement(Button$1, {
+    href: uri,
+    variant: "contained"
+  }, "Edit in CMS"), React__default.createElement(CopyBlock, {
+    text: generatedScript(content),
+    language: "html",
+    showLineNumbers: false,
+    theme: anOldHope,
+    wrapLines: true
   }));
 };
 
-var Loader = function Loader() {
-  return React.createElement("div", {
+var JsonDataViewer = function JsonDataViewer(_ref) {
+  var data = _ref.data,
+      search = _ref.search,
+      setSearch = _ref.setSearch;
+  return React__default.createElement("div", {
     style: {
-      position: "absolute",
-      top: "0",
-      left: "0",
-      zIndex: "100",
-      height: "100%",
-      width: "100%",
       background: "red"
     }
-  }, React.createElement("h1", null, "Loading "), " ");
+  }, React__default.createElement(SearchAppBar, {
+    value: search,
+    onChange: setSearch
+  }), React__default.createElement(ReactJson, {
+    style: {
+      height: "80vh",
+      overflowY: "scroll"
+    },
+    name: "data",
+    // @ts-ignore
+    src: data,
+    theme: "flat",
+    iconStyle: "square",
+    indentWidth: 4,
+    collapsed: true,
+    displayObjectSize: true,
+    displayDataTypes: false,
+    enableClipboard: true
+  }));
 };
 
 var getPageData = /*#__PURE__*/function () {
@@ -1563,6 +1696,8 @@ var zestyWrapper = {
   padding: "2rem"
 };
 
+// list of tabs to render
+
 var tabList = [{
   id: 1,
   label: "Content Viewer",
@@ -1586,15 +1721,15 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
       children = _ref.children;
   var content = contentData || dummydata; // const [modal, setModal] = React.useState(false);
 
-  var _React$useState = React.useState(),
+  var _React$useState = React__default.useState(),
       search = _React$useState[0],
       setSearch = _React$useState[1];
 
-  var _React$useState2 = React.useState(0),
+  var _React$useState2 = React__default.useState(0),
       time = _React$useState2[0],
       _settime = _React$useState2[1];
 
-  React.useEffect(function () {
+  React__default.useEffect(function () {
     var timer = setTimeout(function () {
       if (time > 0) {
         _settime(time - 1);
@@ -1642,7 +1777,7 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
     content: content
   };
 
-  var _React$useState3 = React.useState("Content Viewer"),
+  var _React$useState3 = React__default.useState("Content Viewer"),
       currentTab = _React$useState3[0],
       setcurrentTab = _React$useState3[1];
 
@@ -1654,30 +1789,30 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
     height: "85vh"
   };
   console.log(pageData, "Pagedata");
-  return React.createElement("div", {
+  return React__default.createElement("div", {
     style: containerStyle
-  }, React.createElement(Headers, {
+  }, React__default.createElement(Headers, {
     children: children,
     content: content,
     response: response
-  }), React.createElement(Tabs, {
+  }), React__default.createElement(TabContainer, {
     setcurrentTab: setcurrentTab,
-    tabs: tabList,
+    tabList: tabList,
     settime: function settime() {
       return _settime(2);
     }
-  }), React.createElement("div", {
+  }), React__default.createElement("div", {
     style: {
       position: "relative"
     }
-  }, time > 0 && React.createElement(Loader, null), currentTab === "Content Viewer" && React.createElement(ContentViewer, {
+  }, time > 0 && React__default.createElement(Loader, null), currentTab === "Content Viewer" && React__default.createElement(ContentViewer, {
     data: data,
     search: search,
     setSearch: setSearch
-  }), currentTab === "Meta Viewer" && React.createElement(MetaViewer, {
+  }), currentTab === "Meta Viewer" && React__default.createElement(MetaViewer, {
     response: response,
     content: contentData
-  }), currentTab === "Json Data Viewer" && React.createElement(JsonDataViewer, {
+  }), currentTab === "Json Data Viewer" && React__default.createElement(JsonDataViewer, {
     data: data,
     search: search,
     setSearch: setSearch
@@ -1689,15 +1824,15 @@ var ZestyExplorer = function ZestyExplorer(_ref3) {
   var _ref3$content = _ref3.content,
       content = _ref3$content === void 0 ? {} : _ref3$content;
 
-  var _React$useState4 = React.useState(false),
+  var _React$useState4 = React__default.useState(false),
       open = _React$useState4[0],
       setOpen = _React$useState4[1];
 
-  var _React$useState5 = React.useState(""),
+  var _React$useState5 = React__default.useState(""),
       pageData = _React$useState5[0],
       setPageData = _React$useState5[1];
 
-  var _React$useState6 = React.useState(""),
+  var _React$useState6 = React__default.useState(""),
       response = _React$useState6[0],
       setResponse = _React$useState6[1];
 
@@ -1733,7 +1868,7 @@ var ZestyExplorer = function ZestyExplorer(_ref3) {
   }(); // check if content is available
 
 
-  React.useEffect(function () {
+  React__default.useEffect(function () {
     if (content && Object.keys(content).length === 0) {
       getData();
     } else {
@@ -1750,35 +1885,73 @@ var ZestyExplorer = function ZestyExplorer(_ref3) {
 
   if (!canUseDOM()) {
     return null;
-  }
+  } // const [themeMode, themeToggler, mountedComponent] = useDarkMode()
+
 
   return (// @ts-ignore
-    React.createElement("div", {
+    React__default.createElement("div", {
       style: zestyWrapper
-    }, !open && React.createElement("button", {
+    }, !open && React__default.createElement("button", {
       type: "button",
       onClick: function onClick() {
         return setOpen(true);
       },
       style: buttonStyles
-    }, React.createElement("img", {
+    }, React__default.createElement("img", {
       src: "https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png",
       width: "32px",
       height: "32px",
       alt: "Zesty.io Logo"
-    }), React.createElement("span", {
+    }), React__default.createElement("span", {
       style: zestyStyles
-    }, "Explorer")), open && React.createElement("div", null, React.createElement(ZestyExplorerBrowser, {
+    }, "Explorer")), open && React__default.createElement(Box$1, null, React__default.createElement(ZestyExplorerBrowser, {
       response: response,
       pageData: pageData,
       contentData: searchObject
-    }, React.createElement("button", {
+    }, React__default.createElement(Button, {
       onClick: function onClick() {
         return setOpen(false);
+      },
+      variant: "contained",
+      color: "error",
+      size: "small",
+      sx: {
+        fontSize: "12px",
+        whiteSpace: "nowrap"
       }
-    }, "Close"))))
+    }, React__default.createElement(Box$1, {
+      paddingY: 1,
+      paddingX: 2
+    }, "close")))))
   );
-};
+}; // export const useDarkMode = () => {
+//    // set the initial theme from localstorage or 'light'
+//    const [themeMode, setTheme] = React.useState(
+//       window.localStorage.getItem("themeMode") || "light",
+//    )
+//    const [mountedComponent, setMountedComponent] = React.useState(false)
+//    const setMode = (mode: any) => {
+//       try {
+//          window.localStorage.setItem("themeMode", mode)
+//       } catch {
+//          /* do nothing */
+//       }
+//       setTheme(mode)
+//    }
+//    const themeToggler = () => {
+//       themeMode === "light" ? setMode("dark") : setMode("light")
+//    }
+//    React.useEffect(() => {
+//       try {
+//          const localTheme = window.localStorage.getItem("themeMode")
+//          localTheme ? setTheme(localTheme) : setMode("light")
+//       } catch {
+//          setMode("light")
+//       }
+//       setMountedComponent(true)
+//    }, [])
+//    return [themeMode, themeToggler, mountedComponent]
+// }
 
 export { ZestyExplorer };
 //# sourceMappingURL=explorer.esm.js.map

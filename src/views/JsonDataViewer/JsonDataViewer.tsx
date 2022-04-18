@@ -1,30 +1,16 @@
 import React from "react"
 import ReactJson from "react-json-view-ssr"
+import { SearchAppBar } from "components"
 interface Props {
-   search: any
+   search: string
    data: any
    setSearch: (e: any) => void
-}
-
-const searchBarStyles = {
-   padding: "5px",
-   margin: "10px",
-   borderRadius: "28px",
 }
 
 export const JsonDataViewer = ({ data, search, setSearch }: Props) => {
    return (
       <div style={{ background: "red" }}>
-         <input
-            type="text"
-            placeholder="Search Content Values"
-            value={search}
-            onChange={(e: React.FormEvent<HTMLInputElement>) =>
-               setSearch(e.currentTarget.value)
-            }
-            autoFocus
-            style={searchBarStyles}
-         />
+         <SearchAppBar value={search} onChange={setSearch} />
          <ReactJson
             style={{ height: "80vh", overflowY: "scroll" }}
             name={"data"}
