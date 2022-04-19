@@ -1,6 +1,6 @@
 /// <reference types="react" />
 interface Props {
-    search: string;
+    search: any;
     data: any;
     setSearch: (e: any) => void;
 }

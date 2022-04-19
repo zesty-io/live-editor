@@ -1,4 +1,5 @@
-import { Button } from "@material-ui/core"
+import Button from "@mui/material/Button"
+import { Box } from "@mui/material"
 import React from "react"
 import { CopyBlock, anOldHope } from "react-code-blocks"
 import { headerZUID } from "utils"
@@ -43,10 +44,19 @@ export const MetaViewer = ({ content, response }: any) => {
       headerZUID(response)}.manager.zesty.io/content/${content?.meta?.model?.zuid}/${
       content?.meta?.zuid
    }/meta`
+   console.log(uri)
    return (
       <div style={{ height: "80vh", background: "pink" }}>
-         <Button href={uri} variant="contained">
-            Edit in CMS
+         <Button
+            href={uri}
+            variant="contained"
+            color="primary"
+            size="small"
+            sx={{ fontSize: "12px", whiteSpace: "nowrap" }}
+         >
+            <Box paddingX={2} paddingY={1}>
+               Edit in CMS
+            </Box>
          </Button>
          <CopyBlock
             text={generatedScript(content)}

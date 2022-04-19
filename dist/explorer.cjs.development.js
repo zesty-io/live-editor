@@ -19,8 +19,9 @@ var Container = _interopDefault(require('@mui/material/Container'));
 var Toolbar = _interopDefault(require('@mui/material/Toolbar'));
 var IconButton = _interopDefault(require('@mui/material/IconButton'));
 var InputBase = _interopDefault(require('@mui/material/InputBase'));
-var core = require('@material-ui/core');
+var material = require('@mui/material');
 var reactCodeBlocks = require('react-code-blocks');
+var core = require('@material-ui/core');
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -1570,15 +1571,25 @@ var MetaViewer = function MetaViewer(_ref) {
       response = _ref.response;
   console.log(content, "contentdata");
   var uri = "https://" + ((content == null ? void 0 : content.zestyInstanceZUID) || headerZUID(response)) + ".manager.zesty.io/content/" + (content == null ? void 0 : (_content$meta10 = content.meta) == null ? void 0 : (_content$meta10$model = _content$meta10.model) == null ? void 0 : _content$meta10$model.zuid) + "/" + (content == null ? void 0 : (_content$meta11 = content.meta) == null ? void 0 : _content$meta11.zuid) + "/meta";
+  console.log(uri);
   return React__default.createElement("div", {
     style: {
       height: "80vh",
       background: "pink"
     }
-  }, React__default.createElement(core.Button, {
+  }, React__default.createElement(Button, {
     href: uri,
-    variant: "contained"
-  }, "Edit in CMS"), React__default.createElement(reactCodeBlocks.CopyBlock, {
+    variant: "contained",
+    color: "primary",
+    size: "small",
+    sx: {
+      fontSize: "12px",
+      whiteSpace: "nowrap"
+    }
+  }, React__default.createElement(material.Box, {
+    paddingX: 2,
+    paddingY: 1
+  }, "Edit in CMS")), React__default.createElement(reactCodeBlocks.CopyBlock, {
     text: generatedScript(content),
     language: "html",
     showLineNumbers: false,

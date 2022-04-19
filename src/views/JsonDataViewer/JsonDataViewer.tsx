@@ -2,7 +2,7 @@ import React from "react"
 import ReactJson from "react-json-view-ssr"
 import { SearchAppBar } from "components"
 interface Props {
-   search: string
+   search: any
    data: any
    setSearch: (e: any) => void
 }
