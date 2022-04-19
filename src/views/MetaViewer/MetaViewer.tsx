@@ -1,4 +1,5 @@
-import { Button } from "@material-ui/core"
+import Button from "@mui/material/Button"
+import { Box } from "@mui/material"
 import React from "react"
 import { CopyBlock, anOldHope } from "react-code-blocks"
 import { headerZUID } from "utils"
@@ -29,26 +30,44 @@ const generatedScript = (content: any) => {
   <meta property="og:site_name" content="${content?.meta?.model_alternate_name}" />
 
   <!-- Custom Head Tags -->
-  <meta content="${
-     content?.og_image?.data && content?.og_image.data[0]?.url
-  }" property="og:image" />
-  <meta content="${
-     content?.og_image?.data && content?.og_image.data[0]?.url
-  }" name="twitter:image" />
+  <meta content="${content?.og_image?.data &&
+     content?.og_image.data[0]?.url}" property="og:image" />
+  <meta content="${content?.og_image?.data &&
+     content?.og_image.data[0]?.url}" name="twitter:image" />
 </head>
 `
 }
 
 export const MetaViewer = ({ content, response }: any) => {
    console.log(content, "contentdata")
-   const uri = `https://${
-      content?.zestyInstanceZUID || headerZUID(response)
-   }.manager.zesty.io/content/${content?.meta?.model?.zuid}/${content?.meta?.zuid}/meta`
+   const uri = `https://${content?.zestyInstanceZUID ||
+      headerZUID(response)}.manager.zesty.io/content/${content?.meta?.model?.zuid}/${
+      content?.meta?.zuid
+   }/meta`
+   console.log(uri)
    return (
-      <div style={{ height: "80vh", background: "pink" }}>
-         <Button href={uri} variant="contained">
-            Edit in CMS
-         </Button>
+      <div style={{ height: "80vh", background: "#fff", padding: "1rem 2rem" }}>
+         <Box
+            paddingX={4}
+            sx={{
+               display: "flex",
+               alignItems: "end",
+               width: "100%",
+               justifyContent: "flex-end",
+            }}
+         >
+            <Button
+               href={uri}
+               variant="contained"
+               color="primary"
+               size="small"
+               sx={{ fontSize: "12px", whiteSpace: "nowrap" }}
+            >
+               <Box paddingX={2} paddingY={1}>
+                  Edit in CMS
+               </Box>
+            </Button>
+         </Box>
          <CopyBlock
             text={generatedScript(content)}
             language={"html"}
