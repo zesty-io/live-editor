@@ -15,7 +15,6 @@ import InputBase from '@mui/material/InputBase';
 import { Box as Box$1, responsiveFontSizes } from '@mui/material';
 import { CopyBlock, anOldHope } from 'react-code-blocks';
 import { Box as Box$2 } from '@material-ui/core';
-import { useDarkMode } from 'hooks';
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -1555,7 +1554,7 @@ var ContentViewer = function ContentViewer(_ref) {
     theme: "flat",
     iconStyle: "square",
     indentWidth: 4,
-    collapsed: true,
+    collapsed: 2,
     displayObjectSize: true,
     displayDataTypes: false,
     enableClipboard: true
@@ -1626,7 +1625,7 @@ var JsonDataViewer = function JsonDataViewer(_ref) {
     theme: "flat",
     iconStyle: "square",
     indentWidth: 4,
-    collapsed: true,
+    collapsed: 2,
     displayObjectSize: true,
     displayDataTypes: false,
     enableClipboard: true
@@ -1916,6 +1915,43 @@ var getTheme = function getTheme(mode, themeToggler) {
     // @ts-ignore
     themeToggler: themeToggler
   }));
+};
+
+var useDarkMode = function useDarkMode() {
+  // set the initial theme from localstorage or 'light'
+  var _React$useState = React__default.useState(window.localStorage.getItem("themeMode") || "light"),
+      themeMode = _React$useState[0],
+      setTheme = _React$useState[1];
+
+  var _React$useState2 = React__default.useState(false),
+      mountedComponent = _React$useState2[0],
+      setMountedComponent = _React$useState2[1];
+
+  var setMode = function setMode(mode) {
+    try {
+      window.localStorage.setItem("themeMode", mode);
+    } catch (_unused) {
+      /* do nothing */
+    }
+
+    setTheme(mode);
+  };
+
+  var themeToggler = function themeToggler() {
+    themeMode === "light" ? setMode("dark") : setMode("light");
+  };
+
+  React__default.useEffect(function () {
+    try {
+      var localTheme = window.localStorage.getItem("themeMode");
+      localTheme ? setTheme(localTheme) : setMode("light");
+    } catch (_unused2) {
+      setMode("light");
+    }
+
+    setMountedComponent(true);
+  }, []);
+  return [themeMode, themeToggler, mountedComponent];
 };
 
 var tabList = [{
