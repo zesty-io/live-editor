@@ -1,13 +1,20 @@
 /* eslint-disable react/no-children-prop */
 /* eslint-disable react/jsx-no-target-blank */
 import React from "react"
+import { ThemeProvider } from "@mui/material/styles"
+import CssBaseline from "@mui/material/CssBaseline"
 import { dummydata } from "constants/index"
 import Fuse from "fuse.js"
 import { ContentViewer, MetaViewer, JsonDataViewer } from "views/index"
-import { Headers, Tabs, Loader } from "components/index"
+import { Headers, Loader } from "components/index"
 import * as helper from "utils/index"
 import { getPageData } from "services/index"
-import { buttonStyles, zestyStyles, zestyWrapper } from "./styles"
+import { buttonStyles, containerStyle, zestyStyles, zestyWrapper } from "./styles"
+import { TabContainer } from "components/Tabs"
+import Button from "@mui/material/Button"
+import { Box } from "@material-ui/core"
+import getTheme from "theme/index"
+import { useDarkMode } from "hooks"
 
 // list of tabs to render
 const tabList = [
@@ -19,9 +26,9 @@ const tabList = [
 // renanme content to contentData
 const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any) => {
    const content = contentData || dummydata
-   // const [modal, setModal] = React.useState(false);
    const [search, setSearch] = React.useState()
 
+   // for loading
    const [time, settime] = React.useState(0)
    React.useEffect(() => {
       const timer = setTimeout(() => {
@@ -34,7 +41,6 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
    })
 
    // convert obj to dot
-
    // @ts-ignore
    const flaten1 = helper.flattenObj(content)
 
@@ -79,19 +85,16 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
 
    const [currentTab, setcurrentTab] = React.useState("Content Viewer")
 
-   const containerStyle = {
-      background: "#ddd",
-      boxShadow: "0,0,5px,#333",
-      borderRadius: "4px",
-      width: "70vw",
-      height: "85vh",
-   }
+   console.log(pageData, "This the Pagedata")
 
-   console.log(pageData, "Pagedata")
    return (
-      <div style={containerStyle}>
+      <Box style={containerStyle}>
          <Headers children={children} content={content} response={response} />
-         <Tabs setcurrentTab={setcurrentTab} tabs={tabList} settime={() => settime(2)} />
+         <TabContainer
+            setcurrentTab={setcurrentTab}
+            tabList={tabList}
+            settime={() => settime(2)}
+         />
          <div style={{ position: "relative" }}>
             {time > 0 && <Loader />}
             {currentTab === "Content Viewer" && (
@@ -104,9 +107,10 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
                <JsonDataViewer data={data} search={search} setSearch={setSearch} />
             )}
          </div>
-      </div>
+      </Box>
    )
 }
+
 // Main ZESTY EXPLORER
 export const ZestyExplorer = ({ content = {} }: any) => {
    const [open, setOpen] = React.useState(false)
@@ -137,33 +141,48 @@ export const ZestyExplorer = ({ content = {} }: any) => {
    if (!helper.canUseDOM()) {
       return null
    }
+   const [themeMode, themeToggler, mountedComponent] = useDarkMode()
+   console.log(themeMode, mountedComponent)
    return (
       // @ts-ignore
       <div style={zestyWrapper}>
-         {/* ZESTY LOGO  bottom right*/}
-         {!open && (
-            <button type="button" onClick={() => setOpen(true)} style={buttonStyles}>
-               <img
-                  src="https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png"
-                  width="32px"
-                  height="32px"
-                  alt="Zesty.io Logo"
-               />
-               <span style={zestyStyles}>Explorer</span>
-            </button>
-         )}
+         <ThemeProvider theme={getTheme("light", themeToggler)}>
+            <CssBaseline />
+            {/* ZESTY LOGO  bottom right*/}
+            {!open && (
+               <button type="button" onClick={() => setOpen(true)} style={buttonStyles}>
+                  <img
+                     src="https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png"
+                     width="32px"
+                     height="32px"
+                     alt="Zesty.io Logo"
+                  />
+                  <span style={zestyStyles}>Explorer</span>
+               </button>
+            )}
 
-         {open && (
-            <div>
-               <ZestyExplorerBrowser
-                  response={response}
-                  pageData={pageData}
-                  contentData={searchObject}
-               >
-                  <button onClick={() => setOpen(false)}>Close</button>
-               </ZestyExplorerBrowser>
-            </div>
-         )}
+            {open && (
+               <Box>
+                  <ZestyExplorerBrowser
+                     response={response}
+                     pageData={pageData}
+                     contentData={searchObject}
+                  >
+                     <Button
+                        onClick={() => setOpen(false)}
+                        variant="contained"
+                        color="error"
+                        size="small"
+                        sx={{ fontSize: "12px", whiteSpace: "nowrap" }}
+                     >
+                        <Box paddingY={1} paddingX={2}>
+                           close
+                        </Box>
+                     </Button>
+                  </ZestyExplorerBrowser>
+               </Box>
+            )}
+         </ThemeProvider>
       </div>
    )
 }

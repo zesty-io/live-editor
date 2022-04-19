@@ -1,43 +1,27 @@
 import React from "react"
-import ReactJson from "react-json-view-ssr"
+// import ReactJson from "react-json-view-ssr"
+// import { SearchAppBar } from "components"
+import CollapsibleTable from "components/CollapseTable"
+// import { useTheme } from "@mui/material"
 interface Props {
    search: any
    data: any
    setSearch: (e: any) => void
 }
 
-const searchBarStyles = {
-   padding: "5px",
-   margin: "10px",
-   borderRadius: "28px",
-}
-
 export const ContentViewer = ({ data, search, setSearch }: Props) => {
+   // const theme = useTheme()
+   console.log(search, setSearch)
    return (
-      <div style={{ background: "red" }}>
-         <input
-            type="text"
-            placeholder="Search Content Values"
-            value={search}
-            onChange={(e: React.FormEvent<HTMLInputElement>) =>
-               setSearch(e.currentTarget.value)
-            }
-            autoFocus
-            style={searchBarStyles}
-         />
-         <ReactJson
-            style={{ height: "80vh", overflowY: "scroll" }}
-            name={"data"}
-            // @ts-ignore
-            src={data}
-            theme="flat"
-            iconStyle="square"
-            indentWidth={4}
-            collapsed={true}
-            displayObjectSize
-            displayDataTypes={false}
-            enableClipboard={true}
-         />
+      <div
+         style={{
+            background: "background.paper",
+            overflow: "auto",
+            padding: "1rem 2rem",
+         }}
+      >
+         {/* <SearchAppBar value={search} onChange={setSearch} /> */}
+         <CollapsibleTable data={data.content || {}} />
       </div>
    )
 }
