@@ -14,11 +14,12 @@ module.exports = {
    },
    plugins: ["react", "@typescript-eslint", "import", "prefer-arrow"],
    rules: {
-      "no-unused-vars": "error",
+      "no-unused-vars": "off",
       "react/jsx-key": 0,
       "require-jsdoc": 0,
       "no-use-before-define": "off",
       "react/react-in-jsx-scope": "off",
+      "new-cap": 0,
       "import/extensions": [
          "error",
          "ignorePackages",

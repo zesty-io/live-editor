@@ -82,10 +82,11 @@ export const Headers = ({ response, children, content }: Props) => {
                      </Box>
                   </Button>
                   <Button
-                     href={`https://${content?.zestyInstanceZUID ||
-                        headerZUID(response)}.manager.zesty.io/content/${
-                        content?.meta?.model?.zuid
-                     }/${content?.meta?.zuid}`}
+                     href={`https://${
+                        content?.zestyInstanceZUID || headerZUID(response)
+                     }.manager.zesty.io/content/${content?.meta?.model?.zuid}/${
+                        content?.meta?.zuid
+                     }`}
                      variant="contained"
                      color="secondary"
                      size="small"
@@ -96,10 +97,9 @@ export const Headers = ({ response, children, content }: Props) => {
                      </Box>
                   </Button>
                   <Button
-                     href={`https://${content?.zestyInstanceZUID ||
-                        headerZUID(response)}.manager.zesty.io/schema/${
-                        content?.meta?.model?.zuid
-                     }`}
+                     href={`https://${
+                        content?.zestyInstanceZUID || headerZUID(response)
+                     }.manager.zesty.io/schema/${content?.meta?.model?.zuid}`}
                      variant="contained"
                      color="secondary"
                      size="small"

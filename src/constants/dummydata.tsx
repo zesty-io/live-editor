@@ -26,8 +26,7 @@ export const dummydata: any = {
                   {
                      type: "image",
                      zuid: "3-d959bc7-wnj9b8",
-                     url:
-                        "https://kfg6bckb.media.zestyio.com/Sony-homepage150x50-fullcolor.png",
+                     url: "https://kfg6bckb.media.zestyio.com/Sony-homepage150x50-fullcolor.png",
                   },
                ],
             },
@@ -47,8 +46,7 @@ export const dummydata: any = {
                   {
                      type: "image",
                      zuid: "3-d959bc7-0xs8gd",
-                     url:
-                        "https://kfg6bckb.media.zestyio.com/Sony-homepage150x50-grey.png",
+                     url: "https://kfg6bckb.media.zestyio.com/Sony-homepage150x50-grey.png",
                   },
                ],
             },
@@ -168,8 +166,7 @@ export const dummydata: any = {
                   {
                      type: "image",
                      zuid: "3-d959b5d-6q0prf",
-                     url:
-                        "https://kfg6bckb.media.zestyio.com/Wattpad-homepage150x50-fullcolor.png",
+                     url: "https://kfg6bckb.media.zestyio.com/Wattpad-homepage150x50-fullcolor.png",
                   },
                ],
             },
@@ -189,8 +186,7 @@ export const dummydata: any = {
                   {
                      type: "image",
                      zuid: "3-d959b5d-0xvjnf",
-                     url:
-                        "https://kfg6bckb.media.zestyio.com/Wattpad-homepage150x50-grey.png",
+                     url: "https://kfg6bckb.media.zestyio.com/Wattpad-homepage150x50-grey.png",
                   },
                ],
             },
@@ -240,8 +236,7 @@ export const dummydata: any = {
                   {
                      type: "image",
                      zuid: "3-d959aed-tvdkr1",
-                     url:
-                        "https://kfg6bckb.media.zestyio.com/Petdesk-homepage150x50-fullcolor.png",
+                     url: "https://kfg6bckb.media.zestyio.com/Petdesk-homepage150x50-fullcolor.png",
                   },
                ],
             },
@@ -261,8 +256,7 @@ export const dummydata: any = {
                   {
                      type: "image",
                      zuid: "3-d959aed-dqbvjd",
-                     url:
-                        "https://kfg6bckb.media.zestyio.com/Petdesk-homepage150x50-grey.png",
+                     url: "https://kfg6bckb.media.zestyio.com/Petdesk-homepage150x50-grey.png",
                   },
                ],
             },
@@ -302,8 +296,7 @@ export const dummydata: any = {
                   {
                      type: "image",
                      zuid: "3-d959aa9-f62xz4",
-                     url:
-                        "https://kfg6bckb.media.zestyio.com/Acorns-homepage150x50-fullcolor.png",
+                     url: "https://kfg6bckb.media.zestyio.com/Acorns-homepage150x50-fullcolor.png",
                   },
                ],
             },
@@ -323,8 +316,7 @@ export const dummydata: any = {
                   {
                      type: "image",
                      zuid: "3-d959aa9-0hm1ww",
-                     url:
-                        "https://kfg6bckb.media.zestyio.com/Acorns-homepage150x50-grey.png",
+                     url: "https://kfg6bckb.media.zestyio.com/Acorns-homepage150x50-grey.png",
                   },
                ],
             },

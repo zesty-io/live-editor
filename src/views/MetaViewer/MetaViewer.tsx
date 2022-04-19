@@ -30,20 +30,21 @@ const generatedScript = (content: any) => {
   <meta property="og:site_name" content="${content?.meta?.model_alternate_name}" />
 
   <!-- Custom Head Tags -->
-  <meta content="${content?.og_image?.data &&
-     content?.og_image.data[0]?.url}" property="og:image" />
-  <meta content="${content?.og_image?.data &&
-     content?.og_image.data[0]?.url}" name="twitter:image" />
+  <meta content="${
+     content?.og_image?.data && content?.og_image.data[0]?.url
+  }" property="og:image" />
+  <meta content="${
+     content?.og_image?.data && content?.og_image.data[0]?.url
+  }" name="twitter:image" />
 </head>
 `
 }
 
 export const MetaViewer = ({ content, response }: any) => {
    console.log(content, "contentdata")
-   const uri = `https://${content?.zestyInstanceZUID ||
-      headerZUID(response)}.manager.zesty.io/content/${content?.meta?.model?.zuid}/${
-      content?.meta?.zuid
-   }/meta`
+   const uri = `https://${
+      content?.zestyInstanceZUID || headerZUID(response)
+   }.manager.zesty.io/content/${content?.meta?.model?.zuid}/${content?.meta?.zuid}/meta`
    console.log(uri)
    return (
       <div style={{ height: "80vh", background: "#fff", padding: "1rem 2rem" }}>
