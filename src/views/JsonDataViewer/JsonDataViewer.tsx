@@ -8,6 +8,7 @@ interface Props {
 }
 
 export const JsonDataViewer = ({ data, search, setSearch }: Props) => {
+   console.log(data, "data123123")
    return (
       <div style={{ background: "red" }}>
          <SearchAppBar value={search} onChange={setSearch} />

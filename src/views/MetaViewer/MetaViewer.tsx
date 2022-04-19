@@ -46,18 +46,28 @@ export const MetaViewer = ({ content, response }: any) => {
    }/meta`
    console.log(uri)
    return (
-      <div style={{ height: "80vh", background: "pink" }}>
-         <Button
-            href={uri}
-            variant="contained"
-            color="primary"
-            size="small"
-            sx={{ fontSize: "12px", whiteSpace: "nowrap" }}
+      <div style={{ height: "80vh", background: "#fff", padding: "1rem 2rem" }}>
+         <Box
+            paddingX={4}
+            sx={{
+               display: "flex",
+               alignItems: "end",
+               width: "100%",
+               justifyContent: "flex-end",
+            }}
          >
-            <Box paddingX={2} paddingY={1}>
-               Edit in CMS
-            </Box>
-         </Button>
+            <Button
+               href={uri}
+               variant="contained"
+               color="primary"
+               size="small"
+               sx={{ fontSize: "12px", whiteSpace: "nowrap" }}
+            >
+               <Box paddingX={2} paddingY={1}>
+                  Edit in CMS
+               </Box>
+            </Button>
+         </Box>
          <CopyBlock
             text={generatedScript(content)}
             language={"html"}

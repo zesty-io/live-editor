@@ -1,6 +1,8 @@
 import React from "react"
-import ReactJson from "react-json-view-ssr"
-import { SearchAppBar } from "components"
+// import ReactJson from "react-json-view-ssr"
+// import { SearchAppBar } from "components"
+import CollapsibleTable from "components/CollapseTable"
+// import { useTheme } from "@mui/material"
 interface Props {
    search: any
    data: any
@@ -8,27 +10,18 @@ interface Props {
 }
 
 export const ContentViewer = ({ data, search, setSearch }: Props) => {
+   // const theme = useTheme()
    console.log(search, setSearch)
    return (
-      <div>
-         <SearchAppBar value={search} onChange={setSearch} />
-         {/* <SearchAppBar
-            value={search}
-            onChange={(e: any) => console.log(e.currentTarget.value)}
-         /> */}
-         <ReactJson
-            style={{ height: "80vh", overflowY: "scroll" }}
-            name={"data"}
-            // @ts-ignore
-            src={data}
-            theme="flat"
-            iconStyle="square"
-            indentWidth={4}
-            collapsed={2}
-            displayObjectSize
-            displayDataTypes={false}
-            enableClipboard={true}
-         />
+      <div
+         style={{
+            background: "background.paper",
+            overflow: "auto",
+            padding: "1rem 2rem",
+         }}
+      >
+         {/* <SearchAppBar value={search} onChange={setSearch} /> */}
+         <CollapsibleTable data={data.content || {}} />
       </div>
    )
 }

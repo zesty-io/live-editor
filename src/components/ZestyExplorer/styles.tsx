@@ -31,3 +31,10 @@ export const zestyWrapper = {
    zIndex: "9999999999999999",
    padding: "2rem",
 }
+export const containerStyle = {
+   background: "#ddd",
+   boxShadow: "-1,0,5px,#333",
+   borderRadius: "3px",
+   width: "69vw",
+   height: "84vh",
+}

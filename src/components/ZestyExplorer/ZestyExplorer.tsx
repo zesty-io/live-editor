@@ -9,7 +9,7 @@ import { ContentViewer, MetaViewer, JsonDataViewer } from "views/index"
 import { Headers, Loader } from "components/index"
 import * as helper from "utils/index"
 import { getPageData } from "services/index"
-import { buttonStyles, zestyStyles, zestyWrapper } from "./styles"
+import { buttonStyles, containerStyle, zestyStyles, zestyWrapper } from "./styles"
 import { TabContainer } from "components/Tabs"
 import Button from "@mui/material/Button"
 import { Box } from "@material-ui/core"
@@ -85,15 +85,8 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
 
    const [currentTab, setcurrentTab] = React.useState("Content Viewer")
 
-   const containerStyle = {
-      background: "#ddd",
-      boxShadow: "0,0,5px,#333",
-      borderRadius: "4px",
-      width: "70vw",
-      height: "85vh",
-   }
+   console.log(pageData, "This the Pagedata")
 
-   console.log(pageData, "Pagedata")
    return (
       <Box style={containerStyle}>
          <Headers children={children} content={content} response={response} />

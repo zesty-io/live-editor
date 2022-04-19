@@ -9,18 +9,28 @@ var React__default = _interopDefault(React);
 var styles = require('@mui/material/styles');
 var CssBaseline = _interopDefault(require('@mui/material/CssBaseline'));
 var Fuse = _interopDefault(require('fuse.js'));
+var Box = _interopDefault(require('@mui/material/Box'));
+var Collapse = _interopDefault(require('@mui/material/Collapse'));
+var IconButton = _interopDefault(require('@mui/material/IconButton'));
+var Table = _interopDefault(require('@mui/material/Table'));
+var TableBody = _interopDefault(require('@mui/material/TableBody'));
+var TableCell = require('@mui/material/TableCell');
+var TableCell__default = _interopDefault(TableCell);
+var TableContainer = _interopDefault(require('@mui/material/TableContainer'));
+var TableHead = _interopDefault(require('@mui/material/TableHead'));
+var TableRow = _interopDefault(require('@mui/material/TableRow'));
+var Paper = _interopDefault(require('@mui/material/Paper'));
+var system = require('@mui/system');
+var Button = _interopDefault(require('@mui/material/Button'));
+var material = require('@mui/material');
+var reactCodeBlocks = require('react-code-blocks');
 var ReactJson = _interopDefault(require('react-json-view-ssr'));
 var AppBar = _interopDefault(require('@mui/material/AppBar'));
 var Typography = _interopDefault(require('@mui/material/Typography'));
-var Box = _interopDefault(require('@mui/material/Box'));
-var Button = _interopDefault(require('@mui/material/Button'));
 var Tabs = _interopDefault(require('@mui/material/Tabs'));
 var Tab = _interopDefault(require('@mui/material/Tab'));
 var Toolbar = _interopDefault(require('@mui/material/Toolbar'));
-var IconButton = _interopDefault(require('@mui/material/IconButton'));
 var InputBase = _interopDefault(require('@mui/material/InputBase'));
-var material = require('@mui/material');
-var reactCodeBlocks = require('react-code-blocks');
 var core = require('@material-ui/core');
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
@@ -1245,6 +1255,7 @@ var dummydata = {
 };
 
 /* eslint-disable guard-for-in */
+
 var canUseDOM = function canUseDOM() {
   return !!(typeof window !== "undefined" && window.document && window.document.createElement);
 }; // convert the obj to array of objectsj
@@ -1300,6 +1311,230 @@ var headerZUID = function headerZUID(response) {
   var _response$headers;
 
   return (response == null ? void 0 : (_response$headers = response.headers) == null ? void 0 : _response$headers.get("z-zuid")) || "";
+};
+var PrettyPrintJson = function PrettyPrintJson(_ref2) {
+  var data = _ref2.data;
+
+  if (typeof data === "string") {
+    return React__default.createElement(system.Box, {
+      paddingLeft: 8,
+      dangerouslySetInnerHTML: {
+        __html: data
+      }
+    });
+  }
+
+  return React__default.createElement("div", {
+    style: {
+      paddingLeft: "2rem",
+      overflow: "hidden",
+      width: "100%",
+      whiteSpace: "pre-line"
+    }
+  }, React__default.createElement("pre", null, JSON.stringify(data, null, 2)));
+};
+
+function Row(_ref) {
+  var _sx;
+
+  var keyName = _ref.keyName,
+      obj = _ref.obj;
+
+  var _React$useState = React.useState(false),
+      open = _React$useState[0],
+      setOpen = _React$useState[1];
+
+  var value = "";
+  var valueType = "string";
+
+  if (typeof obj === "string") {
+    value = obj;
+  } else {
+    valueType = "object";
+  }
+
+  console.log(obj, keyName, 11111111111111111111111111);
+  return React.createElement(React.Fragment, null, React.createElement(TableRow, {
+    sx: {
+      "& > *": {
+        borderBottom: "unset"
+      }
+    }
+  }, React.createElement(TableCell__default, {
+    sx: {
+      width: "1rem"
+    }
+  }, React.createElement(IconButton, {
+    "aria-label": "expand row",
+    size: "small",
+    onClick: function onClick() {
+      return setOpen(!open);
+    }
+  }, open ? React.createElement("span", null, "\u2B06\uFE0F") : React.createElement("span", null, "\u2B07\uFE0F"))), React.createElement(TableCell__default, {
+    component: "th",
+    scope: "row"
+  }, keyName), React.createElement(TableCell__default, {
+    align: "left"
+  }, valueType), React.createElement(TableCell__default, {
+    align: "left"
+  }, value), React.createElement(TableCell__default, {
+    align: "left"
+  }, value.length), React.createElement(TableCell__default, {
+    align: "left"
+  })), React.createElement(TableRow, null, React.createElement(TableCell__default, {
+    style: {
+      paddingBottom: 0,
+      paddingTop: 0
+    },
+    colSpan: 6
+  }, React.createElement(Collapse, {
+    "in": open,
+    timeout: "auto",
+    unmountOnExit: true
+  }, React.createElement(Box, {
+    sx: {
+      margin: 1
+    }
+  }, React.createElement(Table, {
+    sx: (_sx = {}, _sx["& ." + TableCell.tableCellClasses.root] = {
+      borderBottom: "none"
+    }, _sx),
+    size: "medium",
+    "aria-label": "purchases"
+  }, React.createElement(TableHead, null, React.createElement(TableRow, null, React.createElement(TableCell__default, null, PrettyPrintJson({
+    data: obj
+  }))))))))));
+}
+
+function CollapsibleTable(_ref2) {
+  var _Object$keys2;
+
+  var _ref2$data = _ref2.data,
+      data = _ref2$data === void 0 ? {} : _ref2$data;
+
+  var _React$useState2 = React.useState(data),
+      content = _React$useState2[0],
+      setcontent = _React$useState2[1];
+
+  React.useEffect(function () {
+    if (typeof data === "object") {
+      var _Object$keys;
+
+      setcontent((_Object$keys = Object.keys(data)) == null ? void 0 : _Object$keys.map(function (keyName) {
+      }));
+    } else {
+      setcontent(data == null ? void 0 : data.map(function (keyName) {
+      }));
+    }
+  }, [data]);
+  console.log(content, "data3333");
+  return React.createElement(TableContainer, {
+    component: Paper,
+    style: {
+      maxHeight: 600
+    }
+  }, React.createElement(Table, {
+    "aria-label": "collapsible table",
+    stickyHeader: true
+  }, React.createElement(TableHead, null, React.createElement(TableRow, null, React.createElement(TableCell__default, null), React.createElement(TableCell__default, {
+    variant: "head",
+    sx: {
+      width: "3rem"
+    }
+  }, React.createElement("strong", null, "Field Name")), React.createElement(TableCell__default, {
+    align: "left",
+    sx: {
+      width: "3rem"
+    }
+  }, React.createElement("strong", null, "Type")), React.createElement(TableCell__default, {
+    align: "left",
+    sx: {
+      width: "20rem"
+    }
+  }, React.createElement("strong", null, "Content Example")), React.createElement(TableCell__default, {
+    align: "left",
+    sx: {
+      width: "3rem"
+    }
+  }, React.createElement("strong", null, "Content Length")), React.createElement(TableCell__default, {
+    align: "left",
+    sx: {
+      width: "3rem"
+    }
+  }, React.createElement("strong", null, "Access Example")))), React.createElement(TableBody, null, (_Object$keys2 = Object.keys(data)) == null ? void 0 : _Object$keys2.map(function (keyName) {
+    return React.createElement(Row, {
+      obj: data && data[keyName],
+      keyName: keyName
+    });
+  }))));
+}
+
+var ContentViewer = function ContentViewer(_ref) {
+  var data = _ref.data,
+      search = _ref.search,
+      setSearch = _ref.setSearch;
+  // const theme = useTheme()
+  console.log(search, setSearch);
+  return React__default.createElement("div", {
+    style: {
+      background: "background.paper",
+      overflow: "auto",
+      padding: "1rem 2rem"
+    }
+  }, React__default.createElement(CollapsibleTable, {
+    data: data.content || {}
+  }));
+};
+
+var generatedScript = function generatedScript(content) {
+  var _content$content, _content$content$meta, _content$content$meta2, _content$meta, _content$meta$web, _content$meta2, _content$meta2$web, _content$meta3, _content$meta3$web, _content$meta4, _content$meta4$web, _content$meta5, _content$meta5$web, _content$meta6, _content$meta6$web, _content$meta7, _content$meta7$web, _content$meta8, _content$meta8$web, _content$meta9, _content$og_image, _content$og_image$dat, _content$og_image2, _content$og_image$dat2;
+
+  console.log(content, "contentdata");
+  console.log((content == null ? void 0 : (_content$content = content.content) == null ? void 0 : (_content$content$meta = _content$content.meta) == null ? void 0 : (_content$content$meta2 = _content$content$meta.web) == null ? void 0 : _content$content$meta2.url) || "");
+  return "<head>\n\n  <!-- Auto-generated Head Tags -->\n   <title>Zesty.io: Simplify digital. Maximize results.</title>\n  <link rel=\"canonical\" href=\"" + (content == null ? void 0 : (_content$meta = content.meta) == null ? void 0 : (_content$meta$web = _content$meta.web) == null ? void 0 : _content$meta$web.url) + "\" />\n\n   <meta name=\"description\" content=\"" + (content == null ? void 0 : (_content$meta2 = content.meta) == null ? void 0 : (_content$meta2$web = _content$meta2.web) == null ? void 0 : _content$meta2$web.seo_meta_description) + "\" />\n  <meta name=\"keywords\" content=\"" + (content == null ? void 0 : (_content$meta3 = content.meta) == null ? void 0 : (_content$meta3$web = _content$meta3.web) == null ? void 0 : _content$meta3$web.seo_meta_keywords) + "\" />\n  <meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\">\n  <meta property=\"og:type\" content=\"website\" />\n  <meta name=\"twitter:card\" content=\"summary\">\n  <meta property=\"og:title\" content=\"" + (content == null ? void 0 : (_content$meta4 = content.meta) == null ? void 0 : (_content$meta4$web = _content$meta4.web) == null ? void 0 : _content$meta4$web.seo_meta_title) + "\" />\n  <meta name=\"twitter:title\" content=\"" + (content == null ? void 0 : (_content$meta5 = content.meta) == null ? void 0 : (_content$meta5$web = _content$meta5.web) == null ? void 0 : _content$meta5$web.seo_meta_title) + "\">\n  <meta property=\"og:description\" content=\"" + (content == null ? void 0 : (_content$meta6 = content.meta) == null ? void 0 : (_content$meta6$web = _content$meta6.web) == null ? void 0 : _content$meta6$web.seo_meta_description) + "\" />\n  <meta property=\"twitter:description\" content=\"" + (content == null ? void 0 : (_content$meta7 = content.meta) == null ? void 0 : (_content$meta7$web = _content$meta7.web) == null ? void 0 : _content$meta7$web.seo_meta_description) + "\" />\n  <meta property=\"og:url\" content=\"" + (content == null ? void 0 : (_content$meta8 = content.meta) == null ? void 0 : (_content$meta8$web = _content$meta8.web) == null ? void 0 : _content$meta8$web.url) + "\" />\n  <meta property=\"og:image:width\" content=\"1200\">\n  <meta property=\"og:image:height\" content=\"630\">\n  <meta property=\"og:site_name\" content=\"" + (content == null ? void 0 : (_content$meta9 = content.meta) == null ? void 0 : _content$meta9.model_alternate_name) + "\" />\n\n  <!-- Custom Head Tags -->\n  <meta content=\"" + ((content == null ? void 0 : (_content$og_image = content.og_image) == null ? void 0 : _content$og_image.data) && (content == null ? void 0 : (_content$og_image$dat = content.og_image.data[0]) == null ? void 0 : _content$og_image$dat.url)) + "\" property=\"og:image\" />\n  <meta content=\"" + ((content == null ? void 0 : (_content$og_image2 = content.og_image) == null ? void 0 : _content$og_image2.data) && (content == null ? void 0 : (_content$og_image$dat2 = content.og_image.data[0]) == null ? void 0 : _content$og_image$dat2.url)) + "\" name=\"twitter:image\" />\n</head>\n";
+};
+
+var MetaViewer = function MetaViewer(_ref) {
+  var _content$meta10, _content$meta10$model, _content$meta11;
+
+  var content = _ref.content,
+      response = _ref.response;
+  console.log(content, "contentdata");
+  var uri = "https://" + ((content == null ? void 0 : content.zestyInstanceZUID) || headerZUID(response)) + ".manager.zesty.io/content/" + (content == null ? void 0 : (_content$meta10 = content.meta) == null ? void 0 : (_content$meta10$model = _content$meta10.model) == null ? void 0 : _content$meta10$model.zuid) + "/" + (content == null ? void 0 : (_content$meta11 = content.meta) == null ? void 0 : _content$meta11.zuid) + "/meta";
+  console.log(uri);
+  return React__default.createElement("div", {
+    style: {
+      height: "80vh",
+      background: "#fff",
+      padding: "1rem 2rem"
+    }
+  }, React__default.createElement(material.Box, {
+    paddingX: 4,
+    sx: {
+      display: "flex",
+      alignItems: "end",
+      width: "100%",
+      justifyContent: "flex-end"
+    }
+  }, React__default.createElement(Button, {
+    href: uri,
+    variant: "contained",
+    color: "primary",
+    size: "small",
+    sx: {
+      fontSize: "12px",
+      whiteSpace: "nowrap"
+    }
+  }, React__default.createElement(material.Box, {
+    paddingX: 2,
+    paddingY: 1
+  }, "Edit in CMS"))), React__default.createElement(reactCodeBlocks.CopyBlock, {
+    text: generatedScript(content),
+    language: "html",
+    showLineNumbers: false,
+    theme: reactCodeBlocks.anOldHope,
+    wrapLines: true
+  }));
 };
 
 /* eslint-disable array-callback-return */
@@ -1455,9 +1690,9 @@ var Loader = function Loader() {
       zIndex: "100",
       height: "100%",
       width: "100%",
-      background: "red"
+      background: "#FEFF01"
     }
-  }, React__default.createElement("h1", null, "Loading "), " ");
+  }, React__default.createElement("h1", null, "Loading "));
 };
 
 // import SearchIcon from "@mui/icons-material/Search"
@@ -1542,78 +1777,11 @@ var SearchAppBar = function SearchAppBar(_ref5) {
   })))));
 };
 
-var ContentViewer = function ContentViewer(_ref) {
-  var data = _ref.data,
-      search = _ref.search,
-      setSearch = _ref.setSearch;
-  console.log(search, setSearch);
-  return React__default.createElement("div", null, React__default.createElement(SearchAppBar, {
-    value: search,
-    onChange: setSearch
-  }), React__default.createElement(ReactJson, {
-    style: {
-      height: "80vh",
-      overflowY: "scroll"
-    },
-    name: "data",
-    // @ts-ignore
-    src: data,
-    theme: "flat",
-    iconStyle: "square",
-    indentWidth: 4,
-    collapsed: 2,
-    displayObjectSize: true,
-    displayDataTypes: false,
-    enableClipboard: true
-  }));
-};
-
-var generatedScript = function generatedScript(content) {
-  var _content$content, _content$content$meta, _content$content$meta2, _content$meta, _content$meta$web, _content$meta2, _content$meta2$web, _content$meta3, _content$meta3$web, _content$meta4, _content$meta4$web, _content$meta5, _content$meta5$web, _content$meta6, _content$meta6$web, _content$meta7, _content$meta7$web, _content$meta8, _content$meta8$web, _content$meta9, _content$og_image, _content$og_image$dat, _content$og_image2, _content$og_image$dat2;
-
-  console.log(content, "contentdata");
-  console.log((content == null ? void 0 : (_content$content = content.content) == null ? void 0 : (_content$content$meta = _content$content.meta) == null ? void 0 : (_content$content$meta2 = _content$content$meta.web) == null ? void 0 : _content$content$meta2.url) || "");
-  return "<head>\n\n  <!-- Auto-generated Head Tags -->\n   <title>Zesty.io: Simplify digital. Maximize results.</title>\n  <link rel=\"canonical\" href=\"" + (content == null ? void 0 : (_content$meta = content.meta) == null ? void 0 : (_content$meta$web = _content$meta.web) == null ? void 0 : _content$meta$web.url) + "\" />\n\n   <meta name=\"description\" content=\"" + (content == null ? void 0 : (_content$meta2 = content.meta) == null ? void 0 : (_content$meta2$web = _content$meta2.web) == null ? void 0 : _content$meta2$web.seo_meta_description) + "\" />\n  <meta name=\"keywords\" content=\"" + (content == null ? void 0 : (_content$meta3 = content.meta) == null ? void 0 : (_content$meta3$web = _content$meta3.web) == null ? void 0 : _content$meta3$web.seo_meta_keywords) + "\" />\n  <meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\">\n  <meta property=\"og:type\" content=\"website\" />\n  <meta name=\"twitter:card\" content=\"summary\">\n  <meta property=\"og:title\" content=\"" + (content == null ? void 0 : (_content$meta4 = content.meta) == null ? void 0 : (_content$meta4$web = _content$meta4.web) == null ? void 0 : _content$meta4$web.seo_meta_title) + "\" />\n  <meta name=\"twitter:title\" content=\"" + (content == null ? void 0 : (_content$meta5 = content.meta) == null ? void 0 : (_content$meta5$web = _content$meta5.web) == null ? void 0 : _content$meta5$web.seo_meta_title) + "\">\n  <meta property=\"og:description\" content=\"" + (content == null ? void 0 : (_content$meta6 = content.meta) == null ? void 0 : (_content$meta6$web = _content$meta6.web) == null ? void 0 : _content$meta6$web.seo_meta_description) + "\" />\n  <meta property=\"twitter:description\" content=\"" + (content == null ? void 0 : (_content$meta7 = content.meta) == null ? void 0 : (_content$meta7$web = _content$meta7.web) == null ? void 0 : _content$meta7$web.seo_meta_description) + "\" />\n  <meta property=\"og:url\" content=\"" + (content == null ? void 0 : (_content$meta8 = content.meta) == null ? void 0 : (_content$meta8$web = _content$meta8.web) == null ? void 0 : _content$meta8$web.url) + "\" />\n  <meta property=\"og:image:width\" content=\"1200\">\n  <meta property=\"og:image:height\" content=\"630\">\n  <meta property=\"og:site_name\" content=\"" + (content == null ? void 0 : (_content$meta9 = content.meta) == null ? void 0 : _content$meta9.model_alternate_name) + "\" />\n\n  <!-- Custom Head Tags -->\n  <meta content=\"" + ((content == null ? void 0 : (_content$og_image = content.og_image) == null ? void 0 : _content$og_image.data) && (content == null ? void 0 : (_content$og_image$dat = content.og_image.data[0]) == null ? void 0 : _content$og_image$dat.url)) + "\" property=\"og:image\" />\n  <meta content=\"" + ((content == null ? void 0 : (_content$og_image2 = content.og_image) == null ? void 0 : _content$og_image2.data) && (content == null ? void 0 : (_content$og_image$dat2 = content.og_image.data[0]) == null ? void 0 : _content$og_image$dat2.url)) + "\" name=\"twitter:image\" />\n</head>\n";
-};
-
-var MetaViewer = function MetaViewer(_ref) {
-  var _content$meta10, _content$meta10$model, _content$meta11;
-
-  var content = _ref.content,
-      response = _ref.response;
-  console.log(content, "contentdata");
-  var uri = "https://" + ((content == null ? void 0 : content.zestyInstanceZUID) || headerZUID(response)) + ".manager.zesty.io/content/" + (content == null ? void 0 : (_content$meta10 = content.meta) == null ? void 0 : (_content$meta10$model = _content$meta10.model) == null ? void 0 : _content$meta10$model.zuid) + "/" + (content == null ? void 0 : (_content$meta11 = content.meta) == null ? void 0 : _content$meta11.zuid) + "/meta";
-  console.log(uri);
-  return React__default.createElement("div", {
-    style: {
-      height: "80vh",
-      background: "pink"
-    }
-  }, React__default.createElement(Button, {
-    href: uri,
-    variant: "contained",
-    color: "primary",
-    size: "small",
-    sx: {
-      fontSize: "12px",
-      whiteSpace: "nowrap"
-    }
-  }, React__default.createElement(material.Box, {
-    paddingX: 2,
-    paddingY: 1
-  }, "Edit in CMS")), React__default.createElement(reactCodeBlocks.CopyBlock, {
-    text: generatedScript(content),
-    language: "html",
-    showLineNumbers: false,
-    theme: reactCodeBlocks.anOldHope,
-    wrapLines: true
-  }));
-};
-
 var JsonDataViewer = function JsonDataViewer(_ref) {
   var data = _ref.data,
       search = _ref.search,
       setSearch = _ref.setSearch;
+  console.log(data, "data123123");
   return React__default.createElement("div", {
     style: {
       background: "red"
@@ -1724,6 +1892,13 @@ var zestyWrapper = {
   right: "20px",
   zIndex: "9999999999999999",
   padding: "2rem"
+};
+var containerStyle = {
+  background: "#ddd",
+  boxShadow: "-1,0,5px,#333",
+  borderRadius: "3px",
+  width: "69vw",
+  height: "84vh"
 };
 
 var shadows = function shadows(themeMode) {
@@ -2045,14 +2220,7 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
       currentTab = _React$useState3[0],
       setcurrentTab = _React$useState3[1];
 
-  var containerStyle = {
-    background: "#ddd",
-    boxShadow: "0,0,5px,#333",
-    borderRadius: "4px",
-    width: "70vw",
-    height: "85vh"
-  };
-  console.log(pageData, "Pagedata");
+  console.log(pageData, "This the Pagedata");
   return React__default.createElement(core.Box, {
     style: containerStyle
   }, React__default.createElement(Headers, {
