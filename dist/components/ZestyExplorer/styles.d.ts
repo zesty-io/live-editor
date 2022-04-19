@@ -30,3 +30,10 @@ export declare const zestyWrapper: {
     zIndex: string;
     padding: string;
 };
+export declare const containerStyle: {
+    background: string;
+    boxShadow: string;
+    borderRadius: string;
+    width: string;
+    height: string;
+};

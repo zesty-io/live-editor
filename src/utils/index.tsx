@@ -1,3 +1,5 @@
+import { Box } from "@mui/system"
+import React from "react"
 /* eslint-disable guard-for-in */
 export const canUseDOM = () => {
    return !!(
@@ -50,4 +52,22 @@ export function deepen(obj: any) {
 
 export const headerZUID = (response: any) => {
    return response?.headers?.get("z-zuid") || ""
+}
+
+export const PrettyPrintJson = ({ data }: any) => {
+   if (typeof data === "string") {
+      return <Box paddingLeft={8} dangerouslySetInnerHTML={{ __html: data }}></Box>
+   }
+   return (
+      <div
+         style={{
+            paddingLeft: "2rem",
+            overflow: "hidden",
+            width: "100%",
+            whiteSpace: "pre-line",
+         }}
+      >
+         <pre>{JSON.stringify(data, null, 2)}</pre>
+      </div>
+   )
 }

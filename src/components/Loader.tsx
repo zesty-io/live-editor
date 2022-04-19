@@ -10,10 +10,10 @@ export const Loader = () => {
             zIndex: "100",
             height: "100%",
             width: "100%",
-            background: "red",
+            background: "#FEFF01",
          }}
       >
-         <h1>Loading </h1>{" "}
+         <h1>Loading </h1>
       </div>
    )
 }
