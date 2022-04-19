@@ -1443,27 +1443,10 @@ function Row(_ref) {
 }
 
 function CollapsibleTable(_ref2) {
-  var _Object$keys2;
+  var _Object$keys;
 
   var _ref2$data = _ref2.data,
       data = _ref2$data === void 0 ? {} : _ref2$data;
-
-  var _React$useState4 = React.useState(data),
-      content = _React$useState4[0],
-      setcontent = _React$useState4[1];
-
-  React.useEffect(function () {
-    if (typeof data === "object") {
-      var _Object$keys;
-
-      setcontent((_Object$keys = Object.keys(data)) == null ? void 0 : _Object$keys.map(function (keyName) {
-      }));
-    } else {
-      setcontent(data == null ? void 0 : data.map(function (keyName) {
-      }));
-    }
-  }, [data]);
-  console.log(content, "data3333");
   return React.createElement(TableContainer, {
     component: Paper,
     style: {
@@ -1497,7 +1480,7 @@ function CollapsibleTable(_ref2) {
     sx: {
       width: "3rem"
     }
-  }, React.createElement("strong", null, "Access Example")))), React.createElement(TableBody, null, (_Object$keys2 = Object.keys(data)) == null ? void 0 : _Object$keys2.map(function (keyName) {
+  }, React.createElement("strong", null, "Access Example")))), React.createElement(TableBody, null, (_Object$keys = Object.keys(data)) == null ? void 0 : _Object$keys.map(function (keyName) {
     return React.createElement(Row, {
       obj: data && data[keyName],
       keyName: keyName

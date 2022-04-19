@@ -1,4 +1,4 @@
-import React__default, { useState, useEffect, createElement, Fragment } from 'react';
+import React__default, { createElement, useState, Fragment } from 'react';
 import { useTheme as useTheme$1, styled, alpha, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Fuse from 'fuse.js';
@@ -1435,27 +1435,10 @@ function Row(_ref) {
 }
 
 function CollapsibleTable(_ref2) {
-  var _Object$keys2;
+  var _Object$keys;
 
   var _ref2$data = _ref2.data,
       data = _ref2$data === void 0 ? {} : _ref2$data;
-
-  var _React$useState4 = useState(data),
-      content = _React$useState4[0],
-      setcontent = _React$useState4[1];
-
-  useEffect(function () {
-    if (typeof data === "object") {
-      var _Object$keys;
-
-      setcontent((_Object$keys = Object.keys(data)) == null ? void 0 : _Object$keys.map(function (keyName) {
-      }));
-    } else {
-      setcontent(data == null ? void 0 : data.map(function (keyName) {
-      }));
-    }
-  }, [data]);
-  console.log(content, "data3333");
   return createElement(TableContainer, {
     component: Paper,
     style: {
@@ -1489,7 +1472,7 @@ function CollapsibleTable(_ref2) {
     sx: {
       width: "3rem"
     }
-  }, createElement("strong", null, "Access Example")))), createElement(TableBody, null, (_Object$keys2 = Object.keys(data)) == null ? void 0 : _Object$keys2.map(function (keyName) {
+  }, createElement("strong", null, "Access Example")))), createElement(TableBody, null, (_Object$keys = Object.keys(data)) == null ? void 0 : _Object$keys.map(function (keyName) {
     return createElement(Row, {
       obj: data && data[keyName],
       keyName: keyName

@@ -117,25 +117,6 @@ function Row({ keyName, obj }: any) {
 }
 
 export default function CollapsibleTable({ data = {} }: any) {
-   const [content, setcontent] = React.useState(data)
-
-   React.useEffect(() => {
-      if (typeof data === "object") {
-         setcontent(
-            Object.keys(data)?.map((keyName: any) => {
-               data: data[keyName], keyName
-            }),
-         )
-      } else {
-         setcontent(
-            data?.map((keyName: any) => {
-               keyName
-            }),
-         )
-      }
-   }, [data])
-
-   console.log(content, "data3333")
    return (
       <TableContainer component={Paper} style={{ maxHeight: 600 }}>
          <Table aria-label="collapsible table" stickyHeader>
