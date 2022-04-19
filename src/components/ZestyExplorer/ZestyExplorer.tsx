@@ -1,7 +1,8 @@
 /* eslint-disable react/no-children-prop */
 /* eslint-disable react/jsx-no-target-blank */
 import React from "react"
-// import { ThemeProvider } from "@mui/material/styles"
+import { ThemeProvider } from "@mui/material/styles"
+import CssBaseline from "@mui/material/CssBaseline"
 import { dummydata } from "constants/index"
 import Fuse from "fuse.js"
 import { ContentViewer, MetaViewer, JsonDataViewer } from "views/index"
@@ -12,7 +13,8 @@ import { buttonStyles, zestyStyles, zestyWrapper } from "./styles"
 import { TabContainer } from "components/Tabs"
 import Button from "@mui/material/Button"
 import { Box } from "@material-ui/core"
-// import getTheme from "theme/index"
+import getTheme from "theme/index"
+import { useDarkMode } from "hooks"
 
 // list of tabs to render
 const tabList = [
@@ -24,9 +26,9 @@ const tabList = [
 // renanme content to contentData
 const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any) => {
    const content = contentData || dummydata
-   // const [modal, setModal] = React.useState(false);
    const [search, setSearch] = React.useState()
 
+   // for loading
    const [time, settime] = React.useState(0)
    React.useEffect(() => {
       const timer = setTimeout(() => {
@@ -39,7 +41,6 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
    })
 
    // convert obj to dot
-
    // @ts-ignore
    const flaten1 = helper.flattenObj(content)
 
@@ -94,7 +95,7 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
 
    console.log(pageData, "Pagedata")
    return (
-      <div style={containerStyle}>
+      <Box style={containerStyle}>
          <Headers children={children} content={content} response={response} />
          <TabContainer
             setcurrentTab={setcurrentTab}
@@ -113,9 +114,10 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
                <JsonDataViewer data={data} search={search} setSearch={setSearch} />
             )}
          </div>
-      </div>
+      </Box>
    )
 }
+
 // Main ZESTY EXPLORER
 export const ZestyExplorer = ({ content = {} }: any) => {
    const [open, setOpen] = React.useState(false)
@@ -146,80 +148,48 @@ export const ZestyExplorer = ({ content = {} }: any) => {
    if (!helper.canUseDOM()) {
       return null
    }
-   // const [themeMode, themeToggler, mountedComponent] = useDarkMode()
+   const [themeMode, themeToggler, mountedComponent] = useDarkMode()
+   console.log(themeMode, mountedComponent)
    return (
       // @ts-ignore
       <div style={zestyWrapper}>
-         {/* ZESTY LOGO  bottom right*/}
-         {!open && (
-            <button type="button" onClick={() => setOpen(true)} style={buttonStyles}>
-               <img
-                  src="https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png"
-                  width="32px"
-                  height="32px"
-                  alt="Zesty.io Logo"
-               />
-               <span style={zestyStyles}>Explorer</span>
-            </button>
-         )}
+         <ThemeProvider theme={getTheme("light", themeToggler)}>
+            <CssBaseline />
+            {/* ZESTY LOGO  bottom right*/}
+            {!open && (
+               <button type="button" onClick={() => setOpen(true)} style={buttonStyles}>
+                  <img
+                     src="https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png"
+                     width="32px"
+                     height="32px"
+                     alt="Zesty.io Logo"
+                  />
+                  <span style={zestyStyles}>Explorer</span>
+               </button>
+            )}
 
-         {open && (
-            <Box>
-               <ZestyExplorerBrowser
-                  response={response}
-                  pageData={pageData}
-                  contentData={searchObject}
-               >
-                  <Button
-                     onClick={() => setOpen(false)}
-                     variant="contained"
-                     color="error"
-                     size="small"
-                     sx={{ fontSize: "12px", whiteSpace: "nowrap" }}
+            {open && (
+               <Box>
+                  <ZestyExplorerBrowser
+                     response={response}
+                     pageData={pageData}
+                     contentData={searchObject}
                   >
-                     <Box paddingY={1} paddingX={2}>
-                        close
-                     </Box>
-                  </Button>
-               </ZestyExplorerBrowser>
-            </Box>
-         )}
+                     <Button
+                        onClick={() => setOpen(false)}
+                        variant="contained"
+                        color="error"
+                        size="small"
+                        sx={{ fontSize: "12px", whiteSpace: "nowrap" }}
+                     >
+                        <Box paddingY={1} paddingX={2}>
+                           close
+                        </Box>
+                     </Button>
+                  </ZestyExplorerBrowser>
+               </Box>
+            )}
+         </ThemeProvider>
       </div>
    )
 }
-
-// export const useDarkMode = () => {
-//    // set the initial theme from localstorage or 'light'
-//    const [themeMode, setTheme] = React.useState(
-//       window.localStorage.getItem("themeMode") || "light",
-//    )
-
-//    const [mountedComponent, setMountedComponent] = React.useState(false)
-
-//    const setMode = (mode: any) => {
-//       try {
-//          window.localStorage.setItem("themeMode", mode)
-//       } catch {
-//          /* do nothing */
-//       }
-
-//       setTheme(mode)
-//    }
-
-//    const themeToggler = () => {
-//       themeMode === "light" ? setMode("dark") : setMode("light")
-//    }
-
-//    React.useEffect(() => {
-//       try {
-//          const localTheme = window.localStorage.getItem("themeMode")
-//          localTheme ? setTheme(localTheme) : setMode("light")
-//       } catch {
-//          setMode("light")
-//       }
-
-//       setMountedComponent(true)
-//    }, [])
-
-//    return [themeMode, themeToggler, mountedComponent]
-// }

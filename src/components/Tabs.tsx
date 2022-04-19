@@ -2,7 +2,6 @@ import React from "react"
 import Tabs from "@mui/material/Tabs"
 import Tab from "@mui/material/Tab"
 import Box from "@mui/material/Box"
-import Container from "@mui/material/Container"
 
 interface Tabs {
    id: number
@@ -20,7 +19,7 @@ export const TabContainer = ({ tabList, settime, setcurrentTab }: any) => {
       settime()
    }
    return (
-      <Container>
+      <Box>
          <Box sx={{ maxWidth: { xs: 320, sm: 480 }, bgcolor: "background.paper" }}>
             {" "}
             <Tabs
@@ -35,6 +34,6 @@ export const TabContainer = ({ tabList, settime, setcurrentTab }: any) => {
                ))}
             </Tabs>
          </Box>
-      </Container>
+      </Box>
    )
 }

@@ -1,20 +1,21 @@
 import React__default, { createElement } from 'react';
+import { useTheme, styled, alpha, createTheme, ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 import Fuse from 'fuse.js';
 import ReactJson from 'react-json-view-ssr';
 import AppBar from '@mui/material/AppBar';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { useTheme, styled, alpha } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import InputBase from '@mui/material/InputBase';
-import { Box as Box$1 } from '@mui/material';
+import { Box as Box$1, responsiveFontSizes } from '@mui/material';
 import { CopyBlock, anOldHope } from 'react-code-blocks';
 import { Box as Box$2 } from '@material-ui/core';
+import { useDarkMode } from 'hooks';
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -1324,7 +1325,14 @@ var Headers = function Headers(_ref) {
       display: "flex",
       gap: "1rem",
       alignItems: "center",
-      justifyContent: "space-evenly"
+      justifyContent: "space-between",
+      width: "100%"
+    }
+  }, React__default.createElement(Box, {
+    sx: {
+      display: "flex",
+      alignItems: "center",
+      gap: "2rem"
     }
   }, React__default.createElement(Typography, {
     variant: "h6",
@@ -1339,8 +1347,8 @@ var Headers = function Headers(_ref) {
     }
   }, React__default.createElement("img", {
     src: "https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png",
-    width: "42px",
-    height: "42px",
+    width: "62px",
+    height: "62px",
     alt: "Zesty.io Logo"
   })), React__default.createElement(Typography, {
     sx: {
@@ -1349,10 +1357,15 @@ var Headers = function Headers(_ref) {
     },
     color: theme.palette.common.black,
     component: "h6"
-  }, "Browsing item ", React__default.createElement("strong", null, " ", content == null ? void 0 : (_content$meta = content.meta) == null ? void 0 : (_content$meta$web = _content$meta.web) == null ? void 0 : _content$meta$web.seo_link_text, " "), "from the ", React__default.createElement("strong", null, content == null ? void 0 : (_content$meta2 = content.meta) == null ? void 0 : _content$meta2.model_alternate_name, " "), "Content Model"), React__default.createElement(Button, {
+  }, "Browsing item ", React__default.createElement("strong", null, " ", content == null ? void 0 : (_content$meta = content.meta) == null ? void 0 : (_content$meta$web = _content$meta.web) == null ? void 0 : _content$meta$web.seo_link_text, " "), "from the ", React__default.createElement("strong", null, content == null ? void 0 : (_content$meta2 = content.meta) == null ? void 0 : _content$meta2.model_alternate_name, " "), "Content Model")), React__default.createElement(Box, {
+    sx: {
+      display: "flex",
+      gap: "2rem"
+    }
+  }, React__default.createElement(Button, {
     href: "https://accounts.zesty.io/instances/" + (content == null ? void 0 : content.zestyInstanceZUID),
     variant: "contained",
-    color: "primary",
+    color: "secondary",
     size: "small",
     sx: {
       fontSize: "12px",
@@ -1364,7 +1377,7 @@ var Headers = function Headers(_ref) {
   }, "Open Zesty Account")), React__default.createElement(Button, {
     href: "https://" + ((content == null ? void 0 : content.zestyInstanceZUID) || headerZUID(response)) + ".manager.zesty.io/content/" + (content == null ? void 0 : (_content$meta3 = content.meta) == null ? void 0 : (_content$meta3$model = _content$meta3.model) == null ? void 0 : _content$meta3$model.zuid) + "/" + (content == null ? void 0 : (_content$meta4 = content.meta) == null ? void 0 : _content$meta4.zuid),
     variant: "contained",
-    color: "primary",
+    color: "secondary",
     size: "small",
     sx: {
       fontSize: "12px",
@@ -1376,7 +1389,7 @@ var Headers = function Headers(_ref) {
   }, "Open Zesty Manager")), React__default.createElement(Button, {
     href: "https://" + ((content == null ? void 0 : content.zestyInstanceZUID) || headerZUID(response)) + ".manager.zesty.io/schema/" + (content == null ? void 0 : (_content$meta5 = content.meta) == null ? void 0 : (_content$meta5$model = _content$meta5.model) == null ? void 0 : _content$meta5$model.zuid),
     variant: "contained",
-    color: "primary",
+    color: "secondary",
     size: "small",
     sx: {
       fontSize: "12px",
@@ -1385,7 +1398,7 @@ var Headers = function Headers(_ref) {
   }, React__default.createElement(Box, {
     paddingY: 1,
     paddingX: 2
-  }, "Open Schema")), children)));
+  }, "Open Schema")), children))));
 };
 
 var TabContainer = function TabContainer(_ref) {
@@ -1405,7 +1418,7 @@ var TabContainer = function TabContainer(_ref) {
     settime();
   };
 
-  return React__default.createElement(Container, null, React__default.createElement(Box, {
+  return React__default.createElement(Box, null, React__default.createElement(Box, {
     sx: {
       maxWidth: {
         xs: 320,
@@ -1707,7 +1720,203 @@ var zestyWrapper = {
   padding: "2rem"
 };
 
-// list of tabs to render
+var shadows = function shadows(themeMode) {
+  if (themeMode === void 0) {
+    themeMode = "light";
+  }
+
+  var rgb = themeMode === "light" ? "#8c98a4" : "#000000";
+  return ["none", "0 3px 6px 0 " + alpha(rgb, 0.25), "0 12px 15px " + alpha(rgb, 0.1), "0 6px 24px 0 " + alpha(rgb, 0.125), "0 10px 40px 10px " + alpha(rgb, 0.175), "0 10px 40px 10px " + alpha(rgb, 0.175), "0 10px 40px 10px " + alpha(rgb, 0.175), "0 10px 40px 10px " + alpha(rgb, 0.175), "0 10px 40px 10px " + alpha(rgb, 0.175), "0 10px 40px 10px " + alpha(rgb, 0.175), "0 10px 40px 10px " + alpha(rgb, 0.175), "0 10px 40px 10px " + alpha(rgb, 0.175), "0 10px 40px 10px " + alpha(rgb, 0.175), "0 10px 40px 10px " + alpha(rgb, 0.175), "0 10px 40px 10px " + alpha(rgb, 0.175), "0 10px 40px 10px " + alpha(rgb, 0.175), "0 10px 40px 10px " + alpha(rgb, 0.175), "0 10px 40px 10px " + alpha(rgb, 0.175), "0 10px 40px 10px " + alpha(rgb, 0.175), "0 10px 40px 10px " + alpha(rgb, 0.175), "0 10px 40px 10px " + alpha(rgb, 0.175), "0 10px 40px 10px " + alpha(rgb, 0.175), "0 10px 40px 10px " + alpha(rgb, 0.175), "0 10px 40px 10px " + alpha(rgb, 0.175), "0 10px 40px 10px " + alpha(rgb, 0.175)];
+};
+
+var light = {
+  alternate: {
+    main: "#f7faff",
+    dark: "#edf1f7"
+  },
+  cardShadow: "rgba(23, 70, 161, .11)",
+  mode: "light",
+  common: {
+    black: "#000",
+    white: "#fff"
+  },
+  primary: {
+    main: "#497edf",
+    light: "#467de3",
+    dark: "#1a202c",
+    contrastText: "#fff"
+  },
+  secondary: {
+    light: "#FF9400",
+    main: "#FF5D0A",
+    dark: "#FF3E12",
+    contrastText: "#fff"
+  },
+  text: {
+    primary: "#1e2022",
+    secondary: "#5b667d"
+  },
+  divider: "rgba(0, 0, 0, 0.12)",
+  background: {
+    paper: "#ffffff",
+    "default": "#ffffff",
+    level2: "#f2f4fb",
+    level1: "#f5f5f5"
+  },
+  zesty: {
+    zestyDarkBlue: "#1b202c",
+    zestyTabBlue: "#697A91",
+    zestyOrange: "#FF5D0A",
+    zestyRed: "rgb(230,74,23)",
+    devTheme: "#77b250",
+    zestyGreen: "#75BF43",
+    zestyBlue: "#497edf",
+    zestyTeal: "#6a9293",
+    zestyWhite: "#eff5ff",
+    bulmaBlue: "#336fdb",
+    zestyLightBlue: "#C3CDDF",
+    zestyFieldBlue: "#C7D4EA",
+    zestyBackgroundBlue: "#D6E8F5",
+    zestyGrey: "#5B667D",
+    zestyLightGrey: "#A7AFBF",
+    navBorderColor: "#3c465e",
+    yellowHighlight: "#FFFDE2",
+    zestyYellow: "rgb(249, 185, 52)",
+    white: "#ffffff",
+    black: "#000000",
+    zestyWhiteBlue: "#f2f4fb",
+    zestyPink: "#EA398C",
+    darkBlue: "#1B1F2C",
+    parsleyGreen: "#96C45B",
+    headerColor: "#CFDCFF",
+    pureWhite: "#ffffff",
+    lightBlue: "#D9E2F4"
+  }
+};
+var dark = {
+  alternate: {
+    main: "#1a2138",
+    dark: "#151a30"
+  },
+  cardShadow: "rgba(0, 0, 0, .11)",
+  common: {
+    black: "#000",
+    white: "#fff"
+  },
+  mode: "dark",
+  primary: {
+    main: "#1976d2",
+    light: "#2196f3",
+    dark: "#0d47a1",
+    contrastText: "#fff"
+  },
+  secondary: {
+    light: "#FF9400",
+    main: "#FF5D0A",
+    dark: "#FF3E12",
+    contrastText: "#fff"
+  },
+  text: {
+    primary: "#EEEEEF",
+    secondary: "#AEB0B4"
+  },
+  divider: "rgba(255, 255, 255, 0.12)",
+  background: {
+    paper: "#1a202c",
+    "default": "#1a202c",
+    level2: "#3c465e",
+    level1: "#2D3748"
+  },
+  zesty: {
+    zestyDarkBlue: "#1b202c",
+    zestyTabBlue: "#697A91",
+    zestyOrange: "#FF5D0A",
+    zestyRed: "rgb(230,74,23)",
+    devTheme: "#77b250",
+    zestyGreen: "#75BF43",
+    zestyBlue: "#497edf",
+    zestyTeal: "#6a9293",
+    zestyWhite: "#eff5ff",
+    bulmaBlue: "#336fdb",
+    zestyLightBlue: "#C3CDDF",
+    zestyFieldBlue: "#C7D4EA",
+    zestyBackgroundBlue: "#D6E8F5",
+    zestyGrey: "#5B667D",
+    zestyLightGrey: "#A7AFBF",
+    navBorderColor: "#3c465e",
+    yellowHighlight: "#FFFDE2",
+    white: "#ffffff",
+    black: "#000000",
+    zestyWhiteBlue: "#f2f4fb",
+    zestyPink: "#EA398C",
+    darkBlue: "#1B1F2C",
+    parsleyGreen: "#96C45B",
+    headerColor: "#CFDCFF",
+    pureWhite: "#ffffff",
+    lightBlue: "#D9E2F4"
+  }
+};
+
+var getTheme = function getTheme(mode, themeToggler) {
+  return responsiveFontSizes(createTheme({
+    // @ts-ignore
+    palette: mode === "light" ? light : dark,
+    // @ts-ignore
+    shadows: shadows(mode),
+    typography: {
+      fontFamily: '"Mulish", sans-serif',
+      button: {
+        textTransform: "none",
+        fontWeight: "medium"
+      }
+    },
+    zIndex: {
+      appBar: 1200,
+      drawer: 1300
+    },
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            fontWeight: 600,
+            borderRadius: 5,
+            paddingTop: 10,
+            paddingBottom: 10
+          },
+          containedSecondary: mode === "light" ? {
+            color: "white"
+          } : {}
+        }
+      },
+      MuiInputBase: {
+        styleOverrides: {
+          root: {
+            borderRadius: 5
+          }
+        }
+      },
+      MuiOutlinedInput: {
+        styleOverrides: {
+          root: {
+            borderRadius: 5
+          },
+          input: {
+            borderRadius: 5
+          }
+        }
+      },
+      MuiCard: {
+        styleOverrides: {
+          root: {
+            borderRadius: 8
+          }
+        }
+      }
+    },
+    // @ts-ignore
+    themeToggler: themeToggler
+  }));
+};
 
 var tabList = [{
   id: 1,
@@ -1730,11 +1939,12 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
       response = _ref.response,
       contentData = _ref.contentData,
       children = _ref.children;
-  var content = contentData || dummydata; // const [modal, setModal] = React.useState(false);
+  var content = contentData || dummydata;
 
   var _React$useState = React__default.useState(),
       search = _React$useState[0],
-      setSearch = _React$useState[1];
+      setSearch = _React$useState[1]; // for loading
+
 
   var _React$useState2 = React__default.useState(0),
       time = _React$useState2[0],
@@ -1800,7 +2010,7 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
     height: "85vh"
   };
   console.log(pageData, "Pagedata");
-  return React__default.createElement("div", {
+  return React__default.createElement(Box$2, {
     style: containerStyle
   }, React__default.createElement(Headers, {
     children: children,
@@ -1896,13 +2106,20 @@ var ZestyExplorer = function ZestyExplorer(_ref3) {
 
   if (!canUseDOM()) {
     return null;
-  } // const [themeMode, themeToggler, mountedComponent] = useDarkMode()
+  }
 
+  var _useDarkMode = useDarkMode(),
+      themeMode = _useDarkMode[0],
+      themeToggler = _useDarkMode[1],
+      mountedComponent = _useDarkMode[2];
 
+  console.log(themeMode, mountedComponent);
   return (// @ts-ignore
     React__default.createElement("div", {
       style: zestyWrapper
-    }, !open && React__default.createElement("button", {
+    }, React__default.createElement(ThemeProvider, {
+      theme: getTheme("light", themeToggler)
+    }, React__default.createElement(CssBaseline, null), !open && React__default.createElement("button", {
       type: "button",
       onClick: function onClick() {
         return setOpen(true);
@@ -1933,36 +2150,9 @@ var ZestyExplorer = function ZestyExplorer(_ref3) {
     }, React__default.createElement(Box$2, {
       paddingY: 1,
       paddingX: 2
-    }, "close")))))
+    }, "close"))))))
   );
-}; // export const useDarkMode = () => {
-//    // set the initial theme from localstorage or 'light'
-//    const [themeMode, setTheme] = React.useState(
-//       window.localStorage.getItem("themeMode") || "light",
-//    )
-//    const [mountedComponent, setMountedComponent] = React.useState(false)
-//    const setMode = (mode: any) => {
-//       try {
-//          window.localStorage.setItem("themeMode", mode)
-//       } catch {
-//          /* do nothing */
-//       }
-//       setTheme(mode)
-//    }
-//    const themeToggler = () => {
-//       themeMode === "light" ? setMode("dark") : setMode("light")
-//    }
-//    React.useEffect(() => {
-//       try {
-//          const localTheme = window.localStorage.getItem("themeMode")
-//          localTheme ? setTheme(localTheme) : setMode("light")
-//       } catch {
-//          setMode("light")
-//       }
-//       setMountedComponent(true)
-//    }, [])
-//    return [themeMode, themeToggler, mountedComponent]
-// }
+};
 
 export { ZestyExplorer };
 //# sourceMappingURL=explorer.esm.js.map
