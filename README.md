@@ -38,7 +38,7 @@ Or
 ```
      <script
       type="text/javascript"
-      src="https://cdn.jsdelivr.net/gh/zesty-io/explorer@1.1.4/dist/explorer.production.js"
+      src="https://cdn.jsdelivr.net/gh/zesty-io/explorer@v1.1.12/dist/explorer.production.js"
       defer="defer"
     ></script>
 
