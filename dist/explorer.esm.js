@@ -1,5 +1,5 @@
 import React__default, { useState, useEffect, createElement, Fragment } from 'react';
-import { useTheme, styled, alpha, createTheme, ThemeProvider } from '@mui/material/styles';
+import { useTheme as useTheme$1, styled, alpha, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Fuse from 'fuse.js';
 import Box$1 from '@mui/material/Box';
@@ -12,7 +12,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Box } from '@mui/system';
+import { Box, useTheme } from '@mui/system';
 import Button from '@mui/material/Button';
 import { Box as Box$2, responsiveFontSizes } from '@mui/material';
 import { CopyBlock, anOldHope } from 'react-code-blocks';
@@ -1333,9 +1333,18 @@ function Row(_ref) {
       obj = _ref.obj;
 
   var _React$useState = useState(false),
-      open = _React$useState[0],
-      setOpen = _React$useState[1];
+      showCopy = _React$useState[0],
+      setShowCopy = _React$useState[1];
 
+  var _React$useState2 = useState(false),
+      clipboardCopy = _React$useState2[0],
+      setclipboardCopy = _React$useState2[1];
+
+  var _React$useState3 = useState(false),
+      open = _React$useState3[0],
+      setOpen = _React$useState3[1];
+
+  var theme = useTheme();
   var value = "";
   var valueType = "string";
 
@@ -1372,11 +1381,38 @@ function Row(_ref) {
   }, value), createElement(TableCell, {
     align: "left"
   }, value.length), createElement(TableCell, {
-    align: "left"
-  })), createElement(TableRow, null, createElement(TableCell, {
+    onMouseEnter: function onMouseEnter() {
+      return setShowCopy(true);
+    },
+    onMouseLeave: function onMouseLeave() {
+      setShowCopy(false);
+      setclipboardCopy(false);
+    },
+    sx: {
+      background: theme.palette.zesty.zestyDarkBlue,
+      color: theme.palette.zesty.zestyGreen,
+      position: "relative"
+    }
+  }, createElement("button", {
+    style: {
+      cursor: "pointer"
+    },
+    onClick: function onClick() {
+      navigator.clipboard.writeText("content." + keyName);
+      setclipboardCopy(true);
+      setShowCopy(false);
+    }
+  }, "{content." + keyName + "}"), createElement(Box$1, {
+    sx: {
+      position: "absolute",
+      left: "0",
+      top: "0"
+    }
+  }, clipboardCopy && createElement("span", null, "\u2705 Copied to clidboard!"), showCopy && createElement("span", null, "\uD83D\uDCDC Copy!")))), createElement(TableRow, null, createElement(TableCell, {
     style: {
       paddingBottom: 0,
-      paddingTop: 0
+      paddingTop: 0,
+      background: theme.palette.zesty.zestyBackgroundBlue
     },
     colSpan: 6
   }, createElement(Collapse, {
@@ -1404,9 +1440,9 @@ function CollapsibleTable(_ref2) {
   var _ref2$data = _ref2.data,
       data = _ref2$data === void 0 ? {} : _ref2$data;
 
-  var _React$useState2 = useState(data),
-      content = _React$useState2[0],
-      setcontent = _React$useState2[1];
+  var _React$useState4 = useState(data),
+      content = _React$useState4[0],
+      setcontent = _React$useState4[1];
 
   useEffect(function () {
     if (typeof data === "object") {
@@ -1541,7 +1577,7 @@ var Headers = function Headers(_ref) {
   var response = _ref.response,
       children = _ref.children,
       content = _ref.content;
-  var theme = useTheme();
+  var theme = useTheme$1();
   return React__default.createElement(AppBar, {
     position: "static"
   }, React__default.createElement(Box$1, {

@@ -1341,9 +1341,18 @@ function Row(_ref) {
       obj = _ref.obj;
 
   var _React$useState = React.useState(false),
-      open = _React$useState[0],
-      setOpen = _React$useState[1];
+      showCopy = _React$useState[0],
+      setShowCopy = _React$useState[1];
 
+  var _React$useState2 = React.useState(false),
+      clipboardCopy = _React$useState2[0],
+      setclipboardCopy = _React$useState2[1];
+
+  var _React$useState3 = React.useState(false),
+      open = _React$useState3[0],
+      setOpen = _React$useState3[1];
+
+  var theme = system.useTheme();
   var value = "";
   var valueType = "string";
 
@@ -1380,11 +1389,38 @@ function Row(_ref) {
   }, value), React.createElement(TableCell__default, {
     align: "left"
   }, value.length), React.createElement(TableCell__default, {
-    align: "left"
-  })), React.createElement(TableRow, null, React.createElement(TableCell__default, {
+    onMouseEnter: function onMouseEnter() {
+      return setShowCopy(true);
+    },
+    onMouseLeave: function onMouseLeave() {
+      setShowCopy(false);
+      setclipboardCopy(false);
+    },
+    sx: {
+      background: theme.palette.zesty.zestyDarkBlue,
+      color: theme.palette.zesty.zestyGreen,
+      position: "relative"
+    }
+  }, React.createElement("button", {
+    style: {
+      cursor: "pointer"
+    },
+    onClick: function onClick() {
+      navigator.clipboard.writeText("content." + keyName);
+      setclipboardCopy(true);
+      setShowCopy(false);
+    }
+  }, "{content." + keyName + "}"), React.createElement(Box, {
+    sx: {
+      position: "absolute",
+      left: "0",
+      top: "0"
+    }
+  }, clipboardCopy && React.createElement("span", null, "\u2705 Copied to clidboard!"), showCopy && React.createElement("span", null, "\uD83D\uDCDC Copy!")))), React.createElement(TableRow, null, React.createElement(TableCell__default, {
     style: {
       paddingBottom: 0,
-      paddingTop: 0
+      paddingTop: 0,
+      background: theme.palette.zesty.zestyBackgroundBlue
     },
     colSpan: 6
   }, React.createElement(Collapse, {
@@ -1412,9 +1448,9 @@ function CollapsibleTable(_ref2) {
   var _ref2$data = _ref2.data,
       data = _ref2$data === void 0 ? {} : _ref2$data;
 
-  var _React$useState2 = React.useState(data),
-      content = _React$useState2[0],
-      setcontent = _React$useState2[1];
+  var _React$useState4 = React.useState(data),
+      content = _React$useState4[0],
+      setcontent = _React$useState4[1];
 
   React.useEffect(function () {
     if (typeof data === "object") {

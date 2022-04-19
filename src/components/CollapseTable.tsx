@@ -10,9 +10,13 @@ import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
 import { PrettyPrintJson } from "utils"
+import { useTheme } from "@mui/system"
 
 function Row({ keyName, obj }: any) {
+   const [showCopy, setShowCopy] = React.useState(false)
+   const [clipboardCopy, setclipboardCopy] = React.useState(false)
    const [open, setOpen] = React.useState(false)
+   const theme = useTheme()
    let value = ""
    let valueType = "string"
 
@@ -42,7 +46,39 @@ function Row({ keyName, obj }: any) {
             <TableCell align="left">{valueType}</TableCell>
             <TableCell align="left">{value}</TableCell>
             <TableCell align="left">{value.length}</TableCell>
-            <TableCell align="left">{}</TableCell>
+            <TableCell
+               onMouseEnter={() => setShowCopy(true)}
+               onMouseLeave={() => {
+                  setShowCopy(false)
+                  setclipboardCopy(false)
+               }}
+               sx={{
+                  background: theme.palette.zesty.zestyDarkBlue,
+                  color: theme.palette.zesty.zestyGreen,
+                  position: "relative",
+               }}
+            >
+               <button
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                     navigator.clipboard.writeText(`content.${keyName}`)
+                     setclipboardCopy(true)
+                     setShowCopy(false)
+                  }}
+               >
+                  {`{content.${keyName}}`}
+               </button>
+               <Box
+                  sx={{
+                     position: "absolute",
+                     left: "0",
+                     top: "0",
+                  }}
+               >
+                  {clipboardCopy && <span>✅ Copied to clidboard!</span>}
+                  {showCopy && <span>📜 Copy!</span>}
+               </Box>
+            </TableCell>
          </TableRow>
 
          {/* Expanded Data */}
@@ -51,6 +87,7 @@ function Row({ keyName, obj }: any) {
                style={{
                   paddingBottom: 0,
                   paddingTop: 0,
+                  background: theme.palette.zesty.zestyBackgroundBlue,
                }}
                colSpan={6}
             >
