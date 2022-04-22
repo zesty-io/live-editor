@@ -1,5 +1,5 @@
 {
-   "version": "1.2.11",
+   "version": "1.2.12",
    "license": "MIT",
    "keywords": [
       "zesty-io",
@@ -25,7 +25,6 @@
       "prepare": "tsdx build",
       "size": "size-limit",
       "analyze": "size-limit --why"
-     
    },
    "peerDependencies": {
       "react": ">=16"
@@ -61,12 +60,12 @@
    ],
    "devDependencies": {
       "@size-limit/preset-small-lib": "^7.0.8",
-      "@types/react": "^18.0.0",
-      "@types/react-dom": "^18.0.0",
-      "babel-plugin-module-resolver": "^4.0.0",
+      "@types/react": ">=17.0.0",
+      "@types/react-dom": ">=17.0.0",
+      "babel-plugin-module-resolver": "^4.1.0",
       "husky": "^7.0.4",
-      "react": "^18.0.0",
-      "react-dom": "^18.0.0",
+      "react": ">=17.0.0",
+      "react-dom": ">=17.0.0",
       "release-it": "^14.14.2",
       "size-limit": "^7.0.8",
       "tsdx": "^0.14.1",

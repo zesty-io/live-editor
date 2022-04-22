@@ -12,7 +12,7 @@ import { getPageData } from "services/index"
 import { buttonStyles, containerStyle, zestyStyles, zestyWrapper } from "./styles"
 import { TabContainer } from "components/Tabs"
 import Button from "@mui/material/Button"
-import { Box } from "@material-ui/core"
+import Box from "@mui/material/Box"
 import getTheme from "theme/index"
 import { useDarkMode } from "hooks"
 
@@ -22,6 +22,15 @@ const tabList = [
    { id: 2, label: "Meta Viewer", value: "Meta Viewer" },
    { id: 3, label: "Json Data Viewer", value: "Json Data Viewer" },
 ]
+
+// dom access highlight function
+const expandBody = (bool:boolean) => {
+   let body:any = document.querySelector("body");
+   body.style.marginLeft  = bool ? '40vw' : '0'
+   body.style.transition = 'margin 250ms ease'
+   let ze:any = document.getElementById('zestyExplorer')
+   ze.style.left = bool ? '0' : '-40vw'
+}
 
 // renanme content to contentData
 const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any) => {
@@ -88,7 +97,7 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
    console.log(pageData, "This the Pagedata")
 
    return (
-      <Box style={containerStyle}>
+      <Box  sx={containerStyle}>
          <Headers children={children} content={content} response={response} />
          <TabContainer
             setcurrentTab={setcurrentTab}
@@ -141,23 +150,29 @@ export const ZestyExplorer = ({ content = {} }: any) => {
    if (!helper.canUseDOM()) {
       return null
    }
+
+   function toggleOpenState(bool:boolean){
+      setOpen(bool)
+      expandBody(bool)
+   }
+
    const [themeMode, themeToggler, mountedComponent] = useDarkMode()
    console.log(themeMode, mountedComponent)
    return (
       // @ts-ignore
-      <div style={zestyWrapper}>
+      <div id={'zestyExplorer'} style={zestyWrapper}>
          <ThemeProvider theme={getTheme("light", themeToggler)}>
             <CssBaseline />
             {/* ZESTY LOGO  bottom right*/}
             {!open && (
-               <button type="button" onClick={() => setOpen(true)} style={buttonStyles}>
+               <button type="button" onClick={() => toggleOpenState(true)} style={buttonStyles}>
                   <img
                      src="https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png"
                      width="32px"
                      height="32px"
                      alt="Zesty.io Logo"
                   />
-                  <span style={zestyStyles}>Explorer</span>
+                  <span style={zestyStyles}>Compass</span>
                </button>
             )}
 
@@ -169,7 +184,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
                      contentData={searchObject}
                   >
                      <Button
-                        onClick={() => setOpen(false)}
+                        onClick={() => toggleOpenState(false)}
                         variant="contained"
                         color="error"
                         size="small"

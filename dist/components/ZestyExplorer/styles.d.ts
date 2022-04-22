@@ -9,6 +9,9 @@ export declare const buttonStyles: {
     justifyContent: string;
     alignItems: string;
     cursor: string;
+    position: string;
+    left: string;
+    bottom: string;
 };
 export declare const zestyStyles: {
     flex: string;
@@ -21,19 +24,18 @@ export declare const zestyStyles: {
     fontFamily: string;
 };
 export declare const zestyWrapper: {
-    overflow: string;
     width: string;
     background: string;
     position: string;
+    left: string;
     bottom: string;
-    right: string;
+    transition: string;
     zIndex: string;
-    padding: string;
 };
 export declare const containerStyle: {
     background: string;
-    boxShadow: string;
     borderRadius: string;
     width: string;
     height: string;
+    boxShadow: string;
 };

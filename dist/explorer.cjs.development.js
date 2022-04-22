@@ -31,7 +31,6 @@ var Tabs = _interopDefault(require('@mui/material/Tabs'));
 var Tab = _interopDefault(require('@mui/material/Tab'));
 var Toolbar = _interopDefault(require('@mui/material/Toolbar'));
 var InputBase = _interopDefault(require('@mui/material/InputBase'));
-var core = require('@material-ui/core');
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -1334,6 +1333,17 @@ var PrettyPrintJson = function PrettyPrintJson(_ref2) {
   }, React__default.createElement("pre", null, JSON.stringify(data, null, 2)));
 };
 
+function accessDom(match) {
+  var elems = document.querySelectorAll("*");
+  var res = Array.from(elems).find(function (v) {
+    return v.textContent == match;
+  });
+  console.log(res ? 'found!' : 'not found');
+  console.log(res);
+  res.style.border = '2px yellow solid';
+  res.setAttribute('contentEditable', true);
+}
+
 function Row(_ref) {
   var _sx;
 
@@ -1385,7 +1395,10 @@ function Row(_ref) {
   }, keyName), React.createElement(TableCell__default, {
     align: "left"
   }, valueType), React.createElement(TableCell__default, {
-    align: "left"
+    align: "left",
+    onMouseEnter: function onMouseEnter() {
+      return accessDom(value);
+    }
   }, value), React.createElement(TableCell__default, {
     align: "left"
   }, value.length), React.createElement(TableCell__default, {
@@ -1890,7 +1903,10 @@ var buttonStyles = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  cursor: "pointer"
+  cursor: "pointer",
+  position: "absolute",
+  left: "40vw",
+  bottom: "0px"
 };
 var zestyStyles = {
   flex: "1",
@@ -1903,21 +1919,20 @@ var zestyStyles = {
   fontFamily: "'Arial Rounded MT Bold','Helvetica Rounded',Arial,sans-serif"
 };
 var zestyWrapper = {
-  overflow: "hidden",
   width: "auto",
   background: "transparent",
   position: "fixed",
-  bottom: "20px",
-  right: "20px",
-  zIndex: "9999999999999999",
-  padding: "2rem"
+  left: "-40vw",
+  bottom: "0px",
+  transition: 'left 250ms ease',
+  zIndex: "9999999999999999"
 };
 var containerStyle = {
   background: "#ddd",
-  boxShadow: "-1,0,5px,#333",
   borderRadius: "3px",
-  width: "69vw",
-  height: "84vh"
+  width: "40vw",
+  height: "100vh",
+  boxShadow: "0 0 0 rgba(0,0,0,.5)"
 };
 
 var shadows = function shadows(themeMode) {
@@ -2167,7 +2182,16 @@ var tabList = [{
   id: 3,
   label: "Json Data Viewer",
   value: "Json Data Viewer"
-}]; // renanme content to contentData
+}]; // dom access highlight function
+
+function expandBody(bool) {
+  var body = document.querySelector("body");
+  body.style.marginLeft = bool ? '40vw' : '0';
+  body.style.transition = 'margin 250ms ease';
+  var ze = document.getElementById('zestyExplorer');
+  ze.style.left = bool ? '0' : '-40vw';
+} // renanme content to contentData
+
 
 var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
   var _result$, _result$$matches;
@@ -2240,8 +2264,8 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
       setcurrentTab = _React$useState3[1];
 
   console.log(pageData, "This the Pagedata");
-  return React__default.createElement(core.Box, {
-    style: containerStyle
+  return React__default.createElement(Box, {
+    sx: containerStyle
   }, React__default.createElement(Headers, {
     children: children,
     content: content,
@@ -2338,6 +2362,11 @@ var ZestyExplorer = function ZestyExplorer(_ref3) {
     return null;
   }
 
+  function toggleOpenState(bool) {
+    setOpen(bool);
+    expandBody(bool);
+  }
+
   var _useDarkMode = useDarkMode(),
       themeMode = _useDarkMode[0],
       themeToggler = _useDarkMode[1],
@@ -2346,13 +2375,14 @@ var ZestyExplorer = function ZestyExplorer(_ref3) {
   console.log(themeMode, mountedComponent);
   return (// @ts-ignore
     React__default.createElement("div", {
+      id: 'zestyExplorer',
       style: zestyWrapper
     }, React__default.createElement(styles.ThemeProvider, {
       theme: getTheme("light", themeToggler)
     }, React__default.createElement(CssBaseline, null), !open && React__default.createElement("button", {
       type: "button",
       onClick: function onClick() {
-        return setOpen(true);
+        return toggleOpenState(true);
       },
       style: buttonStyles
     }, React__default.createElement("img", {
@@ -2362,13 +2392,13 @@ var ZestyExplorer = function ZestyExplorer(_ref3) {
       alt: "Zesty.io Logo"
     }), React__default.createElement("span", {
       style: zestyStyles
-    }, "Explorer")), open && React__default.createElement(core.Box, null, React__default.createElement(ZestyExplorerBrowser, {
+    }, "Compass")), open && React__default.createElement(Box, null, React__default.createElement(ZestyExplorerBrowser, {
       response: response,
       pageData: pageData,
       contentData: searchObject
     }, React__default.createElement(Button, {
       onClick: function onClick() {
-        return setOpen(false);
+        return toggleOpenState(false);
       },
       variant: "contained",
       color: "error",
@@ -2377,7 +2407,7 @@ var ZestyExplorer = function ZestyExplorer(_ref3) {
         fontSize: "12px",
         whiteSpace: "nowrap"
       }
-    }, React__default.createElement(core.Box, {
+    }, React__default.createElement(Box, {
       paddingY: 1,
       paddingX: 2
     }, "close"))))))

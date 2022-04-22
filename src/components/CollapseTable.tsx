@@ -11,6 +11,17 @@ import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
 import { PrettyPrintJson } from "utils"
 import { useTheme } from "@mui/system"
+// dom access highlight function
+function accessDom(match: string){
+   var elems = document.querySelectorAll("*")
+   var res:any = Array.from(elems).find(v => v.textContent == match);
+    
+    console.log(res ? 'found!' : 'not found');
+    console.log(res)
+    res.style.border  = '2px yellow solid';
+    res.setAttribute('contentEditable',true)
+
+}
 
 function Row({ keyName, obj }: any) {
    const [showCopy, setShowCopy] = React.useState(false)
@@ -44,7 +55,7 @@ function Row({ keyName, obj }: any) {
                {keyName}
             </TableCell>
             <TableCell align="left">{valueType}</TableCell>
-            <TableCell align="left">{value}</TableCell>
+            <TableCell align="left" onMouseEnter={() => accessDom(value)}>{value}</TableCell>
             <TableCell align="left">{value.length}</TableCell>
             <TableCell
                onMouseEnter={() => setShowCopy(true)}
