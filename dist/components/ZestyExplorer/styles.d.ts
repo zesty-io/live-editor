@@ -9,9 +9,9 @@ export declare const buttonStyles: {
     justifyContent: string;
     alignItems: string;
     cursor: string;
-    position: string;
     left: string;
-    bottom: string;
+    bottom: number;
+    position: string;
 };
 export declare const zestyStyles: {
     flex: string;
@@ -31,11 +31,11 @@ export declare const zestyWrapper: {
     bottom: string;
     transition: string;
     zIndex: string;
+    boxShadow: string;
 };
 export declare const containerStyle: {
     background: string;
     borderRadius: string;
     width: string;
     height: string;
-    boxShadow: string;
 };

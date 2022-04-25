@@ -36,13 +36,9 @@ export const Headers = ({ response, children, content }: Props) => {
             }}
          >
             <Box
-               style={{
-                  display: "flex",
-                  gap: "1rem",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  width: "100%",
-               }}
+              style={{
+               display: "flex",
+            }}
             >
                <Box sx={{ display: "flex", alignItems: "center", gap: "2rem" }}>
                   <Typography
@@ -69,17 +65,16 @@ export const Headers = ({ response, children, content }: Props) => {
                      Content Model
                   </Typography>
                </Box>
-               <Box sx={{ display: "flex", gap: "2rem" }}>
+               <Box >
                   <Button
                      href={`https://accounts.zesty.io/instances/${content?.zestyInstanceZUID}`}
                      variant="contained"
                      color="secondary"
                      size="small"
-                     sx={{ fontSize: "12px", whiteSpace: "nowrap" }}
                   >
-                     <Box paddingX={2} paddingY={1}>
-                        Open Zesty Account
-                     </Box>
+                     
+                        Edit Permissions
+                     
                   </Button>
                   <Button
                      href={`https://${content?.zestyInstanceZUID ||
@@ -88,12 +83,12 @@ export const Headers = ({ response, children, content }: Props) => {
                      }/${content?.meta?.zuid}`}
                      variant="contained"
                      color="secondary"
+                     target="_blank"
                      size="small"
-                     sx={{ fontSize: "12px", whiteSpace: "nowrap" }}
                   >
-                     <Box paddingX={2} paddingY={1}>
-                        Open Zesty Manager
-                     </Box>
+                     
+                        Edit Content
+                     
                   </Button>
                   <Button
                      href={`https://${content?.zestyInstanceZUID ||
@@ -103,11 +98,9 @@ export const Headers = ({ response, children, content }: Props) => {
                      variant="contained"
                      color="secondary"
                      size="small"
-                     sx={{ fontSize: "12px", whiteSpace: "nowrap" }}
+                     target="_blank"
                   >
-                     <Box paddingY={1} paddingX={2}>
-                        Open Schema
-                     </Box>
+                        Edit Schema
                   </Button>
 
                   {children}

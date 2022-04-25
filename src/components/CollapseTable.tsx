@@ -7,26 +7,42 @@ import TableBody from "@mui/material/TableBody"
 import TableCell, { tableCellClasses } from "@mui/material/TableCell"
 import TableContainer from "@mui/material/TableContainer"
 import TableHead from "@mui/material/TableHead"
+import Button from "@mui/material/Button"
 import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
 import { PrettyPrintJson } from "utils"
 import { useTheme } from "@mui/system"
-// dom access highlight function
-function accessDom(match: string){
-   var elems = document.querySelectorAll("*")
-   var res:any = Array.from(elems).find(v => v.textContent == match);
-    
-    console.log(res ? 'found!' : 'not found');
-    console.log(res)
-    res.style.border  = '2px yellow solid';
-    res.setAttribute('contentEditable',true)
+import CloseIcon from '@mui/icons-material/Close';
 
+// dom access highlight function
+function activateWorkingElement(match:string ): any{
+   console.log('string to test', match);
+   let stringToTest:string = match.replace(/<[^>]*>?/gm,'')
+   var elems = document.querySelectorAll("*")
+   var workingElement:any = Array.from(elems).find(v => v.textContent == stringToTest);
+    
+   workingElement.style.border  = '2px orange solid';
+   workingElement.setAttribute('contentEditable',true)
+   console.log('Activating',workingElement)
+ 
+   return workingElement
+}                                                                       
+
+function deactivateWorkingElement(workingElement:any) :any{
+   if(undefined !== workingElement){
+      console.log('Deactivating',workingElement)
+      workingElement.style.border  = 'none';
+      workingElement.setAttribute('contentEditable',false)
+   }
 }
 
 function Row({ keyName, obj }: any) {
    const [showCopy, setShowCopy] = React.useState(false)
    const [clipboardCopy, setclipboardCopy] = React.useState(false)
+   const [workingElement, setWorkingElement] = React.useState(undefined)
+   const [showEditClose, setShowEditClose] = React.useState(false)
    const [open, setOpen] = React.useState(false)
+   
    const theme = useTheme()
    let value = ""
    let valueType = "string"
@@ -37,7 +53,6 @@ function Row({ keyName, obj }: any) {
       valueType = "object"
    }
 
-   console.log(obj, keyName, 11111111111111111111111111)
    return (
       <React.Fragment>
          <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -55,7 +70,25 @@ function Row({ keyName, obj }: any) {
                {keyName}
             </TableCell>
             <TableCell align="left">{valueType}</TableCell>
-            <TableCell align="left" onMouseEnter={() => accessDom(value)}>{value}</TableCell>
+            <TableCell align="left" 
+               onClick={() => {
+                  setWorkingElement(activateWorkingElement(value))
+                  setShowEditClose(true)
+               }}
+               >{value}
+               {showEditClose && 
+                  <Button 
+                  size="small"
+                     onClick={() => {
+                        setShowEditClose(false)
+                        deactivateWorkingElement(workingElement)
+                        
+                     }}>
+                  <CloseIcon/>
+                  </Button>
+                  }
+               
+               </TableCell>
             <TableCell align="left">{value.length}</TableCell>
             <TableCell
                onMouseEnter={() => setShowCopy(true)}

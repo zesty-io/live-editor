@@ -9,10 +9,11 @@ export const buttonStyles = {
    justifyContent: "center",
    alignItems: "center",
    cursor: "pointer",
-   position: "absolute",
    left: "40vw",
-   bottom: "0px"
+   bottom: 0,
+   position: "absolute",
 }
+
 export const zestyStyles = {
    flex: "1",
    display: "inline-block",
@@ -30,14 +31,16 @@ export const zestyWrapper = {
    background: "transparent",
    position: "fixed",
    left: "-40vw",
-   bottom: "0px",
+   bottom: "0",
    transition: 'left 250ms ease',
    zIndex: "9999999999999999",
+   boxShadow: '0px 0px 15px #000',
 }
+
 export const containerStyle = {
    background: "#ddd",
    borderRadius: "3px",
    width: "40vw",
    height: "100vh",
-   boxShadow: "0 0 0 rgba(0,0,0,.5)"
+   //boxShadow: "0 0 0 rgba(0,0,0,.5)",
 }

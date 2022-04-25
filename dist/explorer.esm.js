@@ -10,10 +10,11 @@ import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
+import Button from '@mui/material/Button';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Box, useTheme } from '@mui/system';
-import Button from '@mui/material/Button';
+import CloseIcon from '@mui/icons-material/Close';
 import { Box as Box$2, responsiveFontSizes } from '@mui/material';
 import { CopyBlock, anOldHope } from 'react-code-blocks';
 import ReactJson from 'react-json-view-ssr';
@@ -23,6 +24,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Toolbar from '@mui/material/Toolbar';
 import InputBase from '@mui/material/InputBase';
+import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -1325,15 +1327,25 @@ var PrettyPrintJson = function PrettyPrintJson(_ref2) {
   }, React__default.createElement("pre", null, JSON.stringify(data, null, 2)));
 };
 
-function accessDom(match) {
+function activateWorkingElement(match) {
+  console.log('string to test', match);
+  var stringToTest = match.replace(/<[^>]*>?/gm, '');
   var elems = document.querySelectorAll("*");
-  var res = Array.from(elems).find(function (v) {
-    return v.textContent == match;
+  var workingElement = Array.from(elems).find(function (v) {
+    return v.textContent == stringToTest;
   });
-  console.log(res ? 'found!' : 'not found');
-  console.log(res);
-  res.style.border = '2px yellow solid';
-  res.setAttribute('contentEditable', true);
+  workingElement.style.border = '2px orange solid';
+  workingElement.setAttribute('contentEditable', true);
+  console.log('Activating', workingElement);
+  return workingElement;
+}
+
+function deactivateWorkingElement(workingElement) {
+  if (undefined !== workingElement) {
+    console.log('Deactivating', workingElement);
+    workingElement.style.border = 'none';
+    workingElement.setAttribute('contentEditable', false);
+  }
 }
 
 function Row(_ref) {
@@ -1350,9 +1362,17 @@ function Row(_ref) {
       clipboardCopy = _React$useState2[0],
       setclipboardCopy = _React$useState2[1];
 
-  var _React$useState3 = useState(false),
-      open = _React$useState3[0],
-      setOpen = _React$useState3[1];
+  var _React$useState3 = useState(undefined),
+      workingElement = _React$useState3[0],
+      setWorkingElement = _React$useState3[1];
+
+  var _React$useState4 = useState(false),
+      showEditClose = _React$useState4[0],
+      setShowEditClose = _React$useState4[1];
+
+  var _React$useState5 = useState(false),
+      open = _React$useState5[0],
+      setOpen = _React$useState5[1];
 
   var theme = useTheme();
   var value = "";
@@ -1364,7 +1384,6 @@ function Row(_ref) {
     valueType = "object";
   }
 
-  console.log(obj, keyName, 11111111111111111111111111);
   return createElement(Fragment, null, createElement(TableRow, {
     sx: {
       "& > *": {
@@ -1388,10 +1407,17 @@ function Row(_ref) {
     align: "left"
   }, valueType), createElement(TableCell, {
     align: "left",
-    onMouseEnter: function onMouseEnter() {
-      return accessDom(value);
+    onClick: function onClick() {
+      setWorkingElement(activateWorkingElement(value));
+      setShowEditClose(true);
     }
-  }, value), createElement(TableCell, {
+  }, value, showEditClose && createElement(Button, {
+    size: "small",
+    onClick: function onClick() {
+      setShowEditClose(false);
+      deactivateWorkingElement(workingElement);
+    }
+  }, createElement(CloseIcon, null))), createElement(TableCell, {
     align: "left"
   }, value.length), createElement(TableCell, {
     onMouseEnter: function onMouseEnter() {
@@ -1587,11 +1613,7 @@ var Headers = function Headers(_ref) {
     }
   }, React__default.createElement(Box$1, {
     style: {
-      display: "flex",
-      gap: "1rem",
-      alignItems: "center",
-      justifyContent: "space-between",
-      width: "100%"
+      display: "flex"
     }
   }, React__default.createElement(Box$1, {
     sx: {
@@ -1622,48 +1644,24 @@ var Headers = function Headers(_ref) {
     },
     color: theme.palette.common.black,
     component: "h6"
-  }, "Browsing item ", React__default.createElement("strong", null, " ", content == null ? void 0 : (_content$meta = content.meta) == null ? void 0 : (_content$meta$web = _content$meta.web) == null ? void 0 : _content$meta$web.seo_link_text, " "), "from the ", React__default.createElement("strong", null, content == null ? void 0 : (_content$meta2 = content.meta) == null ? void 0 : _content$meta2.model_alternate_name, " "), "Content Model")), React__default.createElement(Box$1, {
-    sx: {
-      display: "flex",
-      gap: "2rem"
-    }
-  }, React__default.createElement(Button, {
+  }, "Browsing item ", React__default.createElement("strong", null, " ", content == null ? void 0 : (_content$meta = content.meta) == null ? void 0 : (_content$meta$web = _content$meta.web) == null ? void 0 : _content$meta$web.seo_link_text, " "), "from the ", React__default.createElement("strong", null, content == null ? void 0 : (_content$meta2 = content.meta) == null ? void 0 : _content$meta2.model_alternate_name, " "), "Content Model")), React__default.createElement(Box$1, null, React__default.createElement(Button, {
     href: "https://accounts.zesty.io/instances/" + (content == null ? void 0 : content.zestyInstanceZUID),
     variant: "contained",
     color: "secondary",
-    size: "small",
-    sx: {
-      fontSize: "12px",
-      whiteSpace: "nowrap"
-    }
-  }, React__default.createElement(Box$1, {
-    paddingX: 2,
-    paddingY: 1
-  }, "Open Zesty Account")), React__default.createElement(Button, {
+    size: "small"
+  }, "Edit Permissions"), React__default.createElement(Button, {
     href: "https://" + ((content == null ? void 0 : content.zestyInstanceZUID) || headerZUID(response)) + ".manager.zesty.io/content/" + (content == null ? void 0 : (_content$meta3 = content.meta) == null ? void 0 : (_content$meta3$model = _content$meta3.model) == null ? void 0 : _content$meta3$model.zuid) + "/" + (content == null ? void 0 : (_content$meta4 = content.meta) == null ? void 0 : _content$meta4.zuid),
     variant: "contained",
     color: "secondary",
-    size: "small",
-    sx: {
-      fontSize: "12px",
-      whiteSpace: "nowrap"
-    }
-  }, React__default.createElement(Box$1, {
-    paddingX: 2,
-    paddingY: 1
-  }, "Open Zesty Manager")), React__default.createElement(Button, {
+    target: "_blank",
+    size: "small"
+  }, "Edit Content"), React__default.createElement(Button, {
     href: "https://" + ((content == null ? void 0 : content.zestyInstanceZUID) || headerZUID(response)) + ".manager.zesty.io/schema/" + (content == null ? void 0 : (_content$meta5 = content.meta) == null ? void 0 : (_content$meta5$model = _content$meta5.model) == null ? void 0 : _content$meta5$model.zuid),
     variant: "contained",
     color: "secondary",
     size: "small",
-    sx: {
-      fontSize: "12px",
-      whiteSpace: "nowrap"
-    }
-  }, React__default.createElement(Box$1, {
-    paddingY: 1,
-    paddingX: 2
-  }, "Open Schema")), children))));
+    target: "_blank"
+  }, "Edit Schema"), children))));
 };
 
 var TabContainer = function TabContainer(_ref) {
@@ -1896,9 +1894,9 @@ var buttonStyles = {
   justifyContent: "center",
   alignItems: "center",
   cursor: "pointer",
-  position: "absolute",
   left: "40vw",
-  bottom: "0px"
+  bottom: 0,
+  position: "absolute"
 };
 var zestyStyles = {
   flex: "1",
@@ -1915,16 +1913,16 @@ var zestyWrapper = {
   background: "transparent",
   position: "fixed",
   left: "-40vw",
-  bottom: "0px",
+  bottom: "0",
   transition: 'left 250ms ease',
-  zIndex: "9999999999999999"
+  zIndex: "9999999999999999",
+  boxShadow: '0px 0px 15px #000'
 };
 var containerStyle = {
   background: "#ddd",
   borderRadius: "3px",
   width: "40vw",
-  height: "100vh",
-  boxShadow: "0 0 0 rgba(0,0,0,.5)"
+  height: "100vh"
 };
 
 var shadows = function shadows(themeMode) {
@@ -2176,13 +2174,13 @@ var tabList = [{
   value: "Json Data Viewer"
 }]; // dom access highlight function
 
-function expandBody(bool) {
+var expandBody = function expandBody(bool) {
   var body = document.querySelector("body");
   body.style.marginLeft = bool ? '40vw' : '0';
   body.style.transition = 'margin 250ms ease';
   var ze = document.getElementById('zestyExplorer');
   ze.style.left = bool ? '0' : '-40vw';
-} // renanme content to contentData
+}; // renanme content to contentData
 
 
 var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
@@ -2392,17 +2390,9 @@ var ZestyExplorer = function ZestyExplorer(_ref3) {
       onClick: function onClick() {
         return toggleOpenState(false);
       },
-      variant: "contained",
-      color: "error",
-      size: "small",
-      sx: {
-        fontSize: "12px",
-        whiteSpace: "nowrap"
-      }
-    }, React__default.createElement(Box$1, {
-      paddingY: 1,
-      paddingX: 2
-    }, "close"))))))
+      variant: "outlined",
+      size: "small"
+    }, React__default.createElement(CloseFullscreenIcon, null))))))
   );
 };
 

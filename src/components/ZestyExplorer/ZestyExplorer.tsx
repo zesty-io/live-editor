@@ -15,6 +15,7 @@ import Button from "@mui/material/Button"
 import Box from "@mui/material/Box"
 import getTheme from "theme/index"
 import { useDarkMode } from "hooks"
+import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 
 // list of tabs to render
 const tabList = [
@@ -185,14 +186,10 @@ export const ZestyExplorer = ({ content = {} }: any) => {
                   >
                      <Button
                         onClick={() => toggleOpenState(false)}
-                        variant="contained"
-                        color="error"
+                        variant="outlined"
                         size="small"
-                        sx={{ fontSize: "12px", whiteSpace: "nowrap" }}
                      >
-                        <Box paddingY={1} paddingX={2}>
-                           close
-                        </Box>
+                           <CloseFullscreenIcon />
                      </Button>
                   </ZestyExplorerBrowser>
                </Box>
