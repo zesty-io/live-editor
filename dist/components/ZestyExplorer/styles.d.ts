@@ -23,6 +23,11 @@ export declare const zestyStyles: {
     letterSpacing: string;
     fontFamily: string;
 };
+export declare const verifyUserPrompt: {
+    readonly position: "fixed";
+    readonly top: "40%";
+    readonly left: "15%";
+};
 export declare const zestyWrapper: {
     readonly width: "auto";
     readonly background: "transparent";

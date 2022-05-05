@@ -24,6 +24,11 @@ export const zestyStyles = {
    letterSpacing: "1px",
    fontFamily: "'Arial Rounded MT Bold','Helvetica Rounded',Arial,sans-serif",
 }
+export const verifyUserPrompt = {
+   position: "fixed",
+   top: "40%",
+   left: "15%",
+} as const
 
 export const zestyWrapper = {
    width: "auto",

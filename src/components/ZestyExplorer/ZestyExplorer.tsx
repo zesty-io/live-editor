@@ -9,7 +9,13 @@ import { ContentViewer, MetaViewer, JsonDataViewer } from "views/index"
 import { Headers, Loader } from "components/index"
 import * as helper from "utils/index"
 import { getPageData } from "services/index"
-import { buttonStyles, containerStyle, zestyStyles, zestyWrapper } from "./styles"
+import {
+   buttonStyles,
+   containerStyle,
+   verifyUserPrompt,
+   zestyStyles,
+   zestyWrapper,
+} from "./styles"
 import { TabContainer } from "components/Tabs"
 import Button from "@mui/material/Button"
 import Box from "@mui/material/Box"
@@ -37,10 +43,15 @@ const expandBody = (bool: boolean) => {
 // renanme content to contentData
 const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any) => {
    const content = contentData || dummydata
+   const [currentTab, setcurrentTab] = React.useState("Content Viewer")
    const [search, setSearch] = React.useState()
-
+   const [verifySuccess, setverifySuccess] = React.useState("")
+   const [verifyFailed, setverifyFailed] = React.useState("")
+   const [loading, setloading] = React.useState(false)
    // for loading
    const [time, settime] = React.useState(0)
+
+   // for loading
    React.useEffect(() => {
       const timer = setTimeout(() => {
          if (time > 0) {
@@ -54,16 +65,13 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
    // convert obj to dot
    // @ts-ignore
    const flaten1 = helper.flattenObj(content)
-
    // convert to array of objects
    const flaten2 = helper.convertToArray(flaten1)
-
    // generate columns for search
    const columns = flaten2.map((e) => {
       const res = Object.keys(e)
       return res.toString().replace(/.[0-9]/g, "")
    })
-
    // search options
    const options = {
       includeScore: true,
@@ -76,12 +84,9 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
       minMatchCharLength: 1,
       keys: columns,
    }
-
    // search func
    const fuse = new Fuse([content], options)
-
    const result = fuse.search(search || "")
-
    // convert as key value pairs
    const result2 =
       result &&
@@ -90,13 +95,78 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
             return { [`${e.key}`]: e.value }
          })
          .map((e: any) => helper.deepen(e))
-
    // display the result of search
    const data = search ? result2 : { content }
-
-   const [currentTab, setcurrentTab] = React.useState("Content Viewer")
-
    console.log(pageData, "This the Pagedata")
+
+   // FetchWrapper Section
+   const instanceZUID = helper.getCookie("INSTANCE_ZUID") || "8-c4eec0b7d4-8lx0ch"
+   const userAppSID =
+      helper.getCookie("APP_SID") || "f3555fb52bdd3c6e3b3ff5421b74b740bf41f4e5"
+   // const instanceZUID = ""
+   // const userAppSID = ""
+
+   // @ts-ignore
+   const ZestyAPI = new Zesty.FetchWrapper(instanceZUID, userAppSID)
+
+   const verifyUser = async () => {
+      setloading(true)
+      const res = await ZestyAPI.verify()
+      res.code === 200 && setverifySuccess(res.meta)
+      res.code !== 200 && setverifyFailed(res.error)
+      setloading(false)
+   }
+
+   const getInstances = async () => {
+      const res = await ZestyAPI.getInstances()
+      res.code === 200 && console.log(res, "instance success")
+      res.code !== 200 && console.log(res, "instance failed")
+   }
+   const getModels = async () => {
+      const res = await ZestyAPI.getModels()
+      res.code === 200 && console.log(res, "models success")
+      res.code !== 200 && console.log(res, "models failed")
+   }
+   const getViews = async () => {
+      const res = await ZestyAPI.getViews()
+      res.code === 200 && console.log(res, "views success")
+      res.code !== 200 && console.log(res, "views failed")
+   }
+
+   React.useEffect(() => {
+      verifyUser()
+      getInstances()
+      getModels()
+      getViews()
+   }, [])
+
+   React.useEffect(() => {
+      console.log(verifySuccess, verifyFailed, "verif")
+   }, [verifyFailed, verifySuccess])
+
+   if (loading && !verifyFailed && !verifySuccess) {
+      return (
+         <Box sx={verifyUserPrompt}>
+            <h1>Loading</h1>
+         </Box>
+      )
+   }
+
+   if (!verifySuccess) {
+      return (
+         <Box sx={verifyUserPrompt}>
+            <h1>Please Login</h1>
+            <Button
+               href={`https://accounts.zesty.io/login`}
+               variant="contained"
+               color="secondary"
+               size="small"
+            >
+               Sign in to Zesty.io
+            </Button>
+         </Box>
+      )
+   }
 
    return (
       <Box sx={containerStyle}>
@@ -160,42 +230,6 @@ export const ZestyExplorer = ({ content = {} }: any) => {
       setOpen(bool)
       expandBody(bool)
    }
-
-   // FetchWrapper Section
-   const instanceZUID = helper.getCookie("INSTANCE_ZUID") || "8-c4eec0b7d4-8lx0ch"
-   const userAppSID =
-      helper.getCookie("APP_SID") || "f3555fb52bdd3c6e3b3ff5421b74b740bf41f4e5"
-   // @ts-ignore
-   const ZestyAPI = new Zesty.FetchWrapper(instanceZUID, userAppSID)
-
-   const verifyUser = async () => {
-      const res = await ZestyAPI.verify()
-      res.code === 200 && console.log(res, "verif success")
-      res.code !== 200 && console.log(res, "verif failed")
-   }
-
-   const getInstances = async () => {
-      const res = await ZestyAPI.getInstances()
-      res.code === 200 && console.log(res, "instance success")
-      res.code !== 200 && console.log(res, "instance failed")
-   }
-   const getModels = async () => {
-      const res = await ZestyAPI.getModels()
-      res.code === 200 && console.log(res, "models success")
-      res.code !== 200 && console.log(res, "models failed")
-   }
-   const getViews = async () => {
-      const res = await ZestyAPI.getViews()
-      res.code === 200 && console.log(res, "views success")
-      res.code !== 200 && console.log(res, "views failed")
-   }
-
-   React.useEffect(() => {
-      verifyUser()
-      getInstances()
-      getModels()
-      getViews()
-   }, [])
 
    return (
       <div id={"zestyExplorer"} style={zestyWrapper}>

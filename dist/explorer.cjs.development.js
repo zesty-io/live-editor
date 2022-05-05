@@ -1958,6 +1958,11 @@ var zestyStyles = {
   letterSpacing: "1px",
   fontFamily: "'Arial Rounded MT Bold','Helvetica Rounded',Arial,sans-serif"
 };
+var verifyUserPrompt = {
+  position: "fixed",
+  top: "40%",
+  left: "15%"
+};
 var zestyWrapper = {
   width: "auto",
   background: "transparent",
@@ -2242,14 +2247,31 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
       children = _ref.children;
   var content = contentData || dummydata;
 
-  var _React$useState = React__default.useState(),
-      search = _React$useState[0],
-      setSearch = _React$useState[1]; // for loading
+  var _React$useState = React__default.useState("Content Viewer"),
+      currentTab = _React$useState[0],
+      setcurrentTab = _React$useState[1];
+
+  var _React$useState2 = React__default.useState(),
+      search = _React$useState2[0],
+      setSearch = _React$useState2[1];
+
+  var _React$useState3 = React__default.useState(""),
+      verifySuccess = _React$useState3[0],
+      setverifySuccess = _React$useState3[1];
+
+  var _React$useState4 = React__default.useState(""),
+      verifyFailed = _React$useState4[0],
+      setverifyFailed = _React$useState4[1];
+
+  var _React$useState5 = React__default.useState(false),
+      loading = _React$useState5[0],
+      setloading = _React$useState5[1]; // for loading
 
 
-  var _React$useState2 = React__default.useState(0),
-      time = _React$useState2[0],
-      _settime = _React$useState2[1];
+  var _React$useState6 = React__default.useState(0),
+      time = _React$useState6[0],
+      _settime = _React$useState6[1]; // for loading
+
 
   React__default.useEffect(function () {
     var timer = setTimeout(function () {
@@ -2298,12 +2320,156 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
   var data = search ? result2 : {
     content: content
   };
+  console.log(pageData, "This the Pagedata"); // FetchWrapper Section
 
-  var _React$useState3 = React__default.useState("Content Viewer"),
-      currentTab = _React$useState3[0],
-      setcurrentTab = _React$useState3[1];
+  var instanceZUID = getCookie("INSTANCE_ZUID") || "8-c4eec0b7d4-8lx0ch";
+  var userAppSID = getCookie("APP_SID") || "f3555fb52bdd3c6e3b3ff5421b74b740bf41f4e5"; // const instanceZUID = ""
+  // const userAppSID = ""
+  // @ts-ignore
 
-  console.log(pageData, "This the Pagedata");
+  var ZestyAPI = new Zesty.FetchWrapper(instanceZUID, userAppSID);
+
+  var verifyUser = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee() {
+      var res;
+      return runtime_1.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              setloading(true);
+              _context.next = 3;
+              return ZestyAPI.verify();
+
+            case 3:
+              res = _context.sent;
+              res.code === 200 && setverifySuccess(res.meta);
+              res.code !== 200 && setverifyFailed(res.error);
+              setloading(false);
+
+            case 7:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function verifyUser() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
+  var getInstances = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee2() {
+      var res;
+      return runtime_1.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return ZestyAPI.getInstances();
+
+            case 2:
+              res = _context2.sent;
+              res.code === 200 && console.log(res, "instance success");
+              res.code !== 200 && console.log(res, "instance failed");
+
+            case 5:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function getInstances() {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+
+  var getModels = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee3() {
+      var res;
+      return runtime_1.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return ZestyAPI.getModels();
+
+            case 2:
+              res = _context3.sent;
+              res.code === 200 && console.log(res, "models success");
+              res.code !== 200 && console.log(res, "models failed");
+
+            case 5:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+
+    return function getModels() {
+      return _ref5.apply(this, arguments);
+    };
+  }();
+
+  var getViews = /*#__PURE__*/function () {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee4() {
+      var res;
+      return runtime_1.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return ZestyAPI.getViews();
+
+            case 2:
+              res = _context4.sent;
+              res.code === 200 && console.log(res, "views success");
+              res.code !== 200 && console.log(res, "views failed");
+
+            case 5:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }));
+
+    return function getViews() {
+      return _ref6.apply(this, arguments);
+    };
+  }();
+
+  React__default.useEffect(function () {
+    verifyUser();
+    getInstances();
+    getModels();
+    getViews();
+  }, []);
+  React__default.useEffect(function () {
+    console.log(verifySuccess, verifyFailed, "verif");
+  }, [verifyFailed, verifySuccess]);
+
+  if (loading && !verifyFailed && !verifySuccess) {
+    return React__default.createElement(Box, {
+      sx: verifyUserPrompt
+    }, React__default.createElement("h1", null, "Loading"));
+  }
+
+  if (!verifySuccess) {
+    return React__default.createElement(Box, {
+      sx: verifyUserPrompt
+    }, React__default.createElement("h1", null, "Please Login"), React__default.createElement(Button, {
+      href: "https://accounts.zesty.io/login",
+      variant: "contained",
+      color: "secondary",
+      size: "small"
+    }, "Sign in to Zesty.io"));
+  }
+
   return React__default.createElement(Box, {
     sx: containerStyle
   }, React__default.createElement(Headers, {
@@ -2335,21 +2501,21 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
 }; // Main ZESTY EXPLORER
 
 
-var ZestyExplorer = function ZestyExplorer(_ref3) {
-  var _ref3$content = _ref3.content,
-      content = _ref3$content === void 0 ? {} : _ref3$content;
+var ZestyExplorer = function ZestyExplorer(_ref7) {
+  var _ref7$content = _ref7.content,
+      content = _ref7$content === void 0 ? {} : _ref7$content;
 
-  var _React$useState4 = React__default.useState(false),
-      open = _React$useState4[0],
-      setOpen = _React$useState4[1];
+  var _React$useState7 = React__default.useState(false),
+      open = _React$useState7[0],
+      setOpen = _React$useState7[1];
 
-  var _React$useState5 = React__default.useState(""),
-      pageData = _React$useState5[0],
-      setPageData = _React$useState5[1];
+  var _React$useState8 = React__default.useState(""),
+      pageData = _React$useState8[0],
+      setPageData = _React$useState8[1];
 
-  var _React$useState6 = React__default.useState(""),
-      response = _React$useState6[0],
-      setResponse = _React$useState6[1];
+  var _React$useState9 = React__default.useState(""),
+      response = _React$useState9[0],
+      setResponse = _React$useState9[1];
 
   var _useDarkMode = useDarkMode(),
       themeMode = _useDarkMode[0],
@@ -2359,18 +2525,18 @@ var ZestyExplorer = function ZestyExplorer(_ref3) {
   console.log(themeMode, mountedComponent);
 
   var getData = /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee() {
+    var _ref8 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee5() {
       var _yield$getPageData, data, response;
 
-      return runtime_1.wrap(function _callee$(_context) {
+      return runtime_1.wrap(function _callee5$(_context5) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context5.prev = _context5.next) {
             case 0:
-              _context.next = 2;
+              _context5.next = 2;
               return getPageData();
 
             case 2:
-              _yield$getPageData = _context.sent;
+              _yield$getPageData = _context5.sent;
               data = _yield$getPageData.data;
               response = _yield$getPageData.response;
               data && setPageData(data);
@@ -2378,14 +2544,14 @@ var ZestyExplorer = function ZestyExplorer(_ref3) {
 
             case 7:
             case "end":
-              return _context.stop();
+              return _context5.stop();
           }
         }
-      }, _callee);
+      }, _callee5);
     }));
 
     return function getData() {
-      return _ref4.apply(this, arguments);
+      return _ref8.apply(this, arguments);
     };
   }(); // check if content is available
 
@@ -2412,132 +2578,8 @@ var ZestyExplorer = function ZestyExplorer(_ref3) {
   function toggleOpenState(bool) {
     setOpen(bool);
     expandBody(bool);
-  } // FetchWrapper Section
+  }
 
-
-  var instanceZUID = getCookie("INSTANCE_ZUID") || "8-c4eec0b7d4-8lx0ch";
-  var userAppSID = getCookie("APP_SID") || "f3555fb52bdd3c6e3b3ff5421b74b740bf41f4e5"; // @ts-ignore
-
-  var ZestyAPI = new Zesty.FetchWrapper(instanceZUID, userAppSID);
-
-  var verifyUser = /*#__PURE__*/function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee2() {
-      var res;
-      return runtime_1.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.next = 2;
-              return ZestyAPI.verify();
-
-            case 2:
-              res = _context2.sent;
-              res.code === 200 && console.log(res, "verif success");
-              res.code !== 200 && console.log(res, "verif failed");
-
-            case 5:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2);
-    }));
-
-    return function verifyUser() {
-      return _ref5.apply(this, arguments);
-    };
-  }();
-
-  var getInstances = /*#__PURE__*/function () {
-    var _ref6 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee3() {
-      var res;
-      return runtime_1.wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              _context3.next = 2;
-              return ZestyAPI.getInstances();
-
-            case 2:
-              res = _context3.sent;
-              res.code === 200 && console.log(res, "instance success");
-              res.code !== 200 && console.log(res, "instance failed");
-
-            case 5:
-            case "end":
-              return _context3.stop();
-          }
-        }
-      }, _callee3);
-    }));
-
-    return function getInstances() {
-      return _ref6.apply(this, arguments);
-    };
-  }();
-
-  var getModels = /*#__PURE__*/function () {
-    var _ref7 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee4() {
-      var res;
-      return runtime_1.wrap(function _callee4$(_context4) {
-        while (1) {
-          switch (_context4.prev = _context4.next) {
-            case 0:
-              _context4.next = 2;
-              return ZestyAPI.getModels();
-
-            case 2:
-              res = _context4.sent;
-              res.code === 200 && console.log(res, "models success");
-              res.code !== 200 && console.log(res, "models failed");
-
-            case 5:
-            case "end":
-              return _context4.stop();
-          }
-        }
-      }, _callee4);
-    }));
-
-    return function getModels() {
-      return _ref7.apply(this, arguments);
-    };
-  }();
-
-  var getViews = /*#__PURE__*/function () {
-    var _ref8 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee5() {
-      var res;
-      return runtime_1.wrap(function _callee5$(_context5) {
-        while (1) {
-          switch (_context5.prev = _context5.next) {
-            case 0:
-              _context5.next = 2;
-              return ZestyAPI.getViews();
-
-            case 2:
-              res = _context5.sent;
-              res.code === 200 && console.log(res, "views success");
-              res.code !== 200 && console.log(res, "views failed");
-
-            case 5:
-            case "end":
-              return _context5.stop();
-          }
-        }
-      }, _callee5);
-    }));
-
-    return function getViews() {
-      return _ref8.apply(this, arguments);
-    };
-  }();
-
-  React__default.useEffect(function () {
-    verifyUser();
-    getInstances();
-    getModels();
-    getViews();
-  }, []);
   return React__default.createElement("div", {
     id: "zestyExplorer",
     style: zestyWrapper
