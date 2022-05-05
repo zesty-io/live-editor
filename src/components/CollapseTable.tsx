@@ -13,6 +13,7 @@ import Paper from "@mui/material/Paper"
 import { PrettyPrintJson } from "utils"
 import { useTheme } from "@mui/system"
 import CloseIcon from "@mui/icons-material/Close"
+import * as helper from "utils"
 
 // dom access highlight function
 function activateWorkingElement(match: string): any {
@@ -52,7 +53,6 @@ interface Props {
 function Row({ keyName, obj, workingElement, setWorkingElement }: Props) {
    const [showCopy, setShowCopy] = React.useState(false)
    const [clipboardCopy, setclipboardCopy] = React.useState(false)
-   const [showEditClose, setShowEditClose] = React.useState(false)
    const [open, setOpen] = React.useState(false)
    const [text, settext] = React.useState("")
 
@@ -60,24 +60,14 @@ function Row({ keyName, obj, workingElement, setWorkingElement }: Props) {
    let value = ""
    let valueType = "string"
 
-   const scrollToView = () => {
-      document
-         .getElementById("activeEl")
-         ?.scrollIntoView({ behavior: "smooth", block: "center" })!
-   }
-
-   React.useEffect(() => {
-      console.log(workingElement, "WORKING ELEMENT")
-   }, [workingElement])
-
    if (typeof obj === "string") {
       value = obj
    } else {
       valueType = "object"
    }
-   console.log(showEditClose)
+
    // @ts-ignore
-   const showBtn = text === workingElement?.innerText
+   const showCloseBtn = text === workingElement?.innerText
 
    return (
       <React.Fragment>
@@ -99,7 +89,7 @@ function Row({ keyName, obj, workingElement, setWorkingElement }: Props) {
             <TableCell
                align="left"
                onClick={() => {
-                  scrollToView()
+                  helper.scrollToView("#activeEl")
                }}
             >
                <span
@@ -108,16 +98,14 @@ function Row({ keyName, obj, workingElement, setWorkingElement }: Props) {
                      // @ts-ignore
                      !workingElement?.innerText &&
                         setWorkingElement(activateWorkingElement(value))
-                     setShowEditClose(true)
                   }}
                >
                   {value}
                </span>
-               {showBtn && (
+               {showCloseBtn && (
                   <Button
                      size="small"
                      onClick={() => {
-                        setShowEditClose(false)
                         deactivateWorkingElement(workingElement)
                         setWorkingElement("")
                         settext("")
@@ -198,11 +186,25 @@ function Row({ keyName, obj, workingElement, setWorkingElement }: Props) {
    )
 }
 
+const instanceZUID = helper.getCookie("APP_SID") || "8-c2c78385be-s38gqk"
+const userAppSID =
+   helper.getCookie("INSTANCE_ZUID") || "01388f3d751269ae62547f7dc3d9f14612fbeb04"
+
 export default function CollapsibleTable({ data = {} }: any) {
    const [workingElement, setWorkingElement] = React.useState("")
+
+   // @ts-ignore
+   const ZestyAPI = new Zesty.FetchWrapper(instanceZUID, userAppSID)
+
+   const verifyUser = async () => {
+      const res = await ZestyAPI.verify()
+      res.code === 200 && console.log(res, "verif success")
+      res.code !== 200 && console.log(res, "verif failed")
+   }
+
    React.useEffect(() => {
-      console.log(workingElement, "working")
-   }, [workingElement])
+      verifyUser()
+   }, [])
 
    return (
       <TableContainer component={Paper} style={{ maxHeight: 600 }}>

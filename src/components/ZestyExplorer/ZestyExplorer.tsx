@@ -15,7 +15,8 @@ import Button from "@mui/material/Button"
 import Box from "@mui/material/Box"
 import getTheme from "theme/index"
 import { useDarkMode } from "hooks"
-import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
+import CloseFullscreenIcon from "@mui/icons-material/CloseFullscreen"
+import { Helmet } from "react-helmet"
 
 // list of tabs to render
 const tabList = [
@@ -25,12 +26,12 @@ const tabList = [
 ]
 
 // dom access highlight function
-const expandBody = (bool:boolean) => {
-   let body:any = document.querySelector("body");
-   body.style.marginLeft  = bool ? '40vw' : '0'
-   body.style.transition = 'margin 250ms ease'
-   let ze:any = document.getElementById('zestyExplorer')
-   ze.style.left = bool ? '0' : '-40vw'
+const expandBody = (bool: boolean) => {
+   let body: any = document.querySelector("body")
+   body.style.marginLeft = bool ? "40vw" : "0"
+   body.style.transition = "margin 250ms ease"
+   let ze: any = document.getElementById("zestyExplorer")
+   ze.style.left = bool ? "0" : "-40vw"
 }
 
 // renanme content to contentData
@@ -98,7 +99,7 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
    console.log(pageData, "This the Pagedata")
 
    return (
-      <Box  sx={containerStyle}>
+      <Box sx={containerStyle}>
          <Headers children={children} content={content} response={response} />
          <TabContainer
             setcurrentTab={setcurrentTab}
@@ -152,7 +153,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
       return null
    }
 
-   function toggleOpenState(bool:boolean){
+   function toggleOpenState(bool: boolean) {
       setOpen(bool)
       expandBody(bool)
    }
@@ -160,13 +161,19 @@ export const ZestyExplorer = ({ content = {} }: any) => {
    const [themeMode, themeToggler, mountedComponent] = useDarkMode()
    console.log(themeMode, mountedComponent)
    return (
-      // @ts-ignore
-      <div id={'zestyExplorer'} style={zestyWrapper}>
+      <div id={"zestyExplorer"} style={zestyWrapper}>
+         <Helmet>
+            <script src="https://cdn.jsdelivr.net/gh/zesty-io/fetch-wrapper@latest/dist/index.min.js" />
+         </Helmet>
          <ThemeProvider theme={getTheme("light", themeToggler)}>
             <CssBaseline />
             {/* ZESTY LOGO  bottom right*/}
             {!open && (
-               <button type="button" onClick={() => toggleOpenState(true)} style={buttonStyles}>
+               <button
+                  type="button"
+                  onClick={() => toggleOpenState(true)}
+                  style={buttonStyles}
+               >
                   <img
                      src="https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png"
                      width="32px"
@@ -189,7 +196,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
                         variant="outlined"
                         size="small"
                      >
-                           <CloseFullscreenIcon />
+                        <CloseFullscreenIcon />
                      </Button>
                   </ZestyExplorerBrowser>
                </Box>

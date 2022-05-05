@@ -25,6 +25,7 @@ import Tab from '@mui/material/Tab';
 import Toolbar from '@mui/material/Toolbar';
 import InputBase from '@mui/material/InputBase';
 import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
+import { Helmet } from 'react-helmet';
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -1326,6 +1327,32 @@ var PrettyPrintJson = function PrettyPrintJson(_ref2) {
     }
   }, React__default.createElement("pre", null, JSON.stringify(data, null, 2)));
 };
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(";");
+
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+
+    while (c.charAt(0) == " ") {
+      c = c.substring(1);
+    }
+
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+
+  return "";
+}
+var scrollToView = function scrollToView(elementId) {
+  var _document$getElementB;
+
+  (_document$getElementB = document.getElementById(elementId)) == null ? void 0 : _document$getElementB.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+};
 
 function activateWorkingElement(match) {
   console.log("string to test", match);
@@ -1367,43 +1394,25 @@ function Row(_ref) {
       setclipboardCopy = _React$useState2[1];
 
   var _React$useState3 = useState(false),
-      showEditClose = _React$useState3[0],
-      setShowEditClose = _React$useState3[1];
+      open = _React$useState3[0],
+      setOpen = _React$useState3[1];
 
-  var _React$useState4 = useState(false),
-      open = _React$useState4[0],
-      setOpen = _React$useState4[1];
-
-  var _React$useState5 = useState(""),
-      text = _React$useState5[0],
-      settext = _React$useState5[1];
+  var _React$useState4 = useState(""),
+      text = _React$useState4[0],
+      settext = _React$useState4[1];
 
   var theme = useTheme();
   var value = "";
   var valueType = "string";
 
-  var scrollToView = function scrollToView() {
-    var _document$getElementB;
-
-    (_document$getElementB = document.getElementById("activeEl")) == null ? void 0 : _document$getElementB.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
-  };
-
-  useEffect(function () {
-    console.log(workingElement, "WORKING ELEMENT");
-  }, [workingElement]);
-
   if (typeof obj === "string") {
     value = obj;
   } else {
     valueType = "object";
-  }
+  } // @ts-ignore
 
-  console.log(showEditClose); // @ts-ignore
 
-  var showBtn = text === (workingElement == null ? void 0 : workingElement.innerText);
+  var showCloseBtn = text === (workingElement == null ? void 0 : workingElement.innerText);
   return createElement(Fragment, null, createElement(TableRow, {
     sx: {
       "& > *": {
@@ -1428,19 +1437,17 @@ function Row(_ref) {
   }, valueType), createElement(TableCell, {
     align: "left",
     onClick: function onClick() {
-      scrollToView();
+      scrollToView("#activeEl");
     }
   }, createElement("span", {
     onClick: function onClick(e) {
       !text && settext(e.target.textContent); // @ts-ignore
 
       !(workingElement != null && workingElement.innerText) && setWorkingElement(activateWorkingElement(value));
-      setShowEditClose(true);
     }
-  }, value), showBtn && createElement(Button, {
+  }, value), showCloseBtn && createElement(Button, {
     size: "small",
     onClick: function onClick() {
-      setShowEditClose(false);
       deactivateWorkingElement(workingElement);
       setWorkingElement("");
       settext("");
@@ -1501,19 +1508,52 @@ function Row(_ref) {
   }))))))))));
 }
 
+var instanceZUID = /*#__PURE__*/getCookie("APP_SID") || "8-c2c78385be-s38gqk";
+var userAppSID = /*#__PURE__*/getCookie("INSTANCE_ZUID") || "01388f3d751269ae62547f7dc3d9f14612fbeb04";
 function CollapsibleTable(_ref2) {
   var _Object$keys;
 
   var _ref2$data = _ref2.data,
       data = _ref2$data === void 0 ? {} : _ref2$data;
 
-  var _React$useState6 = useState(""),
-      workingElement = _React$useState6[0],
-      setWorkingElement = _React$useState6[1];
+  var _React$useState5 = useState(""),
+      workingElement = _React$useState5[0],
+      setWorkingElement = _React$useState5[1]; // @ts-ignore
+
+
+  var ZestyAPI = new Zesty.FetchWrapper(instanceZUID, userAppSID);
+
+  var verifyUser = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee() {
+      var res;
+      return runtime_1.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return ZestyAPI.verify();
+
+            case 2:
+              res = _context.sent;
+              res.code === 200 && console.log(res, "verif success");
+              res.code !== 200 && console.log(res, "verif failed");
+
+            case 5:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function verifyUser() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
 
   useEffect(function () {
-    console.log(workingElement, "working");
-  }, [workingElement]);
+    verifyUser();
+  }, []);
   return createElement(TableContainer, {
     component: Paper,
     style: {
@@ -1952,9 +1992,9 @@ var zestyWrapper = {
   position: "fixed",
   left: "-40vw",
   bottom: "0",
-  transition: 'left 250ms ease',
+  transition: "left 250ms ease",
   zIndex: "9999999999999999",
-  boxShadow: '0px 0px 15px #000'
+  boxShadow: "0px 0px 15px #000"
 };
 var containerStyle = {
   background: "#ddd",
@@ -2214,10 +2254,10 @@ var tabList = [{
 
 var expandBody = function expandBody(bool) {
   var body = document.querySelector("body");
-  body.style.marginLeft = bool ? '40vw' : '0';
-  body.style.transition = 'margin 250ms ease';
-  var ze = document.getElementById('zestyExplorer');
-  ze.style.left = bool ? '0' : '-40vw';
+  body.style.marginLeft = bool ? "40vw" : "0";
+  body.style.transition = "margin 250ms ease";
+  var ze = document.getElementById("zestyExplorer");
+  ze.style.left = bool ? "0" : "-40vw";
 }; // renanme content to contentData
 
 
@@ -2401,37 +2441,37 @@ var ZestyExplorer = function ZestyExplorer(_ref3) {
       mountedComponent = _useDarkMode[2];
 
   console.log(themeMode, mountedComponent);
-  return (// @ts-ignore
-    React__default.createElement("div", {
-      id: 'zestyExplorer',
-      style: zestyWrapper
-    }, React__default.createElement(ThemeProvider, {
-      theme: getTheme("light", themeToggler)
-    }, React__default.createElement(CssBaseline, null), !open && React__default.createElement("button", {
-      type: "button",
-      onClick: function onClick() {
-        return toggleOpenState(true);
-      },
-      style: buttonStyles
-    }, React__default.createElement("img", {
-      src: "https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png",
-      width: "32px",
-      height: "32px",
-      alt: "Zesty.io Logo"
-    }), React__default.createElement("span", {
-      style: zestyStyles
-    }, "Compass")), open && React__default.createElement(Box$1, null, React__default.createElement(ZestyExplorerBrowser, {
-      response: response,
-      pageData: pageData,
-      contentData: searchObject
-    }, React__default.createElement(Button, {
-      onClick: function onClick() {
-        return toggleOpenState(false);
-      },
-      variant: "outlined",
-      size: "small"
-    }, React__default.createElement(CloseFullscreenIcon, null))))))
-  );
+  return React__default.createElement("div", {
+    id: "zestyExplorer",
+    style: zestyWrapper
+  }, React__default.createElement(Helmet, null, React__default.createElement("script", {
+    src: "https://cdn.jsdelivr.net/gh/zesty-io/fetch-wrapper@latest/dist/index.min.js"
+  })), React__default.createElement(ThemeProvider, {
+    theme: getTheme("light", themeToggler)
+  }, React__default.createElement(CssBaseline, null), !open && React__default.createElement("button", {
+    type: "button",
+    onClick: function onClick() {
+      return toggleOpenState(true);
+    },
+    style: buttonStyles
+  }, React__default.createElement("img", {
+    src: "https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png",
+    width: "32px",
+    height: "32px",
+    alt: "Zesty.io Logo"
+  }), React__default.createElement("span", {
+    style: zestyStyles
+  }, "Compass")), open && React__default.createElement(Box$1, null, React__default.createElement(ZestyExplorerBrowser, {
+    response: response,
+    pageData: pageData,
+    contentData: searchObject
+  }, React__default.createElement(Button, {
+    onClick: function onClick() {
+      return toggleOpenState(false);
+    },
+    variant: "outlined",
+    size: "small"
+  }, React__default.createElement(CloseFullscreenIcon, null))))));
 };
 
 export { ZestyExplorer };

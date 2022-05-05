@@ -1,17 +1,17 @@
 export declare const buttonStyles: {
-    borderRadius: string;
-    padding: string;
-    background: string;
-    color: string;
-    border: string;
-    boxShadow: string;
-    display: string;
-    justifyContent: string;
-    alignItems: string;
-    cursor: string;
-    left: string;
-    bottom: number;
-    position: string;
+    readonly borderRadius: "5px";
+    readonly padding: "12px 24px 12px 16px";
+    readonly background: "#1b202c";
+    readonly color: "white";
+    readonly border: "1px #5B667D solid";
+    readonly boxShadow: "3px 3px 8px rgba(0,0,0,.5)";
+    readonly display: "flex";
+    readonly justifyContent: "center";
+    readonly alignItems: "center";
+    readonly cursor: "pointer";
+    readonly left: "40vw";
+    readonly bottom: 0;
+    readonly position: "absolute";
 };
 export declare const zestyStyles: {
     flex: string;
@@ -24,14 +24,14 @@ export declare const zestyStyles: {
     fontFamily: string;
 };
 export declare const zestyWrapper: {
-    width: string;
-    background: string;
-    position: string;
-    left: string;
-    bottom: string;
-    transition: string;
-    zIndex: string;
-    boxShadow: string;
+    readonly width: "auto";
+    readonly background: "transparent";
+    readonly position: "fixed";
+    readonly left: "-40vw";
+    readonly bottom: "0";
+    readonly transition: "left 250ms ease";
+    readonly zIndex: "9999999999999999";
+    readonly boxShadow: "0px 0px 15px #000";
 };
 export declare const containerStyle: {
     background: string;

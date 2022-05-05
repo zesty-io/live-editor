@@ -12,7 +12,7 @@ export const buttonStyles = {
    left: "40vw",
    bottom: 0,
    position: "absolute",
-}
+} as const
 
 export const zestyStyles = {
    flex: "1",
@@ -26,16 +26,15 @@ export const zestyStyles = {
 }
 
 export const zestyWrapper = {
-   
    width: "auto",
    background: "transparent",
    position: "fixed",
    left: "-40vw",
    bottom: "0",
-   transition: 'left 250ms ease',
+   transition: "left 250ms ease",
    zIndex: "9999999999999999",
-   boxShadow: '0px 0px 15px #000',
-}
+   boxShadow: "0px 0px 15px #000",
+} as const
 
 export const containerStyle = {
    background: "#ddd",
