@@ -23,6 +23,7 @@ function activateWorkingElement(match: string): any {
 
    workingElement.style.border = "2px orange solid"
    workingElement.setAttribute("contentEditable", true)
+   workingElement.setAttribute("id", "activeEl")
    console.log("Activating", workingElement)
 
    return workingElement
@@ -33,6 +34,7 @@ function deactivateWorkingElement(workingElement: any): any {
       console.log("Deactivating", workingElement)
       workingElement.style.border = "none"
       workingElement.setAttribute("contentEditable", false)
+      workingElement.removeAttribute("id")
    }
 }
 
@@ -57,6 +59,12 @@ function Row({ keyName, obj, workingElement, setWorkingElement }: Props) {
    const theme = useTheme()
    let value = ""
    let valueType = "string"
+
+   const scrollToView = () => {
+      document
+         .getElementById("activeEl")
+         ?.scrollIntoView({ behavior: "smooth", block: "center" })!
+   }
 
    React.useEffect(() => {
       console.log(workingElement, "WORKING ELEMENT")
@@ -88,7 +96,12 @@ function Row({ keyName, obj, workingElement, setWorkingElement }: Props) {
                {keyName}
             </TableCell>
             <TableCell align="left">{valueType}</TableCell>
-            <TableCell align="left">
+            <TableCell
+               align="left"
+               onClick={() => {
+                  scrollToView()
+               }}
+            >
                <span
                   onClick={(e: any) => {
                      !text && settext(e.target.textContent)
@@ -187,6 +200,10 @@ function Row({ keyName, obj, workingElement, setWorkingElement }: Props) {
 
 export default function CollapsibleTable({ data = {} }: any) {
    const [workingElement, setWorkingElement] = React.useState("")
+   React.useEffect(() => {
+      console.log(workingElement, "working")
+   }, [workingElement])
+
    return (
       <TableContainer component={Paper} style={{ maxHeight: 600 }}>
          <Table aria-label="collapsible table" stickyHeader>

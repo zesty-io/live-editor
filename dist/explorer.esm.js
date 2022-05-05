@@ -1,4 +1,4 @@
-import React__default, { useState, createElement, useEffect, Fragment } from 'react';
+import React__default, { useState, useEffect, createElement, Fragment } from 'react';
 import { useTheme as useTheme$1, styled, alpha, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Fuse from 'fuse.js';
@@ -1336,6 +1336,7 @@ function activateWorkingElement(match) {
   });
   workingElement.style.border = "2px orange solid";
   workingElement.setAttribute("contentEditable", true);
+  workingElement.setAttribute("id", "activeEl");
   console.log("Activating", workingElement);
   return workingElement;
 }
@@ -1345,6 +1346,7 @@ function deactivateWorkingElement(workingElement) {
     console.log("Deactivating", workingElement);
     workingElement.style.border = "none";
     workingElement.setAttribute("contentEditable", false);
+    workingElement.removeAttribute("id");
   }
 }
 
@@ -1379,6 +1381,16 @@ function Row(_ref) {
   var theme = useTheme();
   var value = "";
   var valueType = "string";
+
+  var scrollToView = function scrollToView() {
+    var _document$getElementB;
+
+    (_document$getElementB = document.getElementById("activeEl")) == null ? void 0 : _document$getElementB.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+  };
+
   useEffect(function () {
     console.log(workingElement, "WORKING ELEMENT");
   }, [workingElement]);
@@ -1414,7 +1426,10 @@ function Row(_ref) {
   }, keyName), createElement(TableCell, {
     align: "left"
   }, valueType), createElement(TableCell, {
-    align: "left"
+    align: "left",
+    onClick: function onClick() {
+      scrollToView();
+    }
   }, createElement("span", {
     onClick: function onClick(e) {
       !text && settext(e.target.textContent); // @ts-ignore
@@ -1496,6 +1511,9 @@ function CollapsibleTable(_ref2) {
       workingElement = _React$useState6[0],
       setWorkingElement = _React$useState6[1];
 
+  useEffect(function () {
+    console.log(workingElement, "working");
+  }, [workingElement]);
   return createElement(TableContainer, {
     component: Paper,
     style: {
