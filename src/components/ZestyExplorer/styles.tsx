@@ -9,7 +9,11 @@ export const buttonStyles = {
    justifyContent: "center",
    alignItems: "center",
    cursor: "pointer",
-}
+   left: "40vw",
+   bottom: 0,
+   position: "absolute",
+} as const
+
 export const zestyStyles = {
    flex: "1",
    display: "inline-block",
@@ -20,21 +24,26 @@ export const zestyStyles = {
    letterSpacing: "1px",
    fontFamily: "'Arial Rounded MT Bold','Helvetica Rounded',Arial,sans-serif",
 }
+export const verifyUserPrompt = {
+   position: "fixed",
+   top: "40%",
+   left: "15%",
+} as const
 
 export const zestyWrapper = {
-   overflow: "hidden",
    width: "auto",
    background: "transparent",
    position: "fixed",
-   bottom: "20px",
-   right: "20px",
+   left: "-40vw",
+   bottom: "0",
+   transition: "left 250ms ease",
    zIndex: "9999999999999999",
-   padding: "2rem",
-}
+   boxShadow: "0px 0px 15px #000",
+} as const
+
 export const containerStyle = {
    background: "#ddd",
-   boxShadow: "-1,0,5px,#333",
    borderRadius: "3px",
-   width: "69vw",
-   height: "84vh",
+   width: "40vw",
+   height: "100vh",
 }
