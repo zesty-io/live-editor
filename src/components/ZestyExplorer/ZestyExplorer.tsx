@@ -127,6 +127,9 @@ export const ZestyExplorer = ({ content = {} }: any) => {
    const [open, setOpen] = React.useState(false)
    const [pageData, setPageData] = React.useState<any>("")
    const [response, setResponse] = React.useState<any>("")
+   const [themeMode, themeToggler, mountedComponent] = useDarkMode()
+
+   console.log(themeMode, mountedComponent)
 
    const getData = async () => {
       const { data, response } = await getPageData()
@@ -158,8 +161,42 @@ export const ZestyExplorer = ({ content = {} }: any) => {
       expandBody(bool)
    }
 
-   const [themeMode, themeToggler, mountedComponent] = useDarkMode()
-   console.log(themeMode, mountedComponent)
+   // FetchWrapper Section
+   const instanceZUID = helper.getCookie("INSTANCE_ZUID") || "8-c4eec0b7d4-8lx0ch"
+   const userAppSID =
+      helper.getCookie("APP_SID") || "f3555fb52bdd3c6e3b3ff5421b74b740bf41f4e5"
+   // @ts-ignore
+   const ZestyAPI = new Zesty.FetchWrapper(instanceZUID, userAppSID)
+
+   const verifyUser = async () => {
+      const res = await ZestyAPI.verify()
+      res.code === 200 && console.log(res, "verif success")
+      res.code !== 200 && console.log(res, "verif failed")
+   }
+
+   const getInstances = async () => {
+      const res = await ZestyAPI.getInstances()
+      res.code === 200 && console.log(res, "instance success")
+      res.code !== 200 && console.log(res, "instance failed")
+   }
+   const getModels = async () => {
+      const res = await ZestyAPI.getModels()
+      res.code === 200 && console.log(res, "models success")
+      res.code !== 200 && console.log(res, "models failed")
+   }
+   const getViews = async () => {
+      const res = await ZestyAPI.getViews()
+      res.code === 200 && console.log(res, "views success")
+      res.code !== 200 && console.log(res, "views failed")
+   }
+
+   React.useEffect(() => {
+      verifyUser()
+      getInstances()
+      getModels()
+      getViews()
+   }, [])
+
    return (
       <div id={"zestyExplorer"} style={zestyWrapper}>
          <Helmet>

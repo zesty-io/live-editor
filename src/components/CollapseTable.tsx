@@ -189,41 +189,6 @@ function Row({ keyName, obj, workingElement, setWorkingElement }: Props) {
 export default function CollapsibleTable({ data = {} }: any) {
    const [workingElement, setWorkingElement] = React.useState("")
 
-   const instanceZUID = helper.getCookie("INSTANCE_ZUID") || "8-c4eec0b7d4-8lx0ch"
-   const userAppSID =
-      helper.getCookie("APP_SID") || "f3555fb52bdd3c6e3b3ff5421b74b740bf41f4e5"
-   // @ts-ignore
-   const ZestyAPI = new Zesty.FetchWrapper(instanceZUID, userAppSID)
-
-   const verifyUser = async () => {
-      const res = await ZestyAPI.verify()
-      res.code === 200 && console.log(res, "verif success")
-      res.code !== 200 && console.log(res, "verif failed")
-   }
-
-   const getInstances = async () => {
-      const res = await ZestyAPI.getInstances()
-      res.code === 200 && console.log(res, "instance success")
-      res.code !== 200 && console.log(res, "instance failed")
-   }
-   const getModels = async () => {
-      const res = await ZestyAPI.getModels()
-      res.code === 200 && console.log(res, "models success")
-      res.code !== 200 && console.log(res, "models failed")
-   }
-   const getViews = async () => {
-      const res = await ZestyAPI.getViews()
-      res.code === 200 && console.log(res, "views success")
-      res.code !== 200 && console.log(res, "views failed")
-   }
-
-   React.useEffect(() => {
-      verifyUser()
-      getInstances()
-      getModels()
-      getViews()
-   }, [])
-
    return (
       <TableContainer component={Paper} style={{ maxHeight: 600 }}>
          <Table aria-label="collapsible table" stickyHeader>
