@@ -47,6 +47,9 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
    const [search, setSearch] = React.useState()
    const [verifySuccess, setverifySuccess] = React.useState("")
    const [verifyFailed, setverifyFailed] = React.useState("")
+   const [instances, setinstances] = React.useState([])
+   const [models, setmodels] = React.useState("")
+   const [views, setviews] = React.useState("")
    const [loading, setloading] = React.useState(false)
    // for loading
    const [time, settime] = React.useState(0)
@@ -119,18 +122,18 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
 
    const getInstances = async () => {
       const res = await ZestyAPI.getInstances()
-      res.code === 200 && console.log(res, "instance success")
-      res.code !== 200 && console.log(res, "instance failed")
+      !res.error && setinstances(res)
+      res.error && console.log(res, "instance failed")
    }
    const getModels = async () => {
       const res = await ZestyAPI.getModels()
-      res.code === 200 && console.log(res, "models success")
-      res.code !== 200 && console.log(res, "models failed")
+      !res.error && setmodels(res)
+      res.error && console.log(res, "models failed")
    }
    const getViews = async () => {
       const res = await ZestyAPI.getViews()
-      res.code === 200 && console.log(res, "views success")
-      res.code !== 200 && console.log(res, "views failed")
+      !res.error && setviews(res)
+      res.error && console.log(res, "views failed")
    }
 
    React.useEffect(() => {
@@ -141,9 +144,10 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
    }, [])
 
    React.useEffect(() => {
-      console.log(verifySuccess, verifyFailed, "verif")
-   }, [verifyFailed, verifySuccess])
+      console.log(instances, views, models, "datas")
+   }, [instances, models, views])
 
+   // show loading
    if (loading && !verifyFailed && !verifySuccess) {
       return (
          <Box sx={verifyUserPrompt}>
@@ -152,6 +156,7 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
       )
    }
 
+   // show failed login prompt
    if (!verifySuccess) {
       return (
          <Box sx={verifyUserPrompt}>

@@ -89,7 +89,7 @@ function Row({ keyName, obj, workingElement, setWorkingElement }: Props) {
             <TableCell
                align="left"
                onClick={() => {
-                  helper.scrollToView("#activeEl")
+                  helper.scrollToView("activeEl")
                }}
             >
                <span

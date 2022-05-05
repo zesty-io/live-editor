@@ -1445,7 +1445,7 @@ function Row(_ref) {
   }, valueType), React.createElement(TableCell__default, {
     align: "left",
     onClick: function onClick() {
-      scrollToView("#activeEl");
+      scrollToView("activeEl");
     }
   }, React.createElement("span", {
     onClick: function onClick(e) {
@@ -2263,14 +2263,26 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
       verifyFailed = _React$useState4[0],
       setverifyFailed = _React$useState4[1];
 
-  var _React$useState5 = React__default.useState(false),
-      loading = _React$useState5[0],
-      setloading = _React$useState5[1]; // for loading
+  var _React$useState5 = React__default.useState([]),
+      instances = _React$useState5[0],
+      setinstances = _React$useState5[1];
+
+  var _React$useState6 = React__default.useState(""),
+      models = _React$useState6[0],
+      setmodels = _React$useState6[1];
+
+  var _React$useState7 = React__default.useState(""),
+      views = _React$useState7[0],
+      setviews = _React$useState7[1];
+
+  var _React$useState8 = React__default.useState(false),
+      loading = _React$useState8[0],
+      setloading = _React$useState8[1]; // for loading
 
 
-  var _React$useState6 = React__default.useState(0),
-      time = _React$useState6[0],
-      _settime = _React$useState6[1]; // for loading
+  var _React$useState9 = React__default.useState(0),
+      time = _React$useState9[0],
+      _settime = _React$useState9[1]; // for loading
 
 
   React__default.useEffect(function () {
@@ -2371,8 +2383,8 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
 
             case 2:
               res = _context2.sent;
-              res.code === 200 && console.log(res, "instance success");
-              res.code !== 200 && console.log(res, "instance failed");
+              !res.error && setinstances(res);
+              res.error && console.log(res, "instance failed");
 
             case 5:
             case "end":
@@ -2399,8 +2411,8 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
 
             case 2:
               res = _context3.sent;
-              res.code === 200 && console.log(res, "models success");
-              res.code !== 200 && console.log(res, "models failed");
+              !res.error && setmodels(res);
+              res.error && console.log(res, "models failed");
 
             case 5:
             case "end":
@@ -2427,8 +2439,8 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
 
             case 2:
               res = _context4.sent;
-              res.code === 200 && console.log(res, "views success");
-              res.code !== 200 && console.log(res, "views failed");
+              !res.error && setviews(res);
+              res.error && console.log(res, "views failed");
 
             case 5:
             case "end":
@@ -2450,14 +2462,15 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
     getViews();
   }, []);
   React__default.useEffect(function () {
-    console.log(verifySuccess, verifyFailed, "verif");
-  }, [verifyFailed, verifySuccess]);
+    console.log(instances, views, models, "datas");
+  }, [instances, models, views]); // show loading
 
   if (loading && !verifyFailed && !verifySuccess) {
     return React__default.createElement(Box, {
       sx: verifyUserPrompt
     }, React__default.createElement("h1", null, "Loading"));
-  }
+  } // show failed login prompt
+
 
   if (!verifySuccess) {
     return React__default.createElement(Box, {
@@ -2505,17 +2518,17 @@ var ZestyExplorer = function ZestyExplorer(_ref7) {
   var _ref7$content = _ref7.content,
       content = _ref7$content === void 0 ? {} : _ref7$content;
 
-  var _React$useState7 = React__default.useState(false),
-      open = _React$useState7[0],
-      setOpen = _React$useState7[1];
+  var _React$useState10 = React__default.useState(false),
+      open = _React$useState10[0],
+      setOpen = _React$useState10[1];
 
-  var _React$useState8 = React__default.useState(""),
-      pageData = _React$useState8[0],
-      setPageData = _React$useState8[1];
+  var _React$useState11 = React__default.useState(""),
+      pageData = _React$useState11[0],
+      setPageData = _React$useState11[1];
 
-  var _React$useState9 = React__default.useState(""),
-      response = _React$useState9[0],
-      setResponse = _React$useState9[1];
+  var _React$useState12 = React__default.useState(""),
+      response = _React$useState12[0],
+      setResponse = _React$useState12[1];
 
   var _useDarkMode = useDarkMode(),
       themeMode = _useDarkMode[0],
