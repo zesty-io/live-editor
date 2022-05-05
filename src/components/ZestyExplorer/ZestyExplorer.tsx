@@ -51,10 +51,10 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
    const [models, setmodels] = React.useState("")
    const [views, setviews] = React.useState("")
    const [loading, setloading] = React.useState(false)
-   // for loading
+   // for loading of tabs
    const [time, settime] = React.useState(0)
 
-   // for loading
+   // for loading of tabs
    React.useEffect(() => {
       const timer = setTimeout(() => {
          if (time > 0) {

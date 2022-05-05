@@ -2269,12 +2269,12 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
 
   var _React$useState8 = React__default.useState(false),
       loading = _React$useState8[0],
-      setloading = _React$useState8[1]; // for loading
+      setloading = _React$useState8[1]; // for loading of tabs
 
 
   var _React$useState9 = React__default.useState(0),
       time = _React$useState9[0],
-      _settime = _React$useState9[1]; // for loading
+      _settime = _React$useState9[1]; // for loading of tabs
 
 
   React__default.useEffect(function () {
