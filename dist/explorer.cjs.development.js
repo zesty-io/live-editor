@@ -1516,8 +1516,6 @@ function Row(_ref) {
   }))))))))));
 }
 
-var instanceZUID = /*#__PURE__*/getCookie("APP_SID") || "8-c2c78385be-s38gqk";
-var userAppSID = /*#__PURE__*/getCookie("INSTANCE_ZUID") || "01388f3d751269ae62547f7dc3d9f14612fbeb04";
 function CollapsibleTable(_ref2) {
   var _Object$keys;
 
@@ -1526,8 +1524,10 @@ function CollapsibleTable(_ref2) {
 
   var _React$useState5 = React.useState(""),
       workingElement = _React$useState5[0],
-      setWorkingElement = _React$useState5[1]; // @ts-ignore
+      setWorkingElement = _React$useState5[1];
 
+  var instanceZUID = getCookie("INSTANCE_ZUID") || "8-c4eec0b7d4-8lx0ch";
+  var userAppSID = getCookie("APP_SID") || "f3555fb52bdd3c6e3b3ff5421b74b740bf41f4e5"; // @ts-ignore
 
   var ZestyAPI = new Zesty.FetchWrapper(instanceZUID, userAppSID);
 
@@ -1559,8 +1559,95 @@ function CollapsibleTable(_ref2) {
     };
   }();
 
+  var getInstances = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee2() {
+      var res;
+      return runtime_1.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return ZestyAPI.getInstances();
+
+            case 2:
+              res = _context2.sent;
+              res.code === 200 && console.log(res, "instance success");
+              res.code !== 200 && console.log(res, "instance failed");
+
+            case 5:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function getInstances() {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+
+  var getModels = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee3() {
+      var res;
+      return runtime_1.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return ZestyAPI.getModels();
+
+            case 2:
+              res = _context3.sent;
+              res.code === 200 && console.log(res, "models success");
+              res.code !== 200 && console.log(res, "models failed");
+
+            case 5:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+
+    return function getModels() {
+      return _ref5.apply(this, arguments);
+    };
+  }();
+
+  var getViews = /*#__PURE__*/function () {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee4() {
+      var res;
+      return runtime_1.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return ZestyAPI.getViews();
+
+            case 2:
+              res = _context4.sent;
+              res.code === 200 && console.log(res, "views success");
+              res.code !== 200 && console.log(res, "views failed");
+
+            case 5:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }));
+
+    return function getViews() {
+      return _ref6.apply(this, arguments);
+    };
+  }();
+
   React.useEffect(function () {
     verifyUser();
+    getInstances();
+    getModels();
+    getViews();
   }, []);
   return React.createElement(TableContainer, {
     component: Paper,
