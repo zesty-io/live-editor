@@ -18,9 +18,11 @@ import * as helper from "utils"
 // dom access highlight function
 function activateWorkingElement(match: string): any {
    console.log("string to test", match)
-   let stringToTest: string = match.replace(/<[^>]*>?/gm, "")
-   let elems = document.querySelectorAll("*")
-   let workingElement: any = Array.from(elems).find((v) => v.textContent == stringToTest)
+   const stringToTest: string = match.replace(/<[^>]*>?/gm, "")
+   const elems = document.querySelectorAll("*")
+   const workingElement: any = Array.from(elems).find(
+      (v) => v.textContent == stringToTest,
+   )
 
    workingElement.style.border = "2px orange solid"
    workingElement.setAttribute("contentEditable", true)

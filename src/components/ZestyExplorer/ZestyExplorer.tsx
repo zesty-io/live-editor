@@ -3,7 +3,7 @@
 import React from "react"
 import { ThemeProvider } from "@mui/material/styles"
 import CssBaseline from "@mui/material/CssBaseline"
-import { dummydata } from "constants/index"
+import { dummycontent, dummydata } from "constants/index"
 import Fuse from "fuse.js"
 import { ContentViewer, MetaViewer, JsonDataViewer } from "views/index"
 import { Headers, Loader } from "components/index"
@@ -33,10 +33,10 @@ const tabList = [
 
 // dom access highlight function
 const expandBody = (bool: boolean) => {
-   let body: any = document.querySelector("body")
+   const body: any = document.querySelector("body")
    body.style.marginLeft = bool ? "40vw" : "0"
    body.style.transition = "margin 250ms ease"
-   let ze: any = document.getElementById("zestyExplorer")
+   const ze: any = document.getElementById("zestyExplorer")
    ze.style.left = bool ? "0" : "-40vw"
 }
 
@@ -173,6 +173,7 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
       )
    }
 
+   console.log(dummycontent)
    return (
       <Box sx={containerStyle}>
          <Headers children={children} content={content} response={response} />
@@ -181,6 +182,9 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
             tabList={tabList}
             settime={() => settime(2)}
          />
+         {/* <button onClick={() => helper.handleEdit(dummycontent)}>
+            OKOKOKOKOKOKOKOKOK
+         </button> */}
          <div style={{ position: "relative" }}>
             {time > 0 && <Loader />}
             {currentTab === "Content Viewer" && (

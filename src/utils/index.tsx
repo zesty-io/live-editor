@@ -1,4 +1,5 @@
 import { Box } from "@mui/system"
+import { dummycontent } from "constants/index"
 import React from "react"
 /* eslint-disable guard-for-in */
 export const canUseDOM = () => {
@@ -115,4 +116,105 @@ export const scrollToView = (elementId: string) => {
    document
       .getElementById(elementId)
       ?.scrollIntoView({ behavior: "smooth", block: "center" })!
+}
+
+export const handleEdit = async (content: any) => {
+   const instanceZUID = "8-c2c78385be-s38gqk"
+   const url = `https://${instanceZUID}.api.zesty.io/v1/content/models/${content.meta.model.zuid}/items/${content.meta.zuid}`
+
+   // const data = transFromData(e.updated_src.content)
+
+   // const web = {
+   //    metaDescription: content.meta.web.seo_meta_description,
+   //    metaTitle: content.meta.web.seo_meta_title,
+   //    metaLinkText: content.meta.web.seo_link_text,
+   //    metaKeywords: content.meta.web.seo_meta_keywords,
+   //    parentZUID: content.meta.zuid || "0",
+   //    pathPart: content.meta.web.fragment,
+   //    path: content.meta.web.uri,
+   //    sitemapPriority: content.meta.web.sitemap_priority,
+   //    canonicalTagMode: content.meta.web.sitemap_priority,
+   //    canonicalQueryParamWhitelist: content.meta.web.canonical_query_param_whitelist,
+   //    canonicalTagCustomValue: content.meta.web.canonical_tag_custom_value,
+   //    createdByUserZUID: content.meta.zuid,
+   // }
+   const web = {
+      version: 8,
+      versionZUID: "9-8cafc0e7a1-mt987k",
+      metaDescription: "",
+      metaTitle: "Homepage",
+      metaLinkText: "Homepage",
+      metaKeywords: null,
+      parentZUID: "0",
+      pathPart: "zesty_home",
+      path: "/",
+      sitemapPriority: -1,
+      canonicalTagMode: 1,
+      canonicalQueryParamWhitelist: null,
+      canonicalTagCustomValue: null,
+      createdByUserZUID: "5-c2a5c791e3-krq7ts",
+      createdAt: "2022-05-05T16:20:15Z",
+      updatedAt: "2022-05-05T16:20:15Z",
+   }
+   // const meta = {
+   //    ZUID: content.meta.zuid,
+   //    masterZUID: content.meta.zuid,
+   //    contentModelZUID: content.meta.model.zuid,
+   //    contentModelName: content.meta.model.name,
+   //    sort: content.meta.sort,
+   //    listed: content.meta.listed,
+   //    version: content.meta.version,
+   //    langID: content.meta.langID,
+   //    createdAt: content.meta.createdAt,
+   //    updatedAt: content.meta.updatedAt,
+   // }
+   const meta = {
+      ZUID: "7-f4f99e80ec-pq3q7s",
+      zid: 502,
+      masterZUID: "7-f4f99e80ec-pq3q7s",
+      contentModelZUID: "6-8eb48d80ec-8ggrzt",
+      contentModelName: null,
+      sort: 0,
+      listed: true,
+      version: 8,
+      langID: 1,
+      createdAt: "2020-11-06T23:57:12Z",
+      updatedAt: "2022-05-05T16:20:15Z",
+   }
+
+   const originalData: any = dummycontent
+   // remove not necessary fields
+   // @ts-ignore
+   delete originalData.meta
+   delete originalData.zestyBaseURL
+   delete originalData.zestyInstanceZUID
+   delete originalData.zestyProductionMode
+
+   const data = originalData
+
+   const payload = {
+      data,
+      meta,
+      web,
+   }
+
+   const token = "f3555fb52bdd3c6e3b3ff5421b74b740bf41f4e5"
+
+   const putMethod = {
+      method: "PUT",
+      headers: {
+         "Content-type": "application/json; charset=UTF-8",
+         authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(payload),
+   }
+
+   const res = await fetch(url, putMethod)
+
+   res.status === 200 &&
+      res.json().then((e) => {
+         console.log(e)
+         window.location.reload()
+      })
+   res.status !== 200 && res.json().then((e) => console.log(e, "err"))
 }

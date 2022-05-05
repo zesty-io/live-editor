@@ -12,3 +12,4 @@ export declare function setCookie(cname: string, cvalue: string, exdays: any): v
 export declare function checkCookie(): void;
 export declare function updateToken(name: string, value: string): void;
 export declare const scrollToView: (elementId: string) => void;
+export declare const handleEdit: (content: any) => Promise<void>;
