@@ -1336,23 +1336,23 @@ var PrettyPrintJson = function PrettyPrintJson(_ref2) {
 };
 
 function activateWorkingElement(match) {
-  console.log('string to test', match);
-  var stringToTest = match.replace(/<[^>]*>?/gm, '');
+  console.log("string to test", match);
+  var stringToTest = match.replace(/<[^>]*>?/gm, "");
   var elems = document.querySelectorAll("*");
   var workingElement = Array.from(elems).find(function (v) {
     return v.textContent == stringToTest;
   });
-  workingElement.style.border = '2px orange solid';
-  workingElement.setAttribute('contentEditable', true);
-  console.log('Activating', workingElement);
+  workingElement.style.border = "2px orange solid";
+  workingElement.setAttribute("contentEditable", true);
+  console.log("Activating", workingElement);
   return workingElement;
 }
 
 function deactivateWorkingElement(workingElement) {
   if (undefined !== workingElement) {
-    console.log('Deactivating', workingElement);
-    workingElement.style.border = 'none';
-    workingElement.setAttribute('contentEditable', false);
+    console.log("Deactivating", workingElement);
+    workingElement.style.border = "none";
+    workingElement.setAttribute("contentEditable", false);
   }
 }
 
@@ -1360,7 +1360,9 @@ function Row(_ref) {
   var _sx;
 
   var keyName = _ref.keyName,
-      obj = _ref.obj;
+      obj = _ref.obj,
+      workingElement = _ref.workingElement,
+      setWorkingElement = _ref.setWorkingElement;
 
   var _React$useState = React.useState(false),
       showCopy = _React$useState[0],
@@ -1370,21 +1372,24 @@ function Row(_ref) {
       clipboardCopy = _React$useState2[0],
       setclipboardCopy = _React$useState2[1];
 
-  var _React$useState3 = React.useState(undefined),
-      workingElement = _React$useState3[0],
-      setWorkingElement = _React$useState3[1];
+  var _React$useState3 = React.useState(false),
+      showEditClose = _React$useState3[0],
+      setShowEditClose = _React$useState3[1];
 
   var _React$useState4 = React.useState(false),
-      showEditClose = _React$useState4[0],
-      setShowEditClose = _React$useState4[1];
+      open = _React$useState4[0],
+      setOpen = _React$useState4[1];
 
-  var _React$useState5 = React.useState(false),
-      open = _React$useState5[0],
-      setOpen = _React$useState5[1];
+  var _React$useState5 = React.useState(""),
+      text = _React$useState5[0],
+      settext = _React$useState5[1];
 
   var theme = system.useTheme();
   var value = "";
   var valueType = "string";
+  React.useEffect(function () {
+    console.log(workingElement, "WORKING ELEMENT");
+  }, [workingElement]);
 
   if (typeof obj === "string") {
     value = obj;
@@ -1392,6 +1397,9 @@ function Row(_ref) {
     valueType = "object";
   }
 
+  console.log(showEditClose); // @ts-ignore
+
+  var showBtn = text === (workingElement == null ? void 0 : workingElement.innerText);
   return React.createElement(React.Fragment, null, React.createElement(TableRow, {
     sx: {
       "& > *": {
@@ -1414,16 +1422,21 @@ function Row(_ref) {
   }, keyName), React.createElement(TableCell__default, {
     align: "left"
   }, valueType), React.createElement(TableCell__default, {
-    align: "left",
-    onClick: function onClick() {
-      setWorkingElement(activateWorkingElement(value));
+    align: "left"
+  }, React.createElement("span", {
+    onClick: function onClick(e) {
+      !text && settext(e.target.textContent); // @ts-ignore
+
+      !(workingElement != null && workingElement.innerText) && setWorkingElement(activateWorkingElement(value));
       setShowEditClose(true);
     }
-  }, value, showEditClose && React.createElement(Button, {
+  }, value), showBtn && React.createElement(Button, {
     size: "small",
     onClick: function onClick() {
       setShowEditClose(false);
       deactivateWorkingElement(workingElement);
+      setWorkingElement("");
+      settext("");
     }
   }, React.createElement(CloseIcon, null))), React.createElement(TableCell__default, {
     align: "left"
@@ -1455,7 +1468,7 @@ function Row(_ref) {
       left: "0",
       top: "0"
     }
-  }, clipboardCopy && React.createElement("span", null, "\u2705 Copied to clidboard!"), showCopy && React.createElement("span", null, "\uD83D\uDCDC Copy!")))), React.createElement(TableRow, null, React.createElement(TableCell__default, {
+  }, clipboardCopy && React.createElement("span", null, "\u2705 Copied to clipboard!"), showCopy && React.createElement("span", null, "\uD83D\uDCDC Copy")))), React.createElement(TableRow, null, React.createElement(TableCell__default, {
     style: {
       paddingBottom: 0,
       paddingTop: 0,
@@ -1486,6 +1499,11 @@ function CollapsibleTable(_ref2) {
 
   var _ref2$data = _ref2.data,
       data = _ref2$data === void 0 ? {} : _ref2$data;
+
+  var _React$useState6 = React.useState(""),
+      workingElement = _React$useState6[0],
+      setWorkingElement = _React$useState6[1];
+
   return React.createElement(TableContainer, {
     component: Paper,
     style: {
@@ -1522,7 +1540,9 @@ function CollapsibleTable(_ref2) {
   }, React.createElement("strong", null, "Access Example")))), React.createElement(TableBody, null, (_Object$keys = Object.keys(data)) == null ? void 0 : _Object$keys.map(function (keyName) {
     return React.createElement(Row, {
       obj: data && data[keyName],
-      keyName: keyName
+      keyName: keyName,
+      workingElement: workingElement,
+      setWorkingElement: setWorkingElement
     });
   }))));
 }

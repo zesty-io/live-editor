@@ -1,4 +1,4 @@
-import React__default, { createElement, useState, Fragment } from 'react';
+import React__default, { useState, createElement, useEffect, Fragment } from 'react';
 import { useTheme as useTheme$1, styled, alpha, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Fuse from 'fuse.js';
@@ -1328,23 +1328,23 @@ var PrettyPrintJson = function PrettyPrintJson(_ref2) {
 };
 
 function activateWorkingElement(match) {
-  console.log('string to test', match);
-  var stringToTest = match.replace(/<[^>]*>?/gm, '');
+  console.log("string to test", match);
+  var stringToTest = match.replace(/<[^>]*>?/gm, "");
   var elems = document.querySelectorAll("*");
   var workingElement = Array.from(elems).find(function (v) {
     return v.textContent == stringToTest;
   });
-  workingElement.style.border = '2px orange solid';
-  workingElement.setAttribute('contentEditable', true);
-  console.log('Activating', workingElement);
+  workingElement.style.border = "2px orange solid";
+  workingElement.setAttribute("contentEditable", true);
+  console.log("Activating", workingElement);
   return workingElement;
 }
 
 function deactivateWorkingElement(workingElement) {
   if (undefined !== workingElement) {
-    console.log('Deactivating', workingElement);
-    workingElement.style.border = 'none';
-    workingElement.setAttribute('contentEditable', false);
+    console.log("Deactivating", workingElement);
+    workingElement.style.border = "none";
+    workingElement.setAttribute("contentEditable", false);
   }
 }
 
@@ -1352,7 +1352,9 @@ function Row(_ref) {
   var _sx;
 
   var keyName = _ref.keyName,
-      obj = _ref.obj;
+      obj = _ref.obj,
+      workingElement = _ref.workingElement,
+      setWorkingElement = _ref.setWorkingElement;
 
   var _React$useState = useState(false),
       showCopy = _React$useState[0],
@@ -1362,21 +1364,24 @@ function Row(_ref) {
       clipboardCopy = _React$useState2[0],
       setclipboardCopy = _React$useState2[1];
 
-  var _React$useState3 = useState(undefined),
-      workingElement = _React$useState3[0],
-      setWorkingElement = _React$useState3[1];
+  var _React$useState3 = useState(false),
+      showEditClose = _React$useState3[0],
+      setShowEditClose = _React$useState3[1];
 
   var _React$useState4 = useState(false),
-      showEditClose = _React$useState4[0],
-      setShowEditClose = _React$useState4[1];
+      open = _React$useState4[0],
+      setOpen = _React$useState4[1];
 
-  var _React$useState5 = useState(false),
-      open = _React$useState5[0],
-      setOpen = _React$useState5[1];
+  var _React$useState5 = useState(""),
+      text = _React$useState5[0],
+      settext = _React$useState5[1];
 
   var theme = useTheme();
   var value = "";
   var valueType = "string";
+  useEffect(function () {
+    console.log(workingElement, "WORKING ELEMENT");
+  }, [workingElement]);
 
   if (typeof obj === "string") {
     value = obj;
@@ -1384,6 +1389,9 @@ function Row(_ref) {
     valueType = "object";
   }
 
+  console.log(showEditClose); // @ts-ignore
+
+  var showBtn = text === (workingElement == null ? void 0 : workingElement.innerText);
   return createElement(Fragment, null, createElement(TableRow, {
     sx: {
       "& > *": {
@@ -1406,16 +1414,21 @@ function Row(_ref) {
   }, keyName), createElement(TableCell, {
     align: "left"
   }, valueType), createElement(TableCell, {
-    align: "left",
-    onClick: function onClick() {
-      setWorkingElement(activateWorkingElement(value));
+    align: "left"
+  }, createElement("span", {
+    onClick: function onClick(e) {
+      !text && settext(e.target.textContent); // @ts-ignore
+
+      !(workingElement != null && workingElement.innerText) && setWorkingElement(activateWorkingElement(value));
       setShowEditClose(true);
     }
-  }, value, showEditClose && createElement(Button, {
+  }, value), showBtn && createElement(Button, {
     size: "small",
     onClick: function onClick() {
       setShowEditClose(false);
       deactivateWorkingElement(workingElement);
+      setWorkingElement("");
+      settext("");
     }
   }, createElement(CloseIcon, null))), createElement(TableCell, {
     align: "left"
@@ -1447,7 +1460,7 @@ function Row(_ref) {
       left: "0",
       top: "0"
     }
-  }, clipboardCopy && createElement("span", null, "\u2705 Copied to clidboard!"), showCopy && createElement("span", null, "\uD83D\uDCDC Copy!")))), createElement(TableRow, null, createElement(TableCell, {
+  }, clipboardCopy && createElement("span", null, "\u2705 Copied to clipboard!"), showCopy && createElement("span", null, "\uD83D\uDCDC Copy")))), createElement(TableRow, null, createElement(TableCell, {
     style: {
       paddingBottom: 0,
       paddingTop: 0,
@@ -1478,6 +1491,11 @@ function CollapsibleTable(_ref2) {
 
   var _ref2$data = _ref2.data,
       data = _ref2$data === void 0 ? {} : _ref2$data;
+
+  var _React$useState6 = useState(""),
+      workingElement = _React$useState6[0],
+      setWorkingElement = _React$useState6[1];
+
   return createElement(TableContainer, {
     component: Paper,
     style: {
@@ -1514,7 +1532,9 @@ function CollapsibleTable(_ref2) {
   }, createElement("strong", null, "Access Example")))), createElement(TableBody, null, (_Object$keys = Object.keys(data)) == null ? void 0 : _Object$keys.map(function (keyName) {
     return createElement(Row, {
       obj: data && data[keyName],
-      keyName: keyName
+      keyName: keyName,
+      workingElement: workingElement,
+      setWorkingElement: setWorkingElement
     });
   }))));
 }

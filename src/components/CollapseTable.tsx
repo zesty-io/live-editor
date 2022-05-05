@@ -12,46 +12,64 @@ import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
 import { PrettyPrintJson } from "utils"
 import { useTheme } from "@mui/system"
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close"
 
 // dom access highlight function
-function activateWorkingElement(match:string ): any{
-   console.log('string to test', match);
-   let stringToTest:string = match.replace(/<[^>]*>?/gm,'')
-   var elems = document.querySelectorAll("*")
-   var workingElement:any = Array.from(elems).find(v => v.textContent == stringToTest);
-    
-   workingElement.style.border  = '2px orange solid';
-   workingElement.setAttribute('contentEditable',true)
-   console.log('Activating',workingElement)
- 
-   return workingElement
-}                                                                       
+function activateWorkingElement(match: string): any {
+   console.log("string to test", match)
+   let stringToTest: string = match.replace(/<[^>]*>?/gm, "")
+   let elems = document.querySelectorAll("*")
+   let workingElement: any = Array.from(elems).find((v) => v.textContent == stringToTest)
 
-function deactivateWorkingElement(workingElement:any) :any{
-   if(undefined !== workingElement){
-      console.log('Deactivating',workingElement)
-      workingElement.style.border  = 'none';
-      workingElement.setAttribute('contentEditable',false)
+   workingElement.style.border = "2px orange solid"
+   workingElement.setAttribute("contentEditable", true)
+   console.log("Activating", workingElement)
+
+   return workingElement
+}
+
+function deactivateWorkingElement(workingElement: any): any {
+   if (undefined !== workingElement) {
+      console.log("Deactivating", workingElement)
+      workingElement.style.border = "none"
+      workingElement.setAttribute("contentEditable", false)
    }
 }
 
-function Row({ keyName, obj }: any) {
+// 1 edit at a time
+// when click it should scroll to the div
+// fetchwrapper verify if user is login
+// make edit in api
+interface Props {
+   keyName: string
+   obj: any
+   workingElement: string
+   setWorkingElement: (e: string) => void
+}
+
+function Row({ keyName, obj, workingElement, setWorkingElement }: Props) {
    const [showCopy, setShowCopy] = React.useState(false)
    const [clipboardCopy, setclipboardCopy] = React.useState(false)
-   const [workingElement, setWorkingElement] = React.useState(undefined)
    const [showEditClose, setShowEditClose] = React.useState(false)
    const [open, setOpen] = React.useState(false)
-   
+   const [text, settext] = React.useState("")
+
    const theme = useTheme()
    let value = ""
    let valueType = "string"
+
+   React.useEffect(() => {
+      console.log(workingElement, "WORKING ELEMENT")
+   }, [workingElement])
 
    if (typeof obj === "string") {
       value = obj
    } else {
       valueType = "object"
    }
+   console.log(showEditClose)
+   // @ts-ignore
+   const showBtn = text === workingElement?.innerText
 
    return (
       <React.Fragment>
@@ -70,25 +88,32 @@ function Row({ keyName, obj }: any) {
                {keyName}
             </TableCell>
             <TableCell align="left">{valueType}</TableCell>
-            <TableCell align="left" 
-               onClick={() => {
-                  setWorkingElement(activateWorkingElement(value))
-                  setShowEditClose(true)
-               }}
-               >{value}
-               {showEditClose && 
-                  <Button 
-                  size="small"
+            <TableCell align="left">
+               <span
+                  onClick={(e: any) => {
+                     !text && settext(e.target.textContent)
+                     // @ts-ignore
+                     !workingElement?.innerText &&
+                        setWorkingElement(activateWorkingElement(value))
+                     setShowEditClose(true)
+                  }}
+               >
+                  {value}
+               </span>
+               {showBtn && (
+                  <Button
+                     size="small"
                      onClick={() => {
                         setShowEditClose(false)
                         deactivateWorkingElement(workingElement)
-                        
-                     }}>
-                  <CloseIcon/>
+                        setWorkingElement("")
+                        settext("")
+                     }}
+                  >
+                     <CloseIcon />
                   </Button>
-                  }
-               
-               </TableCell>
+               )}
+            </TableCell>
             <TableCell align="left">{value.length}</TableCell>
             <TableCell
                onMouseEnter={() => setShowCopy(true)}
@@ -119,8 +144,8 @@ function Row({ keyName, obj }: any) {
                      top: "0",
                   }}
                >
-                  {clipboardCopy && <span>✅ Copied to clidboard!</span>}
-                  {showCopy && <span>📜 Copy!</span>}
+                  {clipboardCopy && <span>✅ Copied to clipboard!</span>}
+                  {showCopy && <span>📜 Copy</span>}
                </Box>
             </TableCell>
          </TableRow>
@@ -161,6 +186,7 @@ function Row({ keyName, obj }: any) {
 }
 
 export default function CollapsibleTable({ data = {} }: any) {
+   const [workingElement, setWorkingElement] = React.useState("")
    return (
       <TableContainer component={Paper} style={{ maxHeight: 600 }}>
          <Table aria-label="collapsible table" stickyHeader>
@@ -189,7 +215,12 @@ export default function CollapsibleTable({ data = {} }: any) {
             {/* Table Row main  */}
             <TableBody>
                {Object.keys(data)?.map((keyName: any) => (
-                  <Row obj={data && data[keyName]} keyName={keyName} />
+                  <Row
+                     obj={data && data[keyName]}
+                     keyName={keyName}
+                     workingElement={workingElement}
+                     setWorkingElement={setWorkingElement}
+                  />
                ))}
             </TableBody>
          </Table>
