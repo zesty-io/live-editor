@@ -7,7 +7,7 @@ import { dummydata, tabList } from "constants/index"
 import { ContentViewer, MetaViewer, JsonDataViewer } from "views/index"
 import { Headers, Loader } from "components/index"
 import * as helper from "utils/index"
-import { fetchData, getPageData } from "services/index"
+import { fetchData, fetchJSON, getPageData } from "services/index"
 import {
    buttonStyles,
    containerStyle,
@@ -33,7 +33,13 @@ const expandBody = (bool: boolean) => {
 }
 
 // renanme content to contentData
-const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any) => {
+const ZestyExplorerBrowser = ({
+   pageData,
+   response,
+   contentData,
+   children,
+   jsonData,
+}: any) => {
    const content = contentData || dummydata
    const [currentTab, setcurrentTab] = React.useState("Content Viewer")
    const [search, setSearch] = React.useState()
@@ -41,10 +47,16 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
    const [metaData, setMetaData] = React.useState([])
    // for loading of tabs
    const [time, settime] = React.useState(0)
-   const instanceZUID = helper.getCookie("INSTANCE_ZUID") || "8-c4eec0b7d4-8lx0ch"
-   const userAppSID =
-      helper.getCookie("APP_SID") || "f3555fb52bdd3c6e3b3ff5421b74b740bf41f4e5"
+   // const instanceZUID = helper.getCookie("INSTANCE_ZUID") || "8-c2c78385be-s38gqk"
+   const userAppSID = helper.getCookie("APP_SID") || process.env.ZESTY_TEST_APP_SID
+   const token = helper.getCookie("APP_SID") || process.env.ZESTY_TEST_APP_SID
 
+   // jsondata
+   // fetchwarpper
+
+   const itemZUID = jsonData.data.meta.zuid
+   const modelZUID = jsonData.data.meta.model.zuid
+   const instanceZUID = helper.headerZUID(jsonData.response) || "8-c2c78385be-s38gqk"
    // get the instance view models  on initial load
    const {
       loading,
@@ -55,20 +67,21 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
       models,
    } = useFetchWrapper(userAppSID, instanceZUID)
 
-   const url =
-      "https://8-c2c78385be-s38gqk.api.zesty.io/v1/content/models/6-8eb48d80ec-8ggrzt/items/7-f4f99e80ec-pq3q7s"
-   const token = "458f44d62f38d83acb0ef3a307af1db848edb17c"
+   const url = `https://${instanceZUID}.api.zesty.io/v1/content/models/${modelZUID}/items/${itemZUID}`
 
    // this is for json data viewer
    const data = helper.transformContent(content, search)
    console.log(pageData, "This the Pagedata")
 
+   const getFinalData = async () => {
+      await fetchData(url, setMetaData, token)
+   }
    React.useEffect(() => {
-      console.log(instances, views, models, "datas")
-   }, [instances, models, views])
+      console.log(instances, views, models, jsonData, "datas")
+   }, [instances, models, views, jsonData])
 
    React.useEffect(() => {
-      fetchData(url, setMetaData, token)
+      getFinalData()
    }, [])
 
    // for loading of tabs
@@ -123,6 +136,8 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
                   data={data}
                   search={search}
                   setSearch={setSearch}
+                  url={url}
+                  token={token}
                />
             )}
             {currentTab === "Meta Viewer" && (
@@ -138,6 +153,9 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
 
 // Main ZESTY EXPLORER
 export const ZestyExplorer = ({ content = {} }: any) => {
+   const jsonUrl = "https://qzp3zx5t-dev.webengine.zesty.io/?toJSON"
+   const [jsonData, setJsonData] = React.useState([])
+   const token = helper.getCookie("APP_SID") || process.env.ZESTY_TEST_APP_SID
    const [open, setOpen] = React.useState(false)
    const [pageData, setPageData] = React.useState<any>("")
    const [response, setResponse] = React.useState<any>("")
@@ -151,8 +169,12 @@ export const ZestyExplorer = ({ content = {} }: any) => {
       response && setResponse(response)
    }
 
+   const getJsonData = async () => {
+      await fetchJSON(jsonUrl, setJsonData, token)
+   }
    // check if content is available
    React.useEffect(() => {
+      getJsonData()
       if (content && Object.keys(content).length === 0) {
          getData()
       } else {
@@ -205,6 +227,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
                      response={response}
                      pageData={pageData}
                      contentData={searchObject}
+                     jsonData={jsonData}
                   >
                      <Button
                         onClick={() => toggleOpenState(false)}

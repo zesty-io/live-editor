@@ -1,4 +1,4 @@
-export declare const useFetchWrapper: (userAppSID: string, instanceZUID: string) => {
+export declare const useFetchWrapper: (userAppSID: any, instanceZUID: any) => {
     loading: boolean;
     verifyFailed: string;
     verifySuccess: string;

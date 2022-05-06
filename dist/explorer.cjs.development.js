@@ -1367,6 +1367,7 @@ function getCookie(cname) {
 
   return "";
 }
+
 var scrollToView = function scrollToView(elementId) {
   var _document$getElementB;
 
@@ -1486,12 +1487,11 @@ function activateWorkingElement(match) {
   return workingElement;
 }
 
-function deactivateWorkingElement(workingElement, setDeactivateElem, keyName, metaData, url, token) {
+function deactivateWorkingElement(workingElement, keyName, metaData, url, token) {
   if (undefined !== workingElement) {
-    var _setDeactivateElem, _helper$handleEdit;
+    var _helper$handleEdit;
 
     // @ts-ignore
-    setDeactivateElem((_setDeactivateElem = {}, _setDeactivateElem["" + keyName] = workingElement == null ? void 0 : workingElement.innerText, _setDeactivateElem));
     handleEdit(metaData, url, token, (_helper$handleEdit = {}, _helper$handleEdit["" + keyName] = workingElement == null ? void 0 : workingElement.innerText, _helper$handleEdit));
     console.log("Deactivating", workingElement);
     workingElement.style.border = "none";
@@ -1507,9 +1507,9 @@ function Row(_ref) {
       obj = _ref.obj,
       workingElement = _ref.workingElement,
       setWorkingElement = _ref.setWorkingElement,
-      setDeactivateElem = _ref.setDeactivateElem,
       metaData = _ref.metaData,
-      deactivateElem = _ref.deactivateElem;
+      url = _ref.url,
+      token = _ref.token;
 
   var _React$useState = React.useState(false),
       showCopy = _React$useState[0],
@@ -1527,7 +1527,6 @@ function Row(_ref) {
       text = _React$useState4[0],
       settext = _React$useState4[1];
 
-  console.log(deactivateElem);
   var theme = system.useTheme();
   var value = "";
   var valueType = "string";
@@ -1536,10 +1535,10 @@ function Row(_ref) {
     value = obj;
   } else {
     valueType = "object";
-  }
+  } // const url = `https://${instanceZUID}.api.zesty.io/v1/content/models/${modelZUID}/items/${itemZUID}`
+  // const token = helper.getCookie("APP_SID") || process.env.ZESTY_TEST_APP_SID
+  // @ts-ignore
 
-  var url = "https://8-c2c78385be-s38gqk.api.zesty.io/v1/content/models/6-8eb48d80ec-8ggrzt/items/7-f4f99e80ec-pq3q7s";
-  var token = "458f44d62f38d83acb0ef3a307af1db848edb17c"; // @ts-ignore
 
   var showCloseBtn = text === (workingElement == null ? void 0 : workingElement.innerText);
   return React.createElement(React.Fragment, null, React.createElement(TableRow, {
@@ -1577,7 +1576,7 @@ function Row(_ref) {
   }, value), showCloseBtn && React.createElement(Button, {
     size: "small",
     onClick: function onClick() {
-      deactivateWorkingElement(workingElement, setDeactivateElem, keyName, metaData, url, token);
+      deactivateWorkingElement(workingElement, keyName, metaData, url, token);
       setWorkingElement("");
       settext("");
     }
@@ -1642,22 +1641,14 @@ function CollapsibleTable(_ref2) {
 
   var metaData = _ref2.metaData,
       _ref2$data = _ref2.data,
-      data = _ref2$data === void 0 ? {} : _ref2$data;
+      data = _ref2$data === void 0 ? {} : _ref2$data,
+      url = _ref2.url,
+      token = _ref2.token;
 
   var _React$useState5 = React.useState(""),
       workingElement = _React$useState5[0],
       setWorkingElement = _React$useState5[1];
 
-  var _React$useState6 = React.useState({}),
-      deactivateElem = _React$useState6[0],
-      setDeactivateElem = _React$useState6[1];
-
-  React.useEffect(function () {
-    // @ts-ignore
-    console.log(workingElement == null ? void 0 : workingElement.innerText, "ELEM123"); // @ts-ignore
-
-    console.log(deactivateElem, "DEACT ELEM123");
-  }, [workingElement]);
   return React.createElement(TableContainer, {
     component: Paper,
     style: {
@@ -1697,9 +1688,9 @@ function CollapsibleTable(_ref2) {
       keyName: keyName,
       workingElement: workingElement,
       setWorkingElement: setWorkingElement,
-      setDeactivateElem: setDeactivateElem,
       metaData: metaData,
-      deactivateElem: deactivateElem
+      url: url,
+      token: token
     });
   }))));
 }
@@ -1708,7 +1699,9 @@ var ContentViewer = function ContentViewer(_ref) {
   var metaData = _ref.metaData,
       data = _ref.data,
       search = _ref.search,
-      setSearch = _ref.setSearch;
+      setSearch = _ref.setSearch,
+      url = _ref.url,
+      token = _ref.token;
   // const theme = useTheme()
   console.log(search, setSearch);
   return React__default.createElement("div", {
@@ -1718,6 +1711,8 @@ var ContentViewer = function ContentViewer(_ref) {
       padding: "1rem 2rem"
     }
   }, React__default.createElement(CollapsibleTable, {
+    url: url,
+    token: token,
     metaData: metaData,
     data: data.content || {}
   }));
@@ -2076,30 +2071,35 @@ var fetchData = /*#__PURE__*/function () {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
+            console.log(token);
             headers = {
-              authorization: "Bearer " + token
+              authorization: "Bearer " + token,
+              "Content-Type": "application/x-www-form-urlencoded"
             };
-            _context2.next = 3;
+            _context2.next = 4;
             return fetch(uri, {
-              method: "get",
+              method: "GET",
+              mode: "cors",
+              referrerPolicy: "no-referrer",
+              credentials: "omit",
               headers: headers
             }).then(function (response) {
               return response.json();
             });
 
-          case 3:
+          case 4:
             res = _context2.sent;
             _context2.t0 = res;
 
             if (!_context2.t0) {
-              _context2.next = 8;
+              _context2.next = 9;
               break;
             }
 
-            _context2.next = 8;
+            _context2.next = 9;
             return setFunc(res);
 
-          case 8:
+          case 9:
           case "end":
             return _context2.stop();
         }
@@ -2109,6 +2109,51 @@ var fetchData = /*#__PURE__*/function () {
 
   return function fetchData(_x, _x2, _x3) {
     return _ref2.apply(this, arguments);
+  };
+}();
+var fetchJSON = /*#__PURE__*/function () {
+  var _ref3 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee3(uri, setFunc, token) {
+    var data, headers, res;
+    return runtime_1.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            console.log(token);
+            data = "";
+            headers = {
+              "Content-Type": "application/x-www-form-urlencoded"
+            };
+            _context3.next = 5;
+            return fetch(uri, {
+              method: "GET",
+              mode: "cors",
+              referrerPolicy: "no-referrer",
+              credentials: "omit",
+              headers: headers
+            });
+
+          case 5:
+            res = _context3.sent;
+            _context3.next = 8;
+            return res.json();
+
+          case 8:
+            data = _context3.sent;
+            res && setFunc({
+              data: data,
+              response: res
+            });
+
+          case 10:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+
+  return function fetchJSON(_x4, _x5, _x6) {
+    return _ref3.apply(this, arguments);
   };
 }();
 
@@ -2575,7 +2620,8 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
   var pageData = _ref.pageData,
       response = _ref.response,
       contentData = _ref.contentData,
-      children = _ref.children;
+      children = _ref.children,
+      jsonData = _ref.jsonData;
   var content = contentData || dummydata;
 
   var _React$useState = React__default.useState("Content Viewer"),
@@ -2594,10 +2640,16 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
 
   var _React$useState4 = React__default.useState(0),
       time = _React$useState4[0],
-      _settime = _React$useState4[1];
+      _settime = _React$useState4[1]; // const instanceZUID = helper.getCookie("INSTANCE_ZUID") || "8-c2c78385be-s38gqk"
 
-  var instanceZUID = getCookie("INSTANCE_ZUID") || "8-c4eec0b7d4-8lx0ch";
-  var userAppSID = getCookie("APP_SID") || "f3555fb52bdd3c6e3b3ff5421b74b740bf41f4e5"; // get the instance view models  on initial load
+
+  var userAppSID = getCookie("APP_SID") || process.env.ZESTY_TEST_APP_SID;
+  var token = getCookie("APP_SID") || process.env.ZESTY_TEST_APP_SID; // jsondata
+  // fetchwarpper
+
+  var itemZUID = jsonData.data.meta.zuid;
+  var modelZUID = jsonData.data.meta.model.zuid;
+  var instanceZUID = headerZUID(jsonData.response) || "8-c2c78385be-s38gqk"; // get the instance view models  on initial load
 
   var _useFetchWrapper = useFetchWrapper(userAppSID, instanceZUID),
       loading = _useFetchWrapper.loading,
@@ -2607,16 +2659,38 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
       views = _useFetchWrapper.views,
       models = _useFetchWrapper.models;
 
-  var url = "https://8-c2c78385be-s38gqk.api.zesty.io/v1/content/models/6-8eb48d80ec-8ggrzt/items/7-f4f99e80ec-pq3q7s";
-  var token = "458f44d62f38d83acb0ef3a307af1db848edb17c"; // this is for json data viewer
+  var url = "https://" + instanceZUID + ".api.zesty.io/v1/content/models/" + modelZUID + "/items/" + itemZUID; // this is for json data viewer
 
   var data = transformContent(content, search);
   console.log(pageData, "This the Pagedata");
+
+  var getFinalData = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee() {
+      return runtime_1.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return fetchData(url, setMetaData, token);
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function getFinalData() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
   React__default.useEffect(function () {
-    console.log(instances, views, models, "datas");
-  }, [instances, models, views]);
+    console.log(instances, views, models, jsonData, "datas");
+  }, [instances, models, views, jsonData]);
   React__default.useEffect(function () {
-    fetchData(url, setMetaData, token);
+    getFinalData();
   }, []); // for loading of tabs
 
   React__default.useEffect(function () {
@@ -2668,7 +2742,9 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
     metaData: metaData,
     data: data,
     search: search,
-    setSearch: setSearch
+    setSearch: setSearch,
+    url: url,
+    token: token
   }), currentTab === "Meta Viewer" && React__default.createElement(MetaViewer, {
     response: response,
     content: contentData
@@ -2680,21 +2756,28 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
 }; // Main ZESTY EXPLORER
 
 
-var ZestyExplorer = function ZestyExplorer(_ref2) {
-  var _ref2$content = _ref2.content,
-      content = _ref2$content === void 0 ? {} : _ref2$content;
+var ZestyExplorer = function ZestyExplorer(_ref3) {
+  var _ref3$content = _ref3.content,
+      content = _ref3$content === void 0 ? {} : _ref3$content;
+  var jsonUrl = "https://qzp3zx5t-dev.webengine.zesty.io/?toJSON";
 
-  var _React$useState5 = React__default.useState(false),
-      open = _React$useState5[0],
-      setOpen = _React$useState5[1];
+  var _React$useState5 = React__default.useState([]),
+      jsonData = _React$useState5[0],
+      setJsonData = _React$useState5[1];
 
-  var _React$useState6 = React__default.useState(""),
-      pageData = _React$useState6[0],
-      setPageData = _React$useState6[1];
+  var token = getCookie("APP_SID") || process.env.ZESTY_TEST_APP_SID;
+
+  var _React$useState6 = React__default.useState(false),
+      open = _React$useState6[0],
+      setOpen = _React$useState6[1];
 
   var _React$useState7 = React__default.useState(""),
-      response = _React$useState7[0],
-      setResponse = _React$useState7[1];
+      pageData = _React$useState7[0],
+      setPageData = _React$useState7[1];
+
+  var _React$useState8 = React__default.useState(""),
+      response = _React$useState8[0],
+      setResponse = _React$useState8[1];
 
   var _useDarkMode = useDarkMode(),
       themeMode = _useDarkMode[0],
@@ -2704,18 +2787,18 @@ var ZestyExplorer = function ZestyExplorer(_ref2) {
   console.log(themeMode, mountedComponent);
 
   var getData = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee() {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee2() {
       var _yield$getPageData, data, response;
 
-      return runtime_1.wrap(function _callee$(_context) {
+      return runtime_1.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
-              _context.next = 2;
+              _context2.next = 2;
               return getPageData();
 
             case 2:
-              _yield$getPageData = _context.sent;
+              _yield$getPageData = _context2.sent;
               data = _yield$getPageData.data;
               response = _yield$getPageData.response;
               data && setPageData(data);
@@ -2723,19 +2806,43 @@ var ZestyExplorer = function ZestyExplorer(_ref2) {
 
             case 7:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee);
+      }, _callee2);
     }));
 
     return function getData() {
-      return _ref3.apply(this, arguments);
+      return _ref4.apply(this, arguments);
+    };
+  }();
+
+  var getJsonData = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee3() {
+      return runtime_1.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return fetchJSON(jsonUrl, setJsonData, token);
+
+            case 2:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+
+    return function getJsonData() {
+      return _ref5.apply(this, arguments);
     };
   }(); // check if content is available
 
 
   React__default.useEffect(function () {
+    getJsonData();
+
     if (content && Object.keys(content).length === 0) {
       getData();
     } else {
@@ -2782,7 +2889,8 @@ var ZestyExplorer = function ZestyExplorer(_ref2) {
   }, "Compass")), open && React__default.createElement(Box, null, React__default.createElement(ZestyExplorerBrowser, {
     response: response,
     pageData: pageData,
-    contentData: searchObject
+    contentData: searchObject,
+    jsonData: jsonData
   }, React__default.createElement(Button, {
     onClick: function onClick() {
       return toggleOpenState(false);

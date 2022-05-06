@@ -1,6 +1,6 @@
 import React from "react"
 
-export const useFetchWrapper = (userAppSID: string, instanceZUID: string) => {
+export const useFetchWrapper = (userAppSID: any, instanceZUID: any) => {
    const [verifySuccess, setverifySuccess] = React.useState("")
    const [verifyFailed, setverifyFailed] = React.useState("")
    const [instances, setinstances] = React.useState([])

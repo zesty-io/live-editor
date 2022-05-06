@@ -5,4 +5,5 @@ export declare const getPageData: () => Promise<{
     };
     response: Response;
 }>;
-export declare const fetchData: (uri: string, setFunc: (e: any) => void, token: string) => Promise<void>;
+export declare const fetchData: (uri: string, setFunc: (e: any) => void, token: string | any) => Promise<void>;
+export declare const fetchJSON: (uri: string, setFunc: (e: any) => void, token: string | any) => Promise<void>;

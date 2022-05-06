@@ -31,14 +31,40 @@ export const getPageData = async () => {
 export const fetchData = async (
    uri: string,
    setFunc: (e: any) => void,
-   token: string,
+   token: string | any,
 ) => {
+   console.log(token)
    const headers = {
       authorization: `Bearer ${token}`,
+      "Content-Type": "application/x-www-form-urlencoded",
    }
    const res = await fetch(uri, {
-      method: "get",
+      method: "GET",
+      mode: "cors",
+      referrerPolicy: "no-referrer",
+      credentials: "omit",
       headers,
    }).then((response) => response.json())
    res && (await setFunc(res))
+}
+
+export const fetchJSON = async (
+   uri: string,
+   setFunc: (e: any) => void,
+   token: string | any,
+) => {
+   console.log(token)
+   let data = ""
+   const headers = {
+      "Content-Type": "application/x-www-form-urlencoded",
+   }
+   const res = await fetch(uri, {
+      method: "GET",
+      mode: "cors",
+      referrerPolicy: "no-referrer",
+      credentials: "omit",
+      headers,
+   })
+   data = await res.json()
+   res && setFunc({ data, response: res })
 }

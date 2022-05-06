@@ -34,15 +34,13 @@ function activateWorkingElement(match: string): any {
 
 function deactivateWorkingElement(
    workingElement: any,
-   setDeactivateElem: any,
    keyName: string,
    metaData: string,
-   url: string,
-   token: string,
+   url: string | any,
+   token: string | any,
 ): any {
    if (undefined !== workingElement) {
       // @ts-ignore
-      setDeactivateElem({ [`${keyName}`]: workingElement?.innerText })
       helper.handleEdit(metaData, url, token, {
          [`${keyName}`]: workingElement?.innerText,
       })
@@ -62,9 +60,9 @@ interface Props {
    obj: any
    workingElement: string
    setWorkingElement: (e: string) => void
-   setDeactivateElem: (e: any) => void
    metaData: any
-   deactivateElem: any
+   url: any
+   token: any
 }
 
 function Row({
@@ -72,16 +70,15 @@ function Row({
    obj,
    workingElement,
    setWorkingElement,
-   setDeactivateElem,
    metaData,
-   deactivateElem,
+   url,
+   token,
 }: Props) {
    const [showCopy, setShowCopy] = React.useState(false)
    const [clipboardCopy, setclipboardCopy] = React.useState(false)
    const [open, setOpen] = React.useState(false)
    const [text, settext] = React.useState("")
 
-   console.log(deactivateElem)
    const theme = useTheme()
    let value = ""
    let valueType = "string"
@@ -91,9 +88,9 @@ function Row({
    } else {
       valueType = "object"
    }
-   const url =
-      "https://8-c2c78385be-s38gqk.api.zesty.io/v1/content/models/6-8eb48d80ec-8ggrzt/items/7-f4f99e80ec-pq3q7s"
-   const token = "458f44d62f38d83acb0ef3a307af1db848edb17c"
+
+   // const url = `https://${instanceZUID}.api.zesty.io/v1/content/models/${modelZUID}/items/${itemZUID}`
+   // const token = helper.getCookie("APP_SID") || process.env.ZESTY_TEST_APP_SID
 
    // @ts-ignore
    const showCloseBtn = text === workingElement?.innerText
@@ -137,7 +134,6 @@ function Row({
                      onClick={() => {
                         deactivateWorkingElement(
                            workingElement,
-                           setDeactivateElem,
                            keyName,
                            metaData,
                            url,
@@ -222,15 +218,8 @@ function Row({
    )
 }
 
-export default function CollapsibleTable({ metaData, data = {} }: any) {
+export default function CollapsibleTable({ metaData, data = {}, url, token }: any) {
    const [workingElement, setWorkingElement] = React.useState("")
-   const [deactivateElem, setDeactivateElem] = React.useState<any>({})
-   React.useEffect(() => {
-      // @ts-ignore
-      console.log(workingElement?.innerText, "ELEM123")
-      // @ts-ignore
-      console.log(deactivateElem, "DEACT ELEM123")
-   }, [workingElement])
 
    return (
       <TableContainer component={Paper} style={{ maxHeight: 600 }}>
@@ -265,9 +254,9 @@ export default function CollapsibleTable({ metaData, data = {} }: any) {
                      keyName={keyName}
                      workingElement={workingElement}
                      setWorkingElement={setWorkingElement}
-                     setDeactivateElem={setDeactivateElem}
                      metaData={metaData}
-                     deactivateElem={deactivateElem}
+                     url={url}
+                     token={token}
                   />
                ))}
             </TableBody>

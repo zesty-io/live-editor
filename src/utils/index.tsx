@@ -112,6 +112,7 @@ export function updateToken(name: string, value: string) {
    window.location.reload()
 }
 
+// pass element id here to scroll to
 export const scrollToView = (elementId: string) => {
    document
       .getElementById(elementId)

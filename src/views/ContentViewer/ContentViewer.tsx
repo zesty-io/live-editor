@@ -8,9 +8,18 @@ interface Props {
    data: any
    setSearch: (e: any) => void
    metaData: any
+   url: any
+   token: any
 }
 
-export const ContentViewer = ({ metaData, data, search, setSearch }: Props) => {
+export const ContentViewer = ({
+   metaData,
+   data,
+   search,
+   setSearch,
+   url,
+   token,
+}: Props) => {
    // const theme = useTheme()
    console.log(search, setSearch)
    return (
@@ -22,7 +31,12 @@ export const ContentViewer = ({ metaData, data, search, setSearch }: Props) => {
          }}
       >
          {/* <SearchAppBar value={search} onChange={setSearch} /> */}
-         <CollapsibleTable metaData={metaData} data={data.content || {}} />
+         <CollapsibleTable
+            url={url}
+            token={token}
+            metaData={metaData}
+            data={data.content || {}}
+         />
       </div>
    )
 }
