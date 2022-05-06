@@ -42,3 +42,8 @@ export declare const dummycontent: {
         };
     };
 };
+export declare const tabList: {
+    id: number;
+    label: string;
+    value: string;
+}[];

@@ -45,3 +45,10 @@ export const dummycontent = {
       },
    },
 }
+
+// list of tabs to render
+export const tabList = [
+   { id: 1, label: "Content Viewer", value: "Content Viewer" },
+   { id: 2, label: "Meta Viewer", value: "Meta Viewer" },
+   { id: 3, label: "Json Data Viewer", value: "Json Data Viewer" },
+]

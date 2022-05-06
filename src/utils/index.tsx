@@ -1,6 +1,6 @@
 import { Box } from "@mui/system"
-import { dummycontent } from "constants/index"
 import React from "react"
+import Fuse from "fuse.js"
 /* eslint-disable guard-for-in */
 export const canUseDOM = () => {
    return !!(
@@ -118,9 +118,10 @@ export const scrollToView = (elementId: string) => {
       ?.scrollIntoView({ behavior: "smooth", block: "center" })!
 }
 
-export const handleEdit = async (content: any) => {
-   const instanceZUID = "8-c2c78385be-s38gqk"
-   const url = `https://${instanceZUID}.api.zesty.io/v1/content/models/${content.meta.model.zuid}/items/${content.meta.zuid}`
+export const handleEdit = async (data1: any, url: string, token: string) => {
+   const content = data1.data
+   // const instanceZUID = "8-c2c78385be-s38gqk"
+   // const url = `https://${instanceZUID}.api.zesty.io/v1/content/models/${content.meta.model.zuid}/items/${content.meta.zuid}`
 
    // const data = transFromData(e.updated_src.content)
 
@@ -138,24 +139,24 @@ export const handleEdit = async (content: any) => {
    //    canonicalTagCustomValue: content.meta.web.canonical_tag_custom_value,
    //    createdByUserZUID: content.meta.zuid,
    // }
-   const web = {
-      version: 8,
-      versionZUID: "9-8cafc0e7a1-mt987k",
-      metaDescription: "",
-      metaTitle: "Homepage",
-      metaLinkText: "Homepage",
-      metaKeywords: null,
-      parentZUID: "0",
-      pathPart: "zesty_home",
-      path: "/",
-      sitemapPriority: -1,
-      canonicalTagMode: 1,
-      canonicalQueryParamWhitelist: null,
-      canonicalTagCustomValue: null,
-      createdByUserZUID: "5-c2a5c791e3-krq7ts",
-      createdAt: "2022-05-05T16:20:15Z",
-      updatedAt: "2022-05-05T16:20:15Z",
-   }
+   // const web = {
+   //    version: 8,
+   //    versionZUID: "9-8cafc0e7a1-mt987k",
+   //    metaDescription: "",
+   //    metaTitle: "Homepage",
+   //    metaLinkText: "Homepage",
+   //    metaKeywords: null,
+   //    parentZUID: "0",
+   //    pathPart: "zesty_home",
+   //    path: "/",
+   //    sitemapPriority: -1,
+   //    canonicalTagMode: 1,
+   //    canonicalQueryParamWhitelist: null,
+   //    canonicalTagCustomValue: null,
+   //    createdByUserZUID: "5-c2a5c791e3-krq7ts",
+   //    createdAt: "2022-05-05T16:20:15Z",
+   //    updatedAt: "2022-05-05T16:20:15Z",
+   // }
    // const meta = {
    //    ZUID: content.meta.zuid,
    //    masterZUID: content.meta.zuid,
@@ -168,37 +169,35 @@ export const handleEdit = async (content: any) => {
    //    createdAt: content.meta.createdAt,
    //    updatedAt: content.meta.updatedAt,
    // }
-   const meta = {
-      ZUID: "7-f4f99e80ec-pq3q7s",
-      zid: 502,
-      masterZUID: "7-f4f99e80ec-pq3q7s",
-      contentModelZUID: "6-8eb48d80ec-8ggrzt",
-      contentModelName: null,
-      sort: 0,
-      listed: true,
-      version: 8,
-      langID: 1,
-      createdAt: "2020-11-06T23:57:12Z",
-      updatedAt: "2022-05-05T16:20:15Z",
-   }
+   // const meta = {
+   //    ZUID: "7-f4f99e80ec-pq3q7s",
+   //    zid: 502,
+   //    masterZUID: "7-f4f99e80ec-pq3q7s",
+   //    contentModelZUID: "6-8eb48d80ec-8ggrzt",
+   //    contentModelName: null,
+   //    sort: 0,
+   //    listed: true,
+   //    version: 8,
+   //    langID: 1,
+   //    createdAt: "2020-11-06T23:57:12Z",
+   //    updatedAt: "2022-05-05T16:20:15Z",
+   // }
 
-   const originalData: any = dummycontent
+   // const originalData: any = content.data
    // remove not necessary fields
    // @ts-ignore
-   delete originalData.meta
-   delete originalData.zestyBaseURL
-   delete originalData.zestyInstanceZUID
-   delete originalData.zestyProductionMode
-
-   const data = originalData
+   // delete originalData?.meta
+   // delete originalData?.zestyBaseURL
+   // delete originalData?.zestyInstanceZUID
+   // delete originalData?.zestyProductionMode
 
    const payload = {
-      data,
-      meta,
-      web,
+      data: content.data,
+      meta: content.meta,
+      web: content.web,
    }
 
-   const token = "f3555fb52bdd3c6e3b3ff5421b74b740bf41f4e5"
+   // const token = "f3555fb52bdd3c6e3b3ff5421b74b740bf41f4e5"
 
    const putMethod = {
       method: "PUT",
@@ -217,4 +216,42 @@ export const handleEdit = async (content: any) => {
          window.location.reload()
       })
    res.status !== 200 && res.json().then((e) => console.log(e, "err"))
+}
+export const transformContent = (content: any, search: any) => {
+   // convert obj to dot
+   // @ts-ignore
+   const flaten1 = flattenObj(content)
+   // convert to array of objects
+   const flaten2 = convertToArray(flaten1)
+   // generate columns for search
+   const columns = flaten2.map((e) => {
+      const res = Object.keys(e)
+      return res.toString().replace(/.[0-9]/g, "")
+   })
+   // search options
+   const options = {
+      includeScore: true,
+      useExtendedSearch: true,
+      includeMatches: true,
+      ignoreLocation: true,
+      findAllMatches: true,
+      threshold: 0,
+      isCaseSensitive: false,
+      minMatchCharLength: 1,
+      keys: columns,
+   }
+   // search func
+   const fuse = new Fuse([content], options)
+   const result = fuse.search(search || "")
+   // convert as key value pairs
+   const result2 =
+      result &&
+      result[0]?.matches
+         ?.map((e: any) => {
+            return { [`${e.key}`]: e.value }
+         })
+         .map((e: any) => deepen(e))
+   // display the result of search
+   const data = search ? result2 : { content }
+   return data
 }

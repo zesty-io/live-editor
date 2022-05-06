@@ -3,12 +3,11 @@
 import React from "react"
 import { ThemeProvider } from "@mui/material/styles"
 import CssBaseline from "@mui/material/CssBaseline"
-import { dummycontent, dummydata } from "constants/index"
-import Fuse from "fuse.js"
+import { dummydata, tabList } from "constants/index"
 import { ContentViewer, MetaViewer, JsonDataViewer } from "views/index"
 import { Headers, Loader } from "components/index"
 import * as helper from "utils/index"
-import { getPageData } from "services/index"
+import { fetchData, getPageData } from "services/index"
 import {
    buttonStyles,
    containerStyle,
@@ -20,16 +19,9 @@ import { TabContainer } from "components/Tabs"
 import Button from "@mui/material/Button"
 import Box from "@mui/material/Box"
 import getTheme from "theme/index"
-import { useDarkMode } from "hooks"
+import { useDarkMode, useFetchWrapper } from "hooks"
 import CloseFullscreenIcon from "@mui/icons-material/CloseFullscreen"
 import { Helmet } from "react-helmet"
-
-// list of tabs to render
-const tabList = [
-   { id: 1, label: "Content Viewer", value: "Content Viewer" },
-   { id: 2, label: "Meta Viewer", value: "Meta Viewer" },
-   { id: 3, label: "Json Data Viewer", value: "Json Data Viewer" },
-]
 
 // dom access highlight function
 const expandBody = (bool: boolean) => {
@@ -42,17 +34,42 @@ const expandBody = (bool: boolean) => {
 
 // renanme content to contentData
 const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any) => {
+   const instanceZUID = helper.getCookie("INSTANCE_ZUID") || "8-c4eec0b7d4-8lx0ch"
+   const userAppSID =
+      helper.getCookie("APP_SID") || "f3555fb52bdd3c6e3b3ff5421b74b740bf41f4e5"
+
+   // get the instance view models  on initial load
+   const {
+      loading,
+      verifyFailed,
+      verifySuccess,
+      instances,
+      views,
+      models,
+   } = useFetchWrapper(userAppSID, instanceZUID)
+
+   const url =
+      "https://8-c2c78385be-s38gqk.api.zesty.io/v1/content/models/6-8eb48d80ec-8ggrzt/items/7-f4f99e80ec-pq3q7s"
+   const token = "458f44d62f38d83acb0ef3a307af1db848edb17c"
+
    const content = contentData || dummydata
    const [currentTab, setcurrentTab] = React.useState("Content Viewer")
    const [search, setSearch] = React.useState()
-   const [verifySuccess, setverifySuccess] = React.useState("")
-   const [verifyFailed, setverifyFailed] = React.useState("")
-   const [instances, setinstances] = React.useState([])
-   const [models, setmodels] = React.useState("")
-   const [views, setviews] = React.useState("")
-   const [loading, setloading] = React.useState(false)
+   const [contentv2, setcontentv2] = React.useState([])
    // for loading of tabs
    const [time, settime] = React.useState(0)
+
+   // this is for json data viewer
+   const data = helper.transformContent(content, search)
+   console.log(pageData, "This the Pagedata")
+
+   React.useEffect(() => {
+      console.log(instances, views, models, contentv2, "datas")
+   }, [instances, models, views, contentv2])
+
+   React.useEffect(() => {
+      fetchData(url, setcontentv2, token)
+   }, [])
 
    // for loading of tabs
    React.useEffect(() => {
@@ -64,94 +81,11 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
 
       return () => clearTimeout(timer)
    })
-
-   // convert obj to dot
-   // @ts-ignore
-   const flaten1 = helper.flattenObj(content)
-   // convert to array of objects
-   const flaten2 = helper.convertToArray(flaten1)
-   // generate columns for search
-   const columns = flaten2.map((e) => {
-      const res = Object.keys(e)
-      return res.toString().replace(/.[0-9]/g, "")
-   })
-   // search options
-   const options = {
-      includeScore: true,
-      useExtendedSearch: true,
-      includeMatches: true,
-      ignoreLocation: true,
-      findAllMatches: true,
-      threshold: 0,
-      isCaseSensitive: false,
-      minMatchCharLength: 1,
-      keys: columns,
-   }
-   // search func
-   const fuse = new Fuse([content], options)
-   const result = fuse.search(search || "")
-   // convert as key value pairs
-   const result2 =
-      result &&
-      result[0]?.matches
-         ?.map((e: any) => {
-            return { [`${e.key}`]: e.value }
-         })
-         .map((e: any) => helper.deepen(e))
-   // display the result of search
-   const data = search ? result2 : { content }
-   console.log(pageData, "This the Pagedata")
-
-   // FetchWrapper Section
-   const instanceZUID = helper.getCookie("INSTANCE_ZUID") || "8-c4eec0b7d4-8lx0ch"
-   const userAppSID =
-      helper.getCookie("APP_SID") || "f3555fb52bdd3c6e3b3ff5421b74b740bf41f4e5"
-   // const instanceZUID = ""
-   // const userAppSID = ""
-
-   // @ts-ignore
-   const ZestyAPI = new Zesty.FetchWrapper(instanceZUID, userAppSID)
-
-   const verifyUser = async () => {
-      setloading(true)
-      const res = await ZestyAPI.verify()
-      res.code === 200 && setverifySuccess(res.meta)
-      res.code !== 200 && setverifyFailed(res.error)
-      setloading(false)
-   }
-
-   const getInstances = async () => {
-      const res = await ZestyAPI.getInstances()
-      !res.error && setinstances(res)
-      res.error && console.log(res, "instance failed")
-   }
-   const getModels = async () => {
-      const res = await ZestyAPI.getModels()
-      !res.error && setmodels(res)
-      res.error && console.log(res, "models failed")
-   }
-   const getViews = async () => {
-      const res = await ZestyAPI.getViews()
-      !res.error && setviews(res)
-      res.error && console.log(res, "views failed")
-   }
-
-   React.useEffect(() => {
-      verifyUser()
-      getInstances()
-      getModels()
-      getViews()
-   }, [])
-
-   React.useEffect(() => {
-      console.log(instances, views, models, "datas")
-   }, [instances, models, views])
-
    // show loading
    if (loading && !verifyFailed && !verifySuccess) {
       return (
          <Box sx={verifyUserPrompt}>
-            <h1>Loading</h1>
+            <Loader />
          </Box>
       )
    }
@@ -173,7 +107,6 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
       )
    }
 
-   console.log(dummycontent)
    return (
       <Box sx={containerStyle}>
          <Headers children={children} content={content} response={response} />
@@ -182,9 +115,9 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
             tabList={tabList}
             settime={() => settime(2)}
          />
-         {/* <button onClick={() => helper.handleEdit(dummycontent)}>
+         <button onClick={() => helper.handleEdit(contentv2, url, token)}>
             OKOKOKOKOKOKOKOKOK
-         </button> */}
+         </button>
          <div style={{ position: "relative" }}>
             {time > 0 && <Loader />}
             {currentTab === "Content Viewer" && (

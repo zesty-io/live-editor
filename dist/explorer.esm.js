@@ -1,7 +1,6 @@
 import React__default, { useState, createElement, Fragment } from 'react';
 import { useTheme as useTheme$1, styled, alpha, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import Fuse from 'fuse.js';
 import Box$1 from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
@@ -14,6 +13,7 @@ import Button from '@mui/material/Button';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Box, useTheme } from '@mui/system';
+import Fuse from 'fuse.js';
 import CloseIcon from '@mui/icons-material/Close';
 import { Box as Box$2, responsiveFontSizes } from '@mui/material';
 import { CopyBlock, anOldHope } from 'react-code-blocks';
@@ -1248,49 +1248,19 @@ var dummydata = {
   zestyBaseURL: "https://www.zesty.io"
 };
 
-var dummycontent = {
-  title: "Mat",
-  content: "<p>MUI is a lightweight CSS framework that follows Google's Material Design guidelinesc</p>",
-  meta: {
-    type: "item",
-    model_name: "homepage",
-    model_alternate_name: "Homepage",
-    zuid: "7-f4f99e80ec-pq3q7s",
-    createdAt: "2022-05-05 16:20:15",
-    updatedAt: "2022-05-05 16:20:15",
-    listed: "1",
-    version: "8",
-    locale: {
-      id: "1",
-      name: "English (United States)",
-      code: "en-US",
-      "default": "1",
-      active: "1",
-      enabled: "1"
-    },
-    model: {
-      type: "model",
-      zuid: "6-8eb48d80ec-8ggrzt",
-      name: "homepage",
-      label: "Homepage",
-      resourceURI: "https://qzp3zx5t-dev.webengine.zesty.io/-/instant/6-8eb48d80ec-8ggrzt.json"
-    },
-    web: {
-      url: "https://qzp3zx5t-dev.webengine.zesty.io/",
-      uri: "/",
-      fragment: "zesty_home",
-      canonical_tag_mode: "1",
-      sitemap_priority: "-1.0",
-      sitemap_last_updated: "2022-05-05 16:20:15",
-      canonical_query_param_whitelist: null,
-      canonical_tag_custom_value: null,
-      seo_link_text: "Homepage",
-      seo_meta_title: "Homepage",
-      seo_meta_description: "",
-      seo_meta_keywords: null
-    }
-  }
-};
+var tabList = [{
+  id: 1,
+  label: "Content Viewer",
+  value: "Content Viewer"
+}, {
+  id: 2,
+  label: "Meta Viewer",
+  value: "Meta Viewer"
+}, {
+  id: 3,
+  label: "Json Data Viewer",
+  value: "Json Data Viewer"
+}];
 
 /* eslint-disable guard-for-in */
 
@@ -1396,6 +1366,162 @@ var scrollToView = function scrollToView(elementId) {
     behavior: "smooth",
     block: "center"
   });
+};
+var handleEdit = /*#__PURE__*/function () {
+  var _ref3 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(data1, url, token) {
+    var content, payload, putMethod, res;
+    return runtime_1.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            content = data1.data; // const instanceZUID = "8-c2c78385be-s38gqk"
+            // const url = `https://${instanceZUID}.api.zesty.io/v1/content/models/${content.meta.model.zuid}/items/${content.meta.zuid}`
+            // const data = transFromData(e.updated_src.content)
+            // const web = {
+            //    metaDescription: content.meta.web.seo_meta_description,
+            //    metaTitle: content.meta.web.seo_meta_title,
+            //    metaLinkText: content.meta.web.seo_link_text,
+            //    metaKeywords: content.meta.web.seo_meta_keywords,
+            //    parentZUID: content.meta.zuid || "0",
+            //    pathPart: content.meta.web.fragment,
+            //    path: content.meta.web.uri,
+            //    sitemapPriority: content.meta.web.sitemap_priority,
+            //    canonicalTagMode: content.meta.web.sitemap_priority,
+            //    canonicalQueryParamWhitelist: content.meta.web.canonical_query_param_whitelist,
+            //    canonicalTagCustomValue: content.meta.web.canonical_tag_custom_value,
+            //    createdByUserZUID: content.meta.zuid,
+            // }
+            // const web = {
+            //    version: 8,
+            //    versionZUID: "9-8cafc0e7a1-mt987k",
+            //    metaDescription: "",
+            //    metaTitle: "Homepage",
+            //    metaLinkText: "Homepage",
+            //    metaKeywords: null,
+            //    parentZUID: "0",
+            //    pathPart: "zesty_home",
+            //    path: "/",
+            //    sitemapPriority: -1,
+            //    canonicalTagMode: 1,
+            //    canonicalQueryParamWhitelist: null,
+            //    canonicalTagCustomValue: null,
+            //    createdByUserZUID: "5-c2a5c791e3-krq7ts",
+            //    createdAt: "2022-05-05T16:20:15Z",
+            //    updatedAt: "2022-05-05T16:20:15Z",
+            // }
+            // const meta = {
+            //    ZUID: content.meta.zuid,
+            //    masterZUID: content.meta.zuid,
+            //    contentModelZUID: content.meta.model.zuid,
+            //    contentModelName: content.meta.model.name,
+            //    sort: content.meta.sort,
+            //    listed: content.meta.listed,
+            //    version: content.meta.version,
+            //    langID: content.meta.langID,
+            //    createdAt: content.meta.createdAt,
+            //    updatedAt: content.meta.updatedAt,
+            // }
+            // const meta = {
+            //    ZUID: "7-f4f99e80ec-pq3q7s",
+            //    zid: 502,
+            //    masterZUID: "7-f4f99e80ec-pq3q7s",
+            //    contentModelZUID: "6-8eb48d80ec-8ggrzt",
+            //    contentModelName: null,
+            //    sort: 0,
+            //    listed: true,
+            //    version: 8,
+            //    langID: 1,
+            //    createdAt: "2020-11-06T23:57:12Z",
+            //    updatedAt: "2022-05-05T16:20:15Z",
+            // }
+            // const originalData: any = content.data
+            // remove not necessary fields
+            // @ts-ignore
+            // delete originalData?.meta
+            // delete originalData?.zestyBaseURL
+            // delete originalData?.zestyInstanceZUID
+            // delete originalData?.zestyProductionMode
+
+            payload = {
+              data: content.data,
+              meta: content.meta,
+              web: content.web
+            }; // const token = "f3555fb52bdd3c6e3b3ff5421b74b740bf41f4e5"
+
+            putMethod = {
+              method: "PUT",
+              headers: {
+                "Content-type": "application/json; charset=UTF-8",
+                authorization: "Bearer " + token
+              },
+              body: JSON.stringify(payload)
+            };
+            _context.next = 5;
+            return fetch(url, putMethod);
+
+          case 5:
+            res = _context.sent;
+            res.status === 200 && res.json().then(function (e) {
+              console.log(e);
+              window.location.reload();
+            });
+            res.status !== 200 && res.json().then(function (e) {
+              return console.log(e, "err");
+            });
+
+          case 8:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function handleEdit(_x, _x2, _x3) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+var transformContent = function transformContent(content, search) {
+  var _result$, _result$$matches;
+
+  // convert obj to dot
+  // @ts-ignore
+  var flaten1 = flattenObj(content); // convert to array of objects
+
+  var flaten2 = convertToArray(flaten1); // generate columns for search
+
+  var columns = flaten2.map(function (e) {
+    var res = Object.keys(e);
+    return res.toString().replace(/.[0-9]/g, "");
+  }); // search options
+
+  var options = {
+    includeScore: true,
+    useExtendedSearch: true,
+    includeMatches: true,
+    ignoreLocation: true,
+    findAllMatches: true,
+    threshold: 0,
+    isCaseSensitive: false,
+    minMatchCharLength: 1,
+    keys: columns
+  }; // search func
+
+  var fuse = new Fuse([content], options);
+  var result = fuse.search(search || ""); // convert as key value pairs
+
+  var result2 = result && ((_result$ = result[0]) == null ? void 0 : (_result$$matches = _result$.matches) == null ? void 0 : _result$$matches.map(function (e) {
+    var _ref4;
+
+    return _ref4 = {}, _ref4["" + e.key] = e.value, _ref4;
+  }).map(function (e) {
+    return deepen(e);
+  })); // display the result of search
+
+  var data = search ? result2 : {
+    content: content
+  };
+  return data;
 };
 
 function activateWorkingElement(match) {
@@ -1968,6 +2094,48 @@ var getPageData = /*#__PURE__*/function () {
     return _ref.apply(this, arguments);
   };
 }();
+var fetchData = /*#__PURE__*/function () {
+  var _ref2 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee2(uri, setFunc, token) {
+    var headers, res;
+    return runtime_1.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            headers = {
+              authorization: "Bearer " + token
+            };
+            _context2.next = 3;
+            return fetch(uri, {
+              method: "get",
+              headers: headers
+            }).then(function (response) {
+              return response.json();
+            });
+
+          case 3:
+            res = _context2.sent;
+            _context2.t0 = res;
+
+            if (!_context2.t0) {
+              _context2.next = 8;
+              break;
+            }
+
+            _context2.next = 8;
+            return setFunc(res);
+
+          case 8:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+
+  return function fetchData(_x, _x2, _x3) {
+    return _ref2.apply(this, arguments);
+  };
+}();
 
 var buttonStyles = {
   borderRadius: "5px",
@@ -2214,6 +2382,174 @@ var getTheme = function getTheme(mode, themeToggler) {
   }));
 };
 
+var useFetchWrapper = function useFetchWrapper(userAppSID, instanceZUID) {
+  var _React$useState = React__default.useState(""),
+      verifySuccess = _React$useState[0],
+      setverifySuccess = _React$useState[1];
+
+  var _React$useState2 = React__default.useState(""),
+      verifyFailed = _React$useState2[0],
+      setverifyFailed = _React$useState2[1];
+
+  var _React$useState3 = React__default.useState([]),
+      instances = _React$useState3[0],
+      setinstances = _React$useState3[1];
+
+  var _React$useState4 = React__default.useState(""),
+      models = _React$useState4[0],
+      setmodels = _React$useState4[1];
+
+  var _React$useState5 = React__default.useState(""),
+      views = _React$useState5[0],
+      setviews = _React$useState5[1]; // for verify user loading
+
+
+  var _React$useState6 = React__default.useState(false),
+      loading = _React$useState6[0],
+      setloading = _React$useState6[1]; // FetchWrapper Section
+  // const instanceZUID = helper.getCookie("INSTANCE_ZUID") || "8-c4eec0b7d4-8lx0ch"
+  // const userAppSID =
+  //    helper.getCookie("APP_SID") || "f3555fb52bdd3c6e3b3ff5421b74b740bf41f4e5"
+  // const instanceZUID = ""
+  // const userAppSID = ""
+  // @ts-ignore
+
+
+  var ZestyAPI = new Zesty.FetchWrapper(instanceZUID, userAppSID);
+
+  var verifyUser = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee() {
+      var res;
+      return runtime_1.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              setloading(true);
+              _context.next = 3;
+              return ZestyAPI.verify();
+
+            case 3:
+              res = _context.sent;
+              res.code === 200 && setverifySuccess(res.meta);
+              res.code !== 200 && setverifyFailed(res.error);
+              setloading(false);
+
+            case 7:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function verifyUser() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  var getInstances = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee2() {
+      var res;
+      return runtime_1.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return ZestyAPI.getInstances();
+
+            case 2:
+              res = _context2.sent;
+              !res.error && setinstances(res);
+              res.error && console.log(res, "instance failed");
+
+            case 5:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function getInstances() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  var getModels = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee3() {
+      var res;
+      return runtime_1.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return ZestyAPI.getModels();
+
+            case 2:
+              res = _context3.sent;
+              !res.error && setmodels(res);
+              res.error && console.log(res, "models failed");
+
+            case 5:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+
+    return function getModels() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
+  var getViews = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee4() {
+      var res;
+      return runtime_1.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return ZestyAPI.getViews();
+
+            case 2:
+              res = _context4.sent;
+              !res.error && setviews(res);
+              res.error && console.log(res, "views failed");
+
+            case 5:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }));
+
+    return function getViews() {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+
+  React__default.useEffect(function () {
+    verifyUser();
+    getInstances();
+    getModels();
+    getViews();
+  }, []); //    React.useEffect(() => {
+  //       console.log(instances, views, models, "datas")
+  //    }, [instances, models, views])
+
+  return {
+    loading: loading,
+    verifyFailed: verifyFailed,
+    verifySuccess: verifySuccess,
+    models: models,
+    instances: instances,
+    views: views
+  };
+};
+
 var useDarkMode = function useDarkMode() {
   // set the initial theme from localstorage or 'light'
   var _React$useState = React__default.useState(window.localStorage.getItem("themeMode") || "light"),
@@ -2251,20 +2587,6 @@ var useDarkMode = function useDarkMode() {
   return [themeMode, themeToggler, mountedComponent];
 };
 
-var tabList = [{
-  id: 1,
-  label: "Content Viewer",
-  value: "Content Viewer"
-}, {
-  id: 2,
-  label: "Meta Viewer",
-  value: "Meta Viewer"
-}, {
-  id: 3,
-  label: "Json Data Viewer",
-  value: "Json Data Viewer"
-}]; // dom access highlight function
-
 var expandBody = function expandBody(bool) {
   var body = document.querySelector("body");
   body.style.marginLeft = bool ? "40vw" : "0";
@@ -2275,12 +2597,23 @@ var expandBody = function expandBody(bool) {
 
 
 var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
-  var _result$, _result$$matches;
-
   var pageData = _ref.pageData,
       response = _ref.response,
       contentData = _ref.contentData,
       children = _ref.children;
+  var instanceZUID = getCookie("INSTANCE_ZUID") || "8-c4eec0b7d4-8lx0ch";
+  var userAppSID = getCookie("APP_SID") || "f3555fb52bdd3c6e3b3ff5421b74b740bf41f4e5"; // get the instance view models  on initial load
+
+  var _useFetchWrapper = useFetchWrapper(userAppSID, instanceZUID),
+      loading = _useFetchWrapper.loading,
+      verifyFailed = _useFetchWrapper.verifyFailed,
+      verifySuccess = _useFetchWrapper.verifySuccess,
+      instances = _useFetchWrapper.instances,
+      views = _useFetchWrapper.views,
+      models = _useFetchWrapper.models;
+
+  var url = "https://8-c2c78385be-s38gqk.api.zesty.io/v1/content/models/6-8eb48d80ec-8ggrzt/items/7-f4f99e80ec-pq3q7s";
+  var token = "458f44d62f38d83acb0ef3a307af1db848edb17c";
   var content = contentData || dummydata;
 
   var _React$useState = React__default.useState("Content Viewer"),
@@ -2291,35 +2624,24 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
       search = _React$useState2[0],
       setSearch = _React$useState2[1];
 
-  var _React$useState3 = React__default.useState(""),
-      verifySuccess = _React$useState3[0],
-      setverifySuccess = _React$useState3[1];
-
-  var _React$useState4 = React__default.useState(""),
-      verifyFailed = _React$useState4[0],
-      setverifyFailed = _React$useState4[1];
-
-  var _React$useState5 = React__default.useState([]),
-      instances = _React$useState5[0],
-      setinstances = _React$useState5[1];
-
-  var _React$useState6 = React__default.useState(""),
-      models = _React$useState6[0],
-      setmodels = _React$useState6[1];
-
-  var _React$useState7 = React__default.useState(""),
-      views = _React$useState7[0],
-      setviews = _React$useState7[1];
-
-  var _React$useState8 = React__default.useState(false),
-      loading = _React$useState8[0],
-      setloading = _React$useState8[1]; // for loading of tabs
+  var _React$useState3 = React__default.useState([]),
+      contentv2 = _React$useState3[0],
+      setcontentv2 = _React$useState3[1]; // for loading of tabs
 
 
-  var _React$useState9 = React__default.useState(0),
-      time = _React$useState9[0],
-      _settime = _React$useState9[1]; // for loading of tabs
+  var _React$useState4 = React__default.useState(0),
+      time = _React$useState4[0],
+      _settime = _React$useState4[1]; // this is for json data viewer
 
+
+  var data = transformContent(content, search);
+  console.log(pageData, "This the Pagedata");
+  React__default.useEffect(function () {
+    console.log(instances, views, models, contentv2, "datas");
+  }, [instances, models, views, contentv2]);
+  React__default.useEffect(function () {
+    fetchData(url, setcontentv2, token);
+  }, []); // for loading of tabs
 
   React__default.useEffect(function () {
     var timer = setTimeout(function () {
@@ -2330,181 +2652,12 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
     return function () {
       return clearTimeout(timer);
     };
-  }); // convert obj to dot
-  // @ts-ignore
-
-  var flaten1 = flattenObj(content); // convert to array of objects
-
-  var flaten2 = convertToArray(flaten1); // generate columns for search
-
-  var columns = flaten2.map(function (e) {
-    var res = Object.keys(e);
-    return res.toString().replace(/.[0-9]/g, "");
-  }); // search options
-
-  var options = {
-    includeScore: true,
-    useExtendedSearch: true,
-    includeMatches: true,
-    ignoreLocation: true,
-    findAllMatches: true,
-    threshold: 0,
-    isCaseSensitive: false,
-    minMatchCharLength: 1,
-    keys: columns
-  }; // search func
-
-  var fuse = new Fuse([content], options);
-  var result = fuse.search(search || ""); // convert as key value pairs
-
-  var result2 = result && ((_result$ = result[0]) == null ? void 0 : (_result$$matches = _result$.matches) == null ? void 0 : _result$$matches.map(function (e) {
-    var _ref2;
-
-    return _ref2 = {}, _ref2["" + e.key] = e.value, _ref2;
-  }).map(function (e) {
-    return deepen(e);
-  })); // display the result of search
-
-  var data = search ? result2 : {
-    content: content
-  };
-  console.log(pageData, "This the Pagedata"); // FetchWrapper Section
-
-  var instanceZUID = getCookie("INSTANCE_ZUID") || "8-c4eec0b7d4-8lx0ch";
-  var userAppSID = getCookie("APP_SID") || "f3555fb52bdd3c6e3b3ff5421b74b740bf41f4e5"; // const instanceZUID = ""
-  // const userAppSID = ""
-  // @ts-ignore
-
-  var ZestyAPI = new Zesty.FetchWrapper(instanceZUID, userAppSID);
-
-  var verifyUser = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee() {
-      var res;
-      return runtime_1.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              setloading(true);
-              _context.next = 3;
-              return ZestyAPI.verify();
-
-            case 3:
-              res = _context.sent;
-              res.code === 200 && setverifySuccess(res.meta);
-              res.code !== 200 && setverifyFailed(res.error);
-              setloading(false);
-
-            case 7:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    return function verifyUser() {
-      return _ref3.apply(this, arguments);
-    };
-  }();
-
-  var getInstances = /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee2() {
-      var res;
-      return runtime_1.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.next = 2;
-              return ZestyAPI.getInstances();
-
-            case 2:
-              res = _context2.sent;
-              !res.error && setinstances(res);
-              res.error && console.log(res, "instance failed");
-
-            case 5:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2);
-    }));
-
-    return function getInstances() {
-      return _ref4.apply(this, arguments);
-    };
-  }();
-
-  var getModels = /*#__PURE__*/function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee3() {
-      var res;
-      return runtime_1.wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              _context3.next = 2;
-              return ZestyAPI.getModels();
-
-            case 2:
-              res = _context3.sent;
-              !res.error && setmodels(res);
-              res.error && console.log(res, "models failed");
-
-            case 5:
-            case "end":
-              return _context3.stop();
-          }
-        }
-      }, _callee3);
-    }));
-
-    return function getModels() {
-      return _ref5.apply(this, arguments);
-    };
-  }();
-
-  var getViews = /*#__PURE__*/function () {
-    var _ref6 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee4() {
-      var res;
-      return runtime_1.wrap(function _callee4$(_context4) {
-        while (1) {
-          switch (_context4.prev = _context4.next) {
-            case 0:
-              _context4.next = 2;
-              return ZestyAPI.getViews();
-
-            case 2:
-              res = _context4.sent;
-              !res.error && setviews(res);
-              res.error && console.log(res, "views failed");
-
-            case 5:
-            case "end":
-              return _context4.stop();
-          }
-        }
-      }, _callee4);
-    }));
-
-    return function getViews() {
-      return _ref6.apply(this, arguments);
-    };
-  }();
-
-  React__default.useEffect(function () {
-    verifyUser();
-    getInstances();
-    getModels();
-    getViews();
-  }, []);
-  React__default.useEffect(function () {
-    console.log(instances, views, models, "datas");
-  }, [instances, models, views]); // show loading
+  }); // show loading
 
   if (loading && !verifyFailed && !verifySuccess) {
     return React__default.createElement(Box$1, {
       sx: verifyUserPrompt
-    }, React__default.createElement("h1", null, "Loading"));
+    }, React__default.createElement(Loader, null));
   } // show failed login prompt
 
 
@@ -2519,7 +2672,6 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
     }, "Sign in to Zesty.io"));
   }
 
-  console.log(dummycontent);
   return React__default.createElement(Box$1, {
     sx: containerStyle
   }, React__default.createElement(Headers, {
@@ -2532,7 +2684,11 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
     settime: function settime() {
       return _settime(2);
     }
-  }), React__default.createElement("div", {
+  }), React__default.createElement("button", {
+    onClick: function onClick() {
+      return handleEdit(contentv2, url, token);
+    }
+  }, "OKOKOKOKOKOKOKOKOK"), React__default.createElement("div", {
     style: {
       position: "relative"
     }
@@ -2551,21 +2707,21 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
 }; // Main ZESTY EXPLORER
 
 
-var ZestyExplorer = function ZestyExplorer(_ref7) {
-  var _ref7$content = _ref7.content,
-      content = _ref7$content === void 0 ? {} : _ref7$content;
+var ZestyExplorer = function ZestyExplorer(_ref2) {
+  var _ref2$content = _ref2.content,
+      content = _ref2$content === void 0 ? {} : _ref2$content;
 
-  var _React$useState10 = React__default.useState(false),
-      open = _React$useState10[0],
-      setOpen = _React$useState10[1];
+  var _React$useState5 = React__default.useState(false),
+      open = _React$useState5[0],
+      setOpen = _React$useState5[1];
 
-  var _React$useState11 = React__default.useState(""),
-      pageData = _React$useState11[0],
-      setPageData = _React$useState11[1];
+  var _React$useState6 = React__default.useState(""),
+      pageData = _React$useState6[0],
+      setPageData = _React$useState6[1];
 
-  var _React$useState12 = React__default.useState(""),
-      response = _React$useState12[0],
-      setResponse = _React$useState12[1];
+  var _React$useState7 = React__default.useState(""),
+      response = _React$useState7[0],
+      setResponse = _React$useState7[1];
 
   var _useDarkMode = useDarkMode(),
       themeMode = _useDarkMode[0],
@@ -2575,18 +2731,18 @@ var ZestyExplorer = function ZestyExplorer(_ref7) {
   console.log(themeMode, mountedComponent);
 
   var getData = /*#__PURE__*/function () {
-    var _ref8 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee5() {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee() {
       var _yield$getPageData, data, response;
 
-      return runtime_1.wrap(function _callee5$(_context5) {
+      return runtime_1.wrap(function _callee$(_context) {
         while (1) {
-          switch (_context5.prev = _context5.next) {
+          switch (_context.prev = _context.next) {
             case 0:
-              _context5.next = 2;
+              _context.next = 2;
               return getPageData();
 
             case 2:
-              _yield$getPageData = _context5.sent;
+              _yield$getPageData = _context.sent;
               data = _yield$getPageData.data;
               response = _yield$getPageData.response;
               data && setPageData(data);
@@ -2594,14 +2750,14 @@ var ZestyExplorer = function ZestyExplorer(_ref7) {
 
             case 7:
             case "end":
-              return _context5.stop();
+              return _context.stop();
           }
         }
-      }, _callee5);
+      }, _callee);
     }));
 
     return function getData() {
-      return _ref8.apply(this, arguments);
+      return _ref3.apply(this, arguments);
     };
   }(); // check if content is available
 

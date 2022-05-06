@@ -1,3 +1,5 @@
+export * from "./useFetchWrapper"
+
 import React from "react"
 export const useDarkMode = () => {
    // set the initial theme from localstorage or 'light'

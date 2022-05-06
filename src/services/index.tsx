@@ -27,3 +27,18 @@ export const getPageData = async () => {
 
    return { data, response: res }
 }
+
+export const fetchData = async (
+   uri: string,
+   setFunc: (e: any) => void,
+   token: string,
+) => {
+   const headers = {
+      authorization: `Bearer ${token}`,
+   }
+   const res = await fetch(uri, {
+      method: "get",
+      headers,
+   }).then((response) => response.json())
+   res && (await setFunc(res))
+}
