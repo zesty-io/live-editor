@@ -1,4 +1,4 @@
-import React__default, { useState, createElement, Fragment } from 'react';
+import React__default, { useState, useEffect, createElement, Fragment } from 'react';
 import { useTheme as useTheme$1, styled, alpha, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box$1 from '@mui/material/Box';
@@ -1368,73 +1368,13 @@ var scrollToView = function scrollToView(elementId) {
   });
 };
 var handleEdit = /*#__PURE__*/function () {
-  var _ref3 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(data1, url, token) {
+  var _ref3 = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(origData, url, token, dataToEdit) {
     var content, payload, putMethod, res;
     return runtime_1.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            content = data1.data; // const instanceZUID = "8-c2c78385be-s38gqk"
-            // const url = `https://${instanceZUID}.api.zesty.io/v1/content/models/${content.meta.model.zuid}/items/${content.meta.zuid}`
-            // const data = transFromData(e.updated_src.content)
-            // const web = {
-            //    metaDescription: content.meta.web.seo_meta_description,
-            //    metaTitle: content.meta.web.seo_meta_title,
-            //    metaLinkText: content.meta.web.seo_link_text,
-            //    metaKeywords: content.meta.web.seo_meta_keywords,
-            //    parentZUID: content.meta.zuid || "0",
-            //    pathPart: content.meta.web.fragment,
-            //    path: content.meta.web.uri,
-            //    sitemapPriority: content.meta.web.sitemap_priority,
-            //    canonicalTagMode: content.meta.web.sitemap_priority,
-            //    canonicalQueryParamWhitelist: content.meta.web.canonical_query_param_whitelist,
-            //    canonicalTagCustomValue: content.meta.web.canonical_tag_custom_value,
-            //    createdByUserZUID: content.meta.zuid,
-            // }
-            // const web = {
-            //    version: 8,
-            //    versionZUID: "9-8cafc0e7a1-mt987k",
-            //    metaDescription: "",
-            //    metaTitle: "Homepage",
-            //    metaLinkText: "Homepage",
-            //    metaKeywords: null,
-            //    parentZUID: "0",
-            //    pathPart: "zesty_home",
-            //    path: "/",
-            //    sitemapPriority: -1,
-            //    canonicalTagMode: 1,
-            //    canonicalQueryParamWhitelist: null,
-            //    canonicalTagCustomValue: null,
-            //    createdByUserZUID: "5-c2a5c791e3-krq7ts",
-            //    createdAt: "2022-05-05T16:20:15Z",
-            //    updatedAt: "2022-05-05T16:20:15Z",
-            // }
-            // const meta = {
-            //    ZUID: content.meta.zuid,
-            //    masterZUID: content.meta.zuid,
-            //    contentModelZUID: content.meta.model.zuid,
-            //    contentModelName: content.meta.model.name,
-            //    sort: content.meta.sort,
-            //    listed: content.meta.listed,
-            //    version: content.meta.version,
-            //    langID: content.meta.langID,
-            //    createdAt: content.meta.createdAt,
-            //    updatedAt: content.meta.updatedAt,
-            // }
-            // const meta = {
-            //    ZUID: "7-f4f99e80ec-pq3q7s",
-            //    zid: 502,
-            //    masterZUID: "7-f4f99e80ec-pq3q7s",
-            //    contentModelZUID: "6-8eb48d80ec-8ggrzt",
-            //    contentModelName: null,
-            //    sort: 0,
-            //    listed: true,
-            //    version: 8,
-            //    langID: 1,
-            //    createdAt: "2020-11-06T23:57:12Z",
-            //    updatedAt: "2022-05-05T16:20:15Z",
-            // }
-            // const originalData: any = content.data
+            content = origData.data; // const originalData: any = content.data
             // remove not necessary fields
             // @ts-ignore
             // delete originalData?.meta
@@ -1443,10 +1383,11 @@ var handleEdit = /*#__PURE__*/function () {
             // delete originalData?.zestyProductionMode
 
             payload = {
-              data: content.data,
+              data: _extends({}, content.data, dataToEdit),
               meta: content.meta,
               web: content.web
-            }; // const token = "f3555fb52bdd3c6e3b3ff5421b74b740bf41f4e5"
+            };
+            console.log(dataToEdit, "payload"); // const token = "f3555fb52bdd3c6e3b3ff5421b74b740bf41f4e5"
 
             putMethod = {
               method: "PUT",
@@ -1456,20 +1397,19 @@ var handleEdit = /*#__PURE__*/function () {
               },
               body: JSON.stringify(payload)
             };
-            _context.next = 5;
+            _context.next = 6;
             return fetch(url, putMethod);
 
-          case 5:
+          case 6:
             res = _context.sent;
             res.status === 200 && res.json().then(function (e) {
-              console.log(e);
-              window.location.reload();
+              console.log(e); // window.location.reload()
             });
             res.status !== 200 && res.json().then(function (e) {
               return console.log(e, "err");
             });
 
-          case 8:
+          case 9:
           case "end":
             return _context.stop();
         }
@@ -1477,7 +1417,7 @@ var handleEdit = /*#__PURE__*/function () {
     }, _callee);
   }));
 
-  return function handleEdit(_x, _x2, _x3) {
+  return function handleEdit(_x, _x2, _x3, _x4) {
     return _ref3.apply(this, arguments);
   };
 }();
@@ -1538,8 +1478,13 @@ function activateWorkingElement(match) {
   return workingElement;
 }
 
-function deactivateWorkingElement(workingElement) {
+function deactivateWorkingElement(workingElement, setDeactivateElem, keyName, metaData, url, token) {
   if (undefined !== workingElement) {
+    var _setDeactivateElem, _helper$handleEdit;
+
+    // @ts-ignore
+    setDeactivateElem((_setDeactivateElem = {}, _setDeactivateElem["" + keyName] = workingElement == null ? void 0 : workingElement.innerText, _setDeactivateElem));
+    handleEdit(metaData, url, token, (_helper$handleEdit = {}, _helper$handleEdit["" + keyName] = workingElement == null ? void 0 : workingElement.innerText, _helper$handleEdit));
     console.log("Deactivating", workingElement);
     workingElement.style.border = "none";
     workingElement.setAttribute("contentEditable", false);
@@ -1553,7 +1498,10 @@ function Row(_ref) {
   var keyName = _ref.keyName,
       obj = _ref.obj,
       workingElement = _ref.workingElement,
-      setWorkingElement = _ref.setWorkingElement;
+      setWorkingElement = _ref.setWorkingElement,
+      setDeactivateElem = _ref.setDeactivateElem,
+      metaData = _ref.metaData,
+      deactivateElem = _ref.deactivateElem;
 
   var _React$useState = useState(false),
       showCopy = _React$useState[0],
@@ -1571,6 +1519,7 @@ function Row(_ref) {
       text = _React$useState4[0],
       settext = _React$useState4[1];
 
+  console.log(deactivateElem);
   var theme = useTheme();
   var value = "";
   var valueType = "string";
@@ -1579,8 +1528,10 @@ function Row(_ref) {
     value = obj;
   } else {
     valueType = "object";
-  } // @ts-ignore
+  }
 
+  var url = "https://8-c2c78385be-s38gqk.api.zesty.io/v1/content/models/6-8eb48d80ec-8ggrzt/items/7-f4f99e80ec-pq3q7s";
+  var token = "458f44d62f38d83acb0ef3a307af1db848edb17c"; // @ts-ignore
 
   var showCloseBtn = text === (workingElement == null ? void 0 : workingElement.innerText);
   return createElement(Fragment, null, createElement(TableRow, {
@@ -1618,7 +1569,7 @@ function Row(_ref) {
   }, value), showCloseBtn && createElement(Button, {
     size: "small",
     onClick: function onClick() {
-      deactivateWorkingElement(workingElement);
+      deactivateWorkingElement(workingElement, setDeactivateElem, keyName, metaData, url, token);
       setWorkingElement("");
       settext("");
     }
@@ -1681,13 +1632,24 @@ function Row(_ref) {
 function CollapsibleTable(_ref2) {
   var _Object$keys;
 
-  var _ref2$data = _ref2.data,
+  var metaData = _ref2.metaData,
+      _ref2$data = _ref2.data,
       data = _ref2$data === void 0 ? {} : _ref2$data;
 
   var _React$useState5 = useState(""),
       workingElement = _React$useState5[0],
       setWorkingElement = _React$useState5[1];
 
+  var _React$useState6 = useState({}),
+      deactivateElem = _React$useState6[0],
+      setDeactivateElem = _React$useState6[1];
+
+  useEffect(function () {
+    // @ts-ignore
+    console.log(workingElement == null ? void 0 : workingElement.innerText, "ELEM123"); // @ts-ignore
+
+    console.log(deactivateElem, "DEACT ELEM123");
+  }, [workingElement]);
   return createElement(TableContainer, {
     component: Paper,
     style: {
@@ -1726,13 +1688,17 @@ function CollapsibleTable(_ref2) {
       obj: data && data[keyName],
       keyName: keyName,
       workingElement: workingElement,
-      setWorkingElement: setWorkingElement
+      setWorkingElement: setWorkingElement,
+      setDeactivateElem: setDeactivateElem,
+      metaData: metaData,
+      deactivateElem: deactivateElem
     });
   }))));
 }
 
 var ContentViewer = function ContentViewer(_ref) {
-  var data = _ref.data,
+  var metaData = _ref.metaData,
+      data = _ref.data,
       search = _ref.search,
       setSearch = _ref.setSearch;
   // const theme = useTheme()
@@ -1744,6 +1710,7 @@ var ContentViewer = function ContentViewer(_ref) {
       padding: "1rem 2rem"
     }
   }, React__default.createElement(CollapsibleTable, {
+    metaData: metaData,
     data: data.content || {}
   }));
 };
@@ -2601,6 +2568,26 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
       response = _ref.response,
       contentData = _ref.contentData,
       children = _ref.children;
+  var content = contentData || dummydata;
+
+  var _React$useState = React__default.useState("Content Viewer"),
+      currentTab = _React$useState[0],
+      setcurrentTab = _React$useState[1];
+
+  var _React$useState2 = React__default.useState(),
+      search = _React$useState2[0],
+      setSearch = _React$useState2[1]; // this is the data for editing request
+
+
+  var _React$useState3 = React__default.useState([]),
+      metaData = _React$useState3[0],
+      setMetaData = _React$useState3[1]; // for loading of tabs
+
+
+  var _React$useState4 = React__default.useState(0),
+      time = _React$useState4[0],
+      _settime = _React$useState4[1];
+
   var instanceZUID = getCookie("INSTANCE_ZUID") || "8-c4eec0b7d4-8lx0ch";
   var userAppSID = getCookie("APP_SID") || "f3555fb52bdd3c6e3b3ff5421b74b740bf41f4e5"; // get the instance view models  on initial load
 
@@ -2613,34 +2600,15 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
       models = _useFetchWrapper.models;
 
   var url = "https://8-c2c78385be-s38gqk.api.zesty.io/v1/content/models/6-8eb48d80ec-8ggrzt/items/7-f4f99e80ec-pq3q7s";
-  var token = "458f44d62f38d83acb0ef3a307af1db848edb17c";
-  var content = contentData || dummydata;
-
-  var _React$useState = React__default.useState("Content Viewer"),
-      currentTab = _React$useState[0],
-      setcurrentTab = _React$useState[1];
-
-  var _React$useState2 = React__default.useState(),
-      search = _React$useState2[0],
-      setSearch = _React$useState2[1];
-
-  var _React$useState3 = React__default.useState([]),
-      contentv2 = _React$useState3[0],
-      setcontentv2 = _React$useState3[1]; // for loading of tabs
-
-
-  var _React$useState4 = React__default.useState(0),
-      time = _React$useState4[0],
-      _settime = _React$useState4[1]; // this is for json data viewer
-
+  var token = "458f44d62f38d83acb0ef3a307af1db848edb17c"; // this is for json data viewer
 
   var data = transformContent(content, search);
   console.log(pageData, "This the Pagedata");
   React__default.useEffect(function () {
-    console.log(instances, views, models, contentv2, "datas");
-  }, [instances, models, views, contentv2]);
+    console.log(instances, views, models, "datas");
+  }, [instances, models, views]);
   React__default.useEffect(function () {
-    fetchData(url, setcontentv2, token);
+    fetchData(url, setMetaData, token);
   }, []); // for loading of tabs
 
   React__default.useEffect(function () {
@@ -2684,15 +2652,12 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
     settime: function settime() {
       return _settime(2);
     }
-  }), React__default.createElement("button", {
-    onClick: function onClick() {
-      return handleEdit(contentv2, url, token);
-    }
-  }, "OKOKOKOKOKOKOKOKOK"), React__default.createElement("div", {
+  }), React__default.createElement("div", {
     style: {
       position: "relative"
     }
   }, time > 0 && React__default.createElement(Loader, null), currentTab === "Content Viewer" && React__default.createElement(ContentViewer, {
+    metaData: metaData,
     data: data,
     search: search,
     setSearch: setSearch

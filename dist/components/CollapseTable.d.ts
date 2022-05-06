@@ -1,2 +1,2 @@
 /// <reference types="react" />
-export default function CollapsibleTable({ data }: any): JSX.Element;
+export default function CollapsibleTable({ metaData, data }: any): JSX.Element;

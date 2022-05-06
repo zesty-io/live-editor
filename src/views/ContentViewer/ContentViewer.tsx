@@ -7,9 +7,10 @@ interface Props {
    search: any
    data: any
    setSearch: (e: any) => void
+   metaData: any
 }
 
-export const ContentViewer = ({ data, search, setSearch }: Props) => {
+export const ContentViewer = ({ metaData, data, search, setSearch }: Props) => {
    // const theme = useTheme()
    console.log(search, setSearch)
    return (
@@ -21,7 +22,7 @@ export const ContentViewer = ({ data, search, setSearch }: Props) => {
          }}
       >
          {/* <SearchAppBar value={search} onChange={setSearch} /> */}
-         <CollapsibleTable data={data.content || {}} />
+         <CollapsibleTable metaData={metaData} data={data.content || {}} />
       </div>
    )
 }

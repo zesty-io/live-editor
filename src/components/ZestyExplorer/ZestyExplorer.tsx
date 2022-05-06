@@ -34,6 +34,13 @@ const expandBody = (bool: boolean) => {
 
 // renanme content to contentData
 const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any) => {
+   const content = contentData || dummydata
+   const [currentTab, setcurrentTab] = React.useState("Content Viewer")
+   const [search, setSearch] = React.useState()
+   // this is the data for editing request
+   const [metaData, setMetaData] = React.useState([])
+   // for loading of tabs
+   const [time, settime] = React.useState(0)
    const instanceZUID = helper.getCookie("INSTANCE_ZUID") || "8-c4eec0b7d4-8lx0ch"
    const userAppSID =
       helper.getCookie("APP_SID") || "f3555fb52bdd3c6e3b3ff5421b74b740bf41f4e5"
@@ -52,23 +59,16 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
       "https://8-c2c78385be-s38gqk.api.zesty.io/v1/content/models/6-8eb48d80ec-8ggrzt/items/7-f4f99e80ec-pq3q7s"
    const token = "458f44d62f38d83acb0ef3a307af1db848edb17c"
 
-   const content = contentData || dummydata
-   const [currentTab, setcurrentTab] = React.useState("Content Viewer")
-   const [search, setSearch] = React.useState()
-   const [contentv2, setcontentv2] = React.useState([])
-   // for loading of tabs
-   const [time, settime] = React.useState(0)
-
    // this is for json data viewer
    const data = helper.transformContent(content, search)
    console.log(pageData, "This the Pagedata")
 
    React.useEffect(() => {
-      console.log(instances, views, models, contentv2, "datas")
-   }, [instances, models, views, contentv2])
+      console.log(instances, views, models, "datas")
+   }, [instances, models, views])
 
    React.useEffect(() => {
-      fetchData(url, setcontentv2, token)
+      fetchData(url, setMetaData, token)
    }, [])
 
    // for loading of tabs
@@ -115,13 +115,15 @@ const ZestyExplorerBrowser = ({ pageData, response, contentData, children }: any
             tabList={tabList}
             settime={() => settime(2)}
          />
-         <button onClick={() => helper.handleEdit(contentv2, url, token)}>
-            OKOKOKOKOKOKOKOKOK
-         </button>
          <div style={{ position: "relative" }}>
             {time > 0 && <Loader />}
             {currentTab === "Content Viewer" && (
-               <ContentViewer data={data} search={search} setSearch={setSearch} />
+               <ContentViewer
+                  metaData={metaData}
+                  data={data}
+                  search={search}
+                  setSearch={setSearch}
+               />
             )}
             {currentTab === "Meta Viewer" && (
                <MetaViewer response={response} content={contentData} />
