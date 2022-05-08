@@ -49,14 +49,12 @@ const ZestyExplorerBrowser = ({
    const [time, settime] = React.useState(0)
    // const instanceZUID = helper.getCookie("INSTANCE_ZUID") || "8-c2c78385be-s38gqk"
    const userAppSID = helper.getCookie("APP_SID") || process.env.ZESTY_TEST_APP_SID
-   const token = helper.getCookie("APP_SID") || process.env.ZESTY_TEST_APP_SID
-
-   // jsondata
-   // fetchwarpper
-
+   const token = userAppSID
    const itemZUID = jsonData.data.meta.zuid
    const modelZUID = jsonData.data.meta.model.zuid
-   const instanceZUID = helper.headerZUID(jsonData.response) || "8-c2c78385be-s38gqk"
+   const instanceZUID =
+      helper.headerZUID(jsonData.response) || process.env.NEXT_PUBLIC_INSTANCE_ZUID
+
    // get the instance view models  on initial load
    const {
       loading,
@@ -151,9 +149,15 @@ const ZestyExplorerBrowser = ({
    )
 }
 
+const getJsonUrl = () => {
+   if (window.location.href !== "http://test.zesty.io:3000/") {
+      return window.location.href + "?toJSON"
+   }
+   return "https://qzp3zx5t-dev.webengine.zesty.io/?toJSON"
+}
 // Main ZESTY EXPLORER
 export const ZestyExplorer = ({ content = {} }: any) => {
-   const jsonUrl = "https://qzp3zx5t-dev.webengine.zesty.io/?toJSON"
+   const jsonUrl = getJsonUrl()
    const [jsonData, setJsonData] = React.useState([])
    const token = helper.getCookie("APP_SID") || process.env.ZESTY_TEST_APP_SID
    const [open, setOpen] = React.useState(false)

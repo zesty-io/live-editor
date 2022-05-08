@@ -2636,12 +2636,10 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
 
 
   var userAppSID = getCookie("APP_SID") || process.env.ZESTY_TEST_APP_SID;
-  var token = getCookie("APP_SID") || process.env.ZESTY_TEST_APP_SID; // jsondata
-  // fetchwarpper
-
+  var token = userAppSID;
   var itemZUID = jsonData.data.meta.zuid;
   var modelZUID = jsonData.data.meta.model.zuid;
-  var instanceZUID = headerZUID(jsonData.response) || "8-c2c78385be-s38gqk"; // get the instance view models  on initial load
+  var instanceZUID = headerZUID(jsonData.response) || process.env.NEXT_PUBLIC_INSTANCE_ZUID; // get the instance view models  on initial load
 
   var _useFetchWrapper = useFetchWrapper(userAppSID, instanceZUID),
       loading = _useFetchWrapper.loading,
@@ -2745,13 +2743,21 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
     search: search,
     setSearch: setSearch
   })));
+};
+
+var getJsonUrl = function getJsonUrl() {
+  if (window.location.href !== "http://test.zesty.io:3000/") {
+    return window.location.href + "?toJSON";
+  }
+
+  return "https://qzp3zx5t-dev.webengine.zesty.io/?toJSON";
 }; // Main ZESTY EXPLORER
 
 
 var ZestyExplorer = function ZestyExplorer(_ref3) {
   var _ref3$content = _ref3.content,
       content = _ref3$content === void 0 ? {} : _ref3$content;
-  var jsonUrl = "https://qzp3zx5t-dev.webengine.zesty.io/?toJSON";
+  var jsonUrl = getJsonUrl();
 
   var _React$useState5 = React__default.useState([]),
       jsonData = _React$useState5[0],
