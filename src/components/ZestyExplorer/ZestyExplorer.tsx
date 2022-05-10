@@ -55,6 +55,7 @@ const ZestyExplorerBrowser = ({
    const instanceZUID =
       helper.headerZUID(jsonData.response) || process.env.NEXT_PUBLIC_INSTANCE_ZUID
 
+   console.log(instanceZUID, 1111)
    // get the instance view models  on initial load
    const {
       loading,
@@ -149,14 +150,17 @@ const ZestyExplorerBrowser = ({
    )
 }
 
-const getJsonUrl = () => {
-   if (window.location.href !== "http://test.zesty.io:3000/") {
+const getJsonUrl = (customDomain = "") => {
+   if (
+      window.location.href.match(/(:[0-9]+||localhost)/) !== null &&
+      customDomain == ""
+   ) {
       return window.location.href + "?toJSON"
    }
-   return "https://qzp3zx5t-dev.webengine.zesty.io/?toJSON"
+   return customDomain.replace(/\/$/, "") + "/?toJSON"
 }
 // Main ZESTY EXPLORER
-export const ZestyExplorer = ({ content = {} }: any) => {
+export const ZestyExplorer = ({ content = {}, config = {} }: any) => {
    const jsonUrl = getJsonUrl()
    const [jsonData, setJsonData] = React.useState([])
    const token = helper.getCookie("APP_SID") || process.env.ZESTY_TEST_APP_SID

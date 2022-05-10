@@ -2126,17 +2126,18 @@ var fetchJSON = /*#__PURE__*/function () {
 
           case 5:
             res = _context3.sent;
-            _context3.next = 8;
+            console.log(res, "response from json");
+            _context3.next = 9;
             return res.json();
 
-          case 8:
+          case 9:
             data = _context3.sent;
             res && setFunc({
               data: data,
               response: res
             });
 
-          case 10:
+          case 11:
           case "end":
             return _context3.stop();
         }
@@ -2639,7 +2640,8 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
   var token = userAppSID;
   var itemZUID = jsonData.data.meta.zuid;
   var modelZUID = jsonData.data.meta.model.zuid;
-  var instanceZUID = headerZUID(jsonData.response) || process.env.NEXT_PUBLIC_INSTANCE_ZUID; // get the instance view models  on initial load
+  var instanceZUID = headerZUID(jsonData.response) || process.env.NEXT_PUBLIC_INSTANCE_ZUID;
+  console.log(instanceZUID, 1111); // get the instance view models  on initial load
 
   var _useFetchWrapper = useFetchWrapper(userAppSID, instanceZUID),
       loading = _useFetchWrapper.loading,
@@ -2745,12 +2747,16 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
   })));
 };
 
-var getJsonUrl = function getJsonUrl() {
-  if (window.location.href !== "http://test.zesty.io:3000/") {
+var getJsonUrl = function getJsonUrl(customDomain) {
+  if (customDomain === void 0) {
+    customDomain = "";
+  }
+
+  if (window.location.href.match(/(:[0-9]+||localhost)/) !== null) {
     return window.location.href + "?toJSON";
   }
 
-  return "https://qzp3zx5t-dev.webengine.zesty.io/?toJSON";
+  return customDomain.replace(/\/$/, "") + "/?toJSON";
 }; // Main ZESTY EXPLORER
 
 

@@ -65,6 +65,7 @@ export const fetchJSON = async (
       credentials: "omit",
       headers,
    })
+   console.log(res, "response from json")
    data = await res.json()
    res && setFunc({ data, response: res })
 }
