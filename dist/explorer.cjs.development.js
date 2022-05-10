@@ -1472,6 +1472,23 @@ var transformContent = function transformContent(content, search) {
   };
   return data;
 };
+function toggleOpenState(bool, setOpen, expandBody) {
+  setOpen(bool);
+  expandBody(bool);
+}
+var getJsonUrl = function getJsonUrl(customDomain) {
+  if (customDomain === void 0) {
+    customDomain = "";
+  }
+
+  console.log(customDomain, "customdomain"); // return "https://kfg6bckb-dev.preview.stage.zesty.io/?toJSON"
+
+  if (window.location.href.match(/(:[0-9]+||localhost)/) !== null && customDomain == "") {
+    return window.location.href + "?toJSON";
+  }
+
+  return customDomain.replace(/\/$/, "") + "/?toJSON"; // return customDomain + "/?toJSON"
+};
 
 function activateWorkingElement(match) {
   console.log("string to test", match);
@@ -2120,32 +2137,50 @@ var fetchJSON = /*#__PURE__*/function () {
           case 0:
             console.log(token);
             data = "";
+            console.log(data, setFunc);
             headers = {
               "Content-Type": "application/x-www-form-urlencoded"
             };
-            _context3.next = 5;
+            _context3.next = 6;
             return fetch(uri, {
               method: "GET",
               mode: "cors",
               referrerPolicy: "no-referrer",
               credentials: "omit",
               headers: headers
+            })["catch"](function (e) {
+              console.log(e);
+              return e;
             });
 
-          case 5:
+          case 6:
             res = _context3.sent;
-            console.log(res, "response from json");
-            _context3.next = 9;
+
+            if (!(res.status === 200)) {
+              _context3.next = 15;
+              break;
+            }
+
+            _context3.next = 10;
             return res.json();
 
-          case 9:
-            data = _context3.sent;
-            res && setFunc({
-              data: data,
-              response: res
+          case 10:
+            _context3.t0 = _context3.sent;
+            _context3.t1 = res;
+            return _context3.abrupt("return", {
+              data: _context3.t0,
+              res: _context3.t1,
+              error: false
             });
 
-          case 11:
+          case 15:
+            return _context3.abrupt("return", {
+              data: null,
+              res: res,
+              error: false
+            });
+
+          case 16:
           case "end":
             return _context3.stop();
         }
@@ -2618,6 +2653,8 @@ var expandBody = function expandBody(bool) {
 
 
 var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
+  var _jsonData$data, _jsonData$data$meta, _jsonData$data2, _jsonData$data2$meta, _jsonData$data2$meta$;
+
   var pageData = _ref.pageData,
       response = _ref.response,
       contentData = _ref.contentData,
@@ -2641,15 +2678,14 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
 
   var _React$useState4 = React__default.useState(0),
       time = _React$useState4[0],
-      _settime = _React$useState4[1]; // const instanceZUID = helper.getCookie("INSTANCE_ZUID") || "8-c2c78385be-s38gqk"
+      _settime = _React$useState4[1];
 
-
-  var userAppSID = getCookie("APP_SID") || process.env.ZESTY_TEST_APP_SID;
+  var userAppSID = getCookie("APP_SID");
   var token = userAppSID;
-  var itemZUID = jsonData.data.meta.zuid;
-  var modelZUID = jsonData.data.meta.model.zuid;
-  var instanceZUID = headerZUID(jsonData.response) || process.env.NEXT_PUBLIC_INSTANCE_ZUID;
-  console.log(instanceZUID, 1111); // get the instance view models  on initial load
+  var itemZUID = jsonData == null ? void 0 : (_jsonData$data = jsonData.data) == null ? void 0 : (_jsonData$data$meta = _jsonData$data.meta) == null ? void 0 : _jsonData$data$meta.zuid;
+  var modelZUID = jsonData == null ? void 0 : (_jsonData$data2 = jsonData.data) == null ? void 0 : (_jsonData$data2$meta = _jsonData$data2.meta) == null ? void 0 : (_jsonData$data2$meta$ = _jsonData$data2$meta.model) == null ? void 0 : _jsonData$data2$meta$.zuid;
+  var instanceZUID = headerZUID(jsonData.res);
+  console.log(jsonData, 1111); // get the instance view models  on initial load
 
   var _useFetchWrapper = useFetchWrapper(userAppSID, instanceZUID),
       loading = _useFetchWrapper.loading,
@@ -2662,7 +2698,7 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
   var url = "https://" + instanceZUID + ".api.zesty.io/v1/content/models/" + modelZUID + "/items/" + itemZUID; // this is for json data viewer
 
   var data = transformContent(content, search);
-  console.log(pageData, "This the Pagedata");
+  console.log(pageData, url, "This the Pagedata");
 
   var getFinalData = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee() {
@@ -2753,70 +2789,61 @@ var ZestyExplorerBrowser = function ZestyExplorerBrowser(_ref) {
     search: search,
     setSearch: setSearch
   })));
-};
-
-var getJsonUrl = function getJsonUrl(customDomain) {
-  if (customDomain === void 0) {
-    customDomain = "";
-  }
-
-  if (window.location.href.match(/(:[0-9]+||localhost)/) !== null) {
-    return window.location.href + "?toJSON";
-  }
-
-  return customDomain.replace(/\/$/, "") + "/?toJSON";
 }; // Main ZESTY EXPLORER
 
 
 var ZestyExplorer = function ZestyExplorer(_ref3) {
   var _ref3$content = _ref3.content,
       content = _ref3$content === void 0 ? {} : _ref3$content;
-  var jsonUrl = getJsonUrl();
 
-  var _React$useState5 = React__default.useState([]),
-      jsonData = _React$useState5[0],
-      setJsonData = _React$useState5[1];
+  var _React$useState5 = React__default.useState(""),
+      domain = _React$useState5[0],
+      setdomain = _React$useState5[1];
+
+  var _React$useState6 = React__default.useState(getJsonUrl(domain)),
+      jsonUrl = _React$useState6[0],
+      setjsonUrl = _React$useState6[1];
+
+  var _React$useState7 = React__default.useState([]),
+      jsonData = _React$useState7[0],
+      setJsonData = _React$useState7[1];
 
   var token = getCookie("APP_SID") || process.env.ZESTY_TEST_APP_SID;
 
-  var _React$useState6 = React__default.useState(false),
-      open = _React$useState6[0],
-      setOpen = _React$useState6[1];
+  var _React$useState8 = React__default.useState(false),
+      open = _React$useState8[0],
+      setOpen = _React$useState8[1];
 
-  var _React$useState7 = React__default.useState(""),
-      pageData = _React$useState7[0],
-      setPageData = _React$useState7[1];
+  var _React$useState9 = React__default.useState(""),
+      pageData = _React$useState9[0],
+      setPageData = _React$useState9[1];
 
-  var _React$useState8 = React__default.useState(""),
-      response = _React$useState8[0],
-      setResponse = _React$useState8[1];
+  var _React$useState10 = React__default.useState(""),
+      response = _React$useState10[0],
+      setResponse = _React$useState10[1];
 
   var _useDarkMode = useDarkMode(),
       themeMode = _useDarkMode[0],
       themeToggler = _useDarkMode[1],
       mountedComponent = _useDarkMode[2];
 
-  console.log(themeMode, mountedComponent);
+  console.log(themeMode, mountedComponent); // get json data
 
-  var getData = /*#__PURE__*/function () {
+  var fetchJsonData = /*#__PURE__*/function () {
     var _ref4 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee2() {
-      var _yield$getPageData, data, response;
-
+      var res;
       return runtime_1.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return getPageData();
+              return fetchJSON(jsonUrl, setJsonData, token);
 
             case 2:
-              _yield$getPageData = _context2.sent;
-              data = _yield$getPageData.data;
-              response = _yield$getPageData.response;
-              data && setPageData(data);
-              response && setResponse(response);
+              res = _context2.sent;
+              res && setJsonData(res);
 
-            case 7:
+            case 4:
             case "end":
               return _context2.stop();
           }
@@ -2824,21 +2851,30 @@ var ZestyExplorer = function ZestyExplorer(_ref3) {
       }, _callee2);
     }));
 
-    return function getData() {
+    return function fetchJsonData() {
       return _ref4.apply(this, arguments);
     };
   }();
 
-  var getJsonData = /*#__PURE__*/function () {
+  var getData = /*#__PURE__*/function () {
     var _ref5 = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee3() {
+      var _yield$getPageData, data, response;
+
       return runtime_1.wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
               _context3.next = 2;
-              return fetchJSON(jsonUrl, setJsonData, token);
+              return getPageData();
 
             case 2:
+              _yield$getPageData = _context3.sent;
+              data = _yield$getPageData.data;
+              response = _yield$getPageData.response;
+              data && setPageData(data);
+              response && setResponse(response);
+
+            case 7:
             case "end":
               return _context3.stop();
           }
@@ -2846,14 +2882,14 @@ var ZestyExplorer = function ZestyExplorer(_ref3) {
       }, _callee3);
     }));
 
-    return function getJsonData() {
+    return function getData() {
       return _ref5.apply(this, arguments);
     };
   }(); // check if content is available
 
 
   React__default.useEffect(function () {
-    getJsonData();
+    fetchJsonData();
 
     if (content && Object.keys(content).length === 0) {
       getData();
@@ -2861,6 +2897,16 @@ var ZestyExplorer = function ZestyExplorer(_ref3) {
       setPageData(content);
     }
   }, []);
+  React__default.useEffect(function () {
+    console.log(jsonUrl, domain, "domain");
+  }, [domain, jsonUrl]);
+  React__default.useEffect(function () {
+    fetchJsonData();
+  }, [jsonUrl]);
+
+  var handleCustomDomain = function handleCustomDomain() {
+    setjsonUrl(getJsonUrl(domain));
+  };
 
   var searchObject = _extends({}, pageData); // unset navigations for faster search
 
@@ -2873,9 +2919,22 @@ var ZestyExplorer = function ZestyExplorer(_ref3) {
     return null;
   }
 
-  function toggleOpenState(bool) {
-    setOpen(bool);
-    expandBody(bool);
+  if ((jsonData == null ? void 0 : jsonData.data) === null || (jsonData == null ? void 0 : jsonData.length) == 0) {
+    return React__default.createElement(Box, {
+      sx: verifyUserPrompt
+    }, React__default.createElement("h1", null, "Domain Not Valid"), React__default.createElement("h1", null, "Enter domain"), React__default.createElement("input", {
+      type: "text",
+      value: domain,
+      onChange: function onChange(e) {
+        return setdomain(e.target.value);
+      }
+    }), React__default.createElement("button", {
+      onClick: handleCustomDomain
+    }, "ok"), React__default.createElement("button", {
+      onClick: function onClick() {
+        return window.location.reload;
+      }
+    }, "close"));
   }
 
   return React__default.createElement("div", {
@@ -2888,7 +2947,7 @@ var ZestyExplorer = function ZestyExplorer(_ref3) {
   }, React__default.createElement(CssBaseline, null), !open && React__default.createElement("button", {
     type: "button",
     onClick: function onClick() {
-      return toggleOpenState(true);
+      return toggleOpenState(true, setOpen, expandBody);
     },
     style: buttonStyles
   }, React__default.createElement("img", {
@@ -2905,7 +2964,7 @@ var ZestyExplorer = function ZestyExplorer(_ref3) {
     jsonData: jsonData
   }, React__default.createElement(Button, {
     onClick: function onClick() {
-      return toggleOpenState(false);
+      return toggleOpenState(false, setOpen, expandBody);
     },
     variant: "outlined",
     size: "small"

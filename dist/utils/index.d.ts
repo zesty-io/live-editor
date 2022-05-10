@@ -16,3 +16,5 @@ export declare const handleEdit: (origData: any, url: string, token: string, dat
 export declare const transformContent: (content: any, search: any) => {}[] | {
     content: any;
 } | undefined;
+export declare function toggleOpenState(bool: boolean, setOpen: any, expandBody: any): void;
+export declare const getJsonUrl: (customDomain?: string) => string;

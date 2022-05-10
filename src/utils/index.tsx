@@ -200,3 +200,21 @@ export const transformContent = (content: any, search: any) => {
    const data = search ? result2 : { content }
    return data
 }
+
+export function toggleOpenState(bool: boolean, setOpen: any, expandBody: any) {
+   setOpen(bool)
+   expandBody(bool)
+}
+
+export const getJsonUrl = (customDomain = "") => {
+   console.log(customDomain, "customdomain")
+   // return "https://kfg6bckb-dev.preview.stage.zesty.io/?toJSON"
+   if (
+      window.location.href.match(/(:[0-9]+||localhost)/) !== null &&
+      customDomain == ""
+   ) {
+      return window.location.href + "?toJSON"
+   }
+   return customDomain.replace(/\/$/, "") + "/?toJSON"
+   // return customDomain + "/?toJSON"
+}
