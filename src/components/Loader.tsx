@@ -7,7 +7,7 @@ export const Loader = () => {
             position: "absolute",
             top: "0",
             left: "0",
-            zIndex: "100",
+            zIndex: "2147483647",
             height: "100%",
             width: "100%",
             background: "#FEFF01",

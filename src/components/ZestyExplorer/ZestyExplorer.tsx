@@ -8,6 +8,7 @@ import { ContentViewer, MetaViewer, JsonDataViewer } from "views/index"
 import { Headers, Loader } from "components/index"
 import * as helper from "utils/index"
 import { fetchData, fetchJSON, getPageData } from "services/index"
+import Card from "../Card"
 import {
    buttonStyles,
    containerStyle,
@@ -168,12 +169,18 @@ export const ZestyExplorer = ({ content = {} }: any) => {
 
    // check if content is available
    React.useEffect(() => {
-      fetchJsonData()
-      if (content && Object.keys(content).length === 0) {
-         getData()
-      } else {
-         setPageData(content)
+      const fetchJsonData = async () => {
+         const res = await fetchJSON(jsonUrl, setJsonData, token)
+         res && setJsonData(res)
       }
+
+      fetchJsonData().then((e) => {
+         if (content && Object.keys(content).length === 0) {
+            getData()
+         } else {
+            setPageData(content)
+         }
+      })
    }, [])
 
    React.useEffect(() => {
@@ -200,16 +207,12 @@ export const ZestyExplorer = ({ content = {} }: any) => {
 
    if (jsonData?.data === null || jsonData?.length == 0) {
       return (
-         <Box sx={verifyUserPrompt}>
-            <h1>Domain Not Valid</h1>
-            <h1>Enter domain</h1>
-            <input
-               type="text"
+         <Box sx={verifyUserPrompt} zIndex={2147483647}>
+            <Card
+               handleCustomDomain={handleCustomDomain}
                value={domain}
-               onChange={(e) => setdomain(e.target.value)}
+               onChange={(e: any) => setdomain(e.target.value)}
             />
-            <button onClick={handleCustomDomain}>ok</button>
-            <button onClick={() => window.location.reload}>close</button>
          </Box>
       )
    }

@@ -26,8 +26,8 @@ export const zestyStyles = {
 }
 export const verifyUserPrompt = {
    position: "fixed",
-   top: "40%",
-   left: "15%",
+   top: "5%",
+   right: "5%",
 } as const
 
 export const zestyWrapper = {
@@ -37,7 +37,7 @@ export const zestyWrapper = {
    left: "-40vw",
    bottom: "0",
    transition: "left 250ms ease",
-   zIndex: "9999999999999999",
+   zIndex: "2147483647",
    boxShadow: "0px 0px 15px #000",
 } as const
 
