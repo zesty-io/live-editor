@@ -15,7 +15,8 @@
       "test-all": "npm run check-format && npm run check-lint && npm run check-types",
       "commit": "npm run build && git add . && cz",
       "submit": "npm run build && git add . && cz && npm run release",
-      "release": "release-it --no-npm"
+      "release": "release-it --no-npm",
+      "watch": "webpack --watch --config=webpack.config.dev.ts"
    },
    "keywords": [
       "zesty-io",
@@ -80,6 +81,9 @@
       "webpack": "^5.72.0",
       "webpack-cli": "^4.9.2",
       "webpack-dev-server": "^4.9.0"
+   },
+   "browser": {
+      "[module-name]": false
    },
    "config": {
       "commitizen": {
