@@ -108,6 +108,13 @@ git checkout -b explorer-dev-test
 import { ZestyExplorer } from   '@username/explorer-dev-test';
 ```
 
+## Testing Locally in the browser
+
+-  run `npm run watch` to start the application locally
+-  Open /test/index.html in your browser
+-  Remove index.html from the browser file path
+-  use this override domain `https://qzp3zx5t-dev.webEngine.zesty.io/`
+
 ## Testing Locally using NextJs/CRA
 
 -  Clone the [Zesty Explorer](https://github.com/zesty-io/explorer.git "Zesty Explorer") and [NextJs App](https://github.com/zesty-io/nextjs-website.git "Zesty Nextjs-website") on the same folder

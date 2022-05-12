@@ -215,6 +215,6 @@ export const getJsonUrl = (customDomain = "") => {
    ) {
       return window.location.href + "?toJSON"
    }
-   return customDomain.replace(/\/$/, "") + "/?toJSON"
+   return customDomain.replace(/\/$/, "") + window.location.pathname + "?toJSON"
    // return customDomain + "/?toJSON"
 }
