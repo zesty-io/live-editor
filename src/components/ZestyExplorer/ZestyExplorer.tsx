@@ -12,6 +12,7 @@ import Card from "../Card"
 import {
    buttonStyles,
    containerStyle,
+   loginPromp,
    verifyUserPrompt,
    zestyStyles,
    zestyWrapper,
@@ -89,7 +90,7 @@ const ZestyExplorerBrowser = ({
    // show loading
    if (loading && !verifyFailed && !verifySuccess) {
       return (
-         <Box sx={verifyUserPrompt}>
+         <Box sx={loginPromp}>
             <Loader />
          </Box>
       )
@@ -98,7 +99,7 @@ const ZestyExplorerBrowser = ({
    // show failed login prompt
    if (!verifySuccess) {
       return (
-         <Box sx={verifyUserPrompt}>
+         <Box sx={loginPromp}>
             <h1>Please Login</h1>
             <Button
                href={`https://accounts.zesty.io/login`}
