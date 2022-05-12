@@ -239,7 +239,7 @@ function Row({
    )
 }
 
-export default function CollapsibleTable({ metaData, data = {}, url, token }: any) {
+export const CollapsibleTable = ({ metaData, data = {}, url, token }: any) => {
    const [workingElement, setWorkingElement] = React.useState("")
 
    return (

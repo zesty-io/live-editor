@@ -30,6 +30,12 @@ export const verifyUserPrompt = {
    right: "5%",
 } as const
 
+export const loginPromp = {
+   position: "fixed",
+   top: "25%",
+   left: "15%",
+} as const
+
 export const zestyWrapper = {
    width: "auto",
    background: "transparent",

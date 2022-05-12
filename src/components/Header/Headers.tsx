@@ -6,19 +6,12 @@ import AppBar from "@mui/material/AppBar"
 import Typography from "@mui/material/Typography"
 import Box from "@mui/material/Box"
 import { useTheme } from "@mui/material/styles"
-// import Container from "@mui/material/Container"
 import Button from "@mui/material/Button"
 interface Props {
    children: React.ReactNode
    content: any
    response: any
 }
-
-// const linkStyles = {
-//    padding: "5px",
-//    display: "inline-block",
-//    color: "#497edf",
-// }
 
 export const Headers = ({ response, children, content }: Props) => {
    const theme = useTheme()
@@ -56,19 +49,6 @@ export const Headers = ({ response, children, content }: Props) => {
                         alt="Zesty.io Logo"
                      />
                   </Box>
-                  {/* <Typography
-                     variant="h6"
-                     noWrap
-                     component="div"
-                     sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
-                  >
-                     <img
-                        src="https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png"
-                        width="62px"
-                        height="62px"
-                        alt="Zesty.io Logo"
-                     />
-                  </Typography> */}
 
                   <Typography
                      sx={{ fontSize: "14px", whiteSpace: "normal" }}
