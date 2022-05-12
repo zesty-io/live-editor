@@ -1,7 +1,7 @@
 import React from "react"
 // import ReactJson from "react-json-view-ssr"
 // import { SearchAppBar } from "components"
-import CollapsibleTable from "components/CollapseTable"
+import { CollapsibleTable } from "components/Table"
 // import { useTheme } from "@mui/material"
 interface Props {
    search: any
