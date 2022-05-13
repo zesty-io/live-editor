@@ -47,7 +47,7 @@ export const MetaViewer = ({ content, response }: any) => {
    }.manager.zesty.io/content/${content?.meta?.model?.zuid}/${content?.meta?.zuid}/meta`
    console.log(uri)
    return (
-      <div style={{ height: "80vh", background: "#fff", padding: "1rem 2rem" }}>
+      <Box sx={{ height: "80vh", background: "#fff", padding: "1rem 2rem" }}>
          <Box
             paddingX={4}
             sx={{
@@ -76,6 +76,6 @@ export const MetaViewer = ({ content, response }: any) => {
             theme={anOldHope}
             wrapLines={true}
          />
-      </div>
+      </Box>
    )
 }
