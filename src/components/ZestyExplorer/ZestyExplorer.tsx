@@ -14,6 +14,7 @@ import { useDarkMode } from "hooks"
 import CloseFullscreenIcon from "@mui/icons-material/CloseFullscreen"
 import { Helmet } from "react-helmet"
 import { ZestyExplorerBrowser } from "./ZestyExplorerBrowser"
+import { withStyles } from "@material-ui/core/styles"
 
 // dom access highlight function
 const expandBody = (bool: boolean) => {
@@ -84,6 +85,17 @@ export const ZestyExplorer = ({ content = {} }: any) => {
    // custom nav tree building
    delete searchObject.navigationCustom
 
+   const StyledButton = withStyles({
+      root: {
+         backgroundColor: "#1b202c",
+         color: "#fff",
+         "&:hover": {
+            backgroundColor: "#1b202c",
+            color: "#fff",
+         },
+      },
+   })(Button)
+
    if (!helper.canUseDOM()) {
       return null
    }
@@ -101,7 +113,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
    }
 
    return (
-      <div id={"zestyExplorer"} style={zestyWrapper}>
+      <Box id={"zestyExplorer"} sx={zestyWrapper}>
          <Helmet>
             <script src="https://cdn.jsdelivr.net/gh/zesty-io/fetch-wrapper@latest/dist/index.min.js" />
          </Helmet>
@@ -109,8 +121,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
             <CssBaseline />
             {/* ZESTY LOGO  bottom right*/}
             {!open && (
-               <button
-                  type="button"
+               <StyledButton
                   onClick={() => helper.toggleOpenState(true, setOpen, expandBody)}
                   style={buttonStyles}
                >
@@ -121,7 +132,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
                      alt="Zesty.io Logo"
                   />
                   <span style={zestyStyles}>Compass</span>
-               </button>
+               </StyledButton>
             )}
 
             {open && (
@@ -143,6 +154,6 @@ export const ZestyExplorer = ({ content = {} }: any) => {
                </Box>
             )}
          </ThemeProvider>
-      </div>
+      </Box>
    )
 }

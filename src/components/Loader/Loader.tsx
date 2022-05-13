@@ -1,9 +1,10 @@
+import { Box } from "@mui/material"
 import React from "react"
 
 export const Loader = () => {
    return (
-      <div
-         style={{
+      <Box
+         sx={{
             position: "absolute",
             top: "0",
             left: "0",
@@ -14,6 +15,6 @@ export const Loader = () => {
          }}
       >
          <h1>Loading </h1>
-      </div>
+      </Box>
    )
 }

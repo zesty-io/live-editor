@@ -2,6 +2,7 @@ import React from "react"
 // import ReactJson from "react-json-view-ssr"
 // import { SearchAppBar } from "components"
 import { CollapsibleTable } from "components/Table"
+import { Box } from "@mui/material"
 // import { useTheme } from "@mui/material"
 interface Props {
    search: any
@@ -23,8 +24,8 @@ export const ContentViewer = ({
    // const theme = useTheme()
    console.log(search, setSearch)
    return (
-      <div
-         style={{
+      <Box
+         sx={{
             background: "background.paper",
             overflow: "auto",
             padding: "1rem 2rem",
@@ -37,6 +38,6 @@ export const ContentViewer = ({
             metaData={metaData}
             data={data.content || {}}
          />
-      </div>
+      </Box>
    )
 }

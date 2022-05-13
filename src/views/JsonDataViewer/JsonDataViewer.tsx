@@ -1,6 +1,7 @@
 import React from "react"
 import ReactJson from "react-json-view-ssr"
 import { SearchAppBar } from "components"
+import { Box } from "@mui/material"
 interface Props {
    search: any
    data: any
@@ -10,7 +11,7 @@ interface Props {
 export const JsonDataViewer = ({ data, search, setSearch }: Props) => {
    console.log(data, "data123123")
    return (
-      <div style={{ background: "red" }}>
+      <Box sx={{ background: "red" }}>
          <SearchAppBar value={search} onChange={setSearch} />
          <ReactJson
             style={{ height: "80vh", overflowY: "scroll" }}
@@ -25,6 +26,6 @@ export const JsonDataViewer = ({ data, search, setSearch }: Props) => {
             displayDataTypes={false}
             enableClipboard={true}
          />
-      </div>
+      </Box>
    )
 }

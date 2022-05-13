@@ -99,7 +99,7 @@ export const ZestyExplorerBrowser = ({
             tabList={tabList}
             settime={() => settime(2)}
          />
-         <div style={{ position: "relative" }}>
+         <Box sx={{ position: "relative" }}>
             {time > 0 && <Loader />}
             {currentTab === "Content Viewer" && (
                <ContentViewer
@@ -117,7 +117,7 @@ export const ZestyExplorerBrowser = ({
             {currentTab === "Json Data Viewer" && (
                <JsonDataViewer data={data} search={search} setSearch={setSearch} />
             )}
-         </div>
+         </Box>
       </Box>
    )
 }
