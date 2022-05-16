@@ -63,6 +63,7 @@ export const ZestyExplorerBrowser = ({
 
       return () => clearTimeout(timer)
    })
+
    // show loading
    if (loading && !verifyFailed && !verifySuccess) {
       return (

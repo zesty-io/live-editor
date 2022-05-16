@@ -22,7 +22,6 @@ export const ContentViewer = ({
    token,
 }: Props) => {
    // const theme = useTheme()
-   console.log(search, setSearch)
    return (
       <Box
          sx={{
@@ -36,7 +35,7 @@ export const ContentViewer = ({
             url={url}
             token={token}
             metaData={metaData}
-            data={data.content || {}}
+            data={metaData?.data?.data || data?.content || {}}
          />
       </Box>
    )
