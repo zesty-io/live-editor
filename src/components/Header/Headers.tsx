@@ -66,6 +66,7 @@ export const Headers = ({ response, children, content }: Props) => {
                      variant="contained"
                      color="secondary"
                      size="small"
+                     sx={{ textAlign: "center" }}
                   >
                      Edit Permissions
                   </Button>
@@ -79,6 +80,7 @@ export const Headers = ({ response, children, content }: Props) => {
                      color="secondary"
                      target="_blank"
                      size="small"
+                     sx={{ textAlign: "center" }}
                   >
                      Edit Content
                   </Button>
@@ -90,6 +92,7 @@ export const Headers = ({ response, children, content }: Props) => {
                      color="secondary"
                      size="small"
                      target="_blank"
+                     sx={{ textAlign: "center" }}
                   >
                      Edit Schema
                   </Button>

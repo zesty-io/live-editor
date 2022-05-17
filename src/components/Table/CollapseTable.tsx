@@ -246,7 +246,7 @@ export const CollapsibleTable = ({ metaData, data = {}, url, token }: any) => {
    const [workingElement, setWorkingElement] = React.useState("")
 
    return (
-      <TableContainer component={Paper} style={{ maxHeight: 600 }}>
+      <TableContainer component={Paper} style={{ maxHeight: 700 }}>
          <Table aria-label="collapsible table" stickyHeader>
             {/* HEaders */}
             <TableHead>

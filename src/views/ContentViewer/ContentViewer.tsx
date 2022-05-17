@@ -28,15 +28,18 @@ export const ContentViewer = ({
             background: "background.paper",
             overflow: "auto",
             padding: "1rem 2rem",
+            height: "100%",
+            position: "relative",
          }}
       >
-         {/* <SearchAppBar value={search} onChange={setSearch} /> */}
-         <CollapsibleTable
-            url={url}
-            token={token}
-            metaData={metaData}
-            data={metaData?.data?.data || data?.content || {}}
-         />
+         <div id="container1">
+            <CollapsibleTable
+               url={url}
+               token={token}
+               metaData={metaData}
+               data={metaData?.data?.data || data?.content || {}}
+            />
+         </div>
       </Box>
    )
 }
