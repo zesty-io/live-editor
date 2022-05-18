@@ -1,5 +1,5 @@
 import React from "react"
-import { CollapsibleTable } from "components/Table"
+import { CodeHelperTable } from "components"
 import { Box, Fab, Zoom } from "@mui/material"
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
    theme: any
 }
 
-export const ContentViewer = ({ content, theme, metaData, data, url, token }: Props) => {
+export const CodeHelper = ({ theme, content, metaData, data, url, token }: Props) => {
    const [currentScroll, setcurrentScroll] = React.useState(0)
 
    const scrollEvent = (e: any) => {
@@ -43,13 +43,13 @@ export const ContentViewer = ({ content, theme, metaData, data, url, token }: Pr
             </Fab>
          </Zoom>
 
-         <CollapsibleTable
+         <CodeHelperTable
+            content={content}
             onScroll={scrollEvent}
             url={url}
             token={token}
             metaData={metaData}
             data={newData}
-            content={content}
             theme={theme}
          />
       </Box>

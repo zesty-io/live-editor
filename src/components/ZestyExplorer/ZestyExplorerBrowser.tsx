@@ -3,12 +3,12 @@ import * as helper from "utils/index"
 import React from "react"
 import { useFetchWrapper } from "hooks"
 import { fetchData } from "services"
-import { Box, Button, Typography } from "@mui/material"
+import { Box, Button } from "@mui/material"
 import { Loader } from "components"
 import { containerStyle, loginPromp } from "./styles"
 import { Headers } from "components"
 import { tabList } from "constants/index"
-import { ContentViewer, JsonDataViewer, MetaViewer } from "views"
+import { CodeHelper, ContentViewer, JsonDataViewer, MetaViewer } from "views"
 import { useTheme } from "@mui/material/styles"
 
 export const ZestyExplorerBrowser = ({
@@ -102,21 +102,17 @@ export const ZestyExplorerBrowser = ({
          >
             {children}
          </Headers>
-         <Box sx={{ background: "#fff", width: "100%" }}>
-            <Typography
-               sx={{ fontSize: "14px", whiteSpace: "normal" }}
-               color={theme.palette.common.black}
-               component={"h6"}
-            >
-               Browsing item <strong> {content?.meta?.web?.seo_link_text} </strong>
-               from the <strong>{content?.meta?.model_alternate_name} </strong>
-               Content Model
-            </Typography>
-         </Box>
          <Box sx={{ position: "relative" }}>
             {time > 0 && <Loader />}
             {currentTab === "Edit" && (
-               <ContentViewer metaData={metaData} data={data} url={url} token={token} />
+               <ContentViewer
+                  content={content}
+                  theme={theme}
+                  metaData={metaData}
+                  data={data}
+                  url={url}
+                  token={token}
+               />
             )}
             {currentTab === "SEO/Meta" && (
                <MetaViewer response={response} content={contentData} />
@@ -124,8 +120,15 @@ export const ZestyExplorerBrowser = ({
             {currentTab === "JSON" && (
                <JsonDataViewer data={data} search={search} setSearch={setSearch} />
             )}
-            {currentTab === "Code Help" && (
-               <JsonDataViewer data={data} search={search} setSearch={setSearch} />
+            {currentTab === "Code Helper" && (
+               <CodeHelper
+                  content={content}
+                  theme={theme}
+                  metaData={metaData}
+                  data={data}
+                  url={url}
+                  token={token}
+               />
             )}
          </Box>
       </Box>

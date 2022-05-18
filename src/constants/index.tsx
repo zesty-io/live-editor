@@ -51,5 +51,5 @@ export const tabList = [
    { id: 1, label: "Edit", value: "Edit" },
    { id: 2, label: "SEO/Meta", value: "SEO/Meta" },
    { id: 3, label: "JSON", value: "JSON" },
-   { id: 4, label: "Code Help", value: "Code Help" },
+   { id: 4, label: "Code Helper", value: "Code Helper" },
 ]
