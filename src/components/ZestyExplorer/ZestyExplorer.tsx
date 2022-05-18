@@ -59,6 +59,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
       }
 
       fetchJsonData().then((e) => {
+         console.log(e, "not use")
          if (content && Object.keys(content).length === 0) {
             getData()
          } else {

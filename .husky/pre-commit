@@ -4,7 +4,7 @@
 
 echo '🏗️👷 Styling, testing and building your project before committing'
 
-yarn  check-format ||
+npm run  check-format ||
 (
     echo '
     
@@ -19,7 +19,7 @@ echo '⌛⌛⌛Loading.......😅😅😅'
 echo '⌛⌛⌛Loading.......😅😅😅'
 echo '⌛⌛⌛Loading.......😅😅😅'
 echo ' '
-yarn check-lint ||
+npm run check-lint ||
 (
         echo '
         
@@ -35,7 +35,7 @@ echo '⌛⌛⌛Loading.......😅😅😅'
 echo '⌛⌛⌛Loading.......😅😅😅'
 echo '⌛⌛⌛Loading.......😅😅😅'
 echo ' '
-yarn check-types ||
+npm run check-types ||
 (
     echo '
 

@@ -103,14 +103,7 @@ export const ZestyExplorerBrowser = ({
          <Box sx={{ position: "relative" }}>
             {time > 0 && <Loader />}
             {currentTab === "Content Viewer" && (
-               <ContentViewer
-                  metaData={metaData}
-                  data={data}
-                  search={search}
-                  setSearch={setSearch}
-                  url={url}
-                  token={token}
-               />
+               <ContentViewer metaData={metaData} data={data} url={url} token={token} />
             )}
             {currentTab === "Meta Viewer" && (
                <MetaViewer response={response} content={contentData} />

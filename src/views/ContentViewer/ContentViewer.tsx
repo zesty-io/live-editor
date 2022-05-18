@@ -2,22 +2,13 @@ import React from "react"
 import { CollapsibleTable } from "components/Table"
 import { Box, Fab, Zoom } from "@mui/material"
 interface Props {
-   search: any
    data: any
-   setSearch: (e: any) => void
    metaData: any
    url: any
    token: any
 }
 
-export const ContentViewer = ({
-   metaData,
-   data,
-   search,
-   setSearch,
-   url,
-   token,
-}: Props) => {
+export const ContentViewer = ({ metaData, data, url, token }: Props) => {
    const [currentScroll, setcurrentScroll] = React.useState(0)
 
    const scrollEvent = (e: any) => {
