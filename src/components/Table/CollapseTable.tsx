@@ -14,6 +14,9 @@ import { PrettyPrintJson } from "utils"
 import { useTheme } from "@mui/system"
 import CloseIcon from "@mui/icons-material/Close"
 import * as helper from "utils"
+import { CellStyle, TableContainerStyle } from "./Styles"
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
 
 // dom access highlight function
 function activateWorkingElement(match: string): any {
@@ -54,10 +57,6 @@ const deactivateWorkingElement = async (
    }
 }
 
-// 1 edit at a time
-// when click it should scroll to the div
-// fetchwrapper verify if user is login
-// make edit in api
 interface Props {
    keyName: string
    obj: any
@@ -97,7 +96,13 @@ function Row({
 
    return (
       <React.Fragment>
-         <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+         <TableRow
+            sx={{
+               "& > *": { borderBottom: "unset" },
+               fontSize: "12px",
+               fontWeight: "500",
+            }}
+         >
             {/* Row Data  */}
             <TableCell sx={{ width: "1rem" }}>
                <IconButton
@@ -105,7 +110,7 @@ function Row({
                   size="small"
                   onClick={() => setOpen(!open)}
                >
-                  {open ? <span>⬆️</span> : <span>⬇️</span>}
+                  {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                </IconButton>
             </TableCell>
             <TableCell component="th" scope="row">
@@ -242,33 +247,33 @@ function Row({
    )
 }
 
-export const CollapsibleTable = ({ metaData, data = {}, url, token }: any) => {
+export const CollapsibleTable = ({ metaData, data = {}, url, token, onScroll }: any) => {
    const [workingElement, setWorkingElement] = React.useState("")
-
    return (
-      <TableContainer component={Paper} style={{ maxHeight: 600 }}>
+      <TableContainer onScroll={onScroll} component={Paper} style={TableContainerStyle}>
          <Table aria-label="collapsible table" stickyHeader>
             {/* HEaders */}
             <TableHead>
                <TableRow>
                   <TableCell />
-                  <TableCell variant="head" sx={{ width: "3rem" }}>
-                     <strong>Field Name</strong>
+                  <TableCell variant="head" sx={CellStyle}>
+                     Field Name
                   </TableCell>
-                  <TableCell align="left" sx={{ width: "3rem" }}>
-                     <strong>Type</strong>
+                  <TableCell align="left" sx={CellStyle}>
+                     Type
                   </TableCell>
-                  <TableCell align="left" sx={{ width: "20rem" }}>
-                     <strong>Content Example</strong>
+                  <TableCell align="left" sx={CellStyle}>
+                     Content Example
                   </TableCell>
-                  <TableCell align="left" sx={{ width: "3rem" }}>
-                     <strong>Content Length</strong>
+                  <TableCell align="left" sx={CellStyle}>
+                     Content Length
                   </TableCell>
-                  <TableCell align="left" sx={{ width: "3rem" }}>
-                     <strong>Access Example</strong>
+                  <TableCell align="left" sx={CellStyle}>
+                     Access Example
                   </TableCell>
                </TableRow>
             </TableHead>
+            <div id="gotoTop"></div>
 
             {/* Table Row main  */}
             <TableBody>

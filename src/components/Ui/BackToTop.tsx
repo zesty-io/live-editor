@@ -1,59 +1,79 @@
-import React from "react"
-import PropTypes from "prop-types"
-// import Toolbar from "@material-ui/core/Toolbar"
-import { makeStyles } from "@material-ui/core/styles"
+import * as React from "react"
+import AppBar from "@mui/material/AppBar"
+import Toolbar from "@mui/material/Toolbar"
+import Typography from "@mui/material/Typography"
+import CssBaseline from "@mui/material/CssBaseline"
+import useScrollTrigger from "@mui/material/useScrollTrigger"
+import Box from "@mui/material/Box"
+import Container from "@mui/material/Container"
+import Fab from "@mui/material/Fab"
+// import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
+import Zoom from "@mui/material/Zoom"
 
-import useScrollTrigger from "@material-ui/core/useScrollTrigger"
-import Container from "@material-ui/core/Container"
-import Fab from "@material-ui/core/Fab"
-import Zoom from "@material-ui/core/Zoom"
+interface Props {
+   /**
+    * Injected by the documentation to work in an iframe.
+    * You won't need it on your project.
+    */
+   window?: () => Window
+   children: React.ReactElement
+}
 
-const useStyles = makeStyles((theme) => ({
-   root: {
-      position: "fixed",
-      bottom: theme.spacing(2),
-      right: theme.spacing(2),
-   },
-}))
-
-function ScrollTop(props: any) {
-   const { children } = props
-   const classes = useStyles()
+function ScrollTop(props: Props) {
+   const { children, window } = props
+   // Note that you normally won't need to set the window ref as useScrollTrigger
+   // will default to window.
+   // This is only being set here because the demo is in an iframe.
    const trigger = useScrollTrigger({
+      target: window ? window() : undefined,
       disableHysteresis: true,
       threshold: 100,
    })
 
-   const handleClick = (event: any) => {
-      const anchor = (event.target.ownerDocument || document).querySelector(
-         "#back-to-top-anchor",
-      )
+   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+      const anchor = (
+         (event.target as HTMLDivElement).ownerDocument || document
+      ).querySelector("#back-to-top-anchor")
 
       if (anchor) {
-         anchor.scrollIntoView({ behavior: "smooth", block: "center" })
+         anchor.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+         })
       }
    }
 
    return (
       <Zoom in={trigger}>
-         <div onClick={handleClick} role="presentation" className={classes.root}>
+         <Box
+            onClick={handleClick}
+            role="presentation"
+            sx={{ position: "fixed", bottom: 16, right: 16 }}
+         >
             {children}
-         </div>
+         </Box>
       </Zoom>
    )
 }
 
-ScrollTop.propTypes = {
-   children: PropTypes.element.isRequired,
-}
-
-export default function BackToTop({ children }: any) {
+export default function BackToTop(props: Props) {
    return (
       <React.Fragment>
-         {/* <Toolbar id="back-to-top-anchor" /> */}
-         <Container>{children}</Container>
-         <ScrollTop>
+         <CssBaseline />
+         <AppBar>
+            <Toolbar>
+               <Typography variant="h6" component="div">
+                  Scroll to see button
+               </Typography>
+            </Toolbar>
+         </AppBar>
+         <Toolbar id="back-to-top-anchor" />
+         <Container>
+            <Box sx={{ my: 2 }}>{props.children}</Box>
+         </Container>
+         <ScrollTop {...props}>
             <Fab color="secondary" size="small" aria-label="scroll back to top">
+               {/* <KeyboardArrowUpIcon /> */}
                up
             </Fab>
          </ScrollTop>
