@@ -242,11 +242,14 @@ function Row({
    )
 }
 
-export const CollapsibleTable = ({ metaData, data = {}, url, token }: any) => {
+export const CollapsibleTable = ({ metaData, data = {}, url, token, onScroll }: any) => {
    const [workingElement, setWorkingElement] = React.useState("")
-
    return (
-      <TableContainer component={Paper} style={{ maxHeight: 700 }}>
+      <TableContainer
+         onScroll={onScroll}
+         component={Paper}
+         style={{ maxHeight: 700, overflow: "auto", scrollBehavior: "smooth" }}
+      >
          <Table aria-label="collapsible table" stickyHeader>
             {/* HEaders */}
             <TableHead>
@@ -269,6 +272,7 @@ export const CollapsibleTable = ({ metaData, data = {}, url, token }: any) => {
                   </TableCell>
                </TableRow>
             </TableHead>
+            <div id="gotoTop"></div>
 
             {/* Table Row main  */}
             <TableBody>

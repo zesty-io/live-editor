@@ -1,9 +1,6 @@
 import React from "react"
-// import ReactJson from "react-json-view-ssr"
-// import { SearchAppBar } from "components"
 import { CollapsibleTable } from "components/Table"
-import { Box } from "@mui/material"
-// import { useTheme } from "@mui/material"
+import { Box, Fab, Zoom } from "@mui/material"
 interface Props {
    search: any
    data: any
@@ -21,7 +18,16 @@ export const ContentViewer = ({
    url,
    token,
 }: Props) => {
-   // const theme = useTheme()
+   const [currentScroll, setcurrentScroll] = React.useState(0)
+
+   const scrollEvent = (e: any) => {
+      const target = e.target as HTMLTextAreaElement
+      setcurrentScroll(target.scrollTop)
+      console.log("Current scroll position:", target.scrollTop)
+   }
+
+   const newData =
+      Object.keys(data?.content).length === 0 ? metaData?.data?.data : data?.content
    return (
       <Box
          sx={{
@@ -32,14 +38,25 @@ export const ContentViewer = ({
             position: "relative",
          }}
       >
-         <div id="container1">
-            <CollapsibleTable
-               url={url}
-               token={token}
-               metaData={metaData}
-               data={metaData?.data?.data || data?.content || {}}
-            />
-         </div>
+         <Zoom in={currentScroll >= 200 ? true : false}>
+            <Fab
+               sx={{ position: "absolute", bottom: "0", right: "0" }}
+               color="secondary"
+               size="small"
+               aria-label="gotoTop"
+               href="#gotoTop"
+            >
+               ⬆️
+            </Fab>
+         </Zoom>
+
+         <CollapsibleTable
+            onScroll={scrollEvent}
+            url={url}
+            token={token}
+            metaData={metaData}
+            data={newData}
+         />
       </Box>
    )
 }
