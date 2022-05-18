@@ -1,6 +1,7 @@
 import React from "react"
 import { CollapsibleTable } from "components/Table"
 import { Box, Fab, Zoom } from "@mui/material"
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
 interface Props {
    data: any
    metaData: any
@@ -37,7 +38,7 @@ export const ContentViewer = ({ metaData, data, url, token }: Props) => {
                aria-label="gotoTop"
                href="#gotoTop"
             >
-               ⬆️
+               <KeyboardArrowUpIcon />
             </Fab>
          </Zoom>
 

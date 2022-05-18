@@ -15,6 +15,8 @@ import { useTheme } from "@mui/system"
 import CloseIcon from "@mui/icons-material/Close"
 import * as helper from "utils"
 import { CellStyle, TableContainerStyle } from "./Styles"
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
 
 // dom access highlight function
 function activateWorkingElement(match: string): any {
@@ -55,10 +57,6 @@ const deactivateWorkingElement = async (
    }
 }
 
-// 1 edit at a time
-// when click it should scroll to the div
-// fetchwrapper verify if user is login
-// make edit in api
 interface Props {
    keyName: string
    obj: any
@@ -112,7 +110,7 @@ function Row({
                   size="small"
                   onClick={() => setOpen(!open)}
                >
-                  {open ? <span>⬆️</span> : <span>⬇️</span>}
+                  {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                </IconButton>
             </TableCell>
             <TableCell component="th" scope="row">
