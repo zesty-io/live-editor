@@ -25,7 +25,6 @@ export const ContentViewer = ({ metaData, data, url, token }: Props) => {
          sx={{
             background: "background.paper",
             overflow: "auto",
-            padding: "1rem 2rem",
             height: "100%",
             position: "relative",
          }}

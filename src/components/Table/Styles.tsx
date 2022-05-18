@@ -4,7 +4,8 @@ export const CellStyle = {
    fontWeight: "800",
 } as const
 export const TableContainerStyle = {
-   maxHeight: 700,
+   maxHeight: 780,
+   // height: "100%",
    overflow: "auto",
    scrollBehavior: "smooth",
 } as const

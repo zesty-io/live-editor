@@ -3,20 +3,50 @@
 import React from "react"
 import { headerZUID } from "utils"
 import AppBar from "@mui/material/AppBar"
-import Typography from "@mui/material/Typography"
 import Box from "@mui/material/Box"
 import { useTheme } from "@mui/material/styles"
-import Button from "@mui/material/Button"
-import { BtnStyle } from "./Styles"
+import { TabContainer } from "components"
+import { BasicMenu } from "components/Ui"
 interface Props {
    children: React.ReactNode
    content: any
    response: any
+   setcurrentTab: any
+   tabList: any
+   settime: any
 }
 
-export const Headers = ({ response, children, content }: Props) => {
+export const Headers = ({
+   response,
+   children,
+   content,
+   setcurrentTab,
+   tabList,
+   settime,
+}: Props) => {
    const theme = useTheme()
 
+   const list = [
+      {
+         name: "Edit Schema",
+         label: "Edit Schema",
+         href: `https://${
+            content?.zestyInstanceZUID || headerZUID(response)
+         }.manager.zesty.io/schema/${content?.meta?.model?.zuid}`,
+      },
+      {
+         name: "Edit Content",
+         label: "Edit Content",
+         href: `https://${
+            content?.zestyInstanceZUID || headerZUID(response)
+         }.manager.zesty.io/content/${content?.meta?.model?.zuid}/${content?.meta?.zuid}`,
+      },
+      {
+         name: "Edit Permission",
+         label: "Edit Permission",
+         href: `https://accounts.zesty.io/instances/${content?.zestyInstanceZUID}`,
+      },
+   ]
    return (
       <AppBar sx={{ background: "#fff" }} position="static">
          <Box
@@ -24,95 +54,33 @@ export const Headers = ({ response, children, content }: Props) => {
             paddingY={2}
             style={{
                display: "flex",
+               justifyContent: "space-between",
                width: "100%",
-               margin: "0 auto",
+               alignItems: "center",
                background: theme.palette.background.paper,
             }}
          >
-            <Box
-               style={{
-                  display: "flex",
-               }}
-            >
-               <Box
-                  sx={{
-                     display: "flex",
-                     alignItems: "center",
-                     justifyContent: "space-evenly",
-                     gap: "1rem",
-                  }}
-               >
-                  <Box>
-                     <img
-                        src="https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png"
-                        width="62px"
-                        height="62px"
-                        alt="Zesty.io Logo"
-                     />
-                  </Box>
-
-                  <Typography
-                     sx={{ fontSize: "14px", whiteSpace: "normal" }}
-                     color={theme.palette.common.black}
-                     component={"h6"}
-                  >
-                     Browsing item <strong> {content?.meta?.web?.seo_link_text} </strong>
-                     from the <strong>{content?.meta?.model_alternate_name} </strong>
-                     Content Model
-                  </Typography>
+            <Box sx={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+               <Box>
+                  <img
+                     onClick={() => window.location.reload()}
+                     src="https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png"
+                     width="62px"
+                     height="62px"
+                     alt="Zesty.io Logo"
+                  />
                </Box>
-               <Box
-                  sx={{
-                     alignItems: "center",
-                     display: "flex",
-                     gap: "1rem",
-                     paddingLeft: "1rem",
-                  }}
-               >
-                  <Button
-                     component="a"
-                     title="Edit Permissions"
-                     href={`https://accounts.zesty.io/instances/${content?.zestyInstanceZUID}`}
-                     variant="contained"
-                     color="secondary"
-                     size="small"
-                     sx={BtnStyle}
-                  >
-                     Permissions
-                  </Button>
-                  <Button
-                     component="a"
-                     title="Edit Content"
-                     href={`https://${
-                        content?.zestyInstanceZUID || headerZUID(response)
-                     }.manager.zesty.io/content/${content?.meta?.model?.zuid}/${
-                        content?.meta?.zuid
-                     }`}
-                     variant="contained"
-                     color="secondary"
-                     target="_blank"
-                     size="small"
-                     sx={BtnStyle}
-                  >
-                     Content
-                  </Button>
-                  <Button
-                     component="a"
-                     title="Edit Schema"
-                     href={`https://${
-                        content?.zestyInstanceZUID || headerZUID(response)
-                     }.manager.zesty.io/schema/${content?.meta?.model?.zuid}`}
-                     variant="contained"
-                     color="secondary"
-                     size="small"
-                     target="_blank"
-                     sx={BtnStyle}
-                  >
-                     Schema
-                  </Button>
+               <TabContainer
+                  setcurrentTab={setcurrentTab}
+                  tabList={tabList}
+                  settime={settime}
+               />
+            </Box>
 
-                  {children}
-               </Box>
+            <Box sx={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+               <BasicMenu list={list} />
+
+               {children}
             </Box>
          </Box>
       </AppBar>

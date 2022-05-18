@@ -3,13 +3,13 @@ import * as helper from "utils/index"
 import React from "react"
 import { useFetchWrapper } from "hooks"
 import { fetchData } from "services"
-import { Box, Button } from "@mui/material"
+import { Box, Button, Typography } from "@mui/material"
 import { Loader } from "components"
 import { containerStyle, loginPromp } from "./styles"
 import { Headers } from "components"
-import { TabContainer } from "components"
 import { tabList } from "constants/index"
 import { ContentViewer, JsonDataViewer, MetaViewer } from "views"
+import { useTheme } from "@mui/material/styles"
 
 export const ZestyExplorerBrowser = ({
    pageData,
@@ -19,7 +19,7 @@ export const ZestyExplorerBrowser = ({
    jsonData,
 }: any) => {
    const content = contentData || dummydata
-   const [currentTab, setcurrentTab] = React.useState("Content Viewer")
+   const [currentTab, setcurrentTab] = React.useState("Edit")
    const [search, setSearch] = React.useState()
    // this is the data for editing request
    const [metaData, setMetaData] = React.useState([])
@@ -31,6 +31,7 @@ export const ZestyExplorerBrowser = ({
    const modelZUID = jsonData?.data?.meta?.model?.zuid
    const instanceZUID = helper.headerZUID(jsonData.res)
 
+   const theme = useTheme()
    console.log(jsonData, "jsondata")
    // get the instance view models  on initial load
    const { loading, verifyFailed, verifySuccess, instances, views, models } =
@@ -92,23 +93,38 @@ export const ZestyExplorerBrowser = ({
 
    return (
       <Box sx={containerStyle}>
-         <Headers content={content} response={response}>
-            {children}
-         </Headers>
-         <TabContainer
+         <Headers
+            content={content}
+            response={response}
             setcurrentTab={setcurrentTab}
             tabList={tabList}
             settime={() => settime(2)}
-         />
+         >
+            {children}
+         </Headers>
+         <Box sx={{ background: "#fff", width: "100%" }}>
+            <Typography
+               sx={{ fontSize: "14px", whiteSpace: "normal" }}
+               color={theme.palette.common.black}
+               component={"h6"}
+            >
+               Browsing item <strong> {content?.meta?.web?.seo_link_text} </strong>
+               from the <strong>{content?.meta?.model_alternate_name} </strong>
+               Content Model
+            </Typography>
+         </Box>
          <Box sx={{ position: "relative" }}>
             {time > 0 && <Loader />}
-            {currentTab === "Content Viewer" && (
+            {currentTab === "Edit" && (
                <ContentViewer metaData={metaData} data={data} url={url} token={token} />
             )}
-            {currentTab === "Meta Viewer" && (
+            {currentTab === "SEO/Meta" && (
                <MetaViewer response={response} content={contentData} />
             )}
-            {currentTab === "Json Data Viewer" && (
+            {currentTab === "JSON" && (
+               <JsonDataViewer data={data} search={search} setSearch={setSearch} />
+            )}
+            {currentTab === "Code Help" && (
                <JsonDataViewer data={data} search={search} setSearch={setSearch} />
             )}
          </Box>
