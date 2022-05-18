@@ -24,6 +24,16 @@ const expandBody = (bool: boolean) => {
    const ze: any = document.getElementById("zestyExplorer")
    ze.style.left = bool ? "0" : "-40vw"
 }
+const StyledButton = withStyles({
+   root: {
+      backgroundColor: "#1b202c",
+      color: "#fff",
+      "&:hover": {
+         backgroundColor: "#1b202c",
+         color: "#fff",
+      },
+   },
+})(Button)
 
 // renanme content to contentData
 
@@ -85,17 +95,6 @@ export const ZestyExplorer = ({ content = {} }: any) => {
    delete searchObject.navigationTree
    // custom nav tree building
    delete searchObject.navigationCustom
-
-   const StyledButton = withStyles({
-      root: {
-         backgroundColor: "#1b202c",
-         color: "#fff",
-         "&:hover": {
-            backgroundColor: "#1b202c",
-            color: "#fff",
-         },
-      },
-   })(Button)
 
    if (!helper.canUseDOM()) {
       return null

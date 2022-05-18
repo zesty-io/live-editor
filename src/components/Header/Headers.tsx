@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography"
 import Box from "@mui/material/Box"
 import { useTheme } from "@mui/material/styles"
 import Button from "@mui/material/Button"
+import { BtnStyle } from "./Styles"
 interface Props {
    children: React.ReactNode
    content: any
@@ -17,7 +18,7 @@ export const Headers = ({ response, children, content }: Props) => {
    const theme = useTheme()
 
    return (
-      <AppBar position="static">
+      <AppBar sx={{ background: "#fff" }} position="static">
          <Box
             paddingX={4}
             paddingY={2}
@@ -66,7 +67,7 @@ export const Headers = ({ response, children, content }: Props) => {
                      variant="contained"
                      color="secondary"
                      size="small"
-                     sx={{ textAlign: "center" }}
+                     sx={BtnStyle}
                   >
                      Edit Permissions
                   </Button>
@@ -80,7 +81,7 @@ export const Headers = ({ response, children, content }: Props) => {
                      color="secondary"
                      target="_blank"
                      size="small"
-                     sx={{ textAlign: "center" }}
+                     sx={BtnStyle}
                   >
                      Edit Content
                   </Button>
@@ -92,7 +93,7 @@ export const Headers = ({ response, children, content }: Props) => {
                      color="secondary"
                      size="small"
                      target="_blank"
-                     sx={{ textAlign: "center" }}
+                     sx={BtnStyle}
                   >
                      Edit Schema
                   </Button>

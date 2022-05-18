@@ -14,6 +14,7 @@ import { PrettyPrintJson } from "utils"
 import { useTheme } from "@mui/system"
 import CloseIcon from "@mui/icons-material/Close"
 import * as helper from "utils"
+import { CellStyle, TableContainerStyle } from "./Styles"
 
 // dom access highlight function
 function activateWorkingElement(match: string): any {
@@ -97,7 +98,13 @@ function Row({
 
    return (
       <React.Fragment>
-         <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+         <TableRow
+            sx={{
+               "& > *": { borderBottom: "unset" },
+               fontSize: "12px",
+               fontWeight: "500",
+            }}
+         >
             {/* Row Data  */}
             <TableCell sx={{ width: "1rem" }}>
                <IconButton
@@ -245,30 +252,26 @@ function Row({
 export const CollapsibleTable = ({ metaData, data = {}, url, token, onScroll }: any) => {
    const [workingElement, setWorkingElement] = React.useState("")
    return (
-      <TableContainer
-         onScroll={onScroll}
-         component={Paper}
-         style={{ maxHeight: 700, overflow: "auto", scrollBehavior: "smooth" }}
-      >
+      <TableContainer onScroll={onScroll} component={Paper} style={TableContainerStyle}>
          <Table aria-label="collapsible table" stickyHeader>
             {/* HEaders */}
             <TableHead>
                <TableRow>
                   <TableCell />
-                  <TableCell variant="head" sx={{ width: "3rem" }}>
-                     <strong>Field Name</strong>
+                  <TableCell variant="head" sx={CellStyle}>
+                     Field Name
                   </TableCell>
-                  <TableCell align="left" sx={{ width: "3rem" }}>
-                     <strong>Type</strong>
+                  <TableCell align="left" sx={CellStyle}>
+                     Type
                   </TableCell>
-                  <TableCell align="left" sx={{ width: "20rem" }}>
-                     <strong>Content Example</strong>
+                  <TableCell align="left" sx={CellStyle}>
+                     Content Example
                   </TableCell>
-                  <TableCell align="left" sx={{ width: "3rem" }}>
-                     <strong>Content Length</strong>
+                  <TableCell align="left" sx={CellStyle}>
+                     Content Length
                   </TableCell>
-                  <TableCell align="left" sx={{ width: "3rem" }}>
-                     <strong>Access Example</strong>
+                  <TableCell align="left" sx={CellStyle}>
+                     Access Example
                   </TableCell>
                </TableRow>
             </TableHead>
