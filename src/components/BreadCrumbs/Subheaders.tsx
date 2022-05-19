@@ -16,7 +16,7 @@ export const Subheaders = ({ theme, content, btnList = [] }: Props) => {
    return (
       <Box
          paddingX={2}
-         paddingY={1}
+         paddingY={2}
          sx={{
             display: "flex",
             justifyContent: "space-between",
@@ -52,27 +52,6 @@ export const Subheaders = ({ theme, content, btnList = [] }: Props) => {
                   </Button>
                )
             })}
-            {/* <Button
-               sx={{ whiteSpace: "nowrap", cursor: "pointer" }}
-               color="primary"
-               size="small"
-               variant="contained"
-               target="_blank"
-               href={urls.parselyDocs}
-            >
-               Parsely Docs
-            </Button>
-
-            <Button
-               sx={{ whiteSpace: "nowrap", cursor: "pointer" }}
-               color="primary"
-               size="small"
-               variant="contained"
-               target="_blank"
-               href={urls.nextJsDocs}
-            >
-               Next Js Docs
-            </Button> */}
          </Box>
       </Box>
    )

@@ -1,6 +1,6 @@
 export const CellStyle = {
    width: "3rem",
-   fontSize: "12px",
+   fontSize: "16px",
    fontWeight: "800",
    color: "#fff",
 } as const

@@ -7,6 +7,7 @@ import Box from "@mui/material/Box"
 import { useTheme } from "@mui/material/styles"
 import { TabContainer } from "components"
 import { BasicMenu } from "components/Ui"
+import { urls } from "constants"
 interface Props {
    children: React.ReactNode
    content: any
@@ -62,10 +63,10 @@ export const Headers = ({
             }}
          >
             <Box sx={{ display: "flex", alignItems: "center", gap: "2rem" }}>
-               <Box>
+               <Box sx={{ cursor: "pointer" }}>
                   <img
                      onClick={() => window.location.reload()}
-                     src="https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png"
+                     src={urls.zestyBrandLogoMid}
                      width="62px"
                      height="62px"
                      alt="Zesty.io Logo"
@@ -80,7 +81,6 @@ export const Headers = ({
 
             <Box sx={{ display: "flex", alignItems: "center", gap: ".5rem" }}>
                <BasicMenu list={list} />
-
                {children}
             </Box>
          </Box>
