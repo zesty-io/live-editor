@@ -17,7 +17,7 @@ import * as helper from "utils"
 import { CellStyle, TableContainerStyle } from "./Styles"
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
-import { Typography } from "@mui/material"
+import { Subheaders } from "components"
 
 // dom access highlight function
 function activateWorkingElement(match: string): any {
@@ -77,8 +77,6 @@ function Row({
    url,
    token,
 }: Props) {
-   const [showCopy, setShowCopy] = React.useState(false)
-   const [clipboardCopy, setclipboardCopy] = React.useState(false)
    const [open, setOpen] = React.useState(false)
    const [text, settext] = React.useState("")
 
@@ -175,42 +173,6 @@ function Row({
                )}
             </TableCell>
             <TableCell align="left">{value.length}</TableCell>
-            <TableCell
-               onMouseEnter={() => setShowCopy(true)}
-               onMouseLeave={() => {
-                  setShowCopy(false)
-                  setclipboardCopy(false)
-               }}
-               sx={{
-                  background: theme.palette.zesty.zestyDarkBlue,
-                  color: theme.palette.zesty.zestyGreen,
-                  position: "relative",
-               }}
-            >
-               <Button
-                  sx={{ cursor: "pointer" }}
-                  variant="contained"
-                  color="secondary"
-                  size="small"
-                  onClick={() => {
-                     navigator.clipboard.writeText(`content.${keyName}`)
-                     setclipboardCopy(true)
-                     setShowCopy(false)
-                  }}
-               >
-                  {`{content.${keyName}}`}
-               </Button>
-               <Box
-                  sx={{
-                     position: "absolute",
-                     left: "0",
-                     top: "0",
-                  }}
-               >
-                  {clipboardCopy && <span>✅ Copied to clipboard!</span>}
-                  {showCopy && <span>📜 Copy</span>}
-               </Box>
-            </TableCell>
          </TableRow>
 
          {/* Expanded Data */}
@@ -258,22 +220,28 @@ export const CollapsibleTable = ({
    theme,
 }: any) => {
    const [workingElement, setWorkingElement] = React.useState("")
+
    return (
       <TableContainer onScroll={onScroll} component={Paper} style={TableContainerStyle}>
-         <Box sx={{ background: "#fff", width: "100%" }}>
-            <Typography
-               sx={{ fontSize: "14px", whiteSpace: "normal" }}
-               color={theme.palette.common.black}
-               component={"h6"}
-            >
-               Browsing item <strong> {content?.meta?.web?.seo_link_text} </strong>
-               from the <strong>{content?.meta?.model_alternate_name} </strong>
-               Content Model
-            </Typography>
+         <Box
+            paddingX={2}
+            paddingY={1}
+            sx={{
+               display: "flex",
+               justifyContent: "space-between",
+               alignItems: "center",
+               backgroundColor: theme.palette.zesty.zestyLightBlue,
+            }}
+         >
+            <Subheaders content={content} theme={theme} />
          </Box>
          <Table aria-label="collapsible table">
             {/* HEaders */}
-            <TableHead>
+            <TableHead
+               sx={{
+                  backgroundColor: theme.palette.zesty.zestyOrange,
+               }}
+            >
                <TableRow>
                   <TableCell />
                   <TableCell variant="head" sx={CellStyle}>
@@ -288,12 +256,8 @@ export const CollapsibleTable = ({
                   <TableCell align="left" sx={CellStyle}>
                      Content Length
                   </TableCell>
-                  <TableCell align="left" sx={CellStyle}>
-                     Access Example
-                  </TableCell>
                </TableRow>
             </TableHead>
-            <div id="gotoTop"></div>
 
             {/* Table Row main  */}
             <TableBody>

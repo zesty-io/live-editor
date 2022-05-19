@@ -50,7 +50,8 @@ export const Headers = ({
    return (
       <AppBar sx={{ background: "#fff" }} position="static">
          <Box
-            paddingX={4}
+            paddingLeft={3}
+            paddingRight={1}
             paddingY={2}
             style={{
                display: "flex",
@@ -60,7 +61,7 @@ export const Headers = ({
                background: theme.palette.background.paper,
             }}
          >
-            <Box sx={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: ".5rem" }}>
                <Box>
                   <img
                      onClick={() => window.location.reload()}
@@ -77,7 +78,7 @@ export const Headers = ({
                />
             </Box>
 
-            <Box sx={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: ".5rem" }}>
                <BasicMenu list={list} />
 
                {children}

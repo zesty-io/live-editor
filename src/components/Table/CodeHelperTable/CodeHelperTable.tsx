@@ -10,7 +10,8 @@ import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
 import { useTheme } from "@mui/system"
 import { CellStyle, TableContainerStyle } from "./Styles"
-import { Typography } from "@mui/material"
+import { Subheaders } from "components/BreadCrumbs"
+import { urls } from "constants"
 
 function Row({ keyName }: any) {
    const [showCopy, setShowCopy] = React.useState(false)
@@ -188,22 +189,51 @@ export const CodeHelperTable = ({
    theme,
 }: any) => {
    const [workingElement, setWorkingElement] = React.useState("")
+
    return (
       <TableContainer onScroll={onScroll} component={Paper} style={TableContainerStyle}>
-         <Box sx={{ background: "#fff", width: "100%" }}>
-            <Typography
-               sx={{ fontSize: "14px", whiteSpace: "normal" }}
-               color={theme.palette.common.black}
-               component={"h6"}
-            >
-               Browsing item <strong> {content?.meta?.web?.seo_link_text} </strong>
-               from the <strong>{content?.meta?.model_alternate_name} </strong>
-               Content Model
-            </Typography>
+         <Box
+            paddingX={2}
+            paddingY={1}
+            sx={{
+               display: "flex",
+               justifyContent: "space-between",
+               alignItems: "center",
+               backgroundColor: theme.palette.zesty.zestyLightBlue,
+            }}
+         >
+            <Subheaders content={content} theme={theme} />
+            <Box sx={{ display: "flex", gap: ".5rem" }}>
+               <Button
+                  sx={{ whiteSpace: "nowrap", cursor: "pointer" }}
+                  color="primary"
+                  size="small"
+                  variant="contained"
+                  target="_blank"
+                  href={urls.parselyDocs}
+               >
+                  Parsely Docs
+               </Button>
+
+               <Button
+                  sx={{ whiteSpace: "nowrap", cursor: "pointer" }}
+                  color="primary"
+                  size="small"
+                  variant="contained"
+                  target="_blank"
+                  href={urls.nextJsDocs}
+               >
+                  Next Js Docs
+               </Button>
+            </Box>
          </Box>
          <Table aria-label="collapsible table">
             {/* HEaders */}
-            <TableHead>
+            <TableHead
+               sx={{
+                  backgroundColor: theme.palette.zesty.zestyOrange,
+               }}
+            >
                <TableRow>
                   <TableCell variant="head" sx={CellStyle}>
                      Reference Name
@@ -219,7 +249,6 @@ export const CodeHelperTable = ({
                   </TableCell>
                </TableRow>
             </TableHead>
-            <div id="gotoTop"></div>
 
             {/* Table Row main  */}
             <TableBody>

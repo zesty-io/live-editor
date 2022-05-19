@@ -1,6 +1,11 @@
 import { Box, Button } from "@mui/material"
 import React from "react"
-import { loginPromp } from "./styles"
+
+const loginPromp = {
+   position: "fixed",
+   top: "25%",
+   left: "15%",
+} as const
 
 export const LoginPrompt = () => {
    return (

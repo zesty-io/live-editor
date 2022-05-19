@@ -1,5 +1,5 @@
 import React from "react"
-import { CollapsibleTable } from "components/Table"
+import { CollapsibleTable } from "components"
 import { Box, Fab, Zoom } from "@mui/material"
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
 interface Props {

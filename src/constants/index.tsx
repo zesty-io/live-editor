@@ -53,3 +53,8 @@ export const tabList = [
    { id: 3, label: "JSON", value: "JSON" },
    { id: 4, label: "Code Helper", value: "Code Helper" },
 ]
+
+export const urls = {
+   parselyDocs: "",
+   nextJsDocs: "",
+}
