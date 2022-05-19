@@ -17,7 +17,7 @@ export const JsonDataViewer = ({ content, data, search, setSearch, theme }: Prop
          <Subheaders content={content} theme={theme} />
          <SearchAppBar value={search} onChange={setSearch} />
          <ReactJson
-            style={{ height: "90vh", overflowY: "scroll" }}
+            style={{ height: "80vh", overflowY: "scroll" }}
             name={"data"}
             // @ts-ignore
             src={data}
