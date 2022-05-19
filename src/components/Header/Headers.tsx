@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from "react"
 import { headerZUID } from "utils"
-import AppBar from "@mui/material/AppBar"
+import { AppBar } from "@mui/material"
 import Box from "@mui/material/Box"
 import { useTheme } from "@mui/material/styles"
 import { TabContainer } from "components"

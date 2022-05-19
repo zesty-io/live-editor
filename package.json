@@ -16,7 +16,7 @@
       "commit": "npm run build && git add . && cz",
       "submit": "npm run build && git add . && cz && npm run release",
       "release": "release-it --no-npm",
-      "watch": "webpack --watch --config=webpack.config.common.ts"
+      "watch": "webpack --watch  --mode=production --config=webpack.config.common.ts"
    },
    "keywords": [
       "zesty-io",
