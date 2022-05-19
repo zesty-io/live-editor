@@ -4,11 +4,11 @@ import ReactDOM from "react-dom"
 import { ZestyExplorer } from "./components"
 import { canUseDOM } from "./utils/index"
 
-// if (process.env.NODE_ENV === "production") {
-//    console.log = () => {}
-//    console.error = () => {}
-//    console.debug = () => {}
-// }
+if (process.env.NODE_ENV === "production") {
+   console.log = () => {}
+   console.error = () => {}
+   console.debug = () => {}
+}
 
 console.log("dev branch123")
 export const main = () => {
