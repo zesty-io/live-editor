@@ -102,9 +102,17 @@ export const ZestyExplorerBrowser = ({
                   token={token}
                />
             )}
-            {currentTab === 1 && <MetaViewer response={response} content={contentData} />}
+            {currentTab === 1 && (
+               <MetaViewer theme={theme} response={response} content={contentData} />
+            )}
             {currentTab === 2 && (
-               <JsonDataViewer data={data} search={search} setSearch={setSearch} />
+               <JsonDataViewer
+                  data={data}
+                  search={search}
+                  setSearch={setSearch}
+                  theme={theme}
+                  content={content}
+               />
             )}
             {currentTab === 3 && (
                <CodeHelper

@@ -1,8 +1,8 @@
-import Button from "@mui/material/Button"
 import { Box } from "@mui/material"
 import React from "react"
 import { CopyBlock, anOldHope } from "react-code-blocks"
 import { headerZUID } from "utils"
+import { Subheaders } from "components"
 
 const generatedScript = (content: any) => {
    console.log(content, "contentdata")
@@ -40,35 +40,17 @@ const generatedScript = (content: any) => {
 `
 }
 
-export const MetaViewer = ({ content, response }: any) => {
-   console.log(content, "contentdata")
+export const MetaViewer = ({ content, response, theme }: any) => {
    const uri = `https://${
       content?.zestyInstanceZUID || headerZUID(response)
    }.manager.zesty.io/content/${content?.meta?.model?.zuid}/${content?.meta?.zuid}/meta`
-   console.log(uri)
+
+   const btnList = [
+      { name: "Edit in CMS", label: "Edit in CMS", value: "Edit in CMS", href: uri },
+   ]
    return (
-      <Box sx={{ height: "80vh", background: "#fff", padding: "1rem 2rem" }}>
-         <Box
-            paddingX={4}
-            sx={{
-               display: "flex",
-               alignItems: "end",
-               width: "100%",
-               justifyContent: "flex-end",
-            }}
-         >
-            <Button
-               href={uri}
-               variant="contained"
-               color="primary"
-               size="small"
-               sx={{ fontSize: "12px", whiteSpace: "nowrap" }}
-            >
-               <Box paddingX={2} paddingY={1}>
-                  Edit in CMS
-               </Box>
-            </Button>
-         </Box>
+      <Box sx={{ height: "90vh", background: "#fff" }}>
+         <Subheaders content={content} theme={theme} btnList={btnList} />
          <CopyBlock
             text={generatedScript(content)}
             language={"html"}

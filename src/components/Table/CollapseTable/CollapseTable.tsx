@@ -223,18 +223,7 @@ export const CollapsibleTable = ({
 
    return (
       <TableContainer onScroll={onScroll} component={Paper} style={TableContainerStyle}>
-         <Box
-            paddingX={2}
-            paddingY={1}
-            sx={{
-               display: "flex",
-               justifyContent: "space-between",
-               alignItems: "center",
-               backgroundColor: theme.palette.zesty.zestyLightBlue,
-            }}
-         >
-            <Subheaders content={content} theme={theme} />
-         </Box>
+         <Subheaders content={content} theme={theme} />
          <Table aria-label="collapsible table">
             {/* HEaders */}
             <TableHead

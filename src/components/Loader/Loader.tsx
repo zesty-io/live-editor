@@ -43,6 +43,7 @@ export const Loader = () => {
                      height: "100%",
                      width: "100%",
                      textAlign: "center",
+                     userSelect: "none",
                   }}
                >
                   <img src={loading} alt="Loading" />

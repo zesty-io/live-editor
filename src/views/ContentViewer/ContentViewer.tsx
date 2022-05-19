@@ -25,7 +25,7 @@ export const ContentViewer = ({ content, theme, metaData, data, url, token }: Pr
    return (
       <Box
          sx={{
-            background: "background.paper",
+            background: "#fff",
             overflow: "auto",
             height: "100%",
             position: "relative",

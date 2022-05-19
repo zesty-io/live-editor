@@ -78,7 +78,7 @@ export const Headers = ({
                />
             </Box>
 
-            <Box sx={{ display: "flex", alignItems: "center", gap: "0" }}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: ".5rem" }}>
                <BasicMenu list={list} />
 
                {children}

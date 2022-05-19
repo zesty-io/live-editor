@@ -19,8 +19,6 @@ function Row({ keyName }: any) {
 
    const theme = useTheme()
 
-   // @ts-ignore
-
    return (
       <React.Fragment>
          <TableRow
@@ -179,6 +177,21 @@ function Row({ keyName }: any) {
    )
 }
 
+const btnList = [
+   {
+      name: "Parsely Docs",
+      label: "Parsely Docs",
+      value: "Parsely Docs",
+      href: urls.parselyDocs,
+   },
+   {
+      name: "Next Js Docs",
+      label: "Next Js Docs",
+      value: "Next Js Docs",
+      href: urls.nextJsDocs,
+   },
+]
+
 export const CodeHelperTable = ({
    content,
    metaData,
@@ -192,41 +205,7 @@ export const CodeHelperTable = ({
 
    return (
       <TableContainer onScroll={onScroll} component={Paper} style={TableContainerStyle}>
-         <Box
-            paddingX={2}
-            paddingY={1}
-            sx={{
-               display: "flex",
-               justifyContent: "space-between",
-               alignItems: "center",
-               backgroundColor: theme.palette.zesty.zestyLightBlue,
-            }}
-         >
-            <Subheaders content={content} theme={theme} />
-            <Box sx={{ display: "flex", gap: ".5rem" }}>
-               <Button
-                  sx={{ whiteSpace: "nowrap", cursor: "pointer" }}
-                  color="primary"
-                  size="small"
-                  variant="contained"
-                  target="_blank"
-                  href={urls.parselyDocs}
-               >
-                  Parsely Docs
-               </Button>
-
-               <Button
-                  sx={{ whiteSpace: "nowrap", cursor: "pointer" }}
-                  color="primary"
-                  size="small"
-                  variant="contained"
-                  target="_blank"
-                  href={urls.nextJsDocs}
-               >
-                  Next Js Docs
-               </Button>
-            </Box>
-         </Box>
+         <Subheaders theme={theme} content={content} btnList={btnList} />
          <Table aria-label="collapsible table">
             {/* HEaders */}
             <TableHead
