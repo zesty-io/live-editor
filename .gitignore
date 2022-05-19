@@ -1,5 +1,7 @@
 node_modules
 .env
 build
-dist
-!*dist/explorer.production.js
+
+!/dist/
+/dist/*
+!/dist/explorer.production.js
