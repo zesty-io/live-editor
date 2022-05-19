@@ -5,6 +5,7 @@ import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin"
 import "webpack-dev-server"
 import webpack from "webpack"
 import { CleanWebpackPlugin } from "clean-webpack-plugin"
+import TerserPlugin from "terser-webpack-plugin"
 
 const config: Configuration = {
    entry: "./src/index.tsx",
@@ -23,6 +24,17 @@ const config: Configuration = {
                   ],
                },
             },
+         },
+         {
+            test: /\.svg$/,
+            use: [
+               {
+                  loader: "svg-url-loader",
+                  options: {
+                     limit: 10000,
+                  },
+               },
+            ],
          },
       ],
    },
@@ -52,6 +64,22 @@ const config: Configuration = {
    },
    devServer: {
       static: "./dist",
+   },
+   performance: {
+      hints: false,
+      maxEntrypointSize: 512000,
+      maxAssetSize: 512000,
+   },
+   optimization: {
+      minimize: true,
+      minimizer: [
+         new TerserPlugin({
+            // Use multi-process parallel running to improve the build speed
+            // Default number of concurrent runs: os.cpus().length - 1
+            parallel: true,
+            // Enable file caching
+         }),
+      ],
    },
    plugins: [
       new ForkTsCheckerWebpackPlugin({

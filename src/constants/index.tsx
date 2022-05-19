@@ -48,7 +48,16 @@ export const dummycontent = {
 
 // list of tabs to render
 export const tabList = [
-   { id: 1, label: "Content Viewer", value: "Content Viewer" },
-   { id: 2, label: "Meta Viewer", value: "Meta Viewer" },
-   { id: 3, label: "Json Data Viewer", value: "Json Data Viewer" },
+   { id: 1, label: "Edit", value: "Edit" },
+   { id: 2, label: "SEO/Meta", value: "SEO/Meta" },
+   { id: 3, label: "JSON", value: "JSON" },
+   { id: 4, label: "Code Helper", value: "Code Helper" },
 ]
+
+export const urls = {
+   parselyDocs: "",
+   nextJsDocs: "",
+   zestyBrandLogo: "https://brand.zesty.io/zesty-io-logo.svg",
+   zestyBrandLogoMid:
+      "https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png",
+}

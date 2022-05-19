@@ -1,15 +1,15 @@
-import { dummydata } from "constants/index"
-import * as helper from "utils/index"
+import { dummydata, tabList } from "constants"
+import * as helper from "utils"
 import React from "react"
 import { useFetchWrapper } from "hooks"
 import { fetchData } from "services"
-import { Box, Button } from "@mui/material"
+import { Box } from "@mui/material"
 import { Loader } from "components"
-import { containerStyle, loginPromp } from "./styles"
+import { containerStyle } from "./styles"
 import { Headers } from "components"
-import { TabContainer } from "components"
-import { tabList } from "constants/index"
-import { ContentViewer, JsonDataViewer, MetaViewer } from "views"
+import { CodeHelper, ContentViewer, JsonDataViewer, MetaViewer } from "views"
+import { useTheme } from "@mui/material/styles"
+import { LoginPrompt } from "components/Ui"
 
 export const ZestyExplorerBrowser = ({
    pageData,
@@ -19,18 +19,28 @@ export const ZestyExplorerBrowser = ({
    jsonData,
 }: any) => {
    const content = contentData || dummydata
-   const [currentTab, setcurrentTab] = React.useState("Content Viewer")
+   const [currentTab, setcurrentTab] = React.useState(0)
    const [search, setSearch] = React.useState()
    // this is the data for editing request
    const [metaData, setMetaData] = React.useState([])
    // for loading of tabs
    const [time, settime] = React.useState(0)
+
+   const [currentScroll, setcurrentScroll] = React.useState(0)
+
+   const scrollEvent = (e: any) => {
+      const target = e.target as HTMLTextAreaElement
+      setcurrentScroll(target.scrollTop)
+      console.log("Current scroll position:", target.scrollTop)
+   }
+
    const userAppSID = helper.getCookie("APP_SID")
    const token = userAppSID
    const itemZUID = jsonData?.data?.meta?.zuid
    const modelZUID = jsonData?.data?.meta?.model?.zuid
    const instanceZUID = helper.headerZUID(jsonData.res)
 
+   const theme = useTheme()
    console.log(jsonData, "jsondata")
    // get the instance view models  on initial load
    const { loading, verifyFailed, verifySuccess, instances, views, models } =
@@ -64,10 +74,54 @@ export const ZestyExplorerBrowser = ({
       return () => clearTimeout(timer)
    })
 
+   const HeaderProps = {
+      content,
+      response,
+      setcurrentTab,
+      tabList,
+      settime: () => settime(2),
+   }
+
+   const EditProps = {
+      content,
+      theme,
+      metaData,
+      data,
+      url,
+      token,
+      scrollPos: currentScroll,
+      scrollEvent,
+   }
+
+   const MetaProps = {
+      theme,
+      response,
+      content: contentData,
+   }
+
+   const JSONProps = {
+      data,
+      search,
+      setSearch,
+      theme,
+      content,
+   }
+
+   const CodeHelperProps = {
+      content,
+      theme,
+      metaData,
+      data,
+      url,
+      token,
+      scrollPos: currentScroll,
+      scrollEvent,
+   }
+
    // show loading
    if (loading && !verifyFailed && !verifySuccess) {
       return (
-         <Box sx={loginPromp}>
+         <Box sx={containerStyle}>
             <Loader />
          </Box>
       )
@@ -75,42 +129,18 @@ export const ZestyExplorerBrowser = ({
 
    // show failed login prompt
    if (!verifySuccess) {
-      return (
-         <Box sx={loginPromp}>
-            <h1>Please Login</h1>
-            <Button
-               href={`https://accounts.zesty.io/login`}
-               variant="contained"
-               color="secondary"
-               size="small"
-            >
-               Sign in to Zesty.io
-            </Button>
-         </Box>
-      )
+      return <LoginPrompt />
    }
 
    return (
       <Box sx={containerStyle}>
-         <Headers content={content} response={response}>
-            {children}
-         </Headers>
-         <TabContainer
-            setcurrentTab={setcurrentTab}
-            tabList={tabList}
-            settime={() => settime(2)}
-         />
+         <Headers {...HeaderProps}>{children}</Headers>
          <Box sx={{ position: "relative" }}>
             {time > 0 && <Loader />}
-            {currentTab === "Content Viewer" && (
-               <ContentViewer metaData={metaData} data={data} url={url} token={token} />
-            )}
-            {currentTab === "Meta Viewer" && (
-               <MetaViewer response={response} content={contentData} />
-            )}
-            {currentTab === "Json Data Viewer" && (
-               <JsonDataViewer data={data} search={search} setSearch={setSearch} />
-            )}
+            {currentTab === 0 && <ContentViewer {...EditProps} />}
+            {currentTab === 1 && <MetaViewer {...MetaProps} />}
+            {currentTab === 2 && <JsonDataViewer {...JSONProps} />}
+            {currentTab === 3 && <CodeHelper {...CodeHelperProps} />}
          </Box>
       </Box>
    )

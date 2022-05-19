@@ -1,5 +1,5 @@
 import React from "react"
-import { CollapsibleTable, GotoTopBtn } from "components"
+import { CodeHelperTable, GotoTopBtn } from "components"
 import { Box } from "@mui/material"
 interface Props {
    data: any
@@ -12,11 +12,11 @@ interface Props {
    scrollEvent: any
 }
 
-export const ContentViewer = ({
-   scrollPos,
+export const CodeHelper = ({
    scrollEvent,
-   content,
+   scrollPos,
    theme,
+   content,
    metaData,
    data,
    url,
@@ -27,7 +27,7 @@ export const ContentViewer = ({
    return (
       <Box
          sx={{
-            background: "#fff",
+            background: "background.paper",
             overflow: "auto",
             height: "100%",
             position: "relative",
@@ -35,13 +35,13 @@ export const ContentViewer = ({
       >
          <GotoTopBtn scrollPos={scrollPos} />
 
-         <CollapsibleTable
+         <CodeHelperTable
+            content={content}
             onScroll={scrollEvent}
             url={url}
             token={token}
             metaData={metaData}
             data={newData}
-            content={content}
             theme={theme}
          />
       </Box>
