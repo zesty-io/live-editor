@@ -61,7 +61,7 @@ export const Headers = ({
                background: theme.palette.background.paper,
             }}
          >
-            <Box sx={{ display: "flex", alignItems: "center", gap: ".5rem" }}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: "2rem" }}>
                <Box>
                   <img
                      onClick={() => window.location.reload()}
@@ -78,7 +78,7 @@ export const Headers = ({
                />
             </Box>
 
-            <Box sx={{ display: "flex", alignItems: "center", gap: ".5rem" }}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: "0" }}>
                <BasicMenu list={list} />
 
                {children}
