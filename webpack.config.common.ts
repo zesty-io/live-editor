@@ -64,6 +64,11 @@ const config: Configuration = {
    devServer: {
       static: "./dist",
    },
+   performance: {
+      hints: false,
+      maxEntrypointSize: 512000,
+      maxAssetSize: 512000,
+   },
    plugins: [
       new ForkTsCheckerWebpackPlugin({
          async: false,
