@@ -1,3 +1,5 @@
 node_modules
 .env
 build
+dist/*
+!dist/explorer.production.js
