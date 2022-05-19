@@ -32,7 +32,7 @@ export const BasicMenu = ({ list }: Props) => {
             aria-expanded={open ? "true" : undefined}
             onClick={handleClick}
          >
-            Zesty Links
+            Manager Links
          </Button>
          <Menu
             style={{ zIndex: "999999999999999999999999999999999999" }}
