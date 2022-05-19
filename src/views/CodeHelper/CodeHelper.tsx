@@ -1,7 +1,6 @@
 import React from "react"
-import { CodeHelperTable } from "components"
-import { Box, Fab, Zoom } from "@mui/material"
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
+import { CodeHelperTable, GotoTopBtn } from "components"
+import { Box } from "@mui/material"
 interface Props {
    data: any
    metaData: any
@@ -9,17 +8,20 @@ interface Props {
    token: any
    content: any
    theme: any
+   scrollPos: number
+   scrollEvent: any
 }
 
-export const CodeHelper = ({ theme, content, metaData, data, url, token }: Props) => {
-   const [currentScroll, setcurrentScroll] = React.useState(0)
-
-   const scrollEvent = (e: any) => {
-      const target = e.target as HTMLTextAreaElement
-      setcurrentScroll(target.scrollTop)
-      console.log("Current scroll position:", target.scrollTop)
-   }
-
+export const CodeHelper = ({
+   scrollEvent,
+   scrollPos,
+   theme,
+   content,
+   metaData,
+   data,
+   url,
+   token,
+}: Props) => {
    const newData =
       Object.keys(data?.content).length === 0 ? metaData?.data?.data : data?.content
    return (
@@ -31,17 +33,7 @@ export const CodeHelper = ({ theme, content, metaData, data, url, token }: Props
             position: "relative",
          }}
       >
-         <Zoom in={currentScroll >= 200 ? true : false}>
-            <Fab
-               sx={{ position: "absolute", bottom: "0", right: "0" }}
-               color="secondary"
-               size="small"
-               aria-label="gotoTop"
-               href="#gotoTop"
-            >
-               <KeyboardArrowUpIcon />
-            </Fab>
-         </Zoom>
+         <GotoTopBtn scrollPos={scrollPos} />
 
          <CodeHelperTable
             content={content}

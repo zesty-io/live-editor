@@ -25,6 +25,15 @@ export const ZestyExplorerBrowser = ({
    const [metaData, setMetaData] = React.useState([])
    // for loading of tabs
    const [time, settime] = React.useState(0)
+
+   const [currentScroll, setcurrentScroll] = React.useState(0)
+
+   const scrollEvent = (e: any) => {
+      const target = e.target as HTMLTextAreaElement
+      setcurrentScroll(target.scrollTop)
+      console.log("Current scroll position:", target.scrollTop)
+   }
+
    const userAppSID = helper.getCookie("APP_SID")
    const token = userAppSID
    const itemZUID = jsonData?.data?.meta?.zuid
@@ -65,6 +74,50 @@ export const ZestyExplorerBrowser = ({
       return () => clearTimeout(timer)
    })
 
+   const HeaderProps = {
+      content,
+      response,
+      setcurrentTab,
+      tabList,
+      settime: () => settime(2),
+   }
+
+   const EditProps = {
+      content,
+      theme,
+      metaData,
+      data,
+      url,
+      token,
+      scrollPos: currentScroll,
+      scrollEvent,
+   }
+
+   const MetaProps = {
+      theme,
+      response,
+      content: contentData,
+   }
+
+   const JSONProps = {
+      data,
+      search,
+      setSearch,
+      theme,
+      content,
+   }
+
+   const CodeHelperProps = {
+      content,
+      theme,
+      metaData,
+      data,
+      url,
+      token,
+      scrollPos: currentScroll,
+      scrollEvent,
+   }
+
    // show loading
    if (loading && !verifyFailed && !verifySuccess) {
       return (
@@ -81,49 +134,13 @@ export const ZestyExplorerBrowser = ({
 
    return (
       <Box sx={containerStyle}>
-         <Headers
-            content={content}
-            response={response}
-            setcurrentTab={setcurrentTab}
-            tabList={tabList}
-            settime={() => settime(2)}
-         >
-            {children}
-         </Headers>
+         <Headers {...HeaderProps}>{children}</Headers>
          <Box sx={{ position: "relative" }}>
             {time > 0 && <Loader />}
-            {currentTab === 0 && (
-               <ContentViewer
-                  content={content}
-                  theme={theme}
-                  metaData={metaData}
-                  data={data}
-                  url={url}
-                  token={token}
-               />
-            )}
-            {currentTab === 1 && (
-               <MetaViewer theme={theme} response={response} content={contentData} />
-            )}
-            {currentTab === 2 && (
-               <JsonDataViewer
-                  data={data}
-                  search={search}
-                  setSearch={setSearch}
-                  theme={theme}
-                  content={content}
-               />
-            )}
-            {currentTab === 3 && (
-               <CodeHelper
-                  content={content}
-                  theme={theme}
-                  metaData={metaData}
-                  data={data}
-                  url={url}
-                  token={token}
-               />
-            )}
+            {currentTab === 0 && <ContentViewer {...EditProps} />}
+            {currentTab === 1 && <MetaViewer {...MetaProps} />}
+            {currentTab === 2 && <JsonDataViewer {...JSONProps} />}
+            {currentTab === 3 && <CodeHelper {...CodeHelperProps} />}
          </Box>
       </Box>
    )
