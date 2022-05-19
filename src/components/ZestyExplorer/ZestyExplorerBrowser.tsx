@@ -5,7 +5,7 @@ import { useFetchWrapper } from "hooks"
 import { fetchData } from "services"
 import { Box } from "@mui/material"
 import { Loader } from "components"
-import { containerStyle, loginPromp } from "./styles"
+import { containerStyle } from "./styles"
 import { Headers } from "components"
 import { CodeHelper, ContentViewer, JsonDataViewer, MetaViewer } from "views"
 import { useTheme } from "@mui/material/styles"
@@ -68,7 +68,7 @@ export const ZestyExplorerBrowser = ({
    // show loading
    if (loading && !verifyFailed && !verifySuccess) {
       return (
-         <Box sx={loginPromp}>
+         <Box sx={containerStyle}>
             <Loader />
          </Box>
       )

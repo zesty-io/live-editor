@@ -15,5 +15,5 @@
       "types": ["webpack-env"],
       "baseUrl": "src"
    },
-   "include": ["src", "src/custom.d.ts"]
+   "include": ["src", "src/types/custom.d.ts"]
 }
