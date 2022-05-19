@@ -3,13 +3,14 @@ import * as helper from "utils/index"
 import React from "react"
 import { useFetchWrapper } from "hooks"
 import { fetchData } from "services"
-import { Box, Button } from "@mui/material"
+import { Box } from "@mui/material"
 import { Loader } from "components"
 import { containerStyle, loginPromp } from "./styles"
 import { Headers } from "components"
 import { tabList } from "constants/index"
 import { CodeHelper, ContentViewer, JsonDataViewer, MetaViewer } from "views"
 import { useTheme } from "@mui/material/styles"
+import { LoginPrompt } from "./LoginPromp"
 
 export const ZestyExplorerBrowser = ({
    pageData,
@@ -76,19 +77,7 @@ export const ZestyExplorerBrowser = ({
 
    // show failed login prompt
    if (!verifySuccess) {
-      return (
-         <Box sx={loginPromp}>
-            <h1>Please Login</h1>
-            <Button
-               href={`https://accounts.zesty.io/login`}
-               variant="contained"
-               color="secondary"
-               size="small"
-            >
-               Sign in to Zesty.io
-            </Button>
-         </Box>
-      )
+      return <LoginPrompt />
    }
 
    return (
