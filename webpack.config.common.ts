@@ -7,6 +7,7 @@ import webpack from "webpack"
 import { CleanWebpackPlugin } from "clean-webpack-plugin"
 import TerserPlugin from "terser-webpack-plugin"
 import CompressionPlugin from "compression-webpack-plugin"
+import HtmlWebpackPlugin from "html-webpack-plugin"
 
 const config: Configuration = {
    entry: "./src/index.tsx",
@@ -96,6 +97,7 @@ const config: Configuration = {
       }),
       new CleanWebpackPlugin(),
       new CompressionPlugin(),
+      new HtmlWebpackPlugin(),
    ],
 }
 
