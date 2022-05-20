@@ -50,6 +50,9 @@ export const TabContainer = ({ tabList, settime, setcurrentTab }: any) => {
          width: "100%",
          backgroundColor: theme.palette.zesty.zestyOrange,
       },
+      "& .MuiTabScrollButton-root": {
+         color: theme.palette.primary.main,
+      },
    })
    const StyledTab = styled((props: StyledTabProps) => <Tab disableRipple {...props} />)(
       ({ theme }) => ({
@@ -64,12 +67,12 @@ export const TabContainer = ({ tabList, settime, setcurrentTab }: any) => {
             fontWeight: theme.typography.fontWeightBold,
             // @ts-ignore
             backgroundColor: theme.palette.secondary.mainRgb,
-            borderRadius: "10px",
+            borderRadius: "8px",
          },
          "&:hover, &.Mui-focusVisible": {
             // @ts-ignore
             backgroundColor: theme.palette.alternate.main,
-            borderRadius: "10px",
+            borderRadius: "8px",
          },
       }),
    )

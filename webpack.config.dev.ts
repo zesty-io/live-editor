@@ -8,6 +8,7 @@ const config = merge(common, {
       static: {
          directory: path.join(__dirname, "dist"),
       },
+      https: true,
       compress: true,
       port: 9000,
    },

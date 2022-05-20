@@ -62,7 +62,7 @@ export const Headers = ({
                background: theme.palette.background.paper,
             }}
          >
-            <Box sx={{ display: "flex", alignItems: "center", gap: "2rem" }}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: "1rem" }}>
                <Box sx={{ cursor: "pointer" }}>
                   <img
                      onClick={() => window.location.reload()}
