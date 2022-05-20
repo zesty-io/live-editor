@@ -10,7 +10,6 @@ import CompressionPlugin from "compression-webpack-plugin"
 
 const config: Configuration = {
    entry: "./src/index.tsx",
-   mode: "production",
    devtool: false,
    module: {
       rules: [
@@ -64,9 +63,6 @@ const config: Configuration = {
       library: "Explorer",
       libraryTarget: "umd",
       publicPath: "",
-   },
-   devServer: {
-      static: "./dist",
    },
    performance: {
       hints: false,
