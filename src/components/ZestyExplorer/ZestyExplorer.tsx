@@ -14,7 +14,7 @@ import { useDarkMode } from "hooks"
 import CloseFullscreenIcon from "@mui/icons-material/CloseFullscreen"
 import { Helmet } from "react-helmet"
 import { ZestyExplorerBrowser } from "./ZestyExplorerBrowser"
-import { withStyles } from "@material-ui/core/styles"
+import { CompassBtn } from "components"
 
 // dom access highlight function
 const expandBody = (bool: boolean) => {
@@ -24,16 +24,6 @@ const expandBody = (bool: boolean) => {
    const ze: any = document.getElementById("zestyExplorer")
    ze.style.left = bool ? "0" : "-40vw"
 }
-const StyledButton = withStyles({
-   root: {
-      backgroundColor: "#1b202c",
-      color: "#fff",
-      "&:hover": {
-         backgroundColor: "#1b202c",
-         color: "#fff",
-      },
-   },
-})(Button)
 
 // renanme content to contentData
 
@@ -121,7 +111,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
             <CssBaseline />
             {/* ZESTY LOGO  bottom right*/}
             {!open && (
-               <StyledButton
+               <CompassBtn
                   onClick={() => helper.toggleOpenState(true, setOpen, expandBody)}
                   style={buttonStyles}
                >
@@ -132,7 +122,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
                      alt="Zesty.io Logo"
                   />
                   <span style={zestyStyles}>Compass</span>
-               </StyledButton>
+               </CompassBtn>
             )}
 
             {open && (
