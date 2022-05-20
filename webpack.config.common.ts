@@ -97,7 +97,7 @@ const config: Configuration = {
       }),
       new CleanWebpackPlugin(),
       new CompressionPlugin(),
-      new HtmlWebpackPlugin(),
+      new HtmlWebpackPlugin({ template: "test/index.html" }),
    ],
 }
 
