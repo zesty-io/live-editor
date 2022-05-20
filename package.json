@@ -5,7 +5,7 @@
    "main": "./dist/explorer.production.js",
    "scripts": {
       "start": "webpack serve --mode development",
-      "build": "webpack --mode=production --config=webpack.config.common.ts",
+      "build": "webpack --mode=production --config=webpack.config.common.ts && npm run clear-dist",
       "build-dev": "webpack --config=webpack.config.dev.ts",
       "prepare": "husky install",
       "check-types": "tsc --pretty --noEmit",
@@ -17,7 +17,7 @@
       "submit": "npm run build && git add . && cz && npm run release",
       "release": "release-it --no-npm",
       "clear-dist": "find dist ! -name 'explorer.production.js' -type f -exec rm -f {} +",
-      "watch": "webpack --watch  --mode=production --config=webpack.config.common.ts"
+      "watch": "webpack --watch  --mode=production --config=webpack.config.common.ts "
    },
    "keywords": [
       "zesty-io",
@@ -47,6 +47,7 @@
       "@material-ui/core": "^4.12.4",
       "@mui/icons-material": "^5.8.0",
       "@mui/material": "^5.6.2",
+      "@swc/core": "^1.2.187",
       "@types/dotenv-webpack": "^7.0.3",
       "@types/fork-ts-checker-webpack-plugin": "^0.4.5",
       "@types/react": "^18.0.9",
@@ -60,6 +61,7 @@
       "babel-loader": "^8.2.5",
       "babel-plugin-module-resolver": "^4.1.0",
       "clean-webpack-plugin": "^4.0.0",
+      "compression-webpack-plugin": "^10.0.0",
       "cz-conventional-changelog": "^3.3.0",
       "dotenv-webpack": "^7.1.0",
       "eslint": "^8.15.0",

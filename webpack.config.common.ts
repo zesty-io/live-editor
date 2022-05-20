@@ -6,9 +6,12 @@ import "webpack-dev-server"
 import webpack from "webpack"
 import { CleanWebpackPlugin } from "clean-webpack-plugin"
 import TerserPlugin from "terser-webpack-plugin"
+import CompressionPlugin from "compression-webpack-plugin"
 
 const config: Configuration = {
    entry: "./src/index.tsx",
+   mode: "production",
+   devtool: false,
    module: {
       rules: [
          {
@@ -75,6 +78,7 @@ const config: Configuration = {
       minimizer: [
          new TerserPlugin({
             parallel: true,
+            minify: TerserPlugin.swcMinify,
             terserOptions: {
                format: {
                   comments: false,
@@ -85,9 +89,6 @@ const config: Configuration = {
       ],
    },
    plugins: [
-      new webpack.optimize.LimitChunkCountPlugin({
-         maxChunks: 1,
-      }),
       new ForkTsCheckerWebpackPlugin({
          async: false,
       }),
@@ -98,6 +99,7 @@ const config: Configuration = {
          process: "process/browser",
       }),
       new CleanWebpackPlugin(),
+      new CompressionPlugin(),
    ],
 }
 

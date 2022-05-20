@@ -4,13 +4,13 @@ import ReactDOM from "react-dom"
 import { ZestyExplorer } from "./components"
 import { canUseDOM } from "./utils/index"
 
-if (process.env.NODE_ENV === "production") {
-   console.log = () => {}
-   console.error = () => {}
-   console.debug = () => {}
-}
+// if (process.env.NODE_ENV === "production") {
+//    console.log = () => {}
+//    console.error = () => {}
+//    console.debug = () => {}
+// }
 
-console.log("development branch123")
+console.log("development branch222")
 export const main = () => {
    if (!canUseDOM()) {
       return null
