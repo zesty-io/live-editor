@@ -74,14 +74,20 @@ const config: Configuration = {
       minimize: true,
       minimizer: [
          new TerserPlugin({
-            // Use multi-process parallel running to improve the build speed
-            // Default number of concurrent runs: os.cpus().length - 1
             parallel: true,
-            // Enable file caching
+            terserOptions: {
+               format: {
+                  comments: false,
+               },
+            },
+            extractComments: false,
          }),
       ],
    },
    plugins: [
+      new webpack.optimize.LimitChunkCountPlugin({
+         maxChunks: 1,
+      }),
       new ForkTsCheckerWebpackPlugin({
          async: false,
       }),
