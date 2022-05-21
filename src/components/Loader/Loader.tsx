@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material"
 import React from "react"
 import loading from "../../assets/loading.svg"
 
-export const Loader = () => {
+const Index = () => {
    return (
       <Box
          sx={{
@@ -56,3 +56,4 @@ export const Loader = () => {
       </Box>
    )
 }
+export const Loader = React.memo(Index)

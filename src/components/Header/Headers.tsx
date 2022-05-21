@@ -17,7 +17,7 @@ interface Props {
    settime: any
 }
 
-export const Headers = ({
+const Index = ({
    response,
    children,
    content,
@@ -62,8 +62,8 @@ export const Headers = ({
                background: theme.palette.background.paper,
             }}
          >
-            <Box sx={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-               <Box sx={{ cursor: "pointer" }}>
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+               <Box sx={{ cursor: "pointer", paddingRight: "1rem" }}>
                   <img
                      onClick={() => window.location.reload()}
                      src={urls.zestyBrandLogoMid}
@@ -79,7 +79,13 @@ export const Headers = ({
                />
             </Box>
 
-            <Box sx={{ display: "flex", alignItems: "center", gap: ".5rem" }}>
+            <Box
+               sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: ".5rem",
+               }}
+            >
                <BasicMenu list={list} />
                {children}
             </Box>
@@ -87,3 +93,4 @@ export const Headers = ({
       </AppBar>
    )
 }
+export const Headers = React.memo(Index)

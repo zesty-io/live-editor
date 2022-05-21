@@ -20,7 +20,7 @@ interface StyledTabsProps {
    onChange: (event: React.SyntheticEvent, newValue: number) => void
 }
 
-export const TabContainer = ({ tabList, settime, setcurrentTab }: any) => {
+const Index = ({ tabList, settime, setcurrentTab }: any) => {
    const [value, setValue] = React.useState(0)
    const theme = useTheme()
    // @ts-ignore
@@ -35,8 +35,9 @@ export const TabContainer = ({ tabList, settime, setcurrentTab }: any) => {
    const StyledTabs = styled((props: StyledTabsProps) => (
       <Tabs
          variant="scrollable"
-         scrollButtons="auto"
+         scrollButtons
          {...props}
+         sx={{ width: "22vw" }}
          TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
       />
    ))({
@@ -59,7 +60,8 @@ export const TabContainer = ({ tabList, settime, setcurrentTab }: any) => {
          textTransform: "none",
          fontWeight: theme.typography.fontWeightMedium,
          fontSize: theme.typography.pxToRem(15),
-         marginRight: theme.spacing(1),
+         // marginRight: theme.spacing(1),
+         marginRight: "5px",
          color: theme.palette.primary.main,
          "&.Mui-selected": {
             // @ts-ignore
@@ -93,3 +95,4 @@ export const TabContainer = ({ tabList, settime, setcurrentTab }: any) => {
       </Box>
    )
 }
+export const TabContainer = React.memo(Index)
