@@ -210,3 +210,15 @@ git checkout development && npm install && npm start
 ```
 
 assuming the extension is already installed go to a zesty domain website ex `https://www.zesty.io/` the double click the zesty chrome extension to run it.
+
+# How to Commit
+
+```
+npm run commit
+```
+
+# Deploying in Production
+
+```
+git checkout main && npm run release
+```
