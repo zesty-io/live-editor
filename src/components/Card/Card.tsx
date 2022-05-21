@@ -18,10 +18,15 @@ export const OutlineCard = ({ handleCustomDomain, value, onChange }: any) => {
                width={"50"}
                height={"50"}
             />
-            <Typography color="text.secondary" gutterBottom sx={{ fontSize: "14" }}>
+            <Typography color="text.secondary" gutterBottom sx={{ fontSize: "20px" }}>
                Domain Not Valid
             </Typography>
-            <Typography paddingBottom={2} variant="h5" component="div">
+            <Typography
+               paddingBottom={2}
+               variant="h5"
+               component="div"
+               sx={{ fontSize: "16px" }}
+            >
                Override Domain
             </Typography>
             <TextField
@@ -30,10 +35,16 @@ export const OutlineCard = ({ handleCustomDomain, value, onChange }: any) => {
                variant="outlined"
                value={value}
                onChange={onChange}
+               sx={{ fontSize: "12px" }}
             />
          </CardContent>
          <CardActions>
-            <Button size="small" variant="contained" onClick={handleCustomDomain}>
+            <Button
+               size="small"
+               variant="contained"
+               onClick={handleCustomDomain}
+               sx={{ fontSize: "14px" }}
+            >
                Save
             </Button>
             <Button
@@ -41,6 +52,7 @@ export const OutlineCard = ({ handleCustomDomain, value, onChange }: any) => {
                onClick={() => {
                   window.location.reload()
                }}
+               sx={{ fontSize: "14px" }}
             >
                Close
             </Button>
