@@ -104,6 +104,9 @@ const config: Configuration = {
       new CleanWebpackPlugin(),
       new CompressionPlugin(),
       new HtmlWebpackPlugin({ template: "test/index.html" }),
+      new webpack.optimize.LimitChunkCountPlugin({
+         maxChunks: 1,
+      }),
    ],
 }
 
