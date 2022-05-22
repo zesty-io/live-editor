@@ -35,7 +35,7 @@ const Index = ({ tabList, settime, setcurrentTab }: any) => {
    const StyledTabs = styled((props: StyledTabsProps) => (
       <Tabs
          variant="scrollable"
-         scrollButtons
+         scrollButtons="auto"
          sx={{ width: "22vw" }}
          {...props}
          TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
