@@ -15,6 +15,7 @@ import CloseFullscreenIcon from "@mui/icons-material/CloseFullscreen"
 import { Helmet } from "react-helmet"
 import { ZestyExplorerBrowser } from "./ZestyExplorerBrowser"
 import { CompassBtn } from "components"
+import Typography from "@mui/material/Typography"
 
 // dom access highlight function
 const expandBody = (bool: boolean) => {
@@ -106,6 +107,10 @@ export const ZestyExplorer = ({ content = {} }: any) => {
       <Box id={"zestyExplorer"} sx={zestyWrapper}>
          <Helmet>
             <script src="https://cdn.jsdelivr.net/gh/zesty-io/fetch-wrapper@latest/dist/index.min.js" />
+            <link
+               href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500&display=swap"
+               rel="stylesheet"
+            ></link>
          </Helmet>
          <ThemeProvider theme={getTheme("light", themeToggler)}>
             <CssBaseline />
@@ -121,7 +126,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
                      height="32px"
                      alt="Zesty.io Logo"
                   />
-                  <span style={zestyStyles}>Compass</span>
+                  <Typography sx={zestyStyles}>Compass</Typography>
                </CompassBtn>
             )}
 

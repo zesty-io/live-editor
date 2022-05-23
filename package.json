@@ -30,7 +30,6 @@
    "license": "ISC",
    "dependencies": {
       "crypto-browserify": "^3.12.0",
-      "dotenv": "^16.0.0",
       "global": "^4.4.0",
       "react": "^18.1.0",
       "react-dom": "^18.1.0"
@@ -54,6 +53,7 @@
       "@types/react-dom": "^18.0.3",
       "@types/react-helmet": "^6.1.5",
       "@types/webpack": "^5.28.0",
+      "@types/webpack-bundle-analyzer": "^4.4.1",
       "@types/webpack-dev-server": "^4.7.2",
       "@types/webpack-env": "^1.16.4",
       "@typescript-eslint/eslint-plugin": "^5.22.0",
@@ -63,6 +63,7 @@
       "clean-webpack-plugin": "^4.0.0",
       "compression-webpack-plugin": "^10.0.0",
       "cz-conventional-changelog": "^3.3.0",
+      "dotenv": "^16.0.1",
       "dotenv-webpack": "^7.1.0",
       "eslint": "^8.15.0",
       "eslint-config-prettier": "^8.5.0",
@@ -87,6 +88,7 @@
       "typescript": "^4.6.4",
       "url-loader": "^4.1.1",
       "webpack": "^5.72.0",
+      "webpack-bundle-analyzer": "^4.5.0",
       "webpack-cli": "^4.9.2",
       "webpack-dev-server": "^4.9.0"
    },

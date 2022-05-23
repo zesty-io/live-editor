@@ -22,8 +22,9 @@ export const zestyStyles = {
    fontSize: "18px",
    color: "#C7D4EA",
    letterSpacing: "1px",
-   fontFamily: "'Arial Rounded MT Bold','Helvetica Rounded',Arial,sans-serif",
-}
+   // fontFamily: "'Arial Rounded MT Bold','Helvetica Rounded',Arial,sans-serif",
+} as const
+
 export const verifyUserPrompt = {
    position: "fixed",
    top: "5%",

@@ -13,6 +13,12 @@
       "prettier"
    ],
    "rules": {
+      "no-restricted-imports": [
+         "error",
+         {
+            "patterns": ["@mui/*/*/*", "!@mui/material/test-utils/*"]
+         }
+      ],
       "@typescript-eslint/no-unused-vars": "error",
       "no-unused-vars": "off",
       "no-empty-interface": 0,
