@@ -1,5 +1,5 @@
 import React from "react"
-import { CodeHelperTable, GotoTopBtn } from "components"
+import { EditTable, GotoTopBtn } from "components"
 import { Box } from "@mui/material"
 interface Props {
    data: any
@@ -12,11 +12,11 @@ interface Props {
    scrollEvent: any
 }
 
-export const CodeHelper = ({
-   scrollEvent,
+export const EditTab = ({
    scrollPos,
-   theme,
+   scrollEvent,
    content,
+   theme,
    metaData,
    data,
    url,
@@ -27,7 +27,7 @@ export const CodeHelper = ({
    return (
       <Box
          sx={{
-            background: "background.paper",
+            background: "#fff",
             overflow: "auto",
             height: "100%",
             position: "relative",
@@ -35,13 +35,13 @@ export const CodeHelper = ({
       >
          <GotoTopBtn scrollPos={scrollPos} />
 
-         <CodeHelperTable
-            content={content}
+         <EditTable
             onScroll={scrollEvent}
             url={url}
             token={token}
             metaData={metaData}
             data={newData}
+            content={content}
             theme={theme}
          />
       </Box>

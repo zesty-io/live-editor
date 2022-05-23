@@ -6,7 +6,7 @@ import CssBaseline from "@mui/material/CssBaseline"
 import * as helper from "utils/index"
 import { fetchJSON, getPageData } from "services/index"
 import { OutlineCard as Card } from "components/Card"
-import { buttonStyles, verifyUserPrompt, zestyStyles, zestyWrapper } from "./styles"
+import { buttonStyles, verifyUserPrompt, zestyWrapper } from "./styles"
 import Button from "@mui/material/Button"
 import Box from "@mui/material/Box"
 import getTheme from "theme/index"
@@ -14,7 +14,7 @@ import { useDarkMode } from "hooks"
 import CloseFullscreenIcon from "@mui/icons-material/CloseFullscreen"
 import { Helmet } from "react-helmet"
 import { ZestyExplorerBrowser } from "./ZestyExplorerBrowser"
-import { withStyles } from "@material-ui/core/styles"
+import { LaunchBtn } from "components"
 
 // dom access highlight function
 const expandBody = (bool: boolean) => {
@@ -24,16 +24,6 @@ const expandBody = (bool: boolean) => {
    const ze: any = document.getElementById("zestyExplorer")
    ze.style.left = bool ? "0" : "-40vw"
 }
-const StyledButton = withStyles({
-   root: {
-      backgroundColor: "#1b202c",
-      color: "#fff",
-      "&:hover": {
-         backgroundColor: "#1b202c",
-         color: "#fff",
-      },
-   },
-})(Button)
 
 // renanme content to contentData
 
@@ -116,12 +106,16 @@ export const ZestyExplorer = ({ content = {} }: any) => {
       <Box id={"zestyExplorer"} sx={zestyWrapper}>
          <Helmet>
             <script src="https://cdn.jsdelivr.net/gh/zesty-io/fetch-wrapper@latest/dist/index.min.js" />
+            <link
+               href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500&display=swap"
+               rel="stylesheet"
+            ></link>
          </Helmet>
          <ThemeProvider theme={getTheme("light", themeToggler)}>
             <CssBaseline />
             {/* ZESTY LOGO  bottom right*/}
             {!open && (
-               <StyledButton
+               <LaunchBtn
                   onClick={() => helper.toggleOpenState(true, setOpen, expandBody)}
                   style={buttonStyles}
                >
@@ -131,8 +125,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
                      height="32px"
                      alt="Zesty.io Logo"
                   />
-                  <span style={zestyStyles}>Compass</span>
-               </StyledButton>
+               </LaunchBtn>
             )}
 
             {open && (

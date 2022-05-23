@@ -1,4 +1,4 @@
-import * as React from "react"
+import React from "react"
 import Box from "@mui/material/Box"
 import Table from "@mui/material/Table"
 import TableBody from "@mui/material/TableBody"
@@ -9,9 +9,12 @@ import Button from "@mui/material/Button"
 import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
 import { useTheme } from "@mui/system"
-import { CellStyle, TableContainerStyle } from "./Styles"
+import { CellStyle, TableContainerStyle, rowStyle } from "./Styles"
 import { Subheaders } from "components/BreadCrumbs"
 import { urls } from "constants"
+import { Typography } from "@mui/material"
+import ContentCopyIcon from "@mui/icons-material/ContentCopy"
+import CheckCircleIcon from "@mui/icons-material/CheckCircle"
 
 function Row({ keyName }: any) {
    const [showCopy, setShowCopy] = React.useState(false)
@@ -23,17 +26,20 @@ function Row({ keyName }: any) {
 
    const theme = useTheme()
 
+   const TypeStyle = {
+      fontSize: "12px",
+   } as const
    return (
       <React.Fragment>
          <TableRow
             sx={{
                "& > *": { borderBottom: "unset" },
-               fontSize: "12px",
+               fontSize: "14px",
                fontWeight: "500",
             }}
          >
             {/* Row Data  */}
-            <TableCell component="th" scope="row">
+            <TableCell component="th" scope="row" sx={rowStyle}>
                {keyName}
             </TableCell>
             <TableCell
@@ -57,7 +63,7 @@ function Row({ keyName }: any) {
                      setclipboardCopy2(false)
                      setclipboardCopy3(false)
                   }}
-                  sx={{ cursor: "pointer" }}
+                  sx={rowStyle}
                   variant="contained"
                   color="primary"
                   size="small"
@@ -80,8 +86,16 @@ function Row({ keyName }: any) {
                      top: "0",
                   }}
                >
-                  {clipboardCopy && <span>✅ Copied to clipboard!</span>}
-                  {showCopy && <span>📜 Copy</span>}
+                  {clipboardCopy && (
+                     <Typography sx={TypeStyle}>
+                        <CheckCircleIcon /> Copied to clipboard!
+                     </Typography>
+                  )}
+                  {showCopy && (
+                     <Typography sx={TypeStyle}>
+                        <ContentCopyIcon /> Copy
+                     </Typography>
+                  )}
                </Box>
             </TableCell>
             <TableCell
@@ -105,7 +119,7 @@ function Row({ keyName }: any) {
                      setclipboardCopy2(false)
                      setclipboardCopy3(false)
                   }}
-                  sx={{ cursor: "pointer" }}
+                  sx={rowStyle}
                   variant="contained"
                   color="primary"
                   size="small"
@@ -128,8 +142,17 @@ function Row({ keyName }: any) {
                      top: "0",
                   }}
                >
-                  {clipboardCopy2 && <span>✅ Copied to clipboard!</span>}
-                  {showCopy2 && <span>📜 Copy</span>}
+                  {clipboardCopy2 && (
+                     <Typography sx={TypeStyle}>
+                        {" "}
+                        <CheckCircleIcon /> Copied to clipboard!
+                     </Typography>
+                  )}
+                  {showCopy2 && (
+                     <Typography sx={TypeStyle}>
+                        <ContentCopyIcon /> Copy
+                     </Typography>
+                  )}
                </Box>
             </TableCell>
             <TableCell
@@ -153,7 +176,7 @@ function Row({ keyName }: any) {
                      setclipboardCopy2(false)
                      setclipboardCopy3(false)
                   }}
-                  sx={{ cursor: "pointer" }}
+                  sx={rowStyle}
                   variant="contained"
                   color="primary"
                   size="small"
@@ -176,43 +199,19 @@ function Row({ keyName }: any) {
                      top: "0",
                   }}
                >
-                  {clipboardCopy3 && <span>✅ Copied to clipboard!</span>}
-                  {showCopy3 && <span>📜 Copy</span>}
+                  {clipboardCopy3 && (
+                     <Typography sx={TypeStyle}>
+                        <CheckCircleIcon /> Copied to clipboard!
+                     </Typography>
+                  )}
+                  {showCopy3 && (
+                     <Typography sx={TypeStyle}>
+                        <ContentCopyIcon /> Copy
+                     </Typography>
+                  )}
                </Box>
             </TableCell>
          </TableRow>
-
-         {/* Expanded Data */}
-         {/* <TableRow>
-            <TableCell
-               style={{
-                  paddingBottom: 0,
-                  paddingTop: 0,
-                  background: theme.palette.zesty.zestyBackgroundBlue,
-               }}
-               colSpan={6}
-            >
-               <Collapse in={open} timeout="auto" unmountOnExit>
-                  <Box sx={{ margin: 1 }}>
-                     <Table
-                        sx={{
-                           [`& .${tableCellClasses.root}`]: {
-                              borderBottom: "none",
-                           },
-                        }}
-                        size="medium"
-                        aria-label="purchases"
-                     >
-                        <TableHead>
-                           <TableRow>
-                              <TableCell>{PrettyPrintJson({ data: obj })}</TableCell>
-                           </TableRow>
-                        </TableHead>
-                     </Table>
-                  </Box>
-               </Collapse>
-            </TableCell>
-         </TableRow> */}
       </React.Fragment>
    )
 }

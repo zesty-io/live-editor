@@ -20,7 +20,7 @@ interface StyledTabsProps {
    onChange: (event: React.SyntheticEvent, newValue: number) => void
 }
 
-export const TabContainer = ({ tabList, settime, setcurrentTab }: any) => {
+const Index = ({ tabList, settime, setcurrentTab }: any) => {
    const [value, setValue] = React.useState(0)
    const theme = useTheme()
    // @ts-ignore
@@ -36,6 +36,7 @@ export const TabContainer = ({ tabList, settime, setcurrentTab }: any) => {
       <Tabs
          variant="scrollable"
          scrollButtons="auto"
+         sx={{ width: "22vw" }}
          {...props}
          TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
       />
@@ -50,13 +51,17 @@ export const TabContainer = ({ tabList, settime, setcurrentTab }: any) => {
          width: "100%",
          backgroundColor: theme.palette.zesty.zestyOrange,
       },
+      "& .MuiTabScrollButton-root": {
+         color: theme.palette.primary.main,
+      },
    })
    const StyledTab = styled((props: StyledTabProps) => <Tab disableRipple {...props} />)(
       ({ theme }) => ({
          textTransform: "none",
          fontWeight: theme.typography.fontWeightMedium,
-         fontSize: theme.typography.pxToRem(15),
-         marginRight: theme.spacing(1),
+         fontSize: "14px",
+         // marginRight: theme.spacing(1),
+         marginRight: "5px",
          color: theme.palette.primary.main,
          "&.Mui-selected": {
             // @ts-ignore
@@ -64,12 +69,12 @@ export const TabContainer = ({ tabList, settime, setcurrentTab }: any) => {
             fontWeight: theme.typography.fontWeightBold,
             // @ts-ignore
             backgroundColor: theme.palette.secondary.mainRgb,
-            borderRadius: "10px",
+            borderRadius: "8px",
          },
          "&:hover, &.Mui-focusVisible": {
             // @ts-ignore
             backgroundColor: theme.palette.alternate.main,
-            borderRadius: "10px",
+            borderRadius: "8px",
          },
       }),
    )
@@ -90,3 +95,5 @@ export const TabContainer = ({ tabList, settime, setcurrentTab }: any) => {
       </Box>
    )
 }
+
+export const TabContainer = React.memo(Index)

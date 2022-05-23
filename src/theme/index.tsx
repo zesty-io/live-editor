@@ -11,10 +11,11 @@ const getTheme = (mode: any, themeToggler: any) =>
          // @ts-ignore
          shadows: shadows(mode),
          typography: {
-            fontFamily: '"Mulish", sans-serif',
+            fontFamily: ["Mulish", "sans-serif"].join(","),
             button: {
                textTransform: "none",
                fontWeight: "medium",
+               fontSize: "14px",
             },
          },
          zIndex: {

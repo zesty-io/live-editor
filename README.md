@@ -16,10 +16,6 @@ The tool should be built in compiled JavaScript and execute in plain JavaScript 
 
 It should be distributed over npm package manager and yarn, it should also be able to be manually installed from a CDN link.
 
-Using NPM
-
-`npm install @zesty-io/explorer`
-
 Using CDN
 
 -  copy the script tag below and paste it in the head of your main.html file
@@ -33,23 +29,6 @@ Using CDN
 
 ```
 
-Or
-
-```
-     <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/gh/zesty-io/explorer@v1.1.12/dist/explorer.production.js"
-      defer="defer"
-    ></script>
-
-```
-
-Importing
-
-```
-import { ZestyExplorer } from   '@zesty-io/explorer';
-```
-
 ## Explorer Sections
 
 -  Page Data Explorer
@@ -59,84 +38,6 @@ import { ZestyExplorer } from   '@zesty-io/explorer';
 -  Metadata
 -  Link Scanning
 -  Optimization Scanning
-
-## Publishing to NPM
-
-Developer must have access to `zestyionpm` account
-
-`npm publish --access public`
-
-## Deploying the cdn
-
--  `git checkout cdn`
--  run `yarn release` or `npm run release`
-
-#### In the prompts
-
--  press 'n' to not publish to npm then the rest press 'y'
-
-#### It will open new window
-
--  press ok
--  then update the readme version of cdn to current version
-
-#### This is your current updated script tag / cdnjs
-
-```
-     <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/gh/zesty-io/explorer@${RELEASE_VERSION_CDN_BRANCH}/dist/explorer.production.js"
-      defer="defer"
-    ></script>
-
-```
-
-## Testing using NPM
-
--  On origin/main
-
-```
-git checkout -b explorer-dev-test
-```
-
--  Edit `package.json` change the name to @username/explorer-dev-test
--  Edit `package.json` increment the version number per publish
--  Npm publish --access public
--  In your react/next/app
-
-```
-import { ZestyExplorer } from   '@username/explorer-dev-test';
-```
-
-## Testing Locally in the browser
-
--  run `npm run watch` to start the application locally
--  Open /test/index.html in your browser
--  Remove index.html from the browser file path
--  use this override domain `https://qzp3zx5t-dev.webEngine.zesty.io/`
-
-## Testing Locally using NextJs/CRA
-
--  Clone the [Zesty Explorer](https://github.com/zesty-io/explorer.git "Zesty Explorer") and [NextJs App](https://github.com/zesty-io/nextjs-website.git "Zesty Nextjs-website") on the same folder
-
--  cd in the Nextjs app folder
--  Create .env file with a value `NEXT_PUBLIC_DOMAIN_OVERRIDE=https://www.zesty.io`
--  run `npm install`
--  cd in the Zesty Explorer folder
--  run `yarn install`
--  run `npm link ../${YOUR_NEXTJS_APP_FOLDER}/node_modules/react/`
--  run `yarn build`
--  run `yarn start`
--  cd in the Nextjs app folder
--  run `npm i ../${YOUR_EXPLORER_FOLDER}`
-
-#### You can now import the ZestyExplorer in your next js app 🎉🎉🎉
-
-```
-import { ZestyExplorer } from '@zesty-io/explorer';
-```
-
--  run `npm run dev`
 
 # Zesty Page Composer Application Overview
 
@@ -186,3 +87,50 @@ Zesty Overlay using the Rest API (instances-api) to write both content and files
 ### SEO / Meta / Headtags
 
 A view of the pages SEO and meta values which can be edited, this is not limited to SEO meta tags, but open graph tags, scripts, and other head tags. Head tags are injected into the page though WebEngine, prior to Search Engines reading it.
+
+# How to run locally
+
+Clone the Zesty Explorer and Zesty Chrome Extension on same folder :
+
+```
+git clone https://github.com/zesty-io/explorer.git
+```
+
+```
+git clone https://github.com/zesty-io/chrome-ext.git
+```
+
+on the Zesty Chrome Extension Directory run
+
+```
+git checkout development
+```
+
+then install the extension locally [here](https://webkul.com/blog/how-to-install-the-unpacked-extension-in-chrome/)
+
+after that change directory to the Zesty Explorer folder then run the following command
+
+```
+git checkout development && npm install && npm start
+```
+
+assuming the extension is already installed go to a zesty domain website ex `https://www.zesty.io/` the double click the zesty chrome extension to run it.
+
+# How to Commit
+
+```
+npm run commit
+```
+
+# Deploying in Production
+
+```
+git checkout main && npm run release
+```
+
+## Testing Locally in the browser
+
+-  run `npm start` to start the application locally
+-  Open /test/index.html in your browser
+-  Remove index.html from the browser file path
+-  use this override domain `https://qzp3zx5t-dev.webEngine.zesty.io/`

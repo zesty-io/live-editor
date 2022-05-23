@@ -6,9 +6,12 @@ import "webpack-dev-server"
 import webpack from "webpack"
 import { CleanWebpackPlugin } from "clean-webpack-plugin"
 import TerserPlugin from "terser-webpack-plugin"
+import CompressionPlugin from "compression-webpack-plugin"
+import HtmlWebpackPlugin from "html-webpack-plugin"
 
 const config: Configuration = {
    entry: "./src/index.tsx",
+   devtool: false,
    module: {
       rules: [
          {
@@ -36,6 +39,12 @@ const config: Configuration = {
                },
             ],
          },
+         {
+            test: /\.(woff|woff2|eot|ttf|otf)$/i,
+            use: {
+               loader: "url-loader",
+            },
+         },
       ],
    },
    resolve: {
@@ -62,9 +71,6 @@ const config: Configuration = {
       libraryTarget: "umd",
       publicPath: "",
    },
-   devServer: {
-      static: "./dist",
-   },
    performance: {
       hints: false,
       maxEntrypointSize: 512000,
@@ -74,10 +80,14 @@ const config: Configuration = {
       minimize: true,
       minimizer: [
          new TerserPlugin({
-            // Use multi-process parallel running to improve the build speed
-            // Default number of concurrent runs: os.cpus().length - 1
             parallel: true,
-            // Enable file caching
+            minify: TerserPlugin.swcMinify,
+            terserOptions: {
+               format: {
+                  comments: false,
+               },
+            },
+            extractComments: false,
          }),
       ],
    },
@@ -92,6 +102,11 @@ const config: Configuration = {
          process: "process/browser",
       }),
       new CleanWebpackPlugin(),
+      new CompressionPlugin(),
+      new HtmlWebpackPlugin({ template: "test/index.html" }),
+      new webpack.optimize.LimitChunkCountPlugin({
+         maxChunks: 1,
+      }),
    ],
 }
 

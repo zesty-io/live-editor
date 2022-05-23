@@ -41,7 +41,7 @@ export const Subheaders = ({ theme, content, btnList = [] }: Props) => {
             {btnList.map((e) => {
                return (
                   <Button
-                     sx={{ whiteSpace: "nowrap", cursor: "pointer" }}
+                     sx={{ whiteSpace: "nowrap", cursor: "pointer", fontSize: "14px" }}
                      color="primary"
                      size="small"
                      variant="contained"
