@@ -49,7 +49,7 @@ const Index = ({
       },
    ]
    return (
-      <AppBar sx={{ background: "#fff" }} position="static">
+      <AppBar sx={{ background: "#fff", overflowX: "scroll" }} position="static">
          <Box
             paddingLeft={3}
             paddingRight={1}
