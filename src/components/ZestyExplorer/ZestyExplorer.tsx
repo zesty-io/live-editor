@@ -6,7 +6,7 @@ import CssBaseline from "@mui/material/CssBaseline"
 import * as helper from "utils/index"
 import { fetchJSON, getPageData } from "services/index"
 import { OutlineCard as Card } from "components/Card"
-import { buttonStyles, verifyUserPrompt, zestyStyles, zestyWrapper } from "./styles"
+import { buttonStyles, verifyUserPrompt, zestyWrapper } from "./styles"
 import Button from "@mui/material/Button"
 import Box from "@mui/material/Box"
 import getTheme from "theme/index"
@@ -15,7 +15,6 @@ import CloseFullscreenIcon from "@mui/icons-material/CloseFullscreen"
 import { Helmet } from "react-helmet"
 import { ZestyExplorerBrowser } from "./ZestyExplorerBrowser"
 import { LaunchBtn } from "components"
-import Typography from "@mui/material/Typography"
 
 // dom access highlight function
 const expandBody = (bool: boolean) => {
@@ -126,7 +125,6 @@ export const ZestyExplorer = ({ content = {} }: any) => {
                      height="32px"
                      alt="Zesty.io Logo"
                   />
-                  <Typography sx={zestyStyles}>Compass</Typography>
                </LaunchBtn>
             )}
 
