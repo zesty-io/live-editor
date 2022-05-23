@@ -47,7 +47,7 @@ const Index = () => {
                   }}
                >
                   <img src={loading} alt="Loading" />
-                  <Typography color="secondary" variant="h5">
+                  <Typography color="secondary" sx={{ fontSize: "22px" }}>
                      Loading...
                   </Typography>
                </Box>

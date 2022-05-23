@@ -1,2 +1,2 @@
-export * from "./CollapseTable"
+export * from "./EditTable"
 export * from "./CodeHelperTable"

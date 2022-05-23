@@ -10,14 +10,19 @@ interface Props {
    content: any
 }
 
-export const JsonDataViewer = ({ content, data, search, setSearch, theme }: Props) => {
+export const JsonDataViewerTab = ({ content, data, search, setSearch, theme }: Props) => {
    console.log(data, "data123123")
    return (
       <Box sx={{ background: "#fff" }}>
          <Subheaders content={content} theme={theme} />
          <SearchAppBar value={search} onChange={setSearch} />
          <ReactJson
-            style={{ height: "80vh", overflowY: "scroll" }}
+            style={{
+               height: "80vh",
+               overflowY: "scroll",
+               fontSize: "14px !important",
+               fontFamily: "Mulish",
+            }}
             name={"data"}
             // @ts-ignore
             src={data}

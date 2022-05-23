@@ -59,7 +59,7 @@ const Index = ({ tabList, settime, setcurrentTab }: any) => {
       ({ theme }) => ({
          textTransform: "none",
          fontWeight: theme.typography.fontWeightMedium,
-         fontSize: theme.typography.pxToRem(15),
+         fontSize: "14px",
          // marginRight: theme.spacing(1),
          marginRight: "5px",
          color: theme.palette.primary.main,

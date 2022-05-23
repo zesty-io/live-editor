@@ -1,14 +1,13 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import React from "react"
 import ReactDOM from "react-dom"
 import { ZestyExplorer } from "./components"
-import { canUseDOM } from "./utils/index"
+import { canUseDOM } from "./utils"
 
-// if (process.env.NODE_ENV === "production") {
-//    console.log = () => {}
-//    console.error = () => {}
-//    console.debug = () => {}
-// }
+if (process.env.NODE_ENV === "production") {
+   console.log = () => {}
+   console.error = () => {}
+   console.debug = () => {}
+}
 
 console.log("development branch555")
 export const main = () => {

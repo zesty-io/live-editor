@@ -1,4 +1,4 @@
-import * as React from "react"
+import React from "react"
 import Box from "@mui/material/Box"
 import Collapse from "@mui/material/Collapse"
 import IconButton from "@mui/material/IconButton"
@@ -14,7 +14,7 @@ import { PrettyPrintJson } from "utils"
 import { useTheme } from "@mui/system"
 import CloseIcon from "@mui/icons-material/Close"
 import * as helper from "utils"
-import { CellStyle, TableContainerStyle } from "./Styles"
+import { CellStyle, TableContainerStyle, rowStyle } from "./Styles"
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
 import { Subheaders } from "components"
@@ -112,11 +112,14 @@ function Row({
                   {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                </IconButton>
             </TableCell>
-            <TableCell component="th" scope="row">
+            <TableCell component="th" scope="row" sx={rowStyle}>
                {keyName}
             </TableCell>
-            <TableCell align="left">{valueType}</TableCell>
+            <TableCell align="left" sx={rowStyle}>
+               {valueType}
+            </TableCell>
             <TableCell
+               sx={rowStyle}
                align="left"
                onClick={() => {
                   helper.scrollToView("activeEl")
@@ -172,7 +175,9 @@ function Row({
                   </>
                )}
             </TableCell>
-            <TableCell align="left">{value.length}</TableCell>
+            <TableCell align="left" sx={rowStyle}>
+               {value.length}
+            </TableCell>
          </TableRow>
 
          {/* Expanded Data */}
@@ -198,7 +203,9 @@ function Row({
                      >
                         <TableHead>
                            <TableRow>
-                              <TableCell>{PrettyPrintJson({ data: obj })}</TableCell>
+                              <TableCell sx={rowStyle}>
+                                 {PrettyPrintJson({ data: obj })}
+                              </TableCell>
                            </TableRow>
                         </TableHead>
                      </Table>
@@ -210,7 +217,7 @@ function Row({
    )
 }
 
-export const CollapsibleTable = ({
+export const EditTable = ({
    content,
    metaData,
    data = {},

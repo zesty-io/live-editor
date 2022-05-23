@@ -11,3 +11,8 @@ export const TableContainerStyle = {
    backgroundColor: "#fff",
    scrollBehavior: "smooth",
 } as const
+
+export const rowStyle = {
+   fontSize: "14px",
+   cursor: "pointer",
+} as const

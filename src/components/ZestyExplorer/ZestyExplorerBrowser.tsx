@@ -7,7 +7,7 @@ import { Box } from "@mui/material"
 import { Loader } from "components"
 import { containerStyle } from "./styles"
 import { Headers } from "components"
-import { CodeHelper, ContentViewer, JsonDataViewer, MetaViewer } from "views"
+import { CodeHelperTab, EditTab, JsonDataViewerTab, MetaViewerTab } from "views"
 import { useTheme } from "@mui/material/styles"
 import { LoginPrompt } from "components/Ui"
 
@@ -137,10 +137,10 @@ export const ZestyExplorerBrowser = ({
          <Headers {...HeaderProps}>{children}</Headers>
          <Box sx={{ position: "relative" }}>
             {time > 0 && <Loader />}
-            {currentTab === 0 && <ContentViewer {...EditProps} />}
-            {currentTab === 1 && <MetaViewer {...MetaProps} />}
-            {currentTab === 2 && <JsonDataViewer {...JSONProps} />}
-            {currentTab === 3 && <CodeHelper {...CodeHelperProps} />}
+            {currentTab === 0 && <EditTab {...EditProps} />}
+            {currentTab === 1 && <MetaViewerTab {...MetaProps} />}
+            {currentTab === 2 && <JsonDataViewerTab {...JSONProps} />}
+            {currentTab === 3 && <CodeHelperTab {...CodeHelperProps} />}
          </Box>
       </Box>
    )

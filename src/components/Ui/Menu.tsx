@@ -46,7 +46,7 @@ export const BasicMenu = ({ list }: Props) => {
          >
             {list.map((e) => {
                return (
-                  <MenuItem sx={{}} onClick={() => handleClose(e.href)}>
+                  <MenuItem sx={{ fontSize: "14px" }} onClick={() => handleClose(e.href)}>
                      {e.label}
                   </MenuItem>
                )

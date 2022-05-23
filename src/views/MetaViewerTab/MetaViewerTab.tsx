@@ -42,7 +42,7 @@ const generatedScript = (content: any) => {
 `
 }
 
-export const MetaViewer = ({ content, response, theme }: any) => {
+export const MetaViewerTab = ({ content, response, theme }: any) => {
    const uri = `https://${
       content?.zestyInstanceZUID || headerZUID(response)
    }.manager.zesty.io/content/${content?.meta?.model?.zuid}/${content?.meta?.zuid}/meta`
@@ -51,7 +51,7 @@ export const MetaViewer = ({ content, response, theme }: any) => {
       { name: "Edit in CMS", label: "Edit in CMS", value: "Edit in CMS", href: uri },
    ]
    return (
-      <Box sx={{ height: "90vh", background: "#fff" }}>
+      <Box sx={{ height: "90vh", background: "#fff", fontSize: "14px !important" }}>
          <Subheaders content={content} theme={theme} btnList={btnList} />
          <CopyBlock
             text={generatedScript(content)}

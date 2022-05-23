@@ -15,6 +15,7 @@ const getTheme = (mode: any, themeToggler: any) =>
             button: {
                textTransform: "none",
                fontWeight: "medium",
+               fontSize: "14px",
             },
          },
          zIndex: {
