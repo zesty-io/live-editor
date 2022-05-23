@@ -9,7 +9,6 @@ if (process.env.NODE_ENV === "production") {
    console.debug = () => {}
 }
 
-console.log("development branch555")
 export const main = () => {
    if (!canUseDOM()) {
       return null

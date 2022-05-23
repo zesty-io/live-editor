@@ -14,7 +14,7 @@ import { useDarkMode } from "hooks"
 import CloseFullscreenIcon from "@mui/icons-material/CloseFullscreen"
 import { Helmet } from "react-helmet"
 import { ZestyExplorerBrowser } from "./ZestyExplorerBrowser"
-import { CompassBtn } from "components"
+import { LaunchBtn } from "components"
 import Typography from "@mui/material/Typography"
 
 // dom access highlight function
@@ -116,7 +116,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
             <CssBaseline />
             {/* ZESTY LOGO  bottom right*/}
             {!open && (
-               <CompassBtn
+               <LaunchBtn
                   onClick={() => helper.toggleOpenState(true, setOpen, expandBody)}
                   style={buttonStyles}
                >
@@ -127,7 +127,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
                      alt="Zesty.io Logo"
                   />
                   <Typography sx={zestyStyles}>Compass</Typography>
-               </CompassBtn>
+               </LaunchBtn>
             )}
 
             {open && (
