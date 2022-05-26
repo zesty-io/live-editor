@@ -1,6 +1,6 @@
 <img src="https://brand.zesty.io/zesty-io-logo.svg" alt="zesty logo" width="200">
 
-# Zesty.io Explorer
+# Zesty.io Live Editor
 
 Website/App Overlay Guide for Editing Zesty.io Content
 
