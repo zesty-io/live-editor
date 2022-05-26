@@ -9,6 +9,7 @@ if (process.env.NODE_ENV === "production") {
    console.debug = () => {}
 }
 
+console.log("Zesty live editor loaded")
 export const main = () => {
    if (!canUseDOM()) {
       return null

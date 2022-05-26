@@ -1,6 +1,6 @@
 <img src="https://brand.zesty.io/zesty-io-logo.svg" alt="zesty logo" width="200">
 
-# Zesty.io Explorer
+# Zesty.io Live-Editor
 
 Website/App Overlay Guide for Editing Zesty.io Content
 
@@ -23,16 +23,16 @@ Using CDN
 ```
      <script
       type="text/javascript"
-      src="https://cdn.jsdelivr.net/gh/zesty-io/explorer@latest/dist/explorer.production.js"
+      src="https://cdn.jsdelivr.net/gh/zesty-io/live-editor@latest/dist/live-editor.production.js"
       defer="defer"
     ></script>
 
 ```
 
-## Explorer Sections
+## Live-Editor Sections
 
--  Page Data Explorer
--  Full Site Navigation and Explorer
+-  Page Data Live-editor
+-  Full Site Navigation and Live-editor
 -  Inline Editing (phases)
 -  Website and Page Health
 -  Metadata
@@ -86,10 +86,10 @@ A view of the pages SEO and meta values which can be edited, this is not limited
 
 # How to run locally
 
-Clone the Zesty Explorer and Zesty Chrome Extension on same folder :
+Clone the Zesty Live-Editor and Zesty Chrome Extension on same folder :
 
 ```
-git clone https://github.com/zesty-io/explorer.git
+git clone https://github.com/zesty-io/live-editor.git
 ```
 
 ```
