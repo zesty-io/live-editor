@@ -102,6 +102,8 @@ git clone https://github.com/zesty-io/chrome-ext.git
 
 on the Zesty Chrome Extension Directory run
 
+Chrome Extension Repo https://github.com/zesty-io/chrome-ext
+
 ```
 git checkout development
 ```
