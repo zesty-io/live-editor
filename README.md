@@ -23,16 +23,16 @@ Using CDN
 ```
      <script
       type="text/javascript"
-      src="https://cdn.jsdelivr.net/gh/zesty-io/explorer@latest/dist/explorer.production.js"
+      src="https://cdn.jsdelivr.net/gh/zesty-io/live-editor@latest/dist/live-editor.production.js"
       defer="defer"
     ></script>
 
 ```
 
-## Explorer Sections
+## Live-Editor Sections
 
--  Page Data Explorer
--  Full Site Navigation and Explorer
+-  Page Data Live-editor
+-  Full Site Navigation and Live-editor
 -  Inline Editing (phases)
 -  Website and Page Health
 -  Metadata
@@ -90,10 +90,10 @@ A view of the pages SEO and meta values which can be edited, this is not limited
 
 # How to run locally
 
-Clone the Zesty Explorer and Zesty Chrome Extension on same folder :
+Clone the Zesty Live-Editor and Zesty Chrome Extension on same folder :
 
 ```
-git clone https://github.com/zesty-io/explorer.git
+git clone https://github.com/zesty-io/live-editor.git
 ```
 
 ```
@@ -110,7 +110,7 @@ git checkout development
 
 then install the extension locally [here](https://webkul.com/blog/how-to-install-the-unpacked-extension-in-chrome/)
 
-after that change directory to the Zesty Explorer folder then run the following command
+after that change directory to the Zesty Live-editor folder then run the following command
 
 ```
 git checkout development && npm install && npm start

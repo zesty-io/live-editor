@@ -66,8 +66,8 @@ const config: Configuration = {
    },
    output: {
       path: path.resolve(__dirname, "dist"),
-      filename: "explorer.production.js",
-      library: "Explorer",
+      filename: "live-editor.production.js",
+      library: "Live-editor",
       libraryTarget: "umd",
       publicPath: "",
    },
