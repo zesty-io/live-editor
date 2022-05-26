@@ -1,6 +1,6 @@
 <img src="https://brand.zesty.io/zesty-io-logo.svg" alt="zesty logo" width="200">
 
-# Zesty.io Live-Editor
+# Zesty.io Live Editor
 
 Website/App Overlay Guide for Editing Zesty.io Content
 
@@ -42,6 +42,10 @@ Using CDN
 # Zesty Page Composer Application Overview
 
 Zesty is an application that can make any website or text base document on the internet editable. It runs as javascript application and is powered by a Zesty's multi-tenant cloud based API. It would by piping any directing any live domain with a website through WebEngine. Webengine serves the application through and inject content with Parsley, a templating language that connects to the the Zesty API.
+
+## Design
+
+Figma file https://www.figma.com/file/TsOMa4gbWHgMzWyXH8MXpt/Explorer?node-id=0%3A1
 
 ## How the experience works
 
@@ -98,13 +102,15 @@ git clone https://github.com/zesty-io/chrome-ext.git
 
 on the Zesty Chrome Extension Directory run
 
+Chrome Extension Repo https://github.com/zesty-io/chrome-ext
+
 ```
 git checkout development
 ```
 
 then install the extension locally [here](https://webkul.com/blog/how-to-install-the-unpacked-extension-in-chrome/)
 
-after that change directory to the Zesty Explorer folder then run the following command
+after that change directory to the Zesty Live-editor folder then run the following command
 
 ```
 git checkout development && npm install && npm start
