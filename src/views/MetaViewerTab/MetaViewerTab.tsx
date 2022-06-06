@@ -1,6 +1,6 @@
 import { Box } from "@mui/material"
 import React from "react"
-import { CopyBlock, dracula } from "react-code-blocks"
+// import { CopyBlock, dracula } from "react-code-blocks"
 import { headerZUID } from "utils"
 import { Subheaders } from "components"
 
@@ -50,17 +50,18 @@ export const MetaViewerTab = ({ content, response, theme }: any) => {
    const btnList = [
       { name: "Edit in CMS", label: "Edit in CMS", value: "Edit in CMS", href: uri },
    ]
+   console.log(generatedScript(content))
    return (
       <Box sx={{ height: "90vh", background: "#fff", fontSize: "14px !important" }}>
          <Subheaders content={content} theme={theme} btnList={btnList} />
-         <CopyBlock
+         {/* <CopyBlock
             text={generatedScript(content)}
             language={"jsx"}
             showLineNumbers={false}
             theme={dracula}
             wrapLines={false}
             codeBlock
-         />
+         /> */}
       </Box>
    )
 }
