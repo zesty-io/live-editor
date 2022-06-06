@@ -50,7 +50,7 @@ export const zestyWrapper = {
 } as const
 
 export const containerStyle = {
-   background: "#ddd",
+   background: "#fff",
    borderRadius: "3px",
    width: "40vw",
    height: "100vh",

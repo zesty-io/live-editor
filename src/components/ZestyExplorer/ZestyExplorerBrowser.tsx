@@ -129,7 +129,11 @@ export const ZestyExplorerBrowser = ({
 
    // show failed login prompt
    if (!verifySuccess) {
-      return <LoginPrompt />
+      return (
+         <Box sx={containerStyle}>
+            <LoginPrompt />
+         </Box>
+      )
    }
 
    return (
