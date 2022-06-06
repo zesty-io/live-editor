@@ -43,6 +43,7 @@ const deactivateWorkingElement = async (
    url: string | any,
    token: string | any,
    save: boolean,
+   getData: any,
 ) => {
    if (undefined !== workingElement) {
       // @ts-ignore
@@ -50,6 +51,7 @@ const deactivateWorkingElement = async (
          (await helper.handleEdit(metaData, url, token, {
             [`${keyName}`]: workingElement?.innerText,
          }))
+      await getData()
       // save && (await window.location.reload())
       console.log("Deactivating", workingElement)
       workingElement.style.border = "none"
@@ -151,10 +153,10 @@ function Row({
                               url,
                               token,
                               false,
+                              getData,
                            )
                            setWorkingElement("")
                            settext("")
-                           getData()
                            setloading()
                         }}
                      >
@@ -171,8 +173,8 @@ function Row({
                               url,
                               token,
                               true,
+                              getData,
                            )
-                           getData()
                            setloading()
                            setWorkingElement("")
                            settext("")
