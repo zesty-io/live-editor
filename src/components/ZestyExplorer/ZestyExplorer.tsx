@@ -135,6 +135,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
                      pageData={pageData}
                      contentData={searchObject}
                      jsonData={jsonData}
+                     getData={getData}
                   >
                      <Button
                         onClick={() => helper.toggleOpenState(false, setOpen, expandBody)}

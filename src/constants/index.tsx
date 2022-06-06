@@ -55,8 +55,9 @@ export const tabList = [
 ]
 
 export const urls = {
-   parselyDocs: "",
-   nextJsDocs: "",
+   parselyDocs:
+      "https://www.zesty.io/docs/services/web-engine/introduction-to-parsley/README/",
+   nextJsDocs: "https://nextjs.org/docs",
    zestyBrandLogo: "https://brand.zesty.io/zesty-io-logo.svg",
    zestyBrandLogoMid:
       "https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png",

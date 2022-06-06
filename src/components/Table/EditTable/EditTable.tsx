@@ -50,7 +50,7 @@ const deactivateWorkingElement = async (
          (await helper.handleEdit(metaData, url, token, {
             [`${keyName}`]: workingElement?.innerText,
          }))
-      save && (await window.location.reload())
+      // save && (await window.location.reload())
       console.log("Deactivating", workingElement)
       workingElement.style.border = "none"
       workingElement.setAttribute("contentEditable", false)
@@ -66,6 +66,8 @@ interface Props {
    metaData: any
    url: any
    token: any
+   setloading: any
+   getData: any
 }
 
 function Row({
@@ -76,6 +78,8 @@ function Row({
    metaData,
    url,
    token,
+   setloading,
+   getData,
 }: Props) {
    const [open, setOpen] = React.useState(false)
    const [text, settext] = React.useState("")
@@ -150,6 +154,8 @@ function Row({
                            )
                            setWorkingElement("")
                            settext("")
+                           getData()
+                           setloading()
                         }}
                      >
                         <CloseIcon />
@@ -166,6 +172,8 @@ function Row({
                               token,
                               true,
                            )
+                           getData()
+                           setloading()
                            setWorkingElement("")
                            settext("")
                         }}
@@ -225,6 +233,8 @@ export const EditTable = ({
    token,
    onScroll,
    theme,
+   getData,
+   setloading,
 }: any) => {
    const [workingElement, setWorkingElement] = React.useState("")
 
@@ -266,6 +276,8 @@ export const EditTable = ({
                      metaData={metaData}
                      url={url}
                      token={token}
+                     getData={getData}
+                     setloading={setloading}
                   />
                ))}
             </TableBody>

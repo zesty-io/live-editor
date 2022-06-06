@@ -10,6 +10,8 @@ interface Props {
    theme: any
    scrollPos: number
    scrollEvent: any
+   getData: any
+   setloading: any
 }
 
 export const EditTab = ({
@@ -21,6 +23,8 @@ export const EditTab = ({
    data,
    url,
    token,
+   getData,
+   setloading,
 }: Props) => {
    const newData =
       Object.keys(data?.content).length === 0 ? metaData?.data?.data : data?.content
@@ -43,6 +47,8 @@ export const EditTab = ({
             data={newData}
             content={content}
             theme={theme}
+            getData={getData}
+            setloading={setloading}
          />
       </Box>
    )

@@ -77,3 +77,32 @@ export const fetchJSON = async (
       // setFunc({ data: null, response: res, error: true })
    }
 }
+
+export const editSeoData = async ({ url, token, payload }: any) => {
+   const putMethod = {
+      method: "PUT",
+      headers: {
+         "Content-type": "application/json; charset=UTF-8",
+         authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(payload),
+   }
+
+   const res = await fetch(url, putMethod)
+
+   return res
+}
+
+export const getSeoData = async ({ url, token }: any) => {
+   const options = {
+      method: "GET",
+      headers: {
+         "Content-type": "application/json; charset=UTF-8",
+         authorization: "Bearer " + token,
+      },
+   }
+
+   const res = await fetch(url, options)
+
+   return res
+}
