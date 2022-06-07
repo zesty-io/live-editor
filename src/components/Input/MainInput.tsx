@@ -3,7 +3,7 @@ import { Box } from "@mui/material"
 import React from "react"
 
 export const CustomInput = styled.input`
-   padding: 0.6rem 2rem 0.6rem 2.3rem;
+   padding: 0.6rem 2rem 0.6rem 1rem;
    overflow: hidden;
    background: ${(props: any) => props.theme.white};
    width: 100%;
@@ -25,7 +25,25 @@ export const CustomInput = styled.input`
    }
 `
 
-const Index = ({ label, theme, value, onChange, placeholder, autoFocus }: any) => {
+interface Props {
+   label: string
+   theme: any
+   value: string
+   onChange: (e: any) => void
+   placeholder: string
+   autoFocus: boolean
+   required?: boolean
+}
+const Index = ({
+   required,
+   label,
+   theme,
+   value,
+   onChange,
+   placeholder,
+   autoFocus,
+}: Props) => {
+   console.log(required)
    return (
       <Box
          marginBottom={2}

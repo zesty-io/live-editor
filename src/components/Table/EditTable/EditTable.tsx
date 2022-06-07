@@ -96,8 +96,10 @@ function Row({
       valueType = "object"
    }
 
+   const newText = text.replace(/<[^>]*>?/gm, "")
+
    // @ts-ignore
-   const showCloseBtn = text === workingElement?.innerText
+   const showCloseBtn = newText === workingElement?.innerText
 
    return (
       <React.Fragment>
