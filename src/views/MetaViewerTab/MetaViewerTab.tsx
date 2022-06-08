@@ -98,7 +98,7 @@ export const MetaViewerTab = ({
    const arr = [
       {
          key: "title",
-         label: "Title",
+         label: "Meta Title",
          required: true,
          value: title,
          onChange: (e: any) => settitle(e.target.value),
@@ -106,7 +106,7 @@ export const MetaViewerTab = ({
       },
       {
          key: "description",
-         label: "Description",
+         label: "Meta Description",
          required: true,
          value: desc,
          onChange: (e: any) => setdesc(e.target.value),
@@ -114,7 +114,7 @@ export const MetaViewerTab = ({
       },
       {
          key: "keywords",
-         label: "keywords",
+         label: "Meta Keywords",
          required: true,
          value: keywords,
          onChange: (e: any) => setkeywords(e.target.value),
@@ -137,6 +137,7 @@ export const MetaViewerTab = ({
       !res.error && handleSuccessDeleteHeadTags(res)
       res.error && handleErrorDeleteHeadTags(res)
    }
+
    useEffect(() => {
       getHeadTags()
    }, [])
@@ -165,6 +166,7 @@ export const MetaViewerTab = ({
                      Meta Tags
                   </Typography>
                   <Box
+                     borderRadius={4}
                      padding={4}
                      boxShadow={1}
                      sx={{
@@ -187,6 +189,7 @@ export const MetaViewerTab = ({
                               value={e.value}
                               onChange={e.onChange}
                               placeholder={e.placeholder}
+                              textArea={i === 1 ? true : false}
                            />
                         )
                      })}
@@ -197,6 +200,7 @@ export const MetaViewerTab = ({
                   <Box sx={{ display: headtags.length > 0 ? "block" : "none" }}>
                      <Typography
                         paddingTop={4}
+                        paddingBottom={4}
                         sx={{
                            fontSize: "24px",
                            fontWeight: "bold",
@@ -269,16 +273,20 @@ const CustomForm = ({ theme, data, handleSubmit, handleDelete }: any) => {
    return (
       <Box
          boxShadow={1}
+         borderRadius={4}
+         marginBottom={2}
+         paddingX={4}
+         paddingY={4}
          sx={{
             backgroundColor: theme.palette.alternate.main,
+            overflow: "hidden",
+            position: "relative",
          }}
       >
          <form
             action="submit"
             style={{
-               padding: "5rem 5rem",
                margin: "2rem .5rem",
-               position: "relative",
                display: "flex",
                flexDirection: "column",
                justifyContent: "start",
@@ -289,72 +297,74 @@ const CustomForm = ({ theme, data, handleSubmit, handleDelete }: any) => {
                sx={{
                   background: theme.palette.zesty.zestyBitterSweet,
                   position: "absolute",
-                  top: "0",
-                  right: "0",
+                  top: "1rem",
+                  right: "1rem",
+                  borderRadius: "10px",
                }}
                variant="contained"
                onClick={handleDelete}
                type="button"
                title="Delete Head Tag"
             >
-               <CloseIcon fontSize="large" />
+               <CloseIcon fontSize="small" />
             </Button>
             <Box>
-               {Object.entries(data).map((x: any, i: number) => {
-                  const key: any = Object.keys(attri)[i]
-                  const val: any = Object.values(attri)[i]
-                  return (
-                     <Box
-                        sx={{
-                           display: "flex",
-                           gap: "8rem",
+               {data &&
+                  Object.entries(data).map((x: any, i: number) => {
+                     const key: any = Object.keys(attri)[i]
+                     const val: any = Object.values(attri)[i]
+                     return (
+                        <Box
+                           sx={{
+                              display: "flex",
+                              gap: "4rem",
 
-                           justifyContent: "start",
-                           justifyItems: "start",
-                        }}
-                     >
-                        <Box sx={{}}>
-                           <MainInput
-                              theme={{
-                                 main: theme.palette.primary.main,
-                                 white: theme.palette.common.white,
-                                 boxShadow: theme.palette.secondary.blueShadow,
-                                 border: theme.palette.secondary.whiteSmoke,
-                              }}
-                              disabled={true}
-                              name={key}
-                              autoFocus={false}
-                              key={i}
-                              label={"Attribute"}
-                              required={false}
-                              value={key}
-                              onChange={() => {}}
-                              placeholder={key}
-                           />
+                              justifyContent: "start",
+                              justifyItems: "start",
+                           }}
+                        >
+                           <Box sx={{}}>
+                              <MainInput
+                                 theme={{
+                                    main: theme.palette.primary.main,
+                                    white: theme.palette.common.white,
+                                    boxShadow: theme.palette.secondary.blueShadow,
+                                    border: theme.palette.secondary.whiteSmoke,
+                                 }}
+                                 disabled={true}
+                                 name={key}
+                                 autoFocus={false}
+                                 key={i}
+                                 label={"Attribute"}
+                                 required={false}
+                                 value={key}
+                                 onChange={() => {}}
+                                 placeholder={key}
+                              />
+                           </Box>
+                           <Box sx={{}}>
+                              <MainInput
+                                 theme={{
+                                    main: theme.palette.primary.main,
+                                    white: theme.palette.common.white,
+                                    boxShadow: theme.palette.secondary.blueShadow,
+                                    border: theme.palette.secondary.whiteSmoke,
+                                 }}
+                                 name={val}
+                                 autoFocus={false}
+                                 key={i}
+                                 label={"Value"}
+                                 required={false}
+                                 value={val}
+                                 onChange={(e: any) =>
+                                    setattri({ ...attri, [key]: e.target.value })
+                                 }
+                                 placeholder={val}
+                              />
+                           </Box>
                         </Box>
-                        <Box sx={{}}>
-                           <MainInput
-                              theme={{
-                                 main: theme.palette.primary.main,
-                                 white: theme.palette.common.white,
-                                 boxShadow: theme.palette.secondary.blueShadow,
-                                 border: theme.palette.secondary.whiteSmoke,
-                              }}
-                              name={val}
-                              autoFocus={false}
-                              key={i}
-                              label={"Value"}
-                              required={false}
-                              value={val}
-                              onChange={(e: any) =>
-                                 setattri({ ...attri, [key]: e.target.value })
-                              }
-                              placeholder={val}
-                           />
-                        </Box>
-                     </Box>
-                  )
-               })}
+                     )
+                  })}
             </Box>
 
             <Box
@@ -366,7 +376,7 @@ const CustomForm = ({ theme, data, handleSubmit, handleDelete }: any) => {
                }}
             >
                <Button
-                  sx={{ width: "15rem" }}
+                  sx={{ width: "10rem", whiteSpace: "nowrap" }}
                   variant="contained"
                   color="secondary"
                   onClick={() => handleSubmit(attri)}
