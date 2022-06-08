@@ -20,13 +20,12 @@ Using CDN
 
 -  copy the script tag below and paste it in the head of your main.html file
 
-```
-     <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/gh/zesty-io/live-editor@latest/dist/live-editor.production.js"
-      defer="defer"
-    ></script>
-
+```jsx
+<script
+   type="text/javascript"
+   src="https://cdn.jsdelivr.net/gh/zesty-io/live-editor@latest/dist/live-editor.production.js"
+   defer="defer"
+></script>
 ```
 
 Note, if your website has a strict content security policy or x-frame-options, you will need to add this url to your white list 
@@ -76,7 +75,7 @@ The parlsey tag `{{current_view}}` and `<Zesty/>` function the same. The differe
 
 **loader file explantation**
 
-```
+```jsx
 <html> (automated from webengine)
   <head></head> (automated from webengine)
   <body> (loader wraps the body)
@@ -97,11 +96,11 @@ A view of the pages SEO and meta values which can be edited, this is not limited
 
 Clone the Zesty Live-Editor and Zesty Chrome Extension on same folder :
 
-```
+```jsx
 git clone https://github.com/zesty-io/live-editor.git
 ```
 
-```
+```jsx
 git clone https://github.com/zesty-io/chrome-ext.git
 ```
 
@@ -109,7 +108,7 @@ on the Zesty Chrome Extension Directory run
 
 Chrome Extension Repo https://github.com/zesty-io/chrome-ext
 
-```
+```jsx
 git checkout development
 ```
 
@@ -117,7 +116,7 @@ then install the extension locally [here](https://webkul.com/blog/how-to-install
 
 after that change directory to the Zesty Live-editor folder then run the following command
 
-```
+```jsx
 git checkout development && npm install && npm start
 ```
 
@@ -125,13 +124,13 @@ assuming the extension is already installed go to a zesty domain website ex `htt
 
 # How to Commit
 
-```
+```jsx
 npm run commit
 ```
 
 # Deploying in Production
 
-```
+```jsx
 git checkout main && npm run release
 ```
 

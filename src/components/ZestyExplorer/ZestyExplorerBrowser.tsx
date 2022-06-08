@@ -17,6 +17,7 @@ export const ZestyExplorerBrowser = ({
    contentData,
    children,
    jsonData,
+   getData,
 }: any) => {
    const content = contentData || dummydata
    const [currentTab, setcurrentTab] = React.useState(0)
@@ -91,12 +92,19 @@ export const ZestyExplorerBrowser = ({
       token,
       scrollPos: currentScroll,
       scrollEvent,
+      getData,
+      setloading: () => settime(2),
    }
 
    const MetaProps = {
       theme,
       response,
-      content: contentData,
+      metaData,
+      content,
+      token,
+      url,
+      getData,
+      setloading: () => settime(2),
    }
 
    const JSONProps = {
@@ -129,7 +137,11 @@ export const ZestyExplorerBrowser = ({
 
    // show failed login prompt
    if (!verifySuccess) {
-      return <LoginPrompt />
+      return (
+         <Box sx={containerStyle}>
+            <LoginPrompt />
+         </Box>
+      )
    }
 
    return (

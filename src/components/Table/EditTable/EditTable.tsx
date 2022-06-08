@@ -18,6 +18,7 @@ import { CellStyle, TableContainerStyle, rowStyle } from "./Styles"
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
 import { Subheaders } from "components"
+import EditIcon from "@mui/icons-material/Edit"
 
 // dom access highlight function
 function activateWorkingElement(match: string): any {
@@ -43,6 +44,7 @@ const deactivateWorkingElement = async (
    url: string | any,
    token: string | any,
    save: boolean,
+   getData: any,
 ) => {
    if (undefined !== workingElement) {
       // @ts-ignore
@@ -50,7 +52,8 @@ const deactivateWorkingElement = async (
          (await helper.handleEdit(metaData, url, token, {
             [`${keyName}`]: workingElement?.innerText,
          }))
-      save && (await window.location.reload())
+      await getData()
+      // save && (await window.location.reload())
       console.log("Deactivating", workingElement)
       workingElement.style.border = "none"
       workingElement.setAttribute("contentEditable", false)
@@ -66,6 +69,8 @@ interface Props {
    metaData: any
    url: any
    token: any
+   setloading: any
+   getData: any
 }
 
 function Row({
@@ -76,6 +81,8 @@ function Row({
    metaData,
    url,
    token,
+   setloading,
+   getData,
 }: Props) {
    const [open, setOpen] = React.useState(false)
    const [text, settext] = React.useState("")
@@ -90,9 +97,18 @@ function Row({
       valueType = "object"
    }
 
-   // @ts-ignore
-   const showCloseBtn = text === workingElement?.innerText
+   const newText = text.replace(/<[^>]*>?/gm, "")
 
+   // @ts-ignore
+   const showCloseBtn = newText === workingElement?.innerText
+
+   const ref1 = React.useRef()
+   const editElement = () => {
+      // @ts-ignore
+      !text && settext(ref1?.current?.innerText)
+      // @ts-ignore
+      !workingElement?.innerText && setWorkingElement(activateWorkingElement(value))
+   }
    return (
       <React.Fragment>
          <TableRow
@@ -125,55 +141,90 @@ function Row({
                   helper.scrollToView("activeEl")
                }}
             >
-               <span
-                  onClick={(e: any) => {
-                     !text && settext(e.target.textContent)
-                     // @ts-ignore
-                     !workingElement?.innerText &&
-                        setWorkingElement(activateWorkingElement(value))
+               <Box sx={{}}>
+                  {showCloseBtn && (
+                     <Box
+                        sx={{
+                           display: "flex",
+                           gap: "1rem",
+                           justifyContent: "center",
+                           justifyItems: "center",
+                        }}
+                     >
+                        <Button
+                           size="small"
+                           onClick={() => {
+                              deactivateWorkingElement(
+                                 workingElement,
+                                 keyName,
+                                 metaData,
+                                 url,
+                                 token,
+                                 false,
+                                 getData,
+                              )
+                              setWorkingElement("")
+                              settext("")
+                              setloading()
+                           }}
+                           sx={{
+                              fontSize: "16px",
+                              borderRadius: "50%",
+                              color: theme.palette.zesty.zestyOrange,
+                           }}
+                        >
+                           <CloseIcon fontSize="inherit" />
+                        </Button>
+
+                        <Button
+                           size="small"
+                           onClick={() => {
+                              deactivateWorkingElement(
+                                 workingElement,
+                                 keyName,
+                                 metaData,
+                                 url,
+                                 token,
+                                 true,
+                                 getData,
+                              )
+                              setloading()
+                              setWorkingElement("")
+                              settext("")
+                           }}
+                           sx={{
+                              color: theme.palette.zesty.zestyOrange,
+                              fontSize: "16px",
+                              borderRadius: "50%",
+                           }}
+                        >
+                           Save
+                        </Button>
+                     </Box>
+                  )}
+               </Box>
+               <Box
+                  sx={{
+                     display: "flex",
+                     gap: "1rem",
+                     flexDirection: "row-reverse",
+                     maxWidth: "25rem",
+                     maxHeight: "10rem",
+                     wordBreak: "break-word",
+                     overflow: "auto",
                   }}
                >
-                  {value}
-               </span>
-               {showCloseBtn && (
-                  <>
-                     <Button
-                        size="small"
-                        onClick={() => {
-                           deactivateWorkingElement(
-                              workingElement,
-                              keyName,
-                              metaData,
-                              url,
-                              token,
-                              false,
-                           )
-                           setWorkingElement("")
-                           settext("")
-                        }}
-                     >
-                        <CloseIcon />
-                     </Button>
-
-                     <Button
-                        size="small"
-                        onClick={() => {
-                           deactivateWorkingElement(
-                              workingElement,
-                              keyName,
-                              metaData,
-                              url,
-                              token,
-                              true,
-                           )
-                           setWorkingElement("")
-                           settext("")
-                        }}
-                     >
-                        Save
-                     </Button>
-                  </>
-               )}
+                  <Box ref={ref1}>{value}</Box>
+                  {!showCloseBtn && value && (
+                     <Box onClick={editElement} sx={{}}>
+                        <EditIcon
+                           fontSize="medium"
+                           color="secondary"
+                           titleAccess="Edit Data"
+                        />
+                     </Box>
+                  )}
+               </Box>
             </TableCell>
             <TableCell align="left" sx={rowStyle}>
                {value.length}
@@ -225,6 +276,8 @@ export const EditTable = ({
    token,
    onScroll,
    theme,
+   getData,
+   setloading,
 }: any) => {
    const [workingElement, setWorkingElement] = React.useState("")
 
@@ -266,6 +319,8 @@ export const EditTable = ({
                      metaData={metaData}
                      url={url}
                      token={token}
+                     getData={getData}
+                     setloading={setloading}
                   />
                ))}
             </TableBody>

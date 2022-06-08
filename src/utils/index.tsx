@@ -218,3 +218,44 @@ export const getJsonUrl = (customDomain = "") => {
    return customDomain.replace(/\/$/, "") + window.location.pathname + "?toJSON"
    // return customDomain + "/?toJSON"
 }
+
+export const generatedScript = ({ content, tags }: any) => {
+   console.log(content, "contentdata")
+   console.log(content?.content?.meta?.web?.url || "")
+   return `<head>
+
+   <!-- Auto-generated Head Tags -->
+   <title>${content?.meta?.web?.seo_meta_title}</title>
+   <link rel="canonical" href="${content?.meta?.web?.url}" />
+
+   <meta name="description" content="${content?.meta?.web?.seo_meta_description}" />
+   <meta name="keywords" content="${content?.meta?.web?.seo_meta_keywords}" />
+   <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+   <meta property="og:type" content="website" />
+   <meta name="twitter:card" content="summary">
+   <meta property="og:title" content="${content?.meta?.web?.seo_meta_title}" />
+   <meta name="twitter:title" content="${content?.meta?.web?.seo_meta_title}">
+   <meta property="og:description" content="${
+      content?.meta?.web?.seo_meta_description
+   }" />
+   <meta property="twitter:description" content="${
+      content?.meta?.web?.seo_meta_description
+   }" />
+  <meta property="og:url" content="${content?.meta?.web?.url}" />
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="${content?.meta?.model_alternate_name}" />
+
+
+  <!-- Custom Head Tags -->
+  ${tags
+     ?.map((e: any) => {
+        return `<${e?.type}   ${Object?.entries(e?.attributes)
+           .map((e: any) => `${e && e[0]}="${e && e[1]}"`)
+           .join(" ")} />`
+     })
+     .join("\n")}
+
+</head>
+`
+}

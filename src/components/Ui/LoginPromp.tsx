@@ -9,12 +9,17 @@ const loginPromp = {
    position: "fixed",
    top: "25%",
    left: "15%",
+   background: "#fff",
+   gap: "1rem",
+   userSelect: "none",
 } as const
 
 export const LoginPrompt = () => {
    return (
       <Box sx={loginPromp}>
-         <Typography sx={{ fontSize: "24px", fontWeight: 800 }}>Please Login</Typography>
+         <Typography sx={{ fontSize: "32px", fontWeight: "bold" }}>
+            Please Login
+         </Typography>
          <NormalBtn href={`https://accounts.zesty.io/login`}>
             Sign in to Zesty.io
          </NormalBtn>

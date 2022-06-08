@@ -105,7 +105,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
    return (
       <Box id={"zestyExplorer"} sx={zestyWrapper}>
          <Helmet>
-            <script src="https://cdn.jsdelivr.net/gh/zesty-io/fetch-wrapper@latest/dist/index.min.js" />
+            <script src="https://cdn.jsdelivr.net/gh/zesty-io/fetch-wrapper@latest/dist/index.js" />
             <link
                href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500&display=swap"
                rel="stylesheet"
@@ -135,6 +135,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
                      pageData={pageData}
                      contentData={searchObject}
                      jsonData={jsonData}
+                     getData={getData}
                   >
                      <Button
                         onClick={() => helper.toggleOpenState(false, setOpen, expandBody)}
