@@ -208,10 +208,13 @@ function Row({
                      display: "flex",
                      gap: "1rem",
                      flexDirection: "row-reverse",
-                     maxWidth: "25rem",
+                     width: "15rem",
                      maxHeight: "10rem",
                      wordBreak: "break-word",
                      overflow: "auto",
+                     justifyContent: "start",
+                     justifyItems: "start",
+                     textAlign: "left",
                   }}
                >
                   <Box ref={ref1}>{value}</Box>
@@ -299,7 +302,7 @@ export const EditTable = ({
                   <TableCell align="left" sx={CellStyle}>
                      Type
                   </TableCell>
-                  <TableCell align="left" sx={CellStyle}>
+                  <TableCell align="left" sx={{ ...CellStyle, width: "15rem" }}>
                      Content Example
                   </TableCell>
                   <TableCell align="left" sx={CellStyle}>
