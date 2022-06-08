@@ -32,8 +32,15 @@ export const Subheaders = ({ theme, content, btnList = [] }: Props) => {
                color={theme.palette.common.black}
                component={"h6"}
             >
-               Browsing item <strong> {content?.meta?.web?.seo_link_text} </strong>
-               from the <strong>{content?.meta?.model_alternate_name} </strong>
+               Browsing item{" "}
+               <strong style={{ color: theme.palette.zesty.zestyOrange }}>
+                  {" "}
+                  {content?.meta?.web?.seo_link_text}{" "}
+               </strong>
+               from the{" "}
+               <strong style={{ color: theme.palette.zesty.zestyOrange }}>
+                  {content?.meta?.model_alternate_name}{" "}
+               </strong>
                Content Model
             </Typography>
          </Box>
