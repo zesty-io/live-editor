@@ -19,7 +19,13 @@ export const CustomInput = styled.input`
       border: 1px solid ${(props: any) => props.theme.main};
       box-shadow: 0px 0px 0px 4px ${(props: any) => props.theme.boxShadow};
    }
-   &:hover {
+   &:disabled {
+      opacity: 0.8;
+      cursor: not-allowed;
+      border: 1px solid ${(props: any) => props.theme.border};
+      caret-color: transparent;
+   }
+   &:hover:enabled {
       border: 1px solid ${(props: any) => props.theme.main};
       box-shadow: 0px 0px 0px 4px ${(props: any) => props.theme.boxShadow};
    }
@@ -33,6 +39,9 @@ interface Props {
    placeholder: string
    autoFocus: boolean
    required?: boolean
+   name?: string
+   disabled?: boolean
+   key?: number | string
 }
 const Index = ({
    required,
@@ -42,6 +51,9 @@ const Index = ({
    onChange,
    placeholder,
    autoFocus,
+   name,
+   disabled,
+   key,
 }: Props) => {
    console.log(required)
    return (
@@ -59,6 +71,10 @@ const Index = ({
             {label}
          </Box>
          <CustomInput
+            type="text"
+            key={key}
+            disabled={disabled}
+            name={name}
             theme={theme}
             value={value}
             onChange={onChange}

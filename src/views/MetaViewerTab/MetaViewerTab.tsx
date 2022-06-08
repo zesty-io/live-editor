@@ -1,9 +1,10 @@
-import { Box, Button } from "@mui/material"
-import React, { useState } from "react"
+import { Box, Button, Typography } from "@mui/material"
+import React, { useState, useEffect } from "react"
 import { generatedScript, headerZUID } from "utils"
 import { MainInput, Subheaders } from "components"
-import { editSeoData } from "services"
+import { deleteHeadTagApi, editHeadTagApi, editSeoData, headTagApi } from "services"
 import { CopyBlock, dracula } from "react-code-blocks"
+import CloseIcon from "@mui/icons-material/Close"
 
 export const MetaViewerTab = ({
    content,
@@ -19,9 +20,14 @@ export const MetaViewerTab = ({
    const [desc, setdesc] = useState(content?.meta?.web?.seo_meta_description || "")
    const [keywords, setkeywords] = useState(content?.meta?.web?.seo_meta_keywords || "")
 
+   const [headtags, setheadtags] = useState([])
+
    const uri = `https://${
       content?.zestyInstanceZUID || headerZUID(response)
    }.manager.zesty.io/content/${content?.meta?.model?.zuid}/${content?.meta?.zuid}/meta`
+   const headtagsUri = `https://${
+      content?.zestyInstanceZUID || headerZUID(response)
+   }.api.zesty.io/v1/web/headtags`
 
    const btnList = [
       { name: "Edit in CMS", label: "Edit in CMS", value: "Edit in CMS", href: uri },
@@ -36,6 +42,36 @@ export const MetaViewerTab = ({
       await getData()
    }
 
+   const handleSuccessGetHeadTags = async (res: any) => {
+      setheadtags(res.data)
+      await getData()
+   }
+   const handleErrorGetHeadTags = async (error: any) => {
+      console.log(error, "error")
+      await getData()
+   }
+   const handleSuccessEditHeadTags = async (res: any) => {
+      console.log(res)
+      await getHeadTags()
+   }
+   const handleErrorEditHeadTags = async (error: any) => {
+      console.log(error, "error")
+      await getHeadTags()
+   }
+   const handleSuccessDeleteHeadTags = async (res: any) => {
+      console.log(res)
+      await getHeadTags()
+   }
+   const handleErrorDeleteHeadTags = async (error: any) => {
+      console.log(error, "error")
+      await getHeadTags()
+   }
+
+   const getHeadTags = async () => {
+      const res = await headTagApi({ url: headtagsUri, token })
+      !res.error && handleSuccessGetHeadTags(res)
+      res.error && handleErrorGetHeadTags(res)
+   }
    const editData = async () => {
       setloading()
       const payload = {
@@ -85,6 +121,26 @@ export const MetaViewerTab = ({
          placeholder: "Keywords",
       },
    ]
+
+   const editHeadTags = async (data: any) => {
+      setloading()
+      const url = `${headtagsUri}/${data.ZUID}`
+      const res = await editHeadTagApi({ payload: data, url, token })
+      !res.error && handleSuccessEditHeadTags(res)
+      res.error && handleErrorEditHeadTags(res)
+   }
+
+   const deleteHeadTags = async (data: any) => {
+      setloading()
+      const url = `${headtagsUri}/${data.ZUID}`
+      const res = await deleteHeadTagApi({ url, token })
+      !res.error && handleSuccessDeleteHeadTags(res)
+      res.error && handleErrorDeleteHeadTags(res)
+   }
+   useEffect(() => {
+      getHeadTags()
+   }, [])
+
    return (
       <Box
          sx={{
@@ -96,36 +152,83 @@ export const MetaViewerTab = ({
       >
          <Box sx={{ height: "90vh", overflow: "auto" }}>
             <Subheaders content={content} theme={theme} btnList={btnList} />
-            <Box padding={4}>
+            <Box paddingY={4} paddingX={8}>
                <form action="submit" onSubmit={handleSubmit}>
-                  {arr?.map((e, i) => {
-                     return (
-                        <MainInput
-                           theme={{
-                              main: theme.palette.primary.main,
-                              white: theme.palette.common.white,
-                              boxShadow: theme.palette.secondary.blueShadow,
-                              border: theme.palette.secondary.whiteSmoke,
-                           }}
-                           autoFocus={i === 0 ? true : false}
-                           key={e.key}
-                           label={e.label}
-                           required={e.required}
-                           value={e.value}
-                           onChange={e.onChange}
-                           placeholder={e.placeholder}
-                        />
-                     )
-                  })}
+                  <Typography
+                     paddingBottom={4}
+                     sx={{
+                        fontSize: "24px",
+                        fontWeight: "bold",
+                        color: theme.palette.primary.main,
+                     }}
+                  >
+                     Meta Tags
+                  </Typography>
+                  <Box
+                     padding={4}
+                     boxShadow={1}
+                     sx={{
+                        backgroundColor: theme.palette.alternate.main,
+                     }}
+                  >
+                     {arr?.map((e, i) => {
+                        return (
+                           <MainInput
+                              theme={{
+                                 main: theme.palette.primary.main,
+                                 white: theme.palette.common.white,
+                                 boxShadow: theme.palette.secondary.blueShadow,
+                                 border: theme.palette.secondary.whiteSmoke,
+                              }}
+                              autoFocus={i === 0 ? true : false}
+                              key={e.key}
+                              label={e.label}
+                              required={e.required}
+                              value={e.value}
+                              onChange={e.onChange}
+                              placeholder={e.placeholder}
+                           />
+                        )
+                     })}
+                     <Button variant="contained" color="secondary" type="submit">
+                        Save Meta Tags
+                     </Button>
+                  </Box>
+                  <Box sx={{ display: headtags.length > 0 ? "block" : "none" }}>
+                     <Typography
+                        paddingTop={4}
+                        sx={{
+                           fontSize: "24px",
+                           fontWeight: "bold",
+                           color: theme.palette.primary.main,
+                        }}
+                     >
+                        Custom Head Tags
+                     </Typography>
+                     {headtags?.map((e: any) => {
+                        const handleEditHeadTags = async (data: any) => {
+                           const newData = { ...e, attributes: data }
+                           await editHeadTags(newData)
+                        }
+                        const handleDeleteHeadTag = async (data: any) => {
+                           await deleteHeadTags(data)
+                        }
 
-                  <Button variant="contained" color="secondary" type="submit">
-                     Submit
-                  </Button>
+                        return (
+                           <CustomForm
+                              theme={theme}
+                              data={e.attributes}
+                              handleSubmit={handleEditHeadTags}
+                              handleDelete={() => handleDeleteHeadTag(e)}
+                           />
+                        )
+                     })}
+                  </Box>
                </form>
             </Box>
             <Box>
                <CopyBlock
-                  text={generatedScript(content)}
+                  text={generatedScript({ content, tags: headtags })}
                   language={"jsx"}
                   showLineNumbers={false}
                   theme={dracula}
@@ -134,6 +237,146 @@ export const MetaViewerTab = ({
                />
             </Box>
          </Box>
+      </Box>
+   )
+}
+
+const CustomForm = ({ theme, data, handleSubmit, handleDelete }: any) => {
+   const [attri, setattri] = useState(data)
+   // const [test, settest] = useState("")
+
+   // function renameKeys(obj: any, newKeys: any) {
+   //    const keyValues = Object.keys(obj).map((key) => {
+   //       const newKey = newKeys[key] || key
+   //       return { [newKey]: obj[key] }
+   //    })
+   //    return Object.assign({}, ...keyValues)
+   // }
+   // const handleChange = (e: any, name: any, val: any) => {
+   //    console.log(val)
+   //    attri["test"] = attri[name]
+   //    const newKeys = { name: e.target.value }
+   //    const renamedObj = renameKeys(attri, newKeys)
+
+   //    console.log(renamedObj, 9999)
+   //    settest(e.target.value)
+   //    setattri({ ...attri, [e.target.value]: val })
+   // }
+   useEffect(() => {
+      // console.log(test, 9999)
+   }, [attri])
+
+   return (
+      <Box
+         boxShadow={1}
+         sx={{
+            backgroundColor: theme.palette.alternate.main,
+         }}
+      >
+         <form
+            action="submit"
+            style={{
+               padding: "5rem 5rem",
+               margin: "2rem .5rem",
+               position: "relative",
+               display: "flex",
+               flexDirection: "column",
+               justifyContent: "start",
+               justifyItems: "start",
+            }}
+         >
+            <Button
+               sx={{
+                  background: theme.palette.zesty.zestyBitterSweet,
+                  position: "absolute",
+                  top: "0",
+                  right: "0",
+               }}
+               variant="contained"
+               onClick={handleDelete}
+               type="button"
+               title="Delete Head Tag"
+            >
+               <CloseIcon fontSize="large" />
+            </Button>
+            <Box>
+               {Object.entries(data).map((x: any, i: number) => {
+                  const key: any = Object.keys(attri)[i]
+                  const val: any = Object.values(attri)[i]
+                  return (
+                     <Box
+                        sx={{
+                           display: "flex",
+                           gap: "8rem",
+
+                           justifyContent: "start",
+                           justifyItems: "start",
+                        }}
+                     >
+                        <Box sx={{}}>
+                           <MainInput
+                              theme={{
+                                 main: theme.palette.primary.main,
+                                 white: theme.palette.common.white,
+                                 boxShadow: theme.palette.secondary.blueShadow,
+                                 border: theme.palette.secondary.whiteSmoke,
+                              }}
+                              disabled={true}
+                              name={key}
+                              autoFocus={false}
+                              key={i}
+                              label={"Attribute"}
+                              required={false}
+                              value={key}
+                              onChange={() => {}}
+                              placeholder={key}
+                           />
+                        </Box>
+                        <Box sx={{}}>
+                           <MainInput
+                              theme={{
+                                 main: theme.palette.primary.main,
+                                 white: theme.palette.common.white,
+                                 boxShadow: theme.palette.secondary.blueShadow,
+                                 border: theme.palette.secondary.whiteSmoke,
+                              }}
+                              name={val}
+                              autoFocus={false}
+                              key={i}
+                              label={"Value"}
+                              required={false}
+                              value={val}
+                              onChange={(e: any) =>
+                                 setattri({ ...attri, [key]: e.target.value })
+                              }
+                              placeholder={val}
+                           />
+                        </Box>
+                     </Box>
+                  )
+               })}
+            </Box>
+
+            <Box
+               sx={{
+                  display: "flex",
+                  width: "100%",
+                  justifyContent: "start",
+                  justifyItems: "start",
+               }}
+            >
+               <Button
+                  sx={{ width: "15rem" }}
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => handleSubmit(attri)}
+                  type="button"
+                  title="Save Head Tag"
+               >
+                  Save Head Tag
+               </Button>
+            </Box>
+         </form>
       </Box>
    )
 }

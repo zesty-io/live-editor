@@ -219,7 +219,7 @@ export const getJsonUrl = (customDomain = "") => {
    // return customDomain + "/?toJSON"
 }
 
-export const generatedScript = (content: any) => {
+export const generatedScript = ({ content, tags }: any) => {
    console.log(content, "contentdata")
    console.log(content?.content?.meta?.web?.url || "")
    return `<head>
@@ -246,13 +246,16 @@ export const generatedScript = (content: any) => {
   <meta property="og:image:height" content="630">
   <meta property="og:site_name" content="${content?.meta?.model_alternate_name}" />
 
+
   <!-- Custom Head Tags -->
-  <meta content="${
-     content?.og_image?.data && content?.og_image.data[0]?.url
-  }" property="og:image" />
-  <meta content="${
-     content?.og_image?.data && content?.og_image.data[0]?.url
-  }" name="twitter:image" />
+  ${tags
+     ?.map((e: any) => {
+        return `<${e?.type}   ${Object?.entries(e?.attributes)
+           .map((e: any) => `${e && e[0]}="${e && e[1]}"`)
+           .join(" ")} />`
+     })
+     .join("\n")}
+
 </head>
 `
 }

@@ -92,17 +92,58 @@ export const editSeoData = async ({ url, token, payload }: any) => {
 
    return res
 }
+export const editHeadTagApi = async ({ url, token, payload }: any) => {
+   const putMethod = {
+      method: "PUT",
+      headers: {
+         "Content-type": "application/json; charset=UTF-8",
+         authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(payload),
+   }
 
-export const getSeoData = async ({ url, token }: any) => {
-   const options = {
-      method: "GET",
+   const res = await fetch(url, putMethod)
+   const json = await res.json()
+
+   return json
+}
+
+export const deleteHeadTagApi = async ({ url, token }: any) => {
+   const putMethod = {
+      method: "DELETE",
       headers: {
          "Content-type": "application/json; charset=UTF-8",
          authorization: "Bearer " + token,
       },
    }
 
-   const res = await fetch(url, options)
+   const res = await fetch(url, putMethod)
+   const json = await res.json()
 
-   return res
+   return json
+}
+export const headTagApi = async ({
+   method = "GET",
+   url,
+   token,
+   body,
+   options = {},
+}: any) => {
+   if (method != "GET") options.body = body
+
+   options.method = method
+   options.headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+   }
+   options.credentials = "same-origin"
+
+   try {
+      const res = await fetch(url, options)
+      const json = await res.json()
+      return json
+   } catch (err) {
+      console.error("Error:", err)
+      return err
+   }
 }
