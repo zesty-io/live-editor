@@ -1,8 +1,9 @@
 export const CellStyle = {
    width: "3rem",
-   fontSize: "16px",
+   fontSize: "14px",
    fontWeight: "800",
    color: "#fff",
+   whiteSpace: "nowrap",
 } as const
 export const TableContainerStyle = {
    // maxHeight: 790,

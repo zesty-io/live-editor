@@ -18,6 +18,7 @@ import { CellStyle, TableContainerStyle, rowStyle } from "./Styles"
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
 import { Subheaders } from "components"
+// import EditIcon from '@mui/icons-material/Edit';
 
 // dom access highlight function
 function activateWorkingElement(match: string): any {
@@ -133,7 +134,52 @@ function Row({
                   helper.scrollToView("activeEl")
                }}
             >
-               <span
+               <Box>
+                  {showCloseBtn && (
+                     <Box sx={{ display: "flex" }}>
+                        <Button
+                           size="small"
+                           onClick={() => {
+                              deactivateWorkingElement(
+                                 workingElement,
+                                 keyName,
+                                 metaData,
+                                 url,
+                                 token,
+                                 false,
+                                 getData,
+                              )
+                              setWorkingElement("")
+                              settext("")
+                              setloading()
+                           }}
+                        >
+                           <CloseIcon />
+                        </Button>
+
+                        <Button
+                           size="small"
+                           onClick={() => {
+                              deactivateWorkingElement(
+                                 workingElement,
+                                 keyName,
+                                 metaData,
+                                 url,
+                                 token,
+                                 true,
+                                 getData,
+                              )
+                              setloading()
+                              setWorkingElement("")
+                              settext("")
+                           }}
+                        >
+                           Save
+                        </Button>
+                     </Box>
+                  )}
+               </Box>
+               <Box
                   onClick={(e: any) => {
                      !text && settext(e.target.textContent)
                      // @ts-ignore
@@ -142,50 +188,7 @@ function Row({
                   }}
                >
                   {value}
-               </span>
-               {showCloseBtn && (
-                  <>
-                     <Button
-                        size="small"
-                        onClick={() => {
-                           deactivateWorkingElement(
-                              workingElement,
-                              keyName,
-                              metaData,
-                              url,
-                              token,
-                              false,
-                              getData,
-                           )
-                           setWorkingElement("")
-                           settext("")
-                           setloading()
-                        }}
-                     >
-                        <CloseIcon />
-                     </Button>
-
-                     <Button
-                        size="small"
-                        onClick={() => {
-                           deactivateWorkingElement(
-                              workingElement,
-                              keyName,
-                              metaData,
-                              url,
-                              token,
-                              true,
-                              getData,
-                           )
-                           setloading()
-                           setWorkingElement("")
-                           settext("")
-                        }}
-                     >
-                        Save
-                     </Button>
-                  </>
-               )}
+               </Box>
             </TableCell>
             <TableCell align="left" sx={rowStyle}>
                {value.length}
