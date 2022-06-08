@@ -18,7 +18,7 @@ import { CellStyle, TableContainerStyle, rowStyle } from "./Styles"
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
 import { Subheaders } from "components"
-// import EditIcon from '@mui/icons-material/Edit';
+import EditIcon from "@mui/icons-material/Edit"
 
 // dom access highlight function
 function activateWorkingElement(match: string): any {
@@ -102,6 +102,13 @@ function Row({
    // @ts-ignore
    const showCloseBtn = newText === workingElement?.innerText
 
+   const ref1 = React.useRef()
+   const editElement = () => {
+      // @ts-ignore
+      !text && settext(ref1?.current?.innerText)
+      // @ts-ignore
+      !workingElement?.innerText && setWorkingElement(activateWorkingElement(value))
+   }
    return (
       <React.Fragment>
          <TableRow
@@ -134,9 +141,16 @@ function Row({
                   helper.scrollToView("activeEl")
                }}
             >
-               <Box>
+               <Box sx={{}}>
                   {showCloseBtn && (
-                     <Box sx={{ display: "flex" }}>
+                     <Box
+                        sx={{
+                           display: "flex",
+                           gap: "1rem",
+                           justifyContent: "center",
+                           justifyItems: "center",
+                        }}
+                     >
                         <Button
                            size="small"
                            onClick={() => {
@@ -153,8 +167,13 @@ function Row({
                               settext("")
                               setloading()
                            }}
+                           sx={{
+                              fontSize: "16px",
+                              borderRadius: "50%",
+                              color: theme.palette.zesty.zestyOrange,
+                           }}
                         >
-                           <CloseIcon />
+                           <CloseIcon fontSize="inherit" />
                         </Button>
 
                         <Button
@@ -173,6 +192,11 @@ function Row({
                               setWorkingElement("")
                               settext("")
                            }}
+                           sx={{
+                              color: theme.palette.zesty.zestyOrange,
+                              fontSize: "16px",
+                              borderRadius: "50%",
+                           }}
                         >
                            Save
                         </Button>
@@ -180,14 +204,26 @@ function Row({
                   )}
                </Box>
                <Box
-                  onClick={(e: any) => {
-                     !text && settext(e.target.textContent)
-                     // @ts-ignore
-                     !workingElement?.innerText &&
-                        setWorkingElement(activateWorkingElement(value))
+                  sx={{
+                     display: "flex",
+                     gap: "1rem",
+                     flexDirection: "row-reverse",
+                     maxWidth: "25rem",
+                     maxHeight: "10rem",
+                     wordBreak: "break-word",
+                     overflow: "auto",
                   }}
                >
-                  {value}
+                  <Box ref={ref1}>{value}</Box>
+                  {!showCloseBtn && value && (
+                     <Box onClick={editElement} sx={{}}>
+                        <EditIcon
+                           fontSize="medium"
+                           color="secondary"
+                           titleAccess="Edit Data"
+                        />
+                     </Box>
+                  )}
                </Box>
             </TableCell>
             <TableCell align="left" sx={rowStyle}>

@@ -16,4 +16,5 @@ export const TableContainerStyle = {
 export const rowStyle = {
    fontSize: "14px",
    cursor: "pointer",
+   overflow: "auto",
 } as const
