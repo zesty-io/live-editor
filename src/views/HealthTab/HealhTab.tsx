@@ -1,54 +1,10 @@
 import { Box, Typography } from "@mui/material"
 import React from "react"
-import { CustomButton } from "components"
-import ReactTooltip from "react-tooltip"
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline"
+import { CustomButton, Tooltip } from "components"
 
 interface Props {
    content: any
    theme: any
-}
-interface Iinfo {
-   text: string
-   name: string
-}
-
-const infoStyle = `
-.extraClass {
-   width: 15rem;
- font-size: 12px !important;
- pointer-events: auto !important;
- &:hover {
-visibility: visible !important;
-opacity: 1 !important;
- }
-}
-`
-const Info = ({ text, name }: Iinfo) => {
-   return (
-      <div
-         className="side"
-         style={{
-            transform: "translate3d(5px, 5px, 5px)",
-            display: "block",
-            alignItems: "center",
-         }}
-      >
-         <a data-tip data-for={name}>
-            <HelpOutlineIcon fontSize="small" color="secondary" />
-         </a>
-         <ReactTooltip
-            className="extraClass"
-            id={name}
-            place="right"
-            type="info"
-            effect="float"
-         >
-            {text}
-            <style>{infoStyle}</style>
-         </ReactTooltip>
-      </div>
-   )
 }
 
 export const HealhTab = ({ content, theme }: Props) => {
@@ -57,6 +13,7 @@ export const HealhTab = ({ content, theme }: Props) => {
    const w3cUrl = "https://validator.w3.org/nu/?doc=" + currentUrl
    const cssUrl = "https://jigsaw.w3.org/css-validator/validator?uri=" + currentUrl
    const section50Url = "https://www.section508.gov/test/web-software/"
+   const lighthouseUrl = "https://web.dev/measure/?url=" + currentUrl
 
    const openInNewTab = (url: any) => {
       // @ts-ignore
@@ -86,6 +43,14 @@ export const HealhTab = ({ content, theme }: Props) => {
          btnText: "Click here for more info",
          infoText:
             "Section 508 requires that the federal government procure, create, use and maintain ICT that is accessible to people with disabilities, regardless of whether or not they work for the federal government.",
+      },
+      {
+         name: "lighthouse",
+         label: "Google Lighthouse",
+         href: lighthouseUrl,
+         btnText: "Click here for more info",
+         infoText:
+            "Lighthouse is an open-source, automated tool for improving the performance, quality, and correctness of your web apps.",
       },
    ]
    return (
@@ -140,13 +105,13 @@ export const HealhTab = ({ content, theme }: Props) => {
                               paddingTop={1}
                               sx={{
                                  fontSize: "16px",
-                                 fontWeight: "400",
+                                 fontWeight: "bold",
                                  color: theme.palette.primary.main,
                               }}
                            >
                               {e.label}
                            </Typography>
-                           <Info name={e.name} text={e.infoText} />
+                           <Tooltip name={e.name} text={e.infoText} />
                         </Box>
                         <CustomButton onClick={() => openInNewTab(e.href)}>
                            {e.btnText}
