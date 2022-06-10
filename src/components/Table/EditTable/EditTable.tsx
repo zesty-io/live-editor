@@ -7,18 +7,18 @@ import TableBody from "@mui/material/TableBody"
 import TableCell, { tableCellClasses } from "@mui/material/TableCell"
 import TableContainer from "@mui/material/TableContainer"
 import TableHead from "@mui/material/TableHead"
-import Button from "@mui/material/Button"
 import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
 import { PrettyPrintJson } from "utils"
 import { useTheme } from "@mui/system"
-import CloseIcon from "@mui/icons-material/Close"
 import * as helper from "utils"
 import { CellStyle, TableContainerStyle, rowStyle } from "./Styles"
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
-import { Subheaders } from "components"
+import { CustomBtn, Subheaders } from "components"
 import EditIcon from "@mui/icons-material/Edit"
+import CancelIcon from "@mui/icons-material/Cancel"
+import SaveIcon from "@mui/icons-material/Save"
 
 // dom access highlight function
 function activateWorkingElement(match: string): any {
@@ -135,13 +135,20 @@ function Row({
                {valueType}
             </TableCell>
             <TableCell
-               sx={rowStyle}
+               sx={{
+                  fontSize: "14px",
+                  cursor: "pointer",
+                  overflow: "auto",
+                  border: showCloseBtn
+                     ? `2px solid ${theme.palette.zesty.zestyOrange}`
+                     : "2px solid transparent",
+               }}
                align="left"
                onClick={() => {
                   helper.scrollToView("activeEl")
                }}
             >
-               <Box sx={{}}>
+               <Box>
                   {showCloseBtn && (
                      <Box
                         sx={{
@@ -149,10 +156,13 @@ function Row({
                            gap: "1rem",
                            justifyContent: "center",
                            justifyItems: "center",
+                           paddingBottom: ".5rem",
                         }}
                      >
-                        <Button
-                           size="small"
+                        <CustomBtn
+                           variant="error"
+                           theme={theme}
+                           title="Cancel Changes"
                            onClick={() => {
                               deactivateWorkingElement(
                                  workingElement,
@@ -167,17 +177,14 @@ function Row({
                               settext("")
                               setloading()
                            }}
-                           sx={{
-                              fontSize: "16px",
-                              borderRadius: "50%",
-                              color: theme.palette.zesty.zestyOrange,
-                           }}
                         >
-                           <CloseIcon fontSize="inherit" />
-                        </Button>
+                           <CancelIcon fontSize="small" titleAccess="Discard changes" />{" "}
+                           Cancel changes
+                        </CustomBtn>
 
-                        <Button
-                           size="small"
+                        <CustomBtn
+                           title="Save Changes"
+                           theme={theme}
                            onClick={() => {
                               deactivateWorkingElement(
                                  workingElement,
@@ -192,14 +199,10 @@ function Row({
                               setWorkingElement("")
                               settext("")
                            }}
-                           sx={{
-                              color: theme.palette.zesty.zestyOrange,
-                              fontSize: "16px",
-                              borderRadius: "50%",
-                           }}
                         >
-                           Save
-                        </Button>
+                           <SaveIcon fontSize="small" titleAccess="Save Changes" /> Save
+                           changes
+                        </CustomBtn>
                      </Box>
                   )}
                </Box>
@@ -208,10 +211,13 @@ function Row({
                      display: "flex",
                      gap: "1rem",
                      flexDirection: "row-reverse",
-                     maxWidth: "25rem",
+                     width: "15rem",
                      maxHeight: "10rem",
                      wordBreak: "break-word",
                      overflow: "auto",
+                     justifyContent: "start",
+                     justifyItems: "start",
+                     textAlign: "left",
                   }}
                >
                   <Box ref={ref1}>{value}</Box>
@@ -299,7 +305,7 @@ export const EditTable = ({
                   <TableCell align="left" sx={CellStyle}>
                      Type
                   </TableCell>
-                  <TableCell align="left" sx={CellStyle}>
+                  <TableCell align="left" sx={{ ...CellStyle, width: "15rem" }}>
                      Content Example
                   </TableCell>
                   <TableCell align="left" sx={CellStyle}>

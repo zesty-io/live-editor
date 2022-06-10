@@ -31,6 +31,7 @@ export const BasicMenu = ({ list }: Props) => {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
             onClick={handleClick}
+            sx={{ whiteSpace: "nowrap" }}
          >
             Manager Links
          </Button>
