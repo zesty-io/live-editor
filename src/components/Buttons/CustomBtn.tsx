@@ -26,7 +26,7 @@ export const CustomButton = styled.button`
    font-family: Mulish;
    border: 1px solid transparent;
    border-radius: 5px;
-   font-weight: 900;
+   font-weight: 400;
    transition: all 0.1s ease-in-out;
    outline: none;
    color: #fff;
