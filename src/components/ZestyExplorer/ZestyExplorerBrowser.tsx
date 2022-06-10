@@ -7,7 +7,7 @@ import { Box } from "@mui/material"
 import { Loader } from "components"
 import { containerStyle } from "./styles"
 import { Headers } from "components"
-import { CodeHelperTab, EditTab, JsonDataViewerTab, MetaViewerTab } from "views"
+import { CodeHelperTab, EditTab, HealhTab, JsonDataViewerTab, MetaViewerTab } from "views"
 import { useTheme } from "@mui/material/styles"
 import { LoginPrompt } from "components/Ui"
 
@@ -126,6 +126,10 @@ export const ZestyExplorerBrowser = ({
       scrollEvent,
    }
 
+   const HealthTabProps = {
+      content,
+      theme,
+   }
    // show loading
    if (loading && !verifyFailed && !verifySuccess) {
       return (
@@ -153,6 +157,7 @@ export const ZestyExplorerBrowser = ({
             {currentTab === 1 && <MetaViewerTab {...MetaProps} />}
             {currentTab === 2 && <JsonDataViewerTab {...JSONProps} />}
             {currentTab === 3 && <CodeHelperTab {...CodeHelperProps} />}
+            {currentTab === 4 && <HealhTab {...HealthTabProps} />}
          </Box>
       </Box>
    )

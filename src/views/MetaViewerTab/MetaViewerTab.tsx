@@ -247,6 +247,8 @@ export const MetaViewerTab = ({
 
 const CustomForm = ({ theme, data, handleSubmit, handleDelete }: any) => {
    const [attri, setattri] = useState(data)
+   const h1s = document.getElementsByTagName("h1")
+   console.log(h1s, 122222)
    // const [test, settest] = useState("")
 
    // function renameKeys(obj: any, newKeys: any) {
