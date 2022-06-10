@@ -25,8 +25,6 @@ const Index = ({ tabList, settime, setcurrentTab }: any) => {
    const theme = useTheme()
    // @ts-ignore
    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-      console.log(event)
-      console.log(newValue, 123123123)
       setcurrentTab(newValue)
       setValue(newValue)
       settime()
@@ -36,7 +34,7 @@ const Index = ({ tabList, settime, setcurrentTab }: any) => {
       <Tabs
          variant="scrollable"
          scrollButtons="auto"
-         sx={{ width: "22vw" }}
+         sx={{ width: "24vw" }}
          {...props}
          TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
       />
