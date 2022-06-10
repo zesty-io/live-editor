@@ -5,6 +5,7 @@ import { MainInput, Subheaders } from "components"
 import { deleteHeadTagApi, editHeadTagApi, editSeoData, headTagApi } from "services"
 import { CopyBlock, dracula } from "react-code-blocks"
 import CloseIcon from "@mui/icons-material/Close"
+import { DomReport } from "./DomReport"
 
 export const MetaViewerTab = ({
    content,
@@ -197,6 +198,7 @@ export const MetaViewerTab = ({
                         Save Meta Tags
                      </Button>
                   </Box>
+                  <DomReport theme={theme} />
                   <Box sx={{ display: headtags.length > 0 ? "block" : "none" }}>
                      <Typography
                         paddingTop={4}
