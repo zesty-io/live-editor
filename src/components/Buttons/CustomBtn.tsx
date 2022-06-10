@@ -36,18 +36,18 @@ export const CustomButton = styled.button`
    &:hover {
       background: ${(props: any) => props.theme.palette.secondary.snow};
       border: 1px solid ${(props: any) => props.theme.palette.zesty.zestyOrange};
-      color: #333333;
+      color: ${(props: any) => props.theme.palette.zesty.zestyOrange};
    }
 
    &:focus {
       background: ${(props: any) => props.theme.palette.secondary.snow};
       border: 1px solid ${(props: any) => props.theme.palette.zesty.zestyOrange};
-      color: #333333;
+      color: ${(props: any) => props.theme.palette.zesty.zestyOrange};
    }
    &:active {
       background: ${(props: any) => props.theme.palette.secondary.snow};
       border: 1px solid ${(props: any) => props.theme.palette.zesty.zestyOrange};
-      color: #333333;
+      color: ${(props: any) => props.theme.palette.zesty.zestyOrange};
       transform: scale(0.99);
    }
 `
