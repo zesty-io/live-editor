@@ -73,8 +73,8 @@ const Index = ({
                background: theme.palette.background.paper,
             }}
          >
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-               <Box sx={{ cursor: "pointer", paddingRight: "1rem" }}>
+            <Box paddingTop={1} sx={{ display: "flex", alignItems: "center" }}>
+               <Box sx={{ cursor: "pointer" }} paddingRight={4}>
                   <img
                      onClick={() => window.location.reload()}
                      src={urls.zestyBrandLogoMid}

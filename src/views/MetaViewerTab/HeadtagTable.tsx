@@ -9,8 +9,8 @@ import TableContainer from "@mui/material/TableContainer"
 import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
+import EditIcon from "@mui/icons-material/Edit"
+import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh"
 import { CustomForm } from "./CustomForm"
 import { Typography } from "@mui/material"
 
@@ -27,7 +27,20 @@ function Row(props: any) {
                   size="small"
                   onClick={() => setOpen(!open)}
                >
-                  {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                  {/* {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />} */}
+                  {open ? (
+                     <AutoFixHighIcon
+                        fontSize="medium"
+                        color="secondary"
+                        titleAccess="Edit Data"
+                     />
+                  ) : (
+                     <EditIcon
+                        fontSize="medium"
+                        color="secondary"
+                        titleAccess="Edit Data"
+                     />
+                  )}
                </IconButton>
             </TableCell>
             <TableCell component="th" scope="row">

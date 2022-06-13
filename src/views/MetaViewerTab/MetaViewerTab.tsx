@@ -152,7 +152,7 @@ export const MetaViewerTab = ({
    const handleCreateHeadTag = () => {
       createHeadtagModal()
    }
-   const COLUMNS = [
+   const HEADTAGS_COLUMNS = [
       "type",
       "sort",
       "zuid",
@@ -167,17 +167,23 @@ export const MetaViewerTab = ({
       setloading,
       getHeadTags,
    }
-   const pageMetaTags = headtags?.filter((e: any) => {
-      return e.resourceZUID.charAt(0) == "7"
-   })
+   const pageMetaTags = headtags
+      ?.filter((e: any) => {
+         return e.resourceZUID.charAt(0) == "7"
+      })
+      .sort(function (a: any, b: any) {
+         // @ts-ignore
+         return new Date(b.updatedAt) - new Date(a.updatedAt)
+      })
    const globalMetaTags = headtags?.filter((e: any) => {
       return e.resourceZUID.charAt(0) == "8"
    })
 
+   console.log(pageMetaTags, 12122)
    return (
       <Box
          sx={{
-            height: "90vh",
+            height: "100vh",
             overflowY: "auto",
             background: theme.palette.common.white,
             fontSize: "14px !important",
@@ -192,7 +198,7 @@ export const MetaViewerTab = ({
                <HeadTagTable
                   header={"Page Meta Tags"}
                   theme={theme}
-                  columns={COLUMNS}
+                  columns={HEADTAGS_COLUMNS}
                   data={pageMetaTags}
                   editHeadTags={editHeadTags}
                   deleteHeadTags={deleteHeadTags}
@@ -200,19 +206,21 @@ export const MetaViewerTab = ({
                <HeadTagTable
                   header={"Global Meta Tags"}
                   theme={theme}
-                  columns={COLUMNS}
+                  columns={HEADTAGS_COLUMNS}
                   data={globalMetaTags}
                   editHeadTags={editHeadTags}
                   deleteHeadTags={deleteHeadTags}
                />
-               <CopyBlock
-                  text={generatedScript({ content, tags: headtags })}
-                  language={"jsx"}
-                  showLineNumbers={false}
-                  theme={dracula}
-                  wrapLines={false}
-                  codeBlock
-               />
+               <Box paddingTop={4}>
+                  <CopyBlock
+                     text={generatedScript({ content, tags: headtags })}
+                     language={"jsx"}
+                     showLineNumbers={false}
+                     theme={dracula}
+                     wrapLines={false}
+                     codeBlock
+                  />
+               </Box>
             </Box>
          </Box>
       </Box>

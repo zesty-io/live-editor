@@ -305,7 +305,10 @@ export const EditTable = ({
                   <TableCell align="left" sx={CellStyle}>
                      Type
                   </TableCell>
-                  <TableCell align="left" sx={{ ...CellStyle, width: "15rem" }}>
+                  <TableCell
+                     align="left"
+                     sx={{ ...CellStyle, width: "15rem", paddingLeft: "3rem" }}
+                  >
                      Content Example
                   </TableCell>
                   <TableCell align="left" sx={CellStyle}>
