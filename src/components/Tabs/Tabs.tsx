@@ -34,7 +34,7 @@ const Index = ({ tabList, settime, setcurrentTab }: any) => {
       <Tabs
          variant="scrollable"
          scrollButtons="auto"
-         sx={{ width: "24vw" }}
+         sx={{ width: "28vw" }}
          {...props}
          TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
       />
