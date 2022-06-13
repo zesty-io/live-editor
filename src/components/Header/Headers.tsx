@@ -25,7 +25,7 @@ const Index = ({
 }: Props) => {
    const theme = useTheme()
 
-   const list = [
+   const managerLinks = [
       {
          name: "Edit Schema",
          label: "Edit Schema",
@@ -104,7 +104,7 @@ const Index = ({
                color: "black",
             }}
          >
-            {list.map((e: any) => {
+            {managerLinks.map((e: any) => {
                return (
                   <Box>
                      {e.label && (
