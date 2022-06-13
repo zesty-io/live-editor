@@ -28,7 +28,8 @@ Using CDN
 ></script>
 ```
 
-Note, if your website has a strict content security policy or x-frame-options, you will need to add this url to your white list 
+Note, if your website has a strict content security policy or x-frame-options, you will need to add this url to your white list
+
 ```
 https://cdn.jsdelivr.net/gh/zesty-io/live-editor@latest/dist/live-editor.production.js
 ```
