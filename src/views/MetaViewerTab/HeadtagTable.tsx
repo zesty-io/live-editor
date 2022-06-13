@@ -12,6 +12,7 @@ import Paper from "@mui/material/Paper"
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
 import { CustomForm } from "./CustomForm"
+import { Typography } from "@mui/material"
 
 function Row(props: any) {
    const { row, theme, handleSubmit, handleDelete } = props
@@ -55,11 +56,12 @@ function Row(props: any) {
 }
 
 interface Props {
-   columns: string[]
+   columns: any
    data: any
    theme: any
    editHeadTags: any
    deleteHeadTags: any
+   header: string
 }
 export const HeadTagTable = ({
    columns,
@@ -67,40 +69,54 @@ export const HeadTagTable = ({
    theme,
    editHeadTags,
    deleteHeadTags,
+   header,
 }: Props) => {
    const rows = data
    return (
-      <TableContainer component={Paper}>
-         <Table aria-label="collapsible table">
-            <TableHead>
-               <TableRow>
-                  <TableCell />
-                  {columns.map((e: string) => {
-                     return <TableCell align="left">{e}</TableCell>
+      <Box paddingTop={4} sx={{ display: data.length > 0 ? "block" : "none" }}>
+         <Typography
+            paddingBottom={4}
+            sx={{
+               fontSize: "24px",
+               fontWeight: "bold",
+               color: theme.palette.primary.main,
+            }}
+         >
+            {header}
+         </Typography>
+
+         <TableContainer component={Paper}>
+            <Table aria-label="collapsible table">
+               <TableHead>
+                  <TableRow>
+                     <TableCell />
+                     {columns.map((e: any) => {
+                        return <TableCell align="left">{e}</TableCell>
+                     })}
+                  </TableRow>
+               </TableHead>
+               <TableBody>
+                  {rows?.map((row: any) => {
+                     const handleEditHeadTags = async (data: any) => {
+                        const newData = { ...row, attributes: data }
+                        await editHeadTags(newData)
+                     }
+                     const handleDeleteHeadTag = async (data: any) => {
+                        await deleteHeadTags(data)
+                     }
+                     return (
+                        <Row
+                           key={row?.ZUID}
+                           row={row}
+                           theme={theme}
+                           handleSubmit={() => handleEditHeadTags(row)}
+                           handleDelete={() => handleDeleteHeadTag(row)}
+                        />
+                     )
                   })}
-               </TableRow>
-            </TableHead>
-            <TableBody>
-               {rows?.map((row: any) => {
-                  const handleEditHeadTags = async (data: any) => {
-                     const newData = { ...row, attributes: data }
-                     await editHeadTags(newData)
-                  }
-                  const handleDeleteHeadTag = async (data: any) => {
-                     await deleteHeadTags(data)
-                  }
-                  return (
-                     <Row
-                        key={row?.ZUID}
-                        row={row}
-                        theme={theme}
-                        handleSubmit={() => handleEditHeadTags(row)}
-                        handleDelete={() => handleDeleteHeadTag(row)}
-                     />
-                  )
-               })}
-            </TableBody>
-         </Table>
-      </TableContainer>
+               </TableBody>
+            </Table>
+         </TableContainer>
+      </Box>
    )
 }

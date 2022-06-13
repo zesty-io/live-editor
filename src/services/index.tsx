@@ -108,6 +108,21 @@ export const editHeadTagApi = async ({ url, token, payload }: any) => {
    return json
 }
 
+export const addHeadTagApi = async ({ url, token, payload }: any) => {
+   const putMethod = {
+      method: "POST",
+      headers: {
+         "Content-type": "application/json; charset=UTF-8",
+         authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(payload),
+   }
+
+   const res = await fetch(url, putMethod)
+   const json = await res.json()
+
+   return json
+}
 export const deleteHeadTagApi = async ({ url, token }: any) => {
    const putMethod = {
       method: "DELETE",

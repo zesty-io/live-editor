@@ -19,6 +19,7 @@ export const ZestyExplorerBrowser = ({
    jsonData,
    getData,
 }: any) => {
+   const [createHeadtag, setcreateHeadtag] = React.useState(false)
    const content = contentData || dummydata
    const [currentTab, setcurrentTab] = React.useState(0)
    const [search, setSearch] = React.useState()
@@ -97,6 +98,11 @@ export const ZestyExplorerBrowser = ({
    }
 
    const MetaProps = {
+      onClose: () => setcreateHeadtag(false),
+      resourceZUID: itemZUID,
+      instanceZUID,
+
+      createHeadtag,
       theme,
       response,
       metaData,
@@ -104,6 +110,7 @@ export const ZestyExplorerBrowser = ({
       token,
       url,
       getData,
+      createHeadtagModal: () => setcreateHeadtag(true),
       setloading: () => settime(2),
    }
 
@@ -125,6 +132,14 @@ export const ZestyExplorerBrowser = ({
       scrollPos: currentScroll,
       scrollEvent,
    }
+   // const CreateHeadTagProps = {
+   //    onClose: () => setcreateHeadtag(false),
+   //    resourceZUID: itemZUID,
+   //    instanceZUID,
+   //    token,
+   //    setloading: () => settime(2),
+   //    getData,
+   // }
 
    const HealthTabProps = {
       content,
@@ -150,8 +165,10 @@ export const ZestyExplorerBrowser = ({
 
    return (
       <Box sx={containerStyle}>
+         {/* {createHeadtag && <CreateHeadTagModal {...CreateHeadTagProps} />} */}
+
          <Headers {...HeaderProps}>{children}</Headers>
-         <Box sx={{ position: "relative" }}>
+         <Box sx={{ position: "" }}>
             {time > 0 && <Loader />}
             {currentTab === 0 && <EditTab {...EditProps} />}
             {currentTab === 1 && <MetaViewerTab {...MetaProps} />}

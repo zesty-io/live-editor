@@ -1,11 +1,12 @@
-import { Box, Button, Typography } from "@mui/material"
+import { Box } from "@mui/material"
 import React, { useState, useEffect } from "react"
 import { generatedScript, headerZUID } from "utils"
-import { MainInput, Subheaders } from "components"
+import { CreateHeadTagModal, Subheaders } from "components"
 import { deleteHeadTagApi, editHeadTagApi, editSeoData, headTagApi } from "services"
 import { CopyBlock, dracula } from "react-code-blocks"
 import { DomReport } from "./DomReport"
 import { HeadTagTable } from "./HeadtagTable"
+import { MetaTags } from "./MetaTags"
 
 export const MetaViewerTab = ({
    content,
@@ -16,6 +17,11 @@ export const MetaViewerTab = ({
    token,
    getData,
    setloading,
+   createHeadtagModal,
+   onClose,
+   resourceZUID,
+   instanceZUID,
+   createHeadtag,
 }: any) => {
    const [title, settitle] = useState(content?.meta?.web?.seo_meta_title || "")
    const [desc, setdesc] = useState(content?.meta?.web?.seo_meta_description || "")
@@ -91,7 +97,7 @@ export const MetaViewerTab = ({
       res.status !== 200 && handleErrorEdit(res)
    }
 
-   const handleSubmit = async (e: any) => {
+   const editMetaTags = async (e: any) => {
       e.preventDefault()
       await editData()
    }
@@ -143,8 +149,31 @@ export const MetaViewerTab = ({
       getHeadTags()
    }, [])
 
-   const COLUMNS = ["type", "sort", "zuid", "action"]
-   console.log(headtags, 1233)
+   const handleCreateHeadTag = () => {
+      createHeadtagModal()
+   }
+   const COLUMNS = [
+      "type",
+      "sort",
+      "zuid",
+      "action",
+      <button onClick={handleCreateHeadTag}>Create Head Tag</button>,
+   ]
+   const CreateHeadTagProps = {
+      onClose,
+      resourceZUID,
+      instanceZUID,
+      token,
+      setloading,
+      getHeadTags,
+   }
+   const pageMetaTags = headtags?.filter((e: any) => {
+      return e.resourceZUID.charAt(0) == "7"
+   })
+   const globalMetaTags = headtags?.filter((e: any) => {
+      return e.resourceZUID.charAt(0) == "8"
+   })
+
    return (
       <Box
          sx={{
@@ -154,63 +183,28 @@ export const MetaViewerTab = ({
             fontSize: "14px !important",
          }}
       >
+         {createHeadtag && <CreateHeadTagModal {...CreateHeadTagProps} />}
          <Box sx={{ height: "90vh", overflow: "auto" }}>
             <Subheaders content={content} theme={theme} btnList={btnList} />
             <Box paddingY={4} paddingX={8}>
-               <form action="submit" onSubmit={handleSubmit}>
-                  <Typography
-                     paddingBottom={4}
-                     sx={{
-                        fontSize: "24px",
-                        fontWeight: "bold",
-                        color: theme.palette.primary.main,
-                     }}
-                  >
-                     Meta Tags
-                  </Typography>
-                  <Box
-                     borderRadius={4}
-                     padding={4}
-                     boxShadow={1}
-                     sx={{
-                        backgroundColor: theme.palette.alternate.main,
-                     }}
-                  >
-                     {arr?.map((e, i) => {
-                        return (
-                           <MainInput
-                              theme={{
-                                 main: theme.palette.primary.main,
-                                 white: theme.palette.common.white,
-                                 boxShadow: theme.palette.secondary.blueShadow,
-                                 border: theme.palette.secondary.whiteSmoke,
-                              }}
-                              autoFocus={i === 0 ? true : false}
-                              key={e.key}
-                              label={e.label}
-                              required={e.required}
-                              value={e.value}
-                              onChange={e.onChange}
-                              placeholder={e.placeholder}
-                              textArea={i === 1 ? true : false}
-                           />
-                        )
-                     })}
-                     <Button variant="contained" color="secondary" type="submit">
-                        Save Meta Tags
-                     </Button>
-                  </Box>
-                  <DomReport theme={theme} />
-               </form>
+               <MetaTags arr={arr} theme={theme} handleSubmit={editMetaTags} />
+               <DomReport theme={theme} />
                <HeadTagTable
+                  header={"Page Meta Tags"}
                   theme={theme}
                   columns={COLUMNS}
-                  data={headtags}
+                  data={pageMetaTags}
                   editHeadTags={editHeadTags}
                   deleteHeadTags={deleteHeadTags}
                />
-            </Box>
-            <Box>
+               <HeadTagTable
+                  header={"Global Meta Tags"}
+                  theme={theme}
+                  columns={COLUMNS}
+                  data={globalMetaTags}
+                  editHeadTags={editHeadTags}
+                  deleteHeadTags={deleteHeadTags}
+               />
                <CopyBlock
                   text={generatedScript({ content, tags: headtags })}
                   language={"jsx"}

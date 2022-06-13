@@ -54,4 +54,5 @@ export const containerStyle = {
    borderRadius: "3px",
    width: "40vw",
    height: "100vh",
+   position: "relative",
 }
