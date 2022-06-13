@@ -14,6 +14,8 @@ import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh"
 import { CustomForm } from "./CustomForm"
 import { Typography } from "@mui/material"
 
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever"
+
 function Row(props: any) {
    const { row, theme, handleSubmit, handleDelete } = props
    const [open, setOpen] = React.useState(false)
@@ -36,6 +38,7 @@ function Row(props: any) {
                      />
                   ) : (
                      <EditIcon
+                        sx={{ cursor: "pointer" }}
                         fontSize="medium"
                         color="secondary"
                         titleAccess="Edit Data"
@@ -48,7 +51,17 @@ function Row(props: any) {
             </TableCell>
             <TableCell align="left">{row.sort}</TableCell>
             <TableCell align="left">{row.resourceZUID}</TableCell>
-            <TableCell align="left">delete</TableCell>
+            <TableCell align="left">
+               <Box paddingLeft={4}>
+                  <DeleteForeverIcon
+                     sx={{ cursor: "pointer" }}
+                     fontSize="medium"
+                     color="secondary"
+                     titleAccess="Delete Data"
+                     onClick={handleDelete}
+                  />
+               </Box>
+            </TableCell>
          </TableRow>
          <TableRow>
             <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -104,7 +117,14 @@ export const HeadTagTable = ({
                   <TableRow>
                      <TableCell />
                      {columns.map((e: any) => {
-                        return <TableCell align="left">{e}</TableCell>
+                        return (
+                           <TableCell
+                              align="left"
+                              sx={{ fontWeight: "bold", textTransform: "capitalize" }}
+                           >
+                              {e}
+                           </TableCell>
+                        )
                      })}
                   </TableRow>
                </TableHead>
@@ -122,7 +142,7 @@ export const HeadTagTable = ({
                            key={row?.ZUID}
                            row={row}
                            theme={theme}
-                           handleSubmit={() => handleEditHeadTags(row)}
+                           handleSubmit={handleEditHeadTags}
                            handleDelete={() => handleDeleteHeadTag(row)}
                         />
                      )

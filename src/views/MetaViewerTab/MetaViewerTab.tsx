@@ -1,12 +1,13 @@
 import { Box } from "@mui/material"
 import React, { useState, useEffect } from "react"
 import { generatedScript, headerZUID } from "utils"
-import { CreateHeadTagModal, Subheaders } from "components"
+import { CreateHeadTagModal, CustomBtn, Subheaders } from "components"
 import { deleteHeadTagApi, editHeadTagApi, editSeoData, headTagApi } from "services"
 import { CopyBlock, dracula } from "react-code-blocks"
 import { DomReport } from "./DomReport"
 import { HeadTagTable } from "./HeadtagTable"
 import { MetaTags } from "./MetaTags"
+import * as helper from "utils"
 
 export const MetaViewerTab = ({
    content,
@@ -155,9 +156,10 @@ export const MetaViewerTab = ({
    const HEADTAGS_COLUMNS = [
       "type",
       "sort",
-      "zuid",
-      "action",
-      <button onClick={handleCreateHeadTag}>Create Head Tag</button>,
+      "resource ZUID",
+      <CustomBtn theme={theme} onClick={handleCreateHeadTag}>
+         Create Head Tag
+      </CustomBtn>,
    ]
    const CreateHeadTagProps = {
       onClose,
@@ -167,19 +169,10 @@ export const MetaViewerTab = ({
       setloading,
       getHeadTags,
    }
-   const pageMetaTags = headtags
-      ?.filter((e: any) => {
-         return e.resourceZUID.charAt(0) == "7"
-      })
-      .sort(function (a: any, b: any) {
-         // @ts-ignore
-         return new Date(b.updatedAt) - new Date(a.updatedAt)
-      })
-   const globalMetaTags = headtags?.filter((e: any) => {
-      return e.resourceZUID.charAt(0) == "8"
-   })
 
-   console.log(pageMetaTags, 12122)
+   const pageMetaTags = helper.getPageMetaTags(headtags)
+   const globalMetaTags = helper.getGlobalMetaTags(headtags)
+
    return (
       <Box
          sx={{

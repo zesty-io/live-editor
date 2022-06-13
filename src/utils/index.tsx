@@ -259,3 +259,27 @@ export const generatedScript = ({ content, tags }: any) => {
 </head>
 `
 }
+
+export const getPageMetaTags = (headtags: any) => {
+   const res = headtags
+      ?.filter((e: any) => {
+         return e.resourceZUID.charAt(0) == "7"
+      })
+      .sort(function (a: any, b: any) {
+         // @ts-ignore
+         return new Date(b.updatedAt) - new Date(a.updatedAt)
+      })
+   return res
+}
+
+export const getGlobalMetaTags = (headtags: any) => {
+   const res = headtags
+      ?.filter((e: any) => {
+         return e.resourceZUID.charAt(0) == "8"
+      })
+      .sort(function (a: any, b: any) {
+         // @ts-ignore
+         return new Date(b.updatedAt) - new Date(a.updatedAt)
+      })
+   return res
+}

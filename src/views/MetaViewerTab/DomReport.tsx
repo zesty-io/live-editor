@@ -80,7 +80,14 @@ function BasicTable({ rows, columns }: TPROPs) {
             <TableHead>
                <TableRow>
                   {columns.map((e: any) => {
-                     return <TableCell align="left">{e}</TableCell>
+                     return (
+                        <TableCell
+                           align="left"
+                           sx={{ fontWeight: "bold", textTransform: "capitalize" }}
+                        >
+                           {e}
+                        </TableCell>
+                     )
                   })}
                </TableRow>
             </TableHead>

@@ -1,11 +1,14 @@
 import React from "react"
 import { headerZUID } from "utils"
-import { AppBar, Typography } from "@mui/material"
+import { AppBar } from "@mui/material"
 import Box from "@mui/material/Box"
 import { useTheme } from "@mui/material/styles"
 import { TabContainer } from "components"
 import { urls } from "constants"
-import { CustomButton } from "components/Buttons"
+import { CustomLink } from "components/Buttons"
+import AccountBoxIcon from "@mui/icons-material/AccountBox"
+import AddToPhotosIcon from "@mui/icons-material/AddToPhotos"
+import ArchiveIcon from "@mui/icons-material/Archive"
 interface Props {
    children: React.ReactNode
    content: any
@@ -29,6 +32,11 @@ const Index = ({
       {
          name: "Edit Schema",
          label: "Edit Schema",
+         icon: (
+            <>
+               <AccountBoxIcon fontSize="small" />
+            </>
+         ),
          href: `https://${
             content?.zestyInstanceZUID || headerZUID(response)
          }.manager.zesty.io/schema/${content?.meta?.model?.zuid}`,
@@ -36,6 +44,18 @@ const Index = ({
       {
          name: "Edit Content",
          label: "Edit Content",
+         icon: (
+            <>
+               <AddToPhotosIcon fontSize="small" />
+            </>
+         ),
+         href: `https://${
+            content?.zestyInstanceZUID || headerZUID(response)
+         }.manager.zesty.io/content/${content?.meta?.model?.zuid}/${content?.meta?.zuid}`,
+      },
+      {
+         name: "",
+         label: "",
          href: `https://${
             content?.zestyInstanceZUID || headerZUID(response)
          }.manager.zesty.io/content/${content?.meta?.model?.zuid}/${content?.meta?.zuid}`,
@@ -49,6 +69,11 @@ const Index = ({
       },
       {
          name: "Edit Permission",
+         icon: (
+            <>
+               <ArchiveIcon fontSize="small" />
+            </>
+         ),
          label: "Edit Permission",
          href: `https://accounts.zesty.io/instances/${
             content?.zestyInstanceZUID || headerZUID(response)
@@ -108,9 +133,9 @@ const Index = ({
                return (
                   <Box>
                      {e.label && (
-                        <CustomButton onClick={() => handleClick(e.href)} theme={theme}>
-                           <Typography>{e.label}</Typography>
-                        </CustomButton>
+                        <CustomLink onClick={() => handleClick(e.href)} theme={theme}>
+                           <span>{e?.icon}</span> <span>{e.label}</span>
+                        </CustomLink>
                      )}
                   </Box>
                )
