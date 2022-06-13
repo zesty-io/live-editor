@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material"
+import { Box, Button, Typography } from "@mui/material"
 import React, { useState, useEffect } from "react"
 import CloseIcon from "@mui/icons-material/Close"
 import { MainInput } from "components"
@@ -67,6 +67,18 @@ export const CustomForm = ({ theme, data, handleSubmit, handleDelete }: any) => 
                <CloseIcon fontSize="small" />
             </Button>
             <Box>
+               <Box
+                  sx={{
+                     display: "flex",
+                     gap: "4rem",
+
+                     justifyContent: "start",
+                     justifyItems: "start",
+                  }}
+               >
+                  <Typography>Attribute</Typography>
+                  <Typography>Value</Typography>
+               </Box>
                {data &&
                   Object.entries(data).map((x: any, i: number) => {
                      const key: any = Object.keys(attri)[i]
@@ -81,24 +93,8 @@ export const CustomForm = ({ theme, data, handleSubmit, handleDelete }: any) => 
                               justifyItems: "start",
                            }}
                         >
-                           <Box sx={{}}>
-                              <MainInput
-                                 theme={{
-                                    main: theme.palette.primary.main,
-                                    white: theme.palette.common.white,
-                                    boxShadow: theme.palette.secondary.blueShadow,
-                                    border: theme.palette.secondary.whiteSmoke,
-                                 }}
-                                 disabled={true}
-                                 name={key}
-                                 autoFocus={false}
-                                 key={i}
-                                 label={"Attribute"}
-                                 required={false}
-                                 value={key}
-                                 onChange={() => {}}
-                                 placeholder={key}
-                              />
+                           <Box sx={{ display: "block" }}>
+                              <Typography>{key}</Typography>
                            </Box>
                            <Box sx={{}}>
                               <MainInput
@@ -111,7 +107,7 @@ export const CustomForm = ({ theme, data, handleSubmit, handleDelete }: any) => 
                                  name={val}
                                  autoFocus={false}
                                  key={i}
-                                 label={"Value"}
+                                 label={" "}
                                  required={false}
                                  value={val}
                                  onChange={(e: any) =>

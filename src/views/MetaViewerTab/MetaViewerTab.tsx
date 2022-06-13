@@ -5,7 +5,7 @@ import { MainInput, Subheaders } from "components"
 import { deleteHeadTagApi, editHeadTagApi, editSeoData, headTagApi } from "services"
 import { CopyBlock, dracula } from "react-code-blocks"
 import { DomReport } from "./DomReport"
-import { CustomForm } from "./CustomForm"
+import { HeadTagTable } from "./HeadtagTable"
 
 export const MetaViewerTab = ({
    content,
@@ -143,6 +143,8 @@ export const MetaViewerTab = ({
       getHeadTags()
    }, [])
 
+   const COLUMNS = ["type", "sort", "zuid", "action"]
+   console.log(headtags, 1233)
    return (
       <Box
          sx={{
@@ -199,38 +201,14 @@ export const MetaViewerTab = ({
                      </Button>
                   </Box>
                   <DomReport theme={theme} />
-                  <Box sx={{ display: headtags.length > 0 ? "block" : "none" }}>
-                     <Typography
-                        paddingTop={4}
-                        paddingBottom={4}
-                        sx={{
-                           fontSize: "24px",
-                           fontWeight: "bold",
-                           color: theme.palette.primary.main,
-                        }}
-                     >
-                        Custom Head Tags
-                     </Typography>
-                     {headtags?.map((e: any) => {
-                        const handleEditHeadTags = async (data: any) => {
-                           const newData = { ...e, attributes: data }
-                           await editHeadTags(newData)
-                        }
-                        const handleDeleteHeadTag = async (data: any) => {
-                           await deleteHeadTags(data)
-                        }
-
-                        return (
-                           <CustomForm
-                              theme={theme}
-                              data={e.attributes}
-                              handleSubmit={handleEditHeadTags}
-                              handleDelete={() => handleDeleteHeadTag(e)}
-                           />
-                        )
-                     })}
-                  </Box>
                </form>
+               <HeadTagTable
+                  theme={theme}
+                  columns={COLUMNS}
+                  data={headtags}
+                  editHeadTags={editHeadTags}
+                  deleteHeadTags={deleteHeadTags}
+               />
             </Box>
             <Box>
                <CopyBlock

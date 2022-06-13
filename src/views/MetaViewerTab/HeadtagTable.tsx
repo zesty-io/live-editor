@@ -8,43 +8,13 @@ import TableCell from "@mui/material/TableCell"
 import TableContainer from "@mui/material/TableContainer"
 import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
-import Typography from "@mui/material/Typography"
 import Paper from "@mui/material/Paper"
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
+import { CustomForm } from "./CustomForm"
 
-function createData(
-   name: string,
-   calories: number,
-   fat: number,
-   carbs: number,
-   protein: number,
-   price: number,
-) {
-   return {
-      name,
-      calories,
-      fat,
-      carbs,
-      protein,
-      price,
-      history: [
-         {
-            date: "2020-01-05",
-            customerId: "11091700",
-            amount: 3,
-         },
-         {
-            date: "2020-01-02",
-            customerId: "Anonymous",
-            amount: 1,
-         },
-      ],
-   }
-}
-
-function Row(props: { row: ReturnType<typeof createData> }) {
-   const { row } = props
+function Row(props: any) {
+   const { row, theme, handleSubmit, handleDelete } = props
    const [open, setOpen] = React.useState(false)
 
    return (
@@ -60,45 +30,22 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                </IconButton>
             </TableCell>
             <TableCell component="th" scope="row">
-               {row.name}
+               {row.type}
             </TableCell>
-            <TableCell align="right">{row.calories}</TableCell>
-            <TableCell align="right">{row.fat}</TableCell>
-            <TableCell align="right">{row.carbs}</TableCell>
-            <TableCell align="right">{row.protein}</TableCell>
+            <TableCell align="left">{row.sort}</TableCell>
+            <TableCell align="left">{row.resourceZUID}</TableCell>
+            <TableCell align="left">delete</TableCell>
          </TableRow>
          <TableRow>
             <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
                <Collapse in={open} timeout="auto" unmountOnExit>
                   <Box sx={{ margin: 1 }}>
-                     <Typography variant="h6" gutterBottom component="div">
-                        History
-                     </Typography>
-                     <Table size="small" aria-label="purchases">
-                        <TableHead>
-                           <TableRow>
-                              <TableCell>Date</TableCell>
-                              <TableCell>Customer</TableCell>
-                              <TableCell align="right">Amount</TableCell>
-                              <TableCell align="right">Total price ($)</TableCell>
-                           </TableRow>
-                        </TableHead>
-                        <TableBody>
-                           {row.history.map((historyRow) => (
-                              <TableRow key={historyRow.date}>
-                                 <TableCell component="th" scope="row">
-                                    {historyRow.date}
-                                 </TableCell>
-                                 <TableCell>{historyRow.customerId}</TableCell>
-                                 <TableCell align="right">{historyRow.amount}</TableCell>
-                                 <TableCell align="right">
-                                    {Math.round(historyRow.amount * row.price * 100) /
-                                       100}
-                                 </TableCell>
-                              </TableRow>
-                           ))}
-                        </TableBody>
-                     </Table>
+                     <CustomForm
+                        data={row.attributes}
+                        theme={theme}
+                        handleSubmit={handleSubmit}
+                        handleDelete={handleDelete}
+                     />
                   </Box>
                </Collapse>
             </TableCell>
@@ -107,32 +54,51 @@ function Row(props: { row: ReturnType<typeof createData> }) {
    )
 }
 
-const rows = [
-   createData("Frozen yoghurt", 159, 6.0, 24, 4.0, 3.99),
-   createData("Ice cream sandwich", 237, 9.0, 37, 4.3, 4.99),
-   createData("Eclair", 262, 16.0, 24, 6.0, 3.79),
-   createData("Cupcake", 305, 3.7, 67, 4.3, 2.5),
-   createData("Gingerbread", 356, 16.0, 49, 3.9, 1.5),
-]
-
-export const HeadTagTable = () => {
+interface Props {
+   columns: string[]
+   data: any
+   theme: any
+   editHeadTags: any
+   deleteHeadTags: any
+}
+export const HeadTagTable = ({
+   columns,
+   data = [],
+   theme,
+   editHeadTags,
+   deleteHeadTags,
+}: Props) => {
+   const rows = data
    return (
       <TableContainer component={Paper}>
          <Table aria-label="collapsible table">
             <TableHead>
                <TableRow>
                   <TableCell />
-                  <TableCell>Dessert (100g serving)</TableCell>
-                  <TableCell align="right">Calories</TableCell>
-                  <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                  <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                  <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                  {columns.map((e: string) => {
+                     return <TableCell align="left">{e}</TableCell>
+                  })}
                </TableRow>
             </TableHead>
             <TableBody>
-               {rows.map((row) => (
-                  <Row key={row.name} row={row} />
-               ))}
+               {rows?.map((row: any) => {
+                  const handleEditHeadTags = async (data: any) => {
+                     const newData = { ...row, attributes: data }
+                     await editHeadTags(newData)
+                  }
+                  const handleDeleteHeadTag = async (data: any) => {
+                     await deleteHeadTags(data)
+                  }
+                  return (
+                     <Row
+                        key={row?.ZUID}
+                        row={row}
+                        theme={theme}
+                        handleSubmit={() => handleEditHeadTags(row)}
+                        handleDelete={() => handleDeleteHeadTag(row)}
+                     />
+                  )
+               })}
             </TableBody>
          </Table>
       </TableContainer>
