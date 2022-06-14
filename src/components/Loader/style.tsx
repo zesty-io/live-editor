@@ -34,6 +34,7 @@ export const LoaderInnerContentContainer = styled(motion.div)`
    height: 100%;
    width: 100%;
    user-select: none;
+   gap: 1rem;
 `
 export const NewLogo = styled(motion.div)`
    display: flex;

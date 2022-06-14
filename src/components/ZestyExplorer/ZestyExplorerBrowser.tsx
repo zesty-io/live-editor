@@ -4,12 +4,12 @@ import React from "react"
 import { useFetchWrapper } from "hooks"
 import { fetchData } from "services"
 import { Box } from "@mui/material"
-import { NewLoader as Loader } from "components"
 import { containerStyle } from "./styles"
 import { Headers } from "components"
 import { CodeHelperTab, EditTab, HealhTab, JsonDataViewerTab, MetaViewerTab } from "views"
 import { useTheme } from "@mui/material/styles"
 import { LoginPrompt } from "components/Ui"
+import { NewLoader } from "components/Loader/NewLoader"
 
 export const ZestyExplorerBrowser = ({
    pageData,
@@ -149,7 +149,7 @@ export const ZestyExplorerBrowser = ({
    if (loading && !verifyFailed && !verifySuccess) {
       return (
          <Box sx={containerStyle}>
-            <Loader />
+            <NewLoader />
          </Box>
       )
    }
@@ -165,11 +165,9 @@ export const ZestyExplorerBrowser = ({
 
    return (
       <Box sx={containerStyle}>
-         {/* {createHeadtag && <CreateHeadTagModal {...CreateHeadTagProps} />} */}
-
          <Headers {...HeaderProps}>{children}</Headers>
          <Box sx={{ position: "" }}>
-            {time > 0 && <Loader />}
+            {time > 0 && <NewLoader />}
             {currentTab === 0 && <EditTab {...EditProps} />}
             {currentTab === 1 && <MetaViewerTab {...MetaProps} />}
             {currentTab === 2 && <JsonDataViewerTab {...JSONProps} />}
