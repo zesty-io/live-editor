@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Box, Typography } from "@mui/material"
 import { addHeadTagApi } from "services"
 import { BasicMenu } from "components/Ui"
-import HighlightOffIcon from "@mui/icons-material/HighlightOff"
+import CloseIcon from "@mui/icons-material/Close"
 import { MainInput } from "components/Input"
 import { useTheme } from "@emotion/react"
 import { CustomBtn } from "components/Buttons"
@@ -49,9 +49,9 @@ export const CreateHeadTagModal = ({
             <Box
                sx={{
                   position: "absolute",
-                  top: "40%",
+                  top: "50%",
                   left: "50%",
-                  transform: "translate(-50%,-60%)",
+                  transform: "translate(-50%,-50%)",
                }}
             >
                <Box
@@ -163,16 +163,18 @@ const ModalContent = ({
    return (
       <Box
          paddingX={3}
-         paddingY={4}
+         paddingTop={6}
+         paddingBottom={4}
          sx={{
             height: "100%",
             background: "#fafafa",
             zIndex: "2147483649",
             position: "relative",
+            borderRadius: "5px",
          }}
       >
          <Box sx={{ position: "absolute", right: ".5rem", top: ".5rem" }}>
-            <HighlightOffIcon onClick={onClose} color="secondary" fontSize="small" />
+            <CloseIcon onClick={onClose} color="secondary" fontSize="medium" />
          </Box>
          <Box sx={{ display: "flex", gap: "1rem" }}>
             <BasicMenu
@@ -212,12 +214,7 @@ const MetaComponent = ({ onSubmit }: any) => {
 
    return (
       <form action="submit" onSubmit={(e: any) => onSubmit(e, arr)}>
-         <Box gap={2} sx={{ display: "flex" }}>
-            <Typography sx={{ fontWeight: "bold", color: "#3a3a3a" }}>
-               Attribute
-            </Typography>
-            <Typography sx={{ fontWeight: "bold", color: "#3a3a3a" }}>Value</Typography>
-         </Box>
+         <Header />
          <Box gap={2} sx={{ display: "flex" }}>
             <MainInput
                value={content_key}
@@ -275,12 +272,7 @@ const ScriptComponent = ({ onSubmit }: any) => {
 
    return (
       <form action="submit" onSubmit={(e: any) => onSubmit(e, arr)}>
-         <Box gap={2} sx={{ display: "flex" }}>
-            <Typography sx={{ fontWeight: "bold", color: "#3a3a3a" }}>
-               Attribute
-            </Typography>
-            <Typography sx={{ fontWeight: "bold", color: "#3a3a3a" }}>Value</Typography>
-         </Box>
+         <Header />
          <Box gap={2} sx={{ display: "flex" }}>
             <MainInput
                theme={themeCustom}
@@ -365,12 +357,7 @@ const LinkComponent = ({ onSubmit }: any) => {
 
    return (
       <form action="submit" onSubmit={(e: any) => onSubmit(e, arr)}>
-         <Box gap={2} sx={{ display: "flex" }}>
-            <Typography sx={{ fontWeight: "bold", color: "#3a3a3a" }}>
-               Attribute
-            </Typography>
-            <Typography sx={{ fontWeight: "bold", color: "#3a3a3a" }}>Value</Typography>
-         </Box>
+         <Header />
          <Box gap={2} sx={{ display: "flex" }}>
             <MainInput
                theme={themeCustom}
@@ -435,5 +422,26 @@ const LinkComponent = ({ onSubmit }: any) => {
             Submit
          </CustomBtn>
       </form>
+   )
+}
+
+const Header = () => {
+   return (
+      <Box
+         paddingY={2}
+         gap={2}
+         sx={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+         }}
+      >
+         <Typography sx={{ width: "100%", fontWeight: "bold", color: "#3a3a3a" }}>
+            Attribute
+         </Typography>
+         <Typography sx={{ width: "100%", fontWeight: "bold", color: "#3a3a3a" }}>
+            Value
+         </Typography>
+      </Box>
    )
 }

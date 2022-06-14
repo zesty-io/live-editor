@@ -21,7 +21,7 @@ export const MetaTags = ({ arr, handleSubmit, theme }: Props) => {
             Meta Tags
          </Typography>
          <Box
-            borderRadius={4}
+            borderRadius={1}
             padding={4}
             boxShadow={1}
             sx={{
