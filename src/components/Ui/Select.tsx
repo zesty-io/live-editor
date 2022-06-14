@@ -13,8 +13,21 @@ export const BasicSelect = () => {
    }
 
    return (
-      <Box sx={{ minWidth: 120, zIndex: "99999999999999999999999999999" }}>
-         <FormControl fullWidth sx={{ zIndex: "99999999999999" }}>
+      <Box
+         sx={{
+            minWidth: 120,
+            position: "relative",
+            zIndex: "99999999999999999999999999999",
+            background: "pink",
+         }}
+      >
+         <FormControl
+            fullWidth
+            sx={{
+               position: "relative",
+               zIndex: "999999999999999999999",
+            }}
+         >
             <InputLabel id="demo-simple-select-label">Age</InputLabel>
             <Select
                labelId="demo-simple-select-label"
@@ -22,9 +35,15 @@ export const BasicSelect = () => {
                value={age}
                label="Age"
                onChange={handleChange}
-               sx={{ zIndex: "99999999999999" }}
+               sx={{
+                  zIndex: "99999999999999999999999",
+
+                  position: "relative",
+               }}
             >
-               <MenuItem value={10}>Ten</MenuItem>
+               <MenuItem sx={{ zIndex: "9999999999999999999999999" }} value={10}>
+                  Ten
+               </MenuItem>
                <MenuItem value={20}>Twenty</MenuItem>
                <MenuItem value={30}>Thirty</MenuItem>
             </Select>

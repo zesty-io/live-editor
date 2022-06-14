@@ -60,12 +60,12 @@ export const CustomTextArea = styled.textarea`
 `
 
 interface Props {
-   label: string
+   label?: string
    theme: any
    value: string
    onChange: (e: any) => void
-   placeholder: string
-   autoFocus: boolean
+   placeholder?: string
+   autoFocus?: boolean
    required?: boolean
    name?: string
    disabled?: boolean

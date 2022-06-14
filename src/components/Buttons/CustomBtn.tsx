@@ -6,6 +6,7 @@ interface Props {
    theme: any
    title?: string
    variant?: string
+   type?: any
 }
 
 export const CustomButton = styled.button`
@@ -57,9 +58,11 @@ export const CustomBtn = ({
    children,
    onClick,
    theme,
+   type = "button",
 }: Props) => {
    return (
       <CustomButton
+         type={type}
          // @ts-ignore
          variant={variant}
          theme={theme}

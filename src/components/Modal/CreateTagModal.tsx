@@ -1,6 +1,11 @@
-import React, { useState } from "react"
-import { Box } from "@mui/material"
+import React, { useState, useEffect } from "react"
+import { Box, Typography } from "@mui/material"
 import { addHeadTagApi } from "services"
+import { BasicMenu } from "components/Ui"
+import HighlightOffIcon from "@mui/icons-material/HighlightOff"
+import { MainInput } from "components/Input"
+import { useTheme } from "@emotion/react"
+import { CustomBtn } from "components/Buttons"
 interface Props {
    onClose: () => any
    resourceZUID: string
@@ -27,7 +32,7 @@ export const CreateHeadTagModal = ({
             zIndex: "2147483646",
             height: "100%",
             width: "100%",
-            background: "#fff",
+            background: "rgba(1,2,3,.4)",
          }}
       >
          <Box
@@ -37,7 +42,7 @@ export const CreateHeadTagModal = ({
                flexDirection: "column",
                height: "100%",
                width: "100%",
-               background: "#fff",
+               background: "rgba(1,2,3,.4)",
                position: "relative",
             }}
          >
@@ -75,30 +80,23 @@ export const CreateHeadTagModal = ({
       </Box>
    )
 }
-// const linkList = [
-//    { key: "res", value: "preload" },
-//    { key: "as", value: "style" },
-//    { key: "type", value: "text/css" },
-//    { key: "media", value: "screen" },
-//    { key: "href", value: "" },
-// ]
-
-// const sriptList = [
-//    { key: "res", value: "preload" },
-//    { key: "as", value: "script" },
-//    { key: "type", value: "text/javascript" },
-//    { key: "src", value: "" },
-// ]
-
-// const metaList = [
-//    { key: "name", value: "" },
-//    { key: "content", value: "" },
-// ]
-
-const OPTIONS = [
+const OPTIONS_TYPE = [
    { value: "script", label: "script" },
    { value: "meta", label: "meta" },
    { value: "link", label: "link" },
+]
+const OPTIONS_SORT = [
+   { value: "0", label: "0" },
+   { value: "1", label: "1" },
+   { value: "2", label: "2" },
+   { value: "3", label: "3" },
+   { value: "4", label: "4" },
+   { value: "5", label: "5" },
+   { value: "6", label: "6" },
+   { value: "7", label: "7" },
+   { value: "8", label: "8" },
+   { value: "9", label: "9" },
+   { value: "10", label: "10" },
 ]
 const ModalContent = ({
    token,
@@ -111,9 +109,11 @@ const ModalContent = ({
    const [tag, settag] = useState("link")
    const [sort, setsort] = useState(0)
 
-   const handleChange = (data: any) => {
-      console.log(data)
+   const handleChangeType = (data: any) => {
       settag(data)
+   }
+   const handleChangeSort = (data: any) => {
+      setsort(data)
    }
 
    const handleSuccesAddHeadTag = (data: any) => {
@@ -151,40 +151,56 @@ const ModalContent = ({
       ) : (
          <></>
       )
+   useEffect(() => {
+      if (!tag) {
+         settag("link")
+      }
+      if (!sort) {
+         setsort(0)
+      }
+   }, [tag, sort])
+
    return (
-      <Box sx={{ height: "100%" }}>
-         <Box>
-            <button onClick={onClose}>close</button>
+      <Box
+         paddingX={3}
+         paddingY={4}
+         sx={{
+            height: "100%",
+            background: "#fafafa",
+            zIndex: "2147483649",
+            position: "relative",
+         }}
+      >
+         <Box sx={{ position: "absolute", right: ".5rem", top: ".5rem" }}>
+            <HighlightOffIcon onClick={onClose} color="secondary" fontSize="small" />
          </Box>
-         <Box>
-            <CustomSelect OPTIONS={OPTIONS} onChange={handleChange} />
-         </Box>
-         <Box>
-            <input
-               type="number"
+         <Box sx={{ display: "flex", gap: "1rem" }}>
+            <BasicMenu
+               title={"Type"}
+               list={OPTIONS_TYPE}
+               value={tag}
+               onChange={handleChangeType}
+            />
+            <BasicMenu
+               title={"Sort"}
+               list={OPTIONS_SORT}
                value={sort}
-               onChange={(e: any) => setsort(e.target.value)}
+               onChange={handleChangeSort}
             />
          </Box>
-         <Box>{formComponent}</Box>
+         <Box sx={{ height: "auto" }}>{formComponent}</Box>
       </Box>
    )
 }
 
-const CustomSelect = ({ OPTIONS, onChange }: any) => {
-   return (
-      <>
-         <label>Choose a Tag:</label>
-         <select name="cars" id="cars" onChange={(e: any) => onChange(e.target.value)}>
-            {OPTIONS?.map((e: any) => {
-               return <option value={e.value}>{e.label}</option>
-            })}
-         </select>
-      </>
-   )
-}
-
 const MetaComponent = ({ onSubmit }: any) => {
+   const theme: any = useTheme()
+   const themeCustom = {
+      main: theme.palette.primary.main,
+      white: theme.palette.common.white,
+      boxShadow: theme.palette.secondary.blueShadow,
+      border: theme.palette.secondary.whiteSmoke,
+   }
    const [content_key, setcontent_key] = useState("content")
    const [name_key, setname_key] = useState("name")
    const [content_val, setcontent_val] = useState("")
@@ -196,32 +212,39 @@ const MetaComponent = ({ onSubmit }: any) => {
 
    return (
       <form action="submit" onSubmit={(e: any) => onSubmit(e, arr)}>
-         meta
-         <Box sx={{ display: "flex" }}>
-            <input
-               type="text"
+         <Box gap={2} sx={{ display: "flex" }}>
+            <Typography sx={{ fontWeight: "bold", color: "#3a3a3a" }}>
+               Attribute
+            </Typography>
+            <Typography sx={{ fontWeight: "bold", color: "#3a3a3a" }}>Value</Typography>
+         </Box>
+         <Box gap={2} sx={{ display: "flex" }}>
+            <MainInput
                value={content_key}
                onChange={(e: any) => setcontent_key(e.target.value)}
+               theme={themeCustom}
             />
-            <input
-               type="text"
+            <MainInput
+               theme={themeCustom}
                value={content_val}
                onChange={(e: any) => setcontent_val(e.target.value)}
             />
          </Box>
-         <Box sx={{ display: "flex" }}>
-            <input
-               type="text"
+         <Box gap={2} sx={{ display: "flex" }}>
+            <MainInput
+               theme={themeCustom}
                value={name_key}
                onChange={(e: any) => setname_key(e.target.value)}
             />
-            <input
-               type="text"
+            <MainInput
+               theme={themeCustom}
                value={name_val}
                onChange={(e: any) => setname_val(e.target.value)}
             />
          </Box>
-         <button type="submit">okokok</button>
+         <CustomBtn type="submit" onClick={() => {}} theme={theme}>
+            Submit
+         </CustomBtn>
       </form>
    )
 }
@@ -236,6 +259,13 @@ const ScriptComponent = ({ onSubmit }: any) => {
    const [res_key, setres_key] = useState("res")
    const [res_val, setres_val] = useState("")
 
+   const theme: any = useTheme()
+   const themeCustom = {
+      main: theme.palette.primary.main,
+      white: theme.palette.common.white,
+      boxShadow: theme.palette.secondary.blueShadow,
+      border: theme.palette.secondary.whiteSmoke,
+   }
    const arr = {
       [tyep_key]: tyep_val,
       [as_key]: as_val,
@@ -245,56 +275,63 @@ const ScriptComponent = ({ onSubmit }: any) => {
 
    return (
       <form action="submit" onSubmit={(e: any) => onSubmit(e, arr)}>
-         <span>srcipt</span>
-         <Box sx={{ display: "flex" }}>
-            <input
-               type="text"
+         <Box gap={2} sx={{ display: "flex" }}>
+            <Typography sx={{ fontWeight: "bold", color: "#3a3a3a" }}>
+               Attribute
+            </Typography>
+            <Typography sx={{ fontWeight: "bold", color: "#3a3a3a" }}>Value</Typography>
+         </Box>
+         <Box gap={2} sx={{ display: "flex" }}>
+            <MainInput
+               theme={themeCustom}
                value={src_key}
                onChange={(e: any) => setsrc_key(e.target.value)}
             />
-            <input
-               type="text"
+            <MainInput
+               theme={themeCustom}
                value={src_val}
                onChange={(e: any) => setsrc_val(e.target.value)}
             />
          </Box>
-         <Box sx={{ display: "flex" }}>
-            <input
-               type="text"
+         <Box gap={2} sx={{ display: "flex" }}>
+            <MainInput
+               theme={themeCustom}
                value={as_key}
                onChange={(e: any) => setas_key(e.target.value)}
             />
-            <input
-               type="text"
+            <MainInput
+               theme={themeCustom}
                value={as_val}
                onChange={(e: any) => setas_val(e.target.value)}
             />
          </Box>
-         <Box sx={{ display: "flex" }}>
-            <input
-               type="text"
+         <Box gap={2} sx={{ display: "flex" }}>
+            <MainInput
+               theme={themeCustom}
                value={tyep_key}
                onChange={(e: any) => settyep_key(e.target.value)}
             />
-            <input
-               type="text"
+            <MainInput
+               theme={themeCustom}
                value={tyep_val}
                onChange={(e: any) => settyep_val(e.target.value)}
             />
          </Box>
-         <Box sx={{ display: "flex" }}>
-            <input
-               type="text"
+         <Box gap={2} sx={{ display: "flex" }}>
+            <MainInput
+               theme={themeCustom}
                value={res_key}
                onChange={(e: any) => setres_key(e.target.value)}
             />
-            <input
-               type="text"
+            <MainInput
+               theme={themeCustom}
                value={res_val}
                onChange={(e: any) => setres_val(e.target.value)}
             />
          </Box>
-         <button type="submit">okokok</button>
+         <CustomBtn type="submit" onClick={() => {}} theme={theme}>
+            Submit
+         </CustomBtn>
       </form>
    )
 }
@@ -311,6 +348,13 @@ const LinkComponent = ({ onSubmit }: any) => {
    const [media_key, setmedia_key] = useState("media")
    const [media_val, setmedia_val] = useState("")
 
+   const theme: any = useTheme()
+   const themeCustom = {
+      main: theme.palette.primary.main,
+      white: theme.palette.common.white,
+      boxShadow: theme.palette.secondary.blueShadow,
+      border: theme.palette.secondary.whiteSmoke,
+   }
    const arr = {
       [tyep_key]: tyep_val,
       [as_key]: as_val,
@@ -321,68 +365,75 @@ const LinkComponent = ({ onSubmit }: any) => {
 
    return (
       <form action="submit" onSubmit={(e: any) => onSubmit(e, arr)}>
-         link
-         <Box sx={{ display: "flex" }}>
-            <input
-               type="text"
+         <Box gap={2} sx={{ display: "flex" }}>
+            <Typography sx={{ fontWeight: "bold", color: "#3a3a3a" }}>
+               Attribute
+            </Typography>
+            <Typography sx={{ fontWeight: "bold", color: "#3a3a3a" }}>Value</Typography>
+         </Box>
+         <Box gap={2} sx={{ display: "flex" }}>
+            <MainInput
+               theme={themeCustom}
                value={href_key}
                onChange={(e: any) => sethref_key(e.target.value)}
             />
-            <input
-               type="text"
+            <MainInput
+               theme={themeCustom}
                value={href_val}
                onChange={(e: any) => sethref_val(e.target.value)}
             />
          </Box>
-         <Box sx={{ display: "flex" }}>
-            <input
-               type="text"
+         <Box gap={2} sx={{ display: "flex" }}>
+            <MainInput
+               theme={themeCustom}
                value={media_key}
                onChange={(e: any) => setmedia_key(e.target.value)}
             />
-            <input
-               type="text"
+            <MainInput
+               theme={themeCustom}
                value={media_val}
                onChange={(e: any) => setmedia_val(e.target.value)}
             />
          </Box>
-         <Box sx={{ display: "flex" }}>
-            <input
-               type="text"
+         <Box gap={2} sx={{ display: "flex" }}>
+            <MainInput
+               theme={themeCustom}
                value={as_key}
                onChange={(e: any) => setas_key(e.target.value)}
             />
-            <input
-               type="text"
+            <MainInput
+               theme={themeCustom}
                value={as_val}
                onChange={(e: any) => setas_val(e.target.value)}
             />
          </Box>
-         <Box sx={{ display: "flex" }}>
-            <input
-               type="text"
+         <Box gap={2} sx={{ display: "flex" }}>
+            <MainInput
+               theme={themeCustom}
                value={tyep_key}
                onChange={(e: any) => settyep_key(e.target.value)}
             />
-            <input
-               type="text"
+            <MainInput
+               theme={themeCustom}
                value={tyep_val}
                onChange={(e: any) => settyep_val(e.target.value)}
             />
          </Box>
-         <Box sx={{ display: "flex" }}>
-            <input
-               type="text"
+         <Box gap={2} sx={{ display: "flex" }}>
+            <MainInput
+               theme={themeCustom}
                value={res_key}
                onChange={(e: any) => setres_key(e.target.value)}
             />
-            <input
-               type="text"
+            <MainInput
+               theme={themeCustom}
                value={res_val}
                onChange={(e: any) => setres_val(e.target.value)}
             />
          </Box>
-         <button type="submit">okokok</button>
+         <CustomBtn type="submit" onClick={() => {}} theme={theme}>
+            Submit
+         </CustomBtn>
       </form>
    )
 }
