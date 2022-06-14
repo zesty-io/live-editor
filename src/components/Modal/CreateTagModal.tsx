@@ -108,6 +108,7 @@ const ModalContent = ({
 }: Props) => {
    const [tag, settag] = useState("link")
    const [sort, setsort] = useState(0)
+   const theme = useTheme()
 
    const handleChangeType = (data: any) => {
       settag(data)
@@ -176,6 +177,17 @@ const ModalContent = ({
          <Box sx={{ position: "absolute", right: ".5rem", top: ".5rem" }}>
             <CloseIcon onClick={onClose} color="secondary" fontSize="medium" />
          </Box>
+         <Typography
+            paddingBottom={4}
+            sx={{
+               fontSize: "24px",
+               fontWeight: "bold",
+               // @ts-ignore
+               color: theme.palette.primary.main,
+            }}
+         >
+            Create Head Tags
+         </Typography>
          <Box sx={{ display: "flex", gap: "1rem" }}>
             <BasicMenu
                title={"Type"}
