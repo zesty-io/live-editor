@@ -65,6 +65,7 @@ const Index = () => {
                      loading={true}
                      size={15}
                      margin={2}
+                     speedMultiplier={0.7}
                   />
                </Box>
             </LoaderContentContainer>
