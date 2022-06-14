@@ -95,7 +95,7 @@ const CustomLnk = styled.button`
    font-weight: 400;
    transition: all 0.1s ease-in-out;
    outline: none;
-   color: #333333;
+   color: ${(props: any) => props.theme.palette.zesty.zestyZambezi};
    align-items: center;
    gap: 0.3rem;
 

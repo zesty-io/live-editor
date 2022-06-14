@@ -183,7 +183,7 @@ export const MetaViewerTab = ({
          }}
       >
          {createHeadtag && <CreateHeadTagModal {...CreateHeadTagProps} />}
-         <Box sx={{ height: "90vh", overflow: "auto" }}>
+         <Box paddingBottom={8} sx={{ height: "90vh", overflow: "auto" }}>
             <Subheaders content={content} theme={theme} btnList={btnList} />
             <Box paddingY={4} paddingX={8}>
                <MetaTags arr={arr} theme={theme} handleSubmit={editMetaTags} />
