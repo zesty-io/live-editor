@@ -6,7 +6,7 @@ import { ThemeProvider } from "@mui/material/styles"
 import * as helper from "utils/index"
 import { fetchJSON, getPageData } from "services/index"
 import { OutlineCard as Card } from "components/Card"
-import { buttonStyles, verifyUserPrompt, zestyWrapper } from "./styles"
+import { verifyUserPrompt, zestyWrapper } from "./styles"
 import Button from "@mui/material/Button"
 import Box from "@mui/material/Box"
 import getTheme from "theme/index"
@@ -130,15 +130,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
             {!open && (
                <LaunchBtn
                   onClick={() => helper.toggleOpenState(true, setOpen, expandBody)}
-                  style={buttonStyles}
-               >
-                  <img
-                     src="https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png"
-                     width="32px"
-                     height="32px"
-                     alt="Zesty.io Logo"
-                  />
-               </LaunchBtn>
+               />
             )}
 
             {open && (
