@@ -50,6 +50,7 @@ export const fetchJSON = async (
    uri: string,
    setFunc: (e: any) => any,
    token: string | any,
+   setloading: any,
 ) => {
    console.log(token)
    const data = ""
@@ -69,10 +70,12 @@ export const fetchJSON = async (
    })
 
    if (res.status === 200) {
+      setloading(false)
       return { data: await res.json(), res, error: false }
       // data = await res.json()
       // setFunc({ data, response: res })
    } else {
+      setloading(false)
       return { data: null, res, error: false }
       // setFunc({ data: null, response: res, error: true })
    }

@@ -14,7 +14,7 @@ import { useDarkMode } from "hooks"
 import CloseFullscreenIcon from "@mui/icons-material/CloseFullscreen"
 import { Helmet } from "react-helmet"
 import { ZestyExplorerBrowser } from "./ZestyExplorerBrowser"
-import { LaunchBtn } from "components"
+import { LaunchBtn, Loader } from "components"
 
 // dom access highlight function
 const expandBody = (bool: boolean) => {
@@ -37,12 +37,18 @@ export const ZestyExplorer = ({ content = {} }: any) => {
    const [pageData, setPageData] = React.useState<any>("")
    const [response, setResponse] = React.useState<any>("")
    const [themeMode, themeToggler, mountedComponent] = useDarkMode()
+   const [loading, setloading] = React.useState(false)
    console.log(themeMode, mountedComponent)
 
+   const handleJSONData = (res: any) => {
+      setJsonData(res)
+      setloading(false)
+   }
    // get json data
    const fetchJsonData = async () => {
-      const res = await fetchJSON(jsonUrl, setJsonData, token)
-      res && setJsonData(res)
+      setloading(true)
+      const res = await fetchJSON(jsonUrl, setJsonData, token, setloading)
+      res && handleJSONData(res)
    }
 
    const getData = async () => {
@@ -54,7 +60,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
    // check if content is available
    React.useEffect(() => {
       const fetchJsonData = async () => {
-         const res = await fetchJSON(jsonUrl, setJsonData, token)
+         const res = await fetchJSON(jsonUrl, setJsonData, token, setloading)
          res && setJsonData(res)
       }
 
@@ -90,6 +96,13 @@ export const ZestyExplorer = ({ content = {} }: any) => {
       return null
    }
 
+   if (loading) {
+      return (
+         <Box sx={verifyUserPrompt} zIndex={2147483647}>
+            <Loader />
+         </Box>
+      )
+   }
    if (jsonData?.data === null || jsonData?.length == 0) {
       return (
          <Box sx={verifyUserPrompt} zIndex={2147483647}>
