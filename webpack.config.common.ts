@@ -54,6 +54,11 @@ const config: Configuration = {
             },
          },
          {
+            test: /\.css$/,
+            use: ["style-loader", "css-loader"],
+            exclude: /\.module\.css$/,
+         },
+         {
             test: /\.s[ac]ss$/i,
             use: [
                // Creates `style` nodes from JS strings

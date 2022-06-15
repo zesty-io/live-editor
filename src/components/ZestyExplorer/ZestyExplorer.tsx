@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from "react"
 import { ThemeProvider } from "@mui/material/styles"
-import CssBaseline from "@mui/material/CssBaseline"
+// import CssBaseline from "@mui/material/CssBaseline"
 import * as helper from "utils/index"
 import { fetchJSON, getPageData } from "services/index"
 import { OutlineCard as Card } from "components/Card"
@@ -125,7 +125,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
             ></link>
          </Helmet>
          <ThemeProvider theme={getTheme("light", themeToggler)}>
-            <CssBaseline />
+            {/* <CssBaseline /> */}
             {/* ZESTY LOGO  bottom right*/}
             {!open && (
                <LaunchBtn
