@@ -38,7 +38,7 @@ export const CodeHelperTab = ({
          <GotoTopBtn scrollPos={scrollPos} />
 
          <CodeHelperTable
-            reponse={response}
+            response={response}
             content={content}
             onScroll={scrollEvent}
             url={url}

@@ -274,6 +274,18 @@ function Row({
    )
 }
 
+interface ITable {
+   content: any
+   metaData: any
+   data: any
+   url: any
+   token: any
+   onScroll: any
+   theme: any
+   getData: any
+   setloading: any
+   response: any
+}
 export const EditTable = ({
    content,
    metaData,
@@ -285,7 +297,7 @@ export const EditTable = ({
    getData,
    setloading,
    response,
-}: any) => {
+}: ITable) => {
    const [workingElement, setWorkingElement] = React.useState("")
 
    return (

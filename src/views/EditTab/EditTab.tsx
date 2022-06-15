@@ -12,6 +12,7 @@ interface Props {
    scrollEvent: any
    getData: any
    setloading: any
+   response: any
 }
 
 export const EditTab = ({
@@ -25,6 +26,7 @@ export const EditTab = ({
    token,
    getData,
    setloading,
+   response,
 }: Props) => {
    const newData =
       Object.keys(data?.content).length === 0 ? metaData?.data?.data : data?.content
@@ -40,6 +42,7 @@ export const EditTab = ({
          <GotoTopBtn scrollPos={scrollPos} />
 
          <EditTable
+            response={response}
             onScroll={scrollEvent}
             url={url}
             token={token}
