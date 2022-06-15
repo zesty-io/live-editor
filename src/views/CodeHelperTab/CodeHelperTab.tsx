@@ -10,6 +10,7 @@ interface Props {
    theme: any
    scrollPos: number
    scrollEvent: any
+   response: any
 }
 
 export const CodeHelperTab = ({
@@ -21,6 +22,7 @@ export const CodeHelperTab = ({
    data,
    url,
    token,
+   response,
 }: Props) => {
    const newData =
       Object.keys(data?.content).length === 0 ? metaData?.data?.data : data?.content
@@ -36,6 +38,7 @@ export const CodeHelperTab = ({
          <GotoTopBtn scrollPos={scrollPos} />
 
          <CodeHelperTable
+            reponse={response}
             content={content}
             onScroll={scrollEvent}
             url={url}

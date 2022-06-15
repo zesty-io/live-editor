@@ -284,12 +284,13 @@ export const EditTable = ({
    theme,
    getData,
    setloading,
+   response,
 }: any) => {
    const [workingElement, setWorkingElement] = React.useState("")
 
    return (
       <TableContainer onScroll={onScroll} component={Paper} style={TableContainerStyle}>
-         <Subheaders content={content} theme={theme} />
+         <Subheaders response={response} content={content} theme={theme} />
          <Table aria-label="collapsible table">
             {/* HEaders */}
             <TableHead

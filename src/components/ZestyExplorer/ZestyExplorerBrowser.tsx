@@ -95,6 +95,7 @@ export const ZestyExplorerBrowser = ({
       scrollEvent,
       getData,
       setloading: () => settime(2),
+      response,
    }
 
    const MetaProps = {
@@ -120,6 +121,7 @@ export const ZestyExplorerBrowser = ({
       setSearch,
       theme,
       content,
+      response,
    }
 
    const CodeHelperProps = {
@@ -131,19 +133,13 @@ export const ZestyExplorerBrowser = ({
       token,
       scrollPos: currentScroll,
       scrollEvent,
+      response,
    }
-   // const CreateHeadTagProps = {
-   //    onClose: () => setcreateHeadtag(false),
-   //    resourceZUID: itemZUID,
-   //    instanceZUID,
-   //    token,
-   //    setloading: () => settime(2),
-   //    getData,
-   // }
 
    const HealthTabProps = {
       content,
       theme,
+      response,
    }
    // show loading
    if (loading && !verifyFailed && !verifySuccess) {

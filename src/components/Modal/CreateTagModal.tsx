@@ -252,7 +252,7 @@ const MetaComponent = ({ onSubmit }: any) => {
             />
          </Box>
          <CustomBtn type="submit" onClick={() => {}} theme={theme}>
-            Submit
+            Add a Head Tag
          </CustomBtn>
       </form>
    )
@@ -334,7 +334,7 @@ const ScriptComponent = ({ onSubmit }: any) => {
             />
          </Box>
          <CustomBtn type="submit" onClick={() => {}} theme={theme}>
-            Submit
+            Add a Head Tag
          </CustomBtn>
       </form>
    )
@@ -431,7 +431,7 @@ const LinkComponent = ({ onSubmit }: any) => {
             />
          </Box>
          <CustomBtn type="submit" onClick={() => {}} theme={theme}>
-            Submit
+            Add a Head Tag
          </CustomBtn>
       </form>
    )

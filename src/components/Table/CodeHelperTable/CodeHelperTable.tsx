@@ -239,12 +239,18 @@ export const CodeHelperTable = ({
    token,
    onScroll,
    theme,
+   response,
 }: any) => {
    const [workingElement, setWorkingElement] = React.useState("")
 
    return (
       <TableContainer onScroll={onScroll} component={Paper} style={TableContainerStyle}>
-         <Subheaders theme={theme} content={content} btnList={btnList} />
+         <Subheaders
+            response={response}
+            theme={theme}
+            content={content}
+            btnList={btnList}
+         />
          <Table aria-label="collapsible table">
             {/* HEaders */}
             <TableHead
