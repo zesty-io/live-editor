@@ -1,6 +1,8 @@
 import { Box, Card, CardContent, Typography } from "@mui/material"
+import { urls } from "constants"
 import React from "react"
 import loading from "../../assets/loading.svg"
+import zestyLogoName from "../../assets/zestyname.svg"
 
 const Index = () => {
    const card = (
@@ -19,6 +21,29 @@ const Index = () => {
                   background: "#fff",
                }}
             >
+               <Box
+                  gap={1}
+                  sx={{
+                     display: "flex",
+                     width: "100%",
+                     alignItems: "center",
+                     justifyContent: "center",
+                     justifyItems: "center",
+                  }}
+               >
+                  <img
+                     src={urls.zestyBrandLogo}
+                     alt="Zesty Explorer"
+                     width={"50"}
+                     height={"50"}
+                  />
+                  <img
+                     src={zestyLogoName}
+                     alt="Zesty Explorer"
+                     width={"100"}
+                     height={"100"}
+                  />
+               </Box>
                <Box
                   sx={{
                      display: "flex",
