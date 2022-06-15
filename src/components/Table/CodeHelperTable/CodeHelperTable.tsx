@@ -231,6 +231,16 @@ const btnList = [
    },
 ]
 
+interface ITable {
+   content: any
+   metaData: any
+   data: any
+   url: any
+   token: any
+   onScroll: any
+   theme: any
+   response: any
+}
 export const CodeHelperTable = ({
    content,
    metaData,
@@ -240,7 +250,7 @@ export const CodeHelperTable = ({
    onScroll,
    theme,
    response,
-}: any) => {
+}: ITable) => {
    const [workingElement, setWorkingElement] = React.useState("")
 
    return (

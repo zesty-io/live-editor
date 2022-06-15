@@ -1,7 +1,6 @@
 import React from "react"
 import zestyLogo from "../../assets/zesty-io-logo.svg"
 import zestyLogoName from "../../assets/zestyname.svg"
-import Loader from "react-spinners/SyncLoader"
 import {
    LoaderContainer,
    LoaderContentContainer,
@@ -10,11 +9,10 @@ import {
    NewLogo,
    NewLogoText,
 } from "./style"
-import { useTheme } from "@emotion/react"
 import { Box } from "@mui/material"
+import { LoadingText } from "./LoadingText"
 
 const Index = () => {
-   const theme = useTheme()
    return (
       <LoaderContainer>
          <LoaderInnerContainer>
@@ -59,14 +57,7 @@ const Index = () => {
                      userSelect: "none",
                   }}
                >
-                  <Loader
-                     // @ts-ignore
-                     color={theme.palette.zesty.zestyOrange}
-                     loading={true}
-                     size={15}
-                     margin={2}
-                     speedMultiplier={0.7}
-                  />
+                  <LoadingText />
                </Box>
             </LoaderContentContainer>
          </LoaderInnerContainer>
