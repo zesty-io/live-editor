@@ -1,11 +1,12 @@
 .loading {
-   font-size: 30px;
+   font-size: 24px;
    font-family: "Montserrat", sans-serif;
-   font-weight: 800;
+   font-weight: 500;
    text-align: center;
    span {
       display: inline-block;
-      margin: 0 0.05em;
+      margin: 0 0.04em;
+      // color: #5b5b5b;
       color: #ff5d0a;
    }
 }
@@ -22,9 +23,11 @@
 @keyframes loading04 {
    0%,
    100% {
-      transform: translateY(0);
+      // transform: translateY(0);
+      color: #ff5d0a;
    }
    50% {
-      transform: translateY(15px);
+      // transform: translateY(15px);
+      color: #333333;
    }
 }

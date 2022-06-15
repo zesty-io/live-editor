@@ -1,7 +1,7 @@
 import React from "react"
 import "./loading.scss"
 
-export const LoadingText = () => {
+const Index = () => {
    return (
       <section>
          <div className="loading loading04">
@@ -19,3 +19,4 @@ export const LoadingText = () => {
       </section>
    )
 }
+export const LoadingText = React.memo(Index)

@@ -1,8 +1,9 @@
-import { Box, Card, CardContent, Typography } from "@mui/material"
+import { Box, Card, CardContent } from "@mui/material"
 import { urls } from "constants"
 import React from "react"
 import loading from "../../assets/loading.svg"
 import zestyLogoName from "../../assets/zestyname.svg"
+import { LoadingText } from "./LoadingText"
 
 const Index = () => {
    const card = (
@@ -64,15 +65,7 @@ const Index = () => {
                      justifyItems: "center",
                   }}
                >
-                  <Typography
-                     color="inherit"
-                     sx={{
-                        fontSize: "18px",
-                        color: "#ff5d0a",
-                     }}
-                  >
-                     Loading...
-                  </Typography>
+                  <LoadingText />
                </Box>
             </Box>
          </CardContent>
