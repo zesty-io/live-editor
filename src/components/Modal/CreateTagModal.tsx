@@ -251,9 +251,18 @@ const MetaComponent = ({ onSubmit }: any) => {
                onChange={(e: any) => setname_val(e.target.value)}
             />
          </Box>
-         <CustomBtn type="submit" onClick={() => {}} theme={theme}>
-            Add a Head Tag
-         </CustomBtn>
+         <Box
+            sx={{
+               width: "100%",
+               display: "flex",
+               justifyContent: "center",
+               justifyItems: "center",
+            }}
+         >
+            <CustomBtn size="14px" type="submit" onClick={() => {}} theme={theme}>
+               Add a Head Tag
+            </CustomBtn>
+         </Box>
       </form>
    )
 }
@@ -333,9 +342,18 @@ const ScriptComponent = ({ onSubmit }: any) => {
                onChange={(e: any) => setres_val(e.target.value)}
             />
          </Box>
-         <CustomBtn type="submit" onClick={() => {}} theme={theme}>
-            Add a Head Tag
-         </CustomBtn>
+         <Box
+            sx={{
+               width: "100%",
+               display: "flex",
+               justifyContent: "center",
+               justifyItems: "center",
+            }}
+         >
+            <CustomBtn size="14px" type="submit" onClick={() => {}} theme={theme}>
+               Add a Head Tag
+            </CustomBtn>
+         </Box>
       </form>
    )
 }
@@ -430,9 +448,18 @@ const LinkComponent = ({ onSubmit }: any) => {
                onChange={(e: any) => setres_val(e.target.value)}
             />
          </Box>
-         <CustomBtn type="submit" onClick={() => {}} theme={theme}>
-            Add a Head Tag
-         </CustomBtn>
+         <Box
+            sx={{
+               width: "100%",
+               display: "flex",
+               justifyContent: "center",
+               justifyItems: "center",
+            }}
+         >
+            <CustomBtn size="14px" type="submit" onClick={() => {}} theme={theme}>
+               Add a Head Tag
+            </CustomBtn>
+         </Box>
       </form>
    )
 }

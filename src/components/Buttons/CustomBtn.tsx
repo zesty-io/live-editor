@@ -7,6 +7,7 @@ interface Props {
    title?: string
    variant?: string
    type?: any
+   size?: string
 }
 
 export const CustomButton = styled.button`
@@ -22,7 +23,7 @@ export const CustomButton = styled.button`
    justify-items: flex-start;
    text-align: left;
    outline: none;
-   font-size: 10px;
+   font-size: ${(props: any) => props.size};
    cursor: pointer;
    font-family: Mulish;
    border: 1px solid transparent;
@@ -59,9 +60,12 @@ export const CustomBtn = ({
    onClick,
    theme,
    type = "button",
+   size = "10px",
 }: Props) => {
    return (
       <CustomButton
+         // @ts-ignore
+         size={size}
          type={type}
          // @ts-ignore
          variant={variant}
