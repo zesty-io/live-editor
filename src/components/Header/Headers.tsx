@@ -1,12 +1,8 @@
-/* eslint-disable array-callback-return */
-/* eslint-disable react/jsx-no-target-blank */
 import React from "react"
-import { headerZUID } from "utils"
 import { AppBar } from "@mui/material"
 import Box from "@mui/material/Box"
 import { useTheme } from "@mui/material/styles"
 import { TabContainer } from "components"
-import { BasicMenu } from "components/Ui"
 import { urls } from "constants"
 interface Props {
    children: React.ReactNode
@@ -26,28 +22,8 @@ const Index = ({
    settime,
 }: Props) => {
    const theme = useTheme()
+   console.log(content, response)
 
-   const list = [
-      {
-         name: "Edit Schema",
-         label: "Edit Schema",
-         href: `https://${
-            content?.zestyInstanceZUID || headerZUID(response)
-         }.manager.zesty.io/schema/${content?.meta?.model?.zuid}`,
-      },
-      {
-         name: "Edit Content",
-         label: "Edit Content",
-         href: `https://${
-            content?.zestyInstanceZUID || headerZUID(response)
-         }.manager.zesty.io/content/${content?.meta?.model?.zuid}/${content?.meta?.zuid}`,
-      },
-      {
-         name: "Edit Permission",
-         label: "Edit Permission",
-         href: `https://accounts.zesty.io/instances/${content?.zestyInstanceZUID}`,
-      },
-   ]
    return (
       <AppBar sx={{ background: "#fff", overflowX: "auto" }} position="static">
          <Box
@@ -62,8 +38,8 @@ const Index = ({
                background: theme.palette.background.paper,
             }}
          >
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-               <Box sx={{ cursor: "pointer", paddingRight: "1rem" }}>
+            <Box paddingTop={1} sx={{ display: "flex", alignItems: "center" }}>
+               <Box sx={{ cursor: "pointer" }} paddingRight={4}>
                   <img
                      onClick={() => window.location.reload()}
                      src={urls.zestyBrandLogoMid}
@@ -80,7 +56,7 @@ const Index = ({
             </Box>
 
             <Box sx={{ display: "flex", alignItems: "center", gap: ".5rem" }}>
-               <BasicMenu list={list} />
+               {/* <BasicMenu list={list} /> */}
                {children}
             </Box>
          </Box>

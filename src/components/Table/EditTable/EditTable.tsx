@@ -274,6 +274,18 @@ function Row({
    )
 }
 
+interface ITable {
+   content: any
+   metaData: any
+   data: any
+   url: any
+   token: any
+   onScroll: any
+   theme: any
+   getData: any
+   setloading: any
+   response: any
+}
 export const EditTable = ({
    content,
    metaData,
@@ -284,12 +296,13 @@ export const EditTable = ({
    theme,
    getData,
    setloading,
-}: any) => {
+   response,
+}: ITable) => {
    const [workingElement, setWorkingElement] = React.useState("")
 
    return (
       <TableContainer onScroll={onScroll} component={Paper} style={TableContainerStyle}>
-         <Subheaders content={content} theme={theme} />
+         <Subheaders response={response} content={content} theme={theme} />
          <Table aria-label="collapsible table">
             {/* HEaders */}
             <TableHead
@@ -305,7 +318,10 @@ export const EditTable = ({
                   <TableCell align="left" sx={CellStyle}>
                      Type
                   </TableCell>
-                  <TableCell align="left" sx={{ ...CellStyle, width: "15rem" }}>
+                  <TableCell
+                     align="left"
+                     sx={{ ...CellStyle, width: "15rem", paddingLeft: "3rem" }}
+                  >
                      Content Example
                   </TableCell>
                   <TableCell align="left" sx={CellStyle}>

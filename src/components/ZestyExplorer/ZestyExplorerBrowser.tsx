@@ -4,12 +4,12 @@ import React from "react"
 import { useFetchWrapper } from "hooks"
 import { fetchData } from "services"
 import { Box } from "@mui/material"
-import { Loader } from "components"
 import { containerStyle } from "./styles"
 import { Headers } from "components"
 import { CodeHelperTab, EditTab, HealhTab, JsonDataViewerTab, MetaViewerTab } from "views"
 import { useTheme } from "@mui/material/styles"
 import { LoginPrompt } from "components/Ui"
+import { NewLoader } from "components/Loader/NewLoader"
 
 export const ZestyExplorerBrowser = ({
    pageData,
@@ -19,6 +19,7 @@ export const ZestyExplorerBrowser = ({
    jsonData,
    getData,
 }: any) => {
+   const [createHeadtag, setcreateHeadtag] = React.useState(false)
    const content = contentData || dummydata
    const [currentTab, setcurrentTab] = React.useState(0)
    const [search, setSearch] = React.useState()
@@ -35,7 +36,7 @@ export const ZestyExplorerBrowser = ({
       console.log("Current scroll position:", target.scrollTop)
    }
 
-   const userAppSID = helper.getCookie("APP_SID")
+   const userAppSID = helper.getUserAppSID()
    const token = userAppSID
    const itemZUID = jsonData?.data?.meta?.zuid
    const modelZUID = jsonData?.data?.meta?.model?.zuid
@@ -94,9 +95,15 @@ export const ZestyExplorerBrowser = ({
       scrollEvent,
       getData,
       setloading: () => settime(2),
+      response,
    }
 
    const MetaProps = {
+      onClose: () => setcreateHeadtag(false),
+      resourceZUID: itemZUID,
+      instanceZUID,
+
+      createHeadtag,
       theme,
       response,
       metaData,
@@ -104,6 +111,7 @@ export const ZestyExplorerBrowser = ({
       token,
       url,
       getData,
+      createHeadtagModal: () => setcreateHeadtag(true),
       setloading: () => settime(2),
    }
 
@@ -113,6 +121,7 @@ export const ZestyExplorerBrowser = ({
       setSearch,
       theme,
       content,
+      response,
    }
 
    const CodeHelperProps = {
@@ -124,17 +133,19 @@ export const ZestyExplorerBrowser = ({
       token,
       scrollPos: currentScroll,
       scrollEvent,
+      response,
    }
 
    const HealthTabProps = {
       content,
       theme,
+      response,
    }
    // show loading
    if (loading && !verifyFailed && !verifySuccess) {
       return (
          <Box sx={containerStyle}>
-            <Loader />
+            <NewLoader />
          </Box>
       )
    }
@@ -151,8 +162,8 @@ export const ZestyExplorerBrowser = ({
    return (
       <Box sx={containerStyle}>
          <Headers {...HeaderProps}>{children}</Headers>
-         <Box sx={{ position: "relative" }}>
-            {time > 0 && <Loader />}
+         <Box sx={{ position: "" }}>
+            {time > 0 && <NewLoader />}
             {currentTab === 0 && <EditTab {...EditProps} />}
             {currentTab === 1 && <MetaViewerTab {...MetaProps} />}
             {currentTab === 2 && <JsonDataViewerTab {...JSONProps} />}

@@ -231,6 +231,16 @@ const btnList = [
    },
 ]
 
+interface ITable {
+   content: any
+   metaData: any
+   data: any
+   url: any
+   token: any
+   onScroll: any
+   theme: any
+   response: any
+}
 export const CodeHelperTable = ({
    content,
    metaData,
@@ -239,12 +249,18 @@ export const CodeHelperTable = ({
    token,
    onScroll,
    theme,
-}: any) => {
+   response,
+}: ITable) => {
    const [workingElement, setWorkingElement] = React.useState("")
 
    return (
       <TableContainer onScroll={onScroll} component={Paper} style={TableContainerStyle}>
-         <Subheaders theme={theme} content={content} btnList={btnList} />
+         <Subheaders
+            response={response}
+            theme={theme}
+            content={content}
+            btnList={btnList}
+         />
          <Table aria-label="collapsible table">
             {/* HEaders */}
             <TableHead

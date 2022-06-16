@@ -8,17 +8,24 @@ interface Props {
    setSearch: (e: any) => void
    theme: any
    content: any
+   response: any
 }
 
-export const JsonDataViewerTab = ({ content, data, search, setSearch, theme }: Props) => {
-   console.log(data, "data123123")
+export const JsonDataViewerTab = ({
+   response,
+   content,
+   data,
+   search,
+   setSearch,
+   theme,
+}: Props) => {
    return (
       <Box sx={{ background: "#fff" }}>
-         <Subheaders content={content} theme={theme} />
+         <Subheaders response={response} content={content} theme={theme} />
          <SearchAppBar value={search} onChange={setSearch} />
          <ReactJson
             style={{
-               height: "80vh",
+               height: "70vh",
                overflowY: "scroll",
                fontSize: "14px !important",
                fontFamily: "Mulish",

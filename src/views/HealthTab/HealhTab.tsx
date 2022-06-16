@@ -1,13 +1,15 @@
 import { Box, Typography } from "@mui/material"
 import React from "react"
 import { CustomButton, Tooltip } from "components"
+import { Subheaders } from "components"
 
 interface Props {
    content: any
    theme: any
+   response: any
 }
 
-export const HealhTab = ({ content, theme }: Props) => {
+export const HealhTab = ({ content, theme, response }: Props) => {
    console.log(content, theme)
    const currentUrl = window.location.href
    const w3cUrl = "https://validator.w3.org/nu/?doc=" + currentUrl
@@ -54,73 +56,76 @@ export const HealhTab = ({ content, theme }: Props) => {
       },
    ]
    return (
-      <Box
-         paddingX={4}
-         paddingY={4}
-         sx={{
-            background: "background.paper",
-            overflow: "auto",
-            height: "90vh",
-            position: "relative",
-         }}
-      >
+      <>
+         <Subheaders response={response} content={content} theme={theme} />
          <Box
+            paddingX={4}
             paddingY={4}
             sx={{
-               background: theme.palette.common.white,
+               background: "background.paper",
                overflow: "auto",
-               height: "100%",
+               height: "90vh",
+               position: "relative",
             }}
-            boxShadow={1}
-            borderRadius={4}
          >
-            <Typography
-               paddingBottom={4}
-               sx={{
-                  fontSize: "24px",
-                  fontWeight: "bold",
-                  color: theme.palette.zesty.zestyOrange,
-                  textAlign: "center",
-               }}
-            >
-               Site Health Check
-            </Typography>
             <Box
-               paddingLeft={12}
-               sx={{ display: "flex", flexDirection: "column", gap: "2rem" }}
+               paddingY={4}
+               sx={{
+                  background: theme.palette.common.white,
+                  overflow: "auto",
+                  height: "100%",
+               }}
+               boxShadow={1}
+               borderRadius={4}
             >
-               {linkList.map((e: any) => {
-                  return (
-                     <Box>
-                        <Box
-                           sx={{
-                              display: "flex",
-                              textAlign: "center",
-                              alignItems: "center",
-                           }}
-                        >
-                           <Typography
-                              paddingBottom={1}
-                              marginLeft={1}
-                              paddingTop={1}
+               <Typography
+                  paddingBottom={4}
+                  sx={{
+                     fontSize: "24px",
+                     fontWeight: "bold",
+                     color: theme.palette.zesty.zestyOrange,
+                     textAlign: "center",
+                  }}
+               >
+                  Site Health Check
+               </Typography>
+               <Box
+                  paddingLeft={12}
+                  sx={{ display: "flex", flexDirection: "column", gap: "2rem" }}
+               >
+                  {linkList.map((e: any) => {
+                     return (
+                        <Box>
+                           <Box
                               sx={{
-                                 fontSize: "16px",
-                                 fontWeight: "bold",
-                                 color: theme.palette.primary.main,
+                                 display: "flex",
+                                 textAlign: "center",
+                                 alignItems: "center",
                               }}
                            >
-                              {e.label}
-                           </Typography>
-                           <Tooltip name={e.name} text={e.infoText} />
+                              <Typography
+                                 paddingBottom={1}
+                                 marginLeft={1}
+                                 paddingTop={1}
+                                 sx={{
+                                    fontSize: "16px",
+                                    fontWeight: "bold",
+                                    color: theme.palette.primary.main,
+                                 }}
+                              >
+                                 {e.label}
+                              </Typography>
+                              <Tooltip name={e.name} text={e.infoText} />
+                           </Box>
+                           <CustomButton onClick={() => openInNewTab(e.href)}>
+                              {e.btnText}
+                           </CustomButton>
                         </Box>
-                        <CustomButton onClick={() => openInNewTab(e.href)}>
-                           {e.btnText}
-                        </CustomButton>
-                     </Box>
-                  )
-               })}
+                     )
+                  })}
+               </Box>
             </Box>
          </Box>
-      </Box>
+      </>
    )
 }

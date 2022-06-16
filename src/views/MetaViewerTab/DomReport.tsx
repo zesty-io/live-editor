@@ -1,5 +1,12 @@
 import { Box, Typography } from "@mui/material"
 import React from "react"
+import Table from "@mui/material/Table"
+import TableBody from "@mui/material/TableBody"
+import TableCell from "@mui/material/TableCell"
+import TableContainer from "@mui/material/TableContainer"
+import TableHead from "@mui/material/TableHead"
+import TableRow from "@mui/material/TableRow"
+import Paper from "@mui/material/Paper"
 
 function wordCount(elements: any) {
    let count = 0
@@ -10,16 +17,39 @@ function wordCount(elements: any) {
 }
 
 export const DomReport = ({ theme }: any) => {
-   const h1s = document.getElementsByTagName("h1").length
-   const links = document.getElementsByTagName("a").length
-   const words = wordCount(document.getElementsByTagName("body"))
+   const h1s = document.getElementsByTagName("h1")
+   const h2s = document.getElementsByTagName("h2")
+   const h3s = document.getElementsByTagName("h3")
+   const h4s = document.getElementsByTagName("h4")
+   const h5s = document.getElementsByTagName("h5")
+   const h6s = document.getElementsByTagName("h6")
+   const ps = document.getElementsByTagName("p")
+   const links = document.getElementsByTagName("a")
+   const words =
+      wordCount(document.getElementsByTagName("h1")) +
+      wordCount(document.getElementsByTagName("h2")) +
+      wordCount(document.getElementsByTagName("h3")) +
+      wordCount(document.getElementsByTagName("h4")) +
+      wordCount(document.getElementsByTagName("h5")) +
+      wordCount(document.getElementsByTagName("h6")) +
+      wordCount(document.getElementsByTagName("p")) +
+      wordCount(document.getElementsByTagName("a"))
+   const chars = wordCount(document.getElementsByTagName("body"))
 
    const contentList = [
-      { label: "Number of H1 tags:", value: h1s },
-      { label: "Number of words:", value: words },
-      { label: "Number of links:", value: links },
+      { label: "H1 tags:", value: h1s.length },
+      { label: "H2 tags:", value: h2s.length },
+      { label: "H3 tags:", value: h3s.length },
+      { label: "H4 tags:", value: h4s.length },
+      { label: "H5 tags:", value: h5s.length },
+      { label: "H6 tags:", value: h6s.length },
+      { label: "P tags:", value: ps.length },
+      { label: "links:", value: links.length },
+      { label: "words:", value: words },
+      { label: "characters:", value: chars },
    ]
 
+   const COLUMNS = ["Element", "Number of Elements in Page"]
    return (
       <Box paddingTop={4}>
          <Typography
@@ -32,41 +62,51 @@ export const DomReport = ({ theme }: any) => {
          >
             DOM Report
          </Typography>
-         <Box
-            borderRadius={4}
-            padding={4}
-            boxShadow={1}
-            sx={{
-               backgroundColor: theme.palette.alternate.main,
-            }}
-         >
-            {contentList.map((e: any) => {
-               return (
-                  <Box sx={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-                     <Typography
-                        paddingBottom={2}
-                        sx={{
-                           fontSize: "18px",
-                           fontWeight: "400",
-                           color: theme.palette.common.black,
-                        }}
-                     >
-                        {e.label}
-                     </Typography>
-                     <Typography
-                        paddingBottom={2}
-                        sx={{
-                           fontSize: "26px",
-                           fontWeight: "bold",
-                           color: theme.palette.primary.main,
-                        }}
-                     >
-                        {e.value}
-                     </Typography>
-                  </Box>
-               )
-            })}
+         <Box>
+            <BasicTable rows={contentList} columns={COLUMNS} />
          </Box>
       </Box>
+   )
+}
+interface TPROPs {
+   rows: any[]
+   columns: string[]
+}
+
+function BasicTable({ rows, columns }: TPROPs) {
+   return (
+      <TableContainer component={Paper} sx={{ overflowX: "hidden" }}>
+         <Table sx={{ minWidth: 650, overflowX: "hidden" }} aria-label="simple table">
+            <TableHead>
+               <TableRow>
+                  {columns.map((e: any) => {
+                     return (
+                        <TableCell
+                           align="left"
+                           sx={{ fontWeight: "bold", textTransform: "capitalize" }}
+                        >
+                           {e}
+                        </TableCell>
+                     )
+                  })}
+               </TableRow>
+            </TableHead>
+            <TableBody>
+               {rows.map((row: any) => (
+                  <TableRow
+                     key={row.label}
+                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                     <TableCell align="left" component="th" scope="row">
+                        {row.label}
+                     </TableCell>
+                     <TableCell align="left" scope="row">
+                        {row.value}
+                     </TableCell>
+                  </TableRow>
+               ))}
+            </TableBody>
+         </Table>
+      </TableContainer>
    )
 }

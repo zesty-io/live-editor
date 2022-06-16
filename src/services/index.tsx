@@ -50,6 +50,7 @@ export const fetchJSON = async (
    uri: string,
    setFunc: (e: any) => any,
    token: string | any,
+   setloading: any,
 ) => {
    console.log(token)
    const data = ""
@@ -69,10 +70,12 @@ export const fetchJSON = async (
    })
 
    if (res.status === 200) {
+      setloading(false)
       return { data: await res.json(), res, error: false }
       // data = await res.json()
       // setFunc({ data, response: res })
    } else {
+      setloading(false)
       return { data: null, res, error: false }
       // setFunc({ data: null, response: res, error: true })
    }
@@ -108,6 +111,21 @@ export const editHeadTagApi = async ({ url, token, payload }: any) => {
    return json
 }
 
+export const addHeadTagApi = async ({ url, token, payload }: any) => {
+   const putMethod = {
+      method: "POST",
+      headers: {
+         "Content-type": "application/json; charset=UTF-8",
+         authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(payload),
+   }
+
+   const res = await fetch(url, putMethod)
+   const json = await res.json()
+
+   return json
+}
 export const deleteHeadTagApi = async ({ url, token }: any) => {
    const putMethod = {
       method: "DELETE",

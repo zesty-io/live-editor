@@ -2,11 +2,11 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from "react"
 import { ThemeProvider } from "@mui/material/styles"
-import CssBaseline from "@mui/material/CssBaseline"
+// import CssBaseline from "@mui/material/CssBaseline"
 import * as helper from "utils/index"
 import { fetchJSON, getPageData } from "services/index"
 import { OutlineCard as Card } from "components/Card"
-import { buttonStyles, verifyUserPrompt, zestyWrapper } from "./styles"
+import { verifyUserPrompt, zestyWrapper } from "./styles"
 import Button from "@mui/material/Button"
 import Box from "@mui/material/Box"
 import getTheme from "theme/index"
@@ -14,7 +14,7 @@ import { useDarkMode } from "hooks"
 import CloseFullscreenIcon from "@mui/icons-material/CloseFullscreen"
 import { Helmet } from "react-helmet"
 import { ZestyExplorerBrowser } from "./ZestyExplorerBrowser"
-import { LaunchBtn } from "components"
+import { LaunchBtn, Loader } from "components"
 
 // dom access highlight function
 const expandBody = (bool: boolean) => {
@@ -37,12 +37,18 @@ export const ZestyExplorer = ({ content = {} }: any) => {
    const [pageData, setPageData] = React.useState<any>("")
    const [response, setResponse] = React.useState<any>("")
    const [themeMode, themeToggler, mountedComponent] = useDarkMode()
+   const [loading, setloading] = React.useState(false)
    console.log(themeMode, mountedComponent)
 
+   const handleJSONData = (res: any) => {
+      setJsonData(res)
+      setloading(false)
+   }
    // get json data
    const fetchJsonData = async () => {
-      const res = await fetchJSON(jsonUrl, setJsonData, token)
-      res && setJsonData(res)
+      setloading(true)
+      const res = await fetchJSON(jsonUrl, setJsonData, token, setloading)
+      res && handleJSONData(res)
    }
 
    const getData = async () => {
@@ -54,7 +60,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
    // check if content is available
    React.useEffect(() => {
       const fetchJsonData = async () => {
-         const res = await fetchJSON(jsonUrl, setJsonData, token)
+         const res = await fetchJSON(jsonUrl, setJsonData, token, setloading)
          res && setJsonData(res)
       }
 
@@ -90,6 +96,13 @@ export const ZestyExplorer = ({ content = {} }: any) => {
       return null
    }
 
+   if (loading) {
+      return (
+         <Box sx={verifyUserPrompt} zIndex={2147483647}>
+            <Loader />
+         </Box>
+      )
+   }
    if (jsonData?.data === null || jsonData?.length == 0) {
       return (
          <Box sx={verifyUserPrompt} zIndex={2147483647}>
@@ -112,20 +125,12 @@ export const ZestyExplorer = ({ content = {} }: any) => {
             ></link>
          </Helmet>
          <ThemeProvider theme={getTheme("light", themeToggler)}>
-            <CssBaseline />
+            {/* <CssBaseline /> */}
             {/* ZESTY LOGO  bottom right*/}
             {!open && (
                <LaunchBtn
                   onClick={() => helper.toggleOpenState(true, setOpen, expandBody)}
-                  style={buttonStyles}
-               >
-                  <img
-                     src="https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png"
-                     width="32px"
-                     height="32px"
-                     alt="Zesty.io Logo"
-                  />
-               </LaunchBtn>
+               />
             )}
 
             {open && (

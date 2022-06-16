@@ -29,6 +29,14 @@ const config: Configuration = {
             },
          },
          {
+            test: /\.(png|jpe?g|gif)$/i,
+            use: [
+               {
+                  loader: "file-loader",
+               },
+            ],
+         },
+         {
             test: /\.svg$/,
             use: [
                {
@@ -44,6 +52,22 @@ const config: Configuration = {
             use: {
                loader: "url-loader",
             },
+         },
+         {
+            test: /\.css$/,
+            use: ["style-loader", "css-loader"],
+            exclude: /\.module\.css$/,
+         },
+         {
+            test: /\.s[ac]ss$/i,
+            use: [
+               // Creates `style` nodes from JS strings
+               "style-loader",
+               // Translates CSS into CommonJS
+               "css-loader",
+               // Compiles Sass to CSS
+               "sass-loader",
+            ],
          },
       ],
    },
@@ -106,6 +130,9 @@ const config: Configuration = {
       new HtmlWebpackPlugin({ template: "test/index.html" }),
       new webpack.optimize.LimitChunkCountPlugin({
          maxChunks: 1,
+      }),
+      new webpack.ProvidePlugin({
+         process: "process/browser",
       }),
    ],
 }

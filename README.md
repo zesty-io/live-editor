@@ -1,8 +1,12 @@
+<p align="center">
+
 <img src="https://brand.zesty.io/zesty-io-logo.svg" alt="zesty logo" width="200">
+<p>
 
-# Zesty.io Live Editor
-
+<h1 align="center"> Zesty.io Live Editor </h1>
+<p align="center">
 Website/App Overlay Guide for Editing Zesty.io Content
+<p>
 
 ## Overview
 
@@ -28,7 +32,8 @@ Using CDN
 ></script>
 ```
 
-Note, if your website has a strict content security policy or x-frame-options, you will need to add this url to your white list 
+Note, if your website has a strict content security policy or x-frame-options, you will need to add this url to your white list
+
 ```
 https://cdn.jsdelivr.net/gh/zesty-io/live-editor@latest/dist/live-editor.production.js
 ```

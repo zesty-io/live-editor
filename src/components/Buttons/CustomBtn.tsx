@@ -6,6 +6,8 @@ interface Props {
    theme: any
    title?: string
    variant?: string
+   type?: any
+   size?: string
 }
 
 export const CustomButton = styled.button`
@@ -21,7 +23,7 @@ export const CustomButton = styled.button`
    justify-items: flex-start;
    text-align: left;
    outline: none;
-   font-size: 10px;
+   font-size: ${(props: any) => props.size};
    cursor: pointer;
    font-family: Mulish;
    border: 1px solid transparent;
@@ -57,9 +59,14 @@ export const CustomBtn = ({
    children,
    onClick,
    theme,
+   type = "button",
+   size = "10px",
 }: Props) => {
    return (
       <CustomButton
+         // @ts-ignore
+         size={size}
+         type={type}
          // @ts-ignore
          variant={variant}
          theme={theme}
@@ -68,5 +75,68 @@ export const CustomBtn = ({
       >
          {children}
       </CustomButton>
+   )
+}
+
+const CustomLnk = styled.button`
+   width: "auto";
+   white-space: nowrap;
+   background: ${(props: any) =>
+      props.variant === "error"
+         ? props.theme.palette.zesty.zestyLightBlue
+         : props.theme.palette.common.white};
+   padding: 0.5rem 0.5rem;
+   display: flex;
+   justify-content: flex-start;
+   justify-items: flex-start;
+   text-align: left;
+   outline: none;
+   font-size: 12px;
+   cursor: pointer;
+   font-family: Mulish;
+   border: 3px solid transparent;
+   /* border-radius: 5px; */
+   font-weight: 400;
+   transition: all 0.1s ease-in-out;
+   outline: none;
+   color: ${(props: any) => props.theme.palette.zesty.zestyZambezi};
+   align-items: center;
+   gap: 0.3rem;
+
+   &:hover {
+      background: ${(props: any) => props.theme.palette.common.white};
+      border-bottom: 3px solid ${(props: any) => props.theme.palette.zesty.zestyOrange};
+      color: ${(props: any) => props.theme.palette.zesty.zestyOrange};
+   }
+
+   &:focus {
+      background: ${(props: any) => props.theme.palette.common.white};
+      border-bottom: 3px solid ${(props: any) => props.theme.palette.zesty.zestyOrange};
+      color: ${(props: any) => props.theme.palette.zesty.zestyOrange};
+   }
+   &:active {
+      background: ${(props: any) => props.theme.palette.common.white};
+      border-bottom: 3px solid ${(props: any) => props.theme.palette.zesty.zestyOrange};
+      color: ${(props: any) => props.theme.palette.zesty.zestyOrange};
+   }
+`
+
+export const CustomLink = ({
+   variant = "primary",
+   title,
+   children,
+   onClick,
+   theme,
+}: Props) => {
+   return (
+      <CustomLnk
+         // @ts-ignore
+         variant={variant}
+         theme={theme}
+         title={title}
+         onClick={onClick}
+      >
+         {children}
+      </CustomLnk>
    )
 }

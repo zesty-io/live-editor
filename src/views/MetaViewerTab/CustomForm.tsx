@@ -1,9 +1,9 @@
-import { Box, Button } from "@mui/material"
+import { Box, Button, Typography } from "@mui/material"
 import React, { useState, useEffect } from "react"
-import CloseIcon from "@mui/icons-material/Close"
 import { MainInput } from "components"
 
 export const CustomForm = ({ theme, data, handleSubmit, handleDelete }: any) => {
+   console.log(handleDelete)
    const [attri, setattri] = useState(data)
    // const [test, settest] = useState("")
 
@@ -31,9 +31,9 @@ export const CustomForm = ({ theme, data, handleSubmit, handleDelete }: any) => 
    return (
       <Box
          boxShadow={1}
-         borderRadius={4}
+         borderRadius={1}
          marginBottom={2}
-         paddingX={4}
+         paddingX={8}
          paddingY={4}
          sx={{
             backgroundColor: theme.palette.alternate.main,
@@ -51,13 +51,13 @@ export const CustomForm = ({ theme, data, handleSubmit, handleDelete }: any) => 
                justifyItems: "start",
             }}
          >
-            <Button
+            {/* <Button
                sx={{
                   background: theme.palette.zesty.zestyBitterSweet,
                   position: "absolute",
                   top: "1rem",
                   right: "1rem",
-                  borderRadius: "10px",
+                  borderRadius: "5px",
                }}
                variant="contained"
                onClick={handleDelete}
@@ -65,8 +65,20 @@ export const CustomForm = ({ theme, data, handleSubmit, handleDelete }: any) => 
                title="Delete Head Tag"
             >
                <CloseIcon fontSize="small" />
-            </Button>
+            </Button> */}
             <Box>
+               <Box
+                  sx={{
+                     display: "flex",
+                     gap: "4rem",
+                     justifyContent: "start",
+                     justifyItems: "start",
+                     width: "100%",
+                  }}
+               >
+                  <Typography sx={{ fontWeight: "bold" }}>Attribute</Typography>
+                  <Typography sx={{ fontWeight: "bold" }}>Value</Typography>
+               </Box>
                {data &&
                   Object.entries(data).map((x: any, i: number) => {
                      const key: any = Object.keys(attri)[i]
@@ -74,52 +86,35 @@ export const CustomForm = ({ theme, data, handleSubmit, handleDelete }: any) => 
                      return (
                         <Box
                            sx={{
-                              display: "flex",
-                              gap: "4rem",
-
+                              display: "grid",
+                              gap: "2rem",
+                              gridTemplateColumns: "5rem 1fr",
+                              alignItems: "center",
                               justifyContent: "start",
                               justifyItems: "start",
                            }}
                         >
-                           <Box sx={{}}>
-                              <MainInput
-                                 theme={{
-                                    main: theme.palette.primary.main,
-                                    white: theme.palette.common.white,
-                                    boxShadow: theme.palette.secondary.blueShadow,
-                                    border: theme.palette.secondary.whiteSmoke,
-                                 }}
-                                 disabled={true}
-                                 name={key}
-                                 autoFocus={false}
-                                 key={i}
-                                 label={"Attribute"}
-                                 required={false}
-                                 value={key}
-                                 onChange={() => {}}
-                                 placeholder={key}
-                              />
+                           <Box sx={{ display: "block" }}>
+                              <Typography>{key}</Typography>
                            </Box>
-                           <Box sx={{}}>
-                              <MainInput
-                                 theme={{
-                                    main: theme.palette.primary.main,
-                                    white: theme.palette.common.white,
-                                    boxShadow: theme.palette.secondary.blueShadow,
-                                    border: theme.palette.secondary.whiteSmoke,
-                                 }}
-                                 name={val}
-                                 autoFocus={false}
-                                 key={i}
-                                 label={"Value"}
-                                 required={false}
-                                 value={val}
-                                 onChange={(e: any) =>
-                                    setattri({ ...attri, [key]: e.target.value })
-                                 }
-                                 placeholder={val}
-                              />
-                           </Box>
+                           <MainInput
+                              theme={{
+                                 main: theme.palette.primary.main,
+                                 white: theme.palette.common.white,
+                                 boxShadow: theme.palette.secondary.blueShadow,
+                                 border: theme.palette.secondary.whiteSmoke,
+                              }}
+                              name={val}
+                              autoFocus={false}
+                              key={i}
+                              label={" "}
+                              required={false}
+                              value={val}
+                              onChange={(e: any) =>
+                                 setattri({ ...attri, [key]: e.target.value })
+                              }
+                              placeholder={val}
+                           />
                         </Box>
                      )
                   })}
@@ -129,8 +124,8 @@ export const CustomForm = ({ theme, data, handleSubmit, handleDelete }: any) => 
                sx={{
                   display: "flex",
                   width: "100%",
-                  justifyContent: "start",
-                  justifyItems: "start",
+                  justifyContent: "center",
+                  justifyItems: "center",
                }}
             >
                <Button
