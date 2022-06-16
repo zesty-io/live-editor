@@ -283,3 +283,32 @@ export const getGlobalMetaTags = (headtags: any) => {
       })
    return res
 }
+
+export const fetchWrapperOptions = () => {
+   const dev = {
+      sitesServiceURL: "https://svc.dev.zesty.io/sites-service/",
+      instancesAPIURL: ".api.dev.zesty.io/v1",
+      authAPIURL: "https://auth.api.dev.zesty.io",
+      accountsAPIURL: "https://accounts.api.dev.zesty.io/v1",
+      mediaAPIURL: "https://svc.dev.zesty.io",
+   }
+
+   const prod = {}
+
+   if (process.env.PRODUCTION === "false") {
+      return dev
+   } else {
+      return prod
+   }
+}
+
+export const getUserAppSID = () => {
+   const prod = getCookie("APP_SID")
+   const dev = getCookie("DEV_APP_SID")
+
+   if (process.env.PRODUCTION === "false") {
+      return dev
+   } else {
+      return prod
+   }
+}

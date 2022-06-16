@@ -36,7 +36,7 @@ export const ZestyExplorerBrowser = ({
       console.log("Current scroll position:", target.scrollTop)
    }
 
-   const userAppSID = helper.getCookie("APP_SID")
+   const userAppSID = helper.getUserAppSID()
    const token = userAppSID
    const itemZUID = jsonData?.data?.meta?.zuid
    const modelZUID = jsonData?.data?.meta?.model?.zuid

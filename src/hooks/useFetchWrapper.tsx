@@ -1,4 +1,5 @@
 import React from "react"
+import { fetchWrapperOptions } from "utils"
 
 export const useFetchWrapper = (userAppSID: any, instanceZUID: any) => {
    const [verifySuccess, setverifySuccess] = React.useState("")
@@ -9,15 +10,12 @@ export const useFetchWrapper = (userAppSID: any, instanceZUID: any) => {
    // for verify user loading
    const [loading, setloading] = React.useState(false)
 
-   // FetchWrapper Section
-   // const instanceZUID = helper.getCookie("INSTANCE_ZUID") || "8-c4eec0b7d4-8lx0ch"
-   // const userAppSID =
-   //    helper.getCookie("APP_SID") || "f3555fb52bdd3c6e3b3ff5421b74b740bf41f4e5"
-   // const instanceZUID = ""
-   // const userAppSID = ""
-
    // @ts-ignore
-   const ZestyAPI = new Zesty.FetchWrapper(instanceZUID, userAppSID)
+   const ZestyAPI = new Zesty.FetchWrapper(
+      instanceZUID,
+      userAppSID,
+      fetchWrapperOptions(),
+   )
 
    const verifyUser = async () => {
       setloading(true)
