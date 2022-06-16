@@ -3,12 +3,9 @@
 <img src="https://brand.zesty.io/zesty-io-logo.svg" alt="zesty logo" width="200">
 <p>
 
+<h1 align="center"> Zesty.io Live Editor </h1>
 <p align="center">
-
-# Zesty.io Live Editor
-
 Website/App Overlay Guide for Editing Zesty.io Content
-
 <p>
 
 ## Overview
