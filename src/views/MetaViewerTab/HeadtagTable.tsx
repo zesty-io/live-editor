@@ -46,12 +46,16 @@ function Row(props: any) {
                   )}
                </IconButton>
             </TableCell>
-            <TableCell component="th" scope="row">
+            <TableCell component="th" scope="row" sx={{ fontSize: "12px" }}>
                {row.type}
             </TableCell>
-            <TableCell align="left">{row.sort}</TableCell>
-            <TableCell align="left">{row.resourceZUID}</TableCell>
-            <TableCell align="left">
+            <TableCell align="left" sx={{ fontSize: "12px" }}>
+               {row.sort}
+            </TableCell>
+            <TableCell align="left" sx={{ fontSize: "12px" }}>
+               {row.resourceZUID}
+            </TableCell>
+            <TableCell align="left" sx={{ fontSize: "12px" }}>
                <Box paddingLeft={4}>
                   <DeleteForeverIcon
                      sx={{ cursor: "pointer" }}
@@ -120,7 +124,11 @@ export const HeadTagTable = ({
                         return (
                            <TableCell
                               align="left"
-                              sx={{ fontWeight: "bold", textTransform: "capitalize" }}
+                              sx={{
+                                 fontSize: "14px",
+                                 fontWeight: "bold",
+                                 textTransform: "capitalize",
+                              }}
                            >
                               {e}
                            </TableCell>

@@ -83,7 +83,11 @@ function BasicTable({ rows, columns }: TPROPs) {
                      return (
                         <TableCell
                            align="left"
-                           sx={{ fontWeight: "bold", textTransform: "capitalize" }}
+                           sx={{
+                              fontWeight: "bold",
+                              textTransform: "capitalize",
+                              fontSize: "14px",
+                           }}
                         >
                            {e}
                         </TableCell>
@@ -97,10 +101,15 @@ function BasicTable({ rows, columns }: TPROPs) {
                      key={row.label}
                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
-                     <TableCell align="left" component="th" scope="row">
+                     <TableCell
+                        align="left"
+                        component="th"
+                        scope="row"
+                        sx={{ fontSize: "12px" }}
+                     >
                         {row.label}
                      </TableCell>
-                     <TableCell align="left" scope="row">
+                     <TableCell align="left" scope="row" sx={{ fontSize: "12px" }}>
                         {row.value}
                      </TableCell>
                   </TableRow>

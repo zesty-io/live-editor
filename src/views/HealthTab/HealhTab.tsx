@@ -73,7 +73,7 @@ export const HealhTab = ({ content, theme, response }: Props) => {
                sx={{
                   background: theme.palette.common.white,
                   overflow: "auto",
-                  height: "100%",
+                  height: "auto",
                }}
                boxShadow={1}
                borderRadius={4}

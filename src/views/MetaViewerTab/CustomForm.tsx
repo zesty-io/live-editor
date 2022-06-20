@@ -129,7 +129,7 @@ export const CustomForm = ({ theme, data, handleSubmit, handleDelete }: any) => 
                }}
             >
                <Button
-                  sx={{ width: "10rem", whiteSpace: "nowrap" }}
+                  sx={{ whiteSpace: "nowrap", padding: ".5rem 1rem" }}
                   variant="contained"
                   color="secondary"
                   onClick={() => handleSubmit(attri)}
