@@ -28,18 +28,18 @@ function Row(props: any) {
                   aria-label="expand row"
                   size="small"
                   onClick={() => setOpen(!open)}
+                  sx={{ fontSize: "22px" }}
                >
-                  {/* {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />} */}
                   {open ? (
                      <AutoFixHighIcon
-                        fontSize="medium"
+                        fontSize="inherit"
                         color="secondary"
                         titleAccess="Edit Data"
                      />
                   ) : (
                      <EditIcon
                         sx={{ cursor: "pointer" }}
-                        fontSize="medium"
+                        fontSize="inherit"
                         color="secondary"
                         titleAccess="Edit Data"
                      />
@@ -56,10 +56,10 @@ function Row(props: any) {
                {row.resourceZUID}
             </TableCell>
             <TableCell align="left" sx={{ fontSize: "12px" }}>
-               <Box paddingLeft={4}>
+               <Box paddingLeft={4} sx={{ fontSize: "22px" }}>
                   <DeleteForeverIcon
                      sx={{ cursor: "pointer" }}
-                     fontSize="medium"
+                     fontSize="inherit"
                      color="secondary"
                      titleAccess="Delete Data"
                      onClick={handleDelete}

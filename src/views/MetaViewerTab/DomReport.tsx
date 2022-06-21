@@ -37,16 +37,16 @@ export const DomReport = ({ theme }: any) => {
    const chars = wordCount(document.getElementsByTagName("body"))
 
    const contentList = [
-      { label: "H1 tags:", value: h1s.length },
-      { label: "H2 tags:", value: h2s.length },
-      { label: "H3 tags:", value: h3s.length },
-      { label: "H4 tags:", value: h4s.length },
-      { label: "H5 tags:", value: h5s.length },
-      { label: "H6 tags:", value: h6s.length },
-      { label: "P tags:", value: ps.length },
-      { label: "links:", value: links.length },
-      { label: "words:", value: words },
-      { label: "characters:", value: chars },
+      { label: "H1 tags", value: h1s.length },
+      { label: "H2 tags", value: h2s.length },
+      { label: "H3 tags", value: h3s.length },
+      { label: "H4 tags", value: h4s.length },
+      { label: "H5 tags", value: h5s.length },
+      { label: "H6 tags", value: h6s.length },
+      { label: "P tags", value: ps.length },
+      { label: "Links", value: links.length },
+      { label: "Words", value: words },
+      { label: "Characters", value: chars },
    ]
 
    const COLUMNS = ["Element", "Number of Elements in Page"]
