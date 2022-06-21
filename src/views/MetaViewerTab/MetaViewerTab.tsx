@@ -8,6 +8,7 @@ import { DomReport } from "./DomReport"
 import { HeadTagTable } from "./HeadtagTable"
 import { MetaTags } from "./MetaTags"
 import * as helper from "utils"
+import AddIcon from "@mui/icons-material/Add"
 
 export const MetaViewerTab = ({
    content,
@@ -157,8 +158,8 @@ export const MetaViewerTab = ({
       "type",
       "sort",
       "resource ZUID",
-      <CustomBtn theme={theme} onClick={handleCreateHeadTag}>
-         Create Head Tag
+      <CustomBtn size="14px" theme={theme} onClick={handleCreateHeadTag}>
+         <AddIcon fontSize="small" /> Create Head Tag
       </CustomBtn>,
    ]
    const CreateHeadTagProps = {
