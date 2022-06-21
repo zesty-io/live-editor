@@ -124,8 +124,13 @@ function Row({
                   aria-label="expand row"
                   size="small"
                   onClick={() => setOpen(!open)}
+                  sx={{ fontSize: "22px" }}
                >
-                  {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                  {open ? (
+                     <KeyboardArrowUpIcon fontSize="inherit" />
+                  ) : (
+                     <KeyboardArrowDownIcon fontSize="inherit" />
+                  )}
                </IconButton>
             </TableCell>
             <TableCell component="th" scope="row" sx={rowStyle}>
@@ -222,9 +227,9 @@ function Row({
                >
                   <Box ref={ref1}>{value}</Box>
                   {!showCloseBtn && value && (
-                     <Box onClick={editElement} sx={{}}>
+                     <Box onClick={editElement} sx={{ fontSize: "22px" }}>
                         <EditIcon
-                           fontSize="medium"
+                           fontSize="inherit"
                            color="secondary"
                            titleAccess="Edit Data"
                         />
