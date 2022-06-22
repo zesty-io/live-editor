@@ -1,4 +1,6 @@
 export * from "./dummydata"
+import zestyName from "../assets/zestyname.svg"
+import zestyLogo from "../assets/zesty-io-logo.svg"
 
 export const dummycontent = {
    title: "Mat",
@@ -62,4 +64,9 @@ export const urls = {
    zestyBrandLogo: "https://brand.zesty.io/zesty-io-logo.svg",
    zestyBrandLogoMid:
       "https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png",
+}
+
+export const assets = {
+   zestyLogo,
+   zestyName,
 }
