@@ -22,17 +22,18 @@ export const OutlineCard = ({ handleCustomDomain, value, onChange }: Props) => {
                sx={{
                   width: "100%",
                   display: "flex",
-                  flexDirection: "column",
+                  flexDirection: "row",
                   justifyItems: "center",
                   justifyContent: "center",
                   alignItems: "center",
+                  gap: ".5rem",
                }}
             >
                <img
                   src={assets.zestyLogo}
                   alt="Zesty Explorer"
-                  width={"80"}
-                  height={"80"}
+                  width={"50"}
+                  height={"50"}
                />
                <img
                   src={assets.zestyName}
