@@ -19,7 +19,7 @@ export const ZestyExplorerBrowser = ({
    jsonData,
    getData,
 }: any) => {
-   const [createHeadtag, setcreateHeadtag] = React.useState(false)
+   const [modal, setmodal] = React.useState(false)
    const content = contentData || dummydata
    const [currentTab, setcurrentTab] = React.useState(0)
    const [search, setSearch] = React.useState()
@@ -82,6 +82,7 @@ export const ZestyExplorerBrowser = ({
       setcurrentTab,
       tabList,
       settime: () => settime(2),
+      modal,
    }
 
    const EditProps = {
@@ -99,11 +100,10 @@ export const ZestyExplorerBrowser = ({
    }
 
    const MetaProps = {
-      onClose: () => setcreateHeadtag(false),
+      onClose: () => setmodal(false),
       resourceZUID: itemZUID,
       instanceZUID,
-
-      createHeadtag,
+      modal,
       theme,
       response,
       metaData,
@@ -111,7 +111,7 @@ export const ZestyExplorerBrowser = ({
       token,
       url,
       getData,
-      createHeadtagModal: () => setcreateHeadtag(true),
+      createHeadtagModal: () => setmodal(true),
       setloading: () => settime(2),
    }
 

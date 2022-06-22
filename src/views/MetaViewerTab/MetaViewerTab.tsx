@@ -10,6 +10,21 @@ import { MetaTags } from "./MetaTags"
 import * as helper from "utils"
 import AddIcon from "@mui/icons-material/Add"
 
+interface Props {
+   content: any
+   response: any
+   theme: any
+   metaData: any
+   url: string
+   token: string
+   getData: any
+   setloading: any
+   createHeadtagModal: any
+   onClose: any
+   resourceZUID: any
+   instanceZUID: any
+   modal: boolean
+}
 export const MetaViewerTab = ({
    content,
    response,
@@ -23,8 +38,8 @@ export const MetaViewerTab = ({
    onClose,
    resourceZUID,
    instanceZUID,
-   createHeadtag,
-}: any) => {
+   modal,
+}: Props) => {
    const [title, settitle] = useState(content?.meta?.web?.seo_meta_title || "")
    const [desc, setdesc] = useState(content?.meta?.web?.seo_meta_description || "")
    const [keywords, setkeywords] = useState(content?.meta?.web?.seo_meta_keywords || "")
@@ -183,7 +198,7 @@ export const MetaViewerTab = ({
             fontSize: "14px !important",
          }}
       >
-         {createHeadtag && <CreateHeadTagModal {...CreateHeadTagProps} />}
+         {modal && <CreateHeadTagModal {...CreateHeadTagProps} />}
          <Box paddingBottom={8} sx={{ height: "90vh", overflow: "auto" }}>
             <Subheaders
                response={response}
@@ -195,7 +210,7 @@ export const MetaViewerTab = ({
                paddingY={4}
                paddingX={8}
                sx={{
-                  filter: createHeadtag ? "blur(5px)" : "blur(0px)",
+                  filter: modal ? "blur(5px)" : "none",
                }}
             >
                <MetaTags arr={arr} theme={theme} handleSubmit={editMetaTags} />

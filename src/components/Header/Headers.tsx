@@ -11,6 +11,7 @@ interface Props {
    setcurrentTab: any
    tabList: any
    settime: any
+   modal: boolean
 }
 
 const Index = ({
@@ -20,12 +21,20 @@ const Index = ({
    setcurrentTab,
    tabList,
    settime,
+   modal,
 }: Props) => {
    const theme = useTheme()
    console.log(content, response)
 
    return (
-      <AppBar sx={{ background: "#fff", overflowX: "auto" }} position="static">
+      <AppBar
+         sx={{
+            filter: modal ? "blur(5px)" : "none",
+            background: "#fff",
+            overflowX: "auto",
+         }}
+         position="static"
+      >
          <Box
             paddingLeft={3}
             paddingRight={1}
