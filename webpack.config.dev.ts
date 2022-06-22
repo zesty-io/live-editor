@@ -8,6 +8,8 @@ const config = merge(common, {
       static: {
          directory: path.join(__dirname, "dist"),
       },
+      // for zesty.io domain to work on CORS
+      host: "test.zesty.io",
       server: {
          type: "https",
       },
