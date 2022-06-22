@@ -70,14 +70,18 @@ export const CustomForm = ({ theme, data, handleSubmit, handleDelete }: any) => 
                <Box
                   sx={{
                      display: "flex",
-                     gap: "4rem",
+                     gap: "10rem",
                      justifyContent: "start",
                      justifyItems: "start",
                      width: "100%",
                   }}
                >
-                  <Typography sx={{ fontWeight: "bold" }}>Attribute</Typography>
-                  <Typography sx={{ fontWeight: "bold" }}>Value</Typography>
+                  <Typography sx={{ fontWeight: "bold", fontSize: "14px" }}>
+                     Attribute
+                  </Typography>
+                  <Typography sx={{ fontWeight: "bold", fontSize: "14px" }}>
+                     Value
+                  </Typography>
                </Box>
                {data &&
                   Object.entries(data).map((x: any, i: number) => {
@@ -88,14 +92,27 @@ export const CustomForm = ({ theme, data, handleSubmit, handleDelete }: any) => 
                            sx={{
                               display: "grid",
                               gap: "2rem",
-                              gridTemplateColumns: "5rem 1fr",
+                              gridTemplateColumns: "10rem 1fr",
                               alignItems: "center",
                               justifyContent: "start",
                               justifyItems: "start",
                            }}
                         >
-                           <Box sx={{ display: "block" }}>
-                              <Typography>{key}</Typography>
+                           <Box
+                              paddingBottom={2}
+                              sx={{
+                                 display: "block",
+                                 width: "15rem",
+                                 overflow: "hidden",
+                              }}
+                           >
+                              <Typography
+                                 sx={{
+                                    fontSize: "14px",
+                                 }}
+                              >
+                                 {key}
+                              </Typography>
                            </Box>
                            <MainInput
                               theme={{
