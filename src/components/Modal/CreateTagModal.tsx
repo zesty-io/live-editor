@@ -122,7 +122,6 @@ const ModalContent = ({
       <Box
          onClick={(e: any) => {
             e.stopPropagation()
-            e.preventDefault()
          }}
          paddingX={3}
          paddingTop={6}

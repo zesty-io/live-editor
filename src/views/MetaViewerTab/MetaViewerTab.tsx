@@ -191,7 +191,13 @@ export const MetaViewerTab = ({
                theme={theme}
                btnList={btnList}
             />
-            <Box paddingY={4} paddingX={8}>
+            <Box
+               paddingY={4}
+               paddingX={8}
+               sx={{
+                  filter: createHeadtag ? "blur(5px)" : "blur(0px)",
+               }}
+            >
                <MetaTags arr={arr} theme={theme} handleSubmit={editMetaTags} />
                <DomReport theme={theme} />
                <HeadTagTable
