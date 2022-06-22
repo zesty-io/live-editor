@@ -20,6 +20,7 @@ export const BasicMenu = ({ title = "no title", list, value, onChange }: Props) 
    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
    const open = Boolean(anchorEl)
    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.stopPropagation()
       setAnchorEl(event.currentTarget)
    }
    const handleClose = (data: any) => {
