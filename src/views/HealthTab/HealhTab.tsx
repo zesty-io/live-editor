@@ -72,7 +72,7 @@ export const HealhTab = ({ content, theme, response }: Props) => {
                paddingY={4}
                sx={{
                   background: theme.palette.common.white,
-                  overflow: "auto",
+                  overflow: "hidden",
                   height: "auto",
                }}
                boxShadow={1}
