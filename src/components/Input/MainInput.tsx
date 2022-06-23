@@ -115,7 +115,7 @@ const Index = ({
             />
          ) : (
             <CustomTextArea
-               rows={10}
+               rows={5}
                cols={10}
                key={key}
                disabled={disabled}
