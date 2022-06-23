@@ -16,6 +16,13 @@ import { Typography } from "@mui/material"
 import ContentCopyIcon from "@mui/icons-material/ContentCopy"
 import CheckCircleIcon from "@mui/icons-material/CheckCircle"
 
+const TypeStyle = {
+   fontSize: "14px",
+   display: "flex",
+   alignItems: "center",
+   gap: ".3rem",
+} as const
+
 function Row({ keyName }: any) {
    const [showCopy, setShowCopy] = React.useState(false)
    const [showCopy2, setShowCopy2] = React.useState(false)
@@ -26,9 +33,6 @@ function Row({ keyName }: any) {
 
    const theme = useTheme()
 
-   const TypeStyle = {
-      fontSize: "12px",
-   } as const
    return (
       <React.Fragment>
          <TableRow
@@ -88,12 +92,12 @@ function Row({ keyName }: any) {
                >
                   {clipboardCopy && (
                      <Typography sx={TypeStyle}>
-                        <CheckCircleIcon /> Copied to clipboard!
+                        <CheckCircleIcon fontSize="inherit" /> Copied to clipboard!
                      </Typography>
                   )}
                   {showCopy && (
                      <Typography sx={TypeStyle}>
-                        <ContentCopyIcon /> Copy
+                        <ContentCopyIcon fontSize="inherit" /> Copy
                      </Typography>
                   )}
                </Box>
@@ -145,12 +149,12 @@ function Row({ keyName }: any) {
                   {clipboardCopy2 && (
                      <Typography sx={TypeStyle}>
                         {" "}
-                        <CheckCircleIcon /> Copied to clipboard!
+                        <CheckCircleIcon fontSize="inherit" /> Copied to clipboard!
                      </Typography>
                   )}
                   {showCopy2 && (
                      <Typography sx={TypeStyle}>
-                        <ContentCopyIcon /> Copy
+                        <ContentCopyIcon fontSize="inherit" /> Copy
                      </Typography>
                   )}
                </Box>
@@ -201,12 +205,12 @@ function Row({ keyName }: any) {
                >
                   {clipboardCopy3 && (
                      <Typography sx={TypeStyle}>
-                        <CheckCircleIcon /> Copied to clipboard!
+                        <CheckCircleIcon fontSize="inherit" /> Copied to clipboard!
                      </Typography>
                   )}
                   {showCopy3 && (
                      <Typography sx={TypeStyle}>
-                        <ContentCopyIcon /> Copy
+                        <ContentCopyIcon fontSize="inherit" /> Copy
                      </Typography>
                   )}
                </Box>

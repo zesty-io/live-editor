@@ -131,9 +131,6 @@ const config: Configuration = {
       new webpack.optimize.LimitChunkCountPlugin({
          maxChunks: 1,
       }),
-      new webpack.ProvidePlugin({
-         process: "process/browser",
-      }),
    ],
 }
 
