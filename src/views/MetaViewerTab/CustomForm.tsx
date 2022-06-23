@@ -33,18 +33,20 @@ export const CustomForm = ({ theme, data, handleSubmit, handleDelete }: any) => 
          boxShadow={1}
          borderRadius={1}
          marginBottom={2}
-         paddingX={8}
          paddingY={4}
          sx={{
             backgroundColor: theme.palette.alternate.main,
             overflow: "hidden",
             position: "relative",
+            display: "flex",
+            justifyContent: "center",
+            justifyItems: "center",
          }}
       >
          <form
             action="submit"
             style={{
-               margin: "2rem .5rem",
+               margin: "0rem .5rem",
                display: "flex",
                flexDirection: "column",
                justifyContent: "start",
@@ -138,6 +140,7 @@ export const CustomForm = ({ theme, data, handleSubmit, handleDelete }: any) => 
             </Box>
 
             <Box
+               paddingTop={4}
                sx={{
                   display: "flex",
                   width: "100%",
