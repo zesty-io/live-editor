@@ -443,10 +443,14 @@ const Header = () => {
             justifyContent: "space-between",
          }}
       >
-         <Typography sx={{ width: "100%", fontWeight: "bold", color: "#3a3a3a" }}>
+         <Typography
+            sx={{ fontSize: "14px", width: "100%", fontWeight: "bold", color: "#3a3a3a" }}
+         >
             Attribute
          </Typography>
-         <Typography sx={{ width: "100%", fontWeight: "bold", color: "#3a3a3a" }}>
+         <Typography
+            sx={{ fontSize: "14px", width: "100%", fontWeight: "bold", color: "#3a3a3a" }}
+         >
             Value
          </Typography>
       </Box>

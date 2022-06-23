@@ -3,7 +3,7 @@ import { AppBar } from "@mui/material"
 import Box from "@mui/material/Box"
 import { useTheme } from "@mui/material/styles"
 import { TabContainer } from "components"
-import { urls } from "constants"
+import { assets } from "constants"
 interface Props {
    children: React.ReactNode
    content: any
@@ -51,7 +51,7 @@ const Index = ({
                <Box sx={{ cursor: "pointer" }} paddingRight={4}>
                   <img
                      onClick={() => window.location.reload()}
-                     src={urls.zestyBrandLogoMid}
+                     src={assets.zestyLogo}
                      width="62px"
                      height="62px"
                      alt="Zesty.io Logo"

@@ -51,7 +51,7 @@ export const dummycontent = {
 // list of tabs to render
 export const tabList = [
    { id: 1, label: "Edit", value: "Edit" },
-   { id: 2, label: "SEO/Meta", value: "SEO/Meta" },
+   { id: 2, label: "SEO", value: "SEO/Meta" },
    { id: 3, label: "JSON", value: "JSON" },
    { id: 4, label: "Code Helper", value: "Code Helper" },
    { id: 5, label: "Health", value: "Health" },
