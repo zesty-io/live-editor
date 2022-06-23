@@ -1,4 +1,6 @@
 export * from "./dummydata"
+import zestyName from "../assets/zestyname.svg"
+import zestyLogo from "../assets/zesty-io-logo.svg"
 
 export const dummycontent = {
    title: "Mat",
@@ -49,7 +51,7 @@ export const dummycontent = {
 // list of tabs to render
 export const tabList = [
    { id: 1, label: "Edit", value: "Edit" },
-   { id: 2, label: "SEO/Meta", value: "SEO/Meta" },
+   { id: 2, label: "SEO", value: "SEO/Meta" },
    { id: 3, label: "JSON", value: "JSON" },
    { id: 4, label: "Code Helper", value: "Code Helper" },
    { id: 5, label: "Health", value: "Health" },
@@ -62,4 +64,9 @@ export const urls = {
    zestyBrandLogo: "https://brand.zesty.io/zesty-io-logo.svg",
    zestyBrandLogoMid:
       "https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png",
+}
+
+export const assets = {
+   zestyLogo,
+   zestyName,
 }

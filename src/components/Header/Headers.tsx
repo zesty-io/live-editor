@@ -3,7 +3,7 @@ import { AppBar } from "@mui/material"
 import Box from "@mui/material/Box"
 import { useTheme } from "@mui/material/styles"
 import { TabContainer } from "components"
-import { urls } from "constants"
+import { assets } from "constants"
 interface Props {
    children: React.ReactNode
    content: any
@@ -11,6 +11,7 @@ interface Props {
    setcurrentTab: any
    tabList: any
    settime: any
+   modal: boolean
 }
 
 const Index = ({
@@ -20,12 +21,20 @@ const Index = ({
    setcurrentTab,
    tabList,
    settime,
+   modal,
 }: Props) => {
    const theme = useTheme()
    console.log(content, response)
 
    return (
-      <AppBar sx={{ background: "#fff", overflowX: "auto" }} position="static">
+      <AppBar
+         sx={{
+            filter: modal ? "blur(5px)" : "none",
+            background: "#fff",
+            overflowX: "auto",
+         }}
+         position="static"
+      >
          <Box
             paddingLeft={3}
             paddingRight={1}
@@ -42,7 +51,7 @@ const Index = ({
                <Box sx={{ cursor: "pointer" }} paddingRight={4}>
                   <img
                      onClick={() => window.location.reload()}
-                     src={urls.zestyBrandLogoMid}
+                     src={assets.zestyLogo}
                      width="62px"
                      height="62px"
                      alt="Zesty.io Logo"

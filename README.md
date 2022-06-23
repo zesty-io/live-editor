@@ -99,6 +99,18 @@ A view of the pages SEO and meta values which can be edited, this is not limited
 
 # How to run locally
 
+Edit the hostfile in linux or MacOs
+
+```jsx
+sudo vim /etc/hosts
+```
+
+then add the line
+
+```jsx
+127.0.0.1 test.zesty.io
+```
+
 Clone the Zesty Live-Editor and Zesty Chrome Extension on same folder :
 
 ```jsx

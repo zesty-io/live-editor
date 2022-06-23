@@ -6,26 +6,50 @@ import CardContent from "@mui/material/CardContent"
 import Button from "@mui/material/Button"
 import Typography from "@mui/material/Typography"
 import { TextField } from "@mui/material"
-import { urls } from "constants"
+import { assets } from "constants"
 
-export const OutlineCard = ({ handleCustomDomain, value, onChange }: any) => {
+interface Props {
+   handleCustomDomain: () => void
+   value: string
+   onChange: (e: any) => void
+}
+export const OutlineCard = ({ handleCustomDomain, value, onChange }: Props) => {
    const card = (
       <React.Fragment>
          <CardContent>
-            <img
-               src={urls.zestyBrandLogo}
-               alt="Zesty Explorer"
-               width={"50"}
-               height={"50"}
-            />
-            <Typography color="text.secondary" gutterBottom sx={{ fontSize: "20px" }}>
+            <Box
+               paddingTop={1}
+               sx={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyItems: "center",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: ".5rem",
+               }}
+            >
+               <img
+                  src={assets.zestyLogo}
+                  alt="Zesty Explorer"
+                  width={"50"}
+                  height={"50"}
+               />
+               <img
+                  src={assets.zestyName}
+                  alt="Zesty Explorer"
+                  width={"100"}
+                  height={"100"}
+               />
+            </Box>
+            <Typography color="text.secondary" gutterBottom sx={{ fontSize: "18px" }}>
                Domain Not Valid
             </Typography>
             <Typography
                paddingBottom={2}
                variant="h5"
                component="div"
-               sx={{ fontSize: "16px" }}
+               sx={{ fontSize: "14px" }}
             >
                Override Domain
             </Typography>

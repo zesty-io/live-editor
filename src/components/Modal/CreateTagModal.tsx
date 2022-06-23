@@ -6,6 +6,7 @@ import CloseIcon from "@mui/icons-material/Close"
 import { MainInput } from "components/Input"
 import { useTheme } from "@emotion/react"
 import { CustomBtn } from "components/Buttons"
+import { Modal } from "components/Modal"
 interface Props {
    onClose: () => any
    resourceZUID: string
@@ -24,60 +25,16 @@ export const CreateHeadTagModal = ({
    getHeadTags,
 }: Props) => {
    return (
-      <Box
-         sx={{
-            position: "absolute",
-            top: "0",
-            left: "0",
-            zIndex: "2147483646",
-            height: "100%",
-            width: "100%",
-            background: "rgba(1,2,3,.4)",
-         }}
-      >
-         <Box
-            sx={{
-               display: "flex",
-               justifyItems: "center",
-               flexDirection: "column",
-               height: "100%",
-               width: "100%",
-               background: "rgba(1,2,3,.4)",
-               position: "relative",
-            }}
-         >
-            <Box
-               sx={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%,-50%)",
-               }}
-            >
-               <Box
-                  sx={{
-                     display: "flex",
-                     flexDirection: "column",
-                     justifyContent: "center",
-                     justifyItems: "center",
-                     height: "100%",
-                     width: "100%",
-                     textAlign: "center",
-                     userSelect: "none",
-                  }}
-               >
-                  <ModalContent
-                     token={token}
-                     instanceZUID={instanceZUID}
-                     resourceZUID={resourceZUID}
-                     onClose={onClose}
-                     setloading={setloading}
-                     getHeadTags={getHeadTags}
-                  />
-               </Box>
-            </Box>
-         </Box>
-      </Box>
+      <Modal onClose={onClose}>
+         <ModalContent
+            token={token}
+            instanceZUID={instanceZUID}
+            resourceZUID={resourceZUID}
+            onClose={onClose}
+            setloading={setloading}
+            getHeadTags={getHeadTags}
+         />
+      </Modal>
    )
 }
 const OPTIONS_TYPE = [
@@ -163,6 +120,9 @@ const ModalContent = ({
 
    return (
       <Box
+         onClick={(e: any) => {
+            e.stopPropagation()
+         }}
          paddingX={3}
          paddingTop={6}
          paddingBottom={4}
@@ -174,8 +134,16 @@ const ModalContent = ({
             borderRadius: "5px",
          }}
       >
-         <Box sx={{ position: "absolute", right: ".5rem", top: ".5rem" }}>
-            <CloseIcon onClick={onClose} color="secondary" fontSize="medium" />
+         <Box
+            sx={{
+               position: "absolute",
+               right: ".5rem",
+               top: ".5rem",
+               fontSize: "20px",
+               cursor: "pointer",
+            }}
+         >
+            <CloseIcon onClick={onClose} color="secondary" fontSize="inherit" />
          </Box>
          <Typography
             paddingBottom={4}
@@ -475,10 +443,14 @@ const Header = () => {
             justifyContent: "space-between",
          }}
       >
-         <Typography sx={{ width: "100%", fontWeight: "bold", color: "#3a3a3a" }}>
+         <Typography
+            sx={{ fontSize: "14px", width: "100%", fontWeight: "bold", color: "#3a3a3a" }}
+         >
             Attribute
          </Typography>
-         <Typography sx={{ width: "100%", fontWeight: "bold", color: "#3a3a3a" }}>
+         <Typography
+            sx={{ fontSize: "14px", width: "100%", fontWeight: "bold", color: "#3a3a3a" }}
+         >
             Value
          </Typography>
       </Box>

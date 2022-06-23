@@ -33,18 +33,20 @@ export const CustomForm = ({ theme, data, handleSubmit, handleDelete }: any) => 
          boxShadow={1}
          borderRadius={1}
          marginBottom={2}
-         paddingX={8}
          paddingY={4}
          sx={{
             backgroundColor: theme.palette.alternate.main,
             overflow: "hidden",
             position: "relative",
+            display: "flex",
+            justifyContent: "center",
+            justifyItems: "center",
          }}
       >
          <form
             action="submit"
             style={{
-               margin: "2rem .5rem",
+               margin: "0rem .5rem",
                display: "flex",
                flexDirection: "column",
                justifyContent: "start",
@@ -70,14 +72,18 @@ export const CustomForm = ({ theme, data, handleSubmit, handleDelete }: any) => 
                <Box
                   sx={{
                      display: "flex",
-                     gap: "4rem",
+                     gap: "10rem",
                      justifyContent: "start",
                      justifyItems: "start",
                      width: "100%",
                   }}
                >
-                  <Typography sx={{ fontWeight: "bold" }}>Attribute</Typography>
-                  <Typography sx={{ fontWeight: "bold" }}>Value</Typography>
+                  <Typography sx={{ fontWeight: "bold", fontSize: "14px" }}>
+                     Attribute
+                  </Typography>
+                  <Typography sx={{ fontWeight: "bold", fontSize: "14px" }}>
+                     Value
+                  </Typography>
                </Box>
                {data &&
                   Object.entries(data).map((x: any, i: number) => {
@@ -88,14 +94,27 @@ export const CustomForm = ({ theme, data, handleSubmit, handleDelete }: any) => 
                            sx={{
                               display: "grid",
                               gap: "2rem",
-                              gridTemplateColumns: "5rem 1fr",
+                              gridTemplateColumns: "10rem 1fr",
                               alignItems: "center",
                               justifyContent: "start",
                               justifyItems: "start",
                            }}
                         >
-                           <Box sx={{ display: "block" }}>
-                              <Typography>{key}</Typography>
+                           <Box
+                              paddingBottom={2}
+                              sx={{
+                                 display: "block",
+                                 width: "15rem",
+                                 overflow: "hidden",
+                              }}
+                           >
+                              <Typography
+                                 sx={{
+                                    fontSize: "14px",
+                                 }}
+                              >
+                                 {key}
+                              </Typography>
                            </Box>
                            <MainInput
                               theme={{
@@ -121,6 +140,7 @@ export const CustomForm = ({ theme, data, handleSubmit, handleDelete }: any) => 
             </Box>
 
             <Box
+               paddingTop={4}
                sx={{
                   display: "flex",
                   width: "100%",
@@ -129,7 +149,7 @@ export const CustomForm = ({ theme, data, handleSubmit, handleDelete }: any) => 
                }}
             >
                <Button
-                  sx={{ width: "10rem", whiteSpace: "nowrap" }}
+                  sx={{ whiteSpace: "nowrap", padding: ".5rem 1rem" }}
                   variant="contained"
                   color="secondary"
                   onClick={() => handleSubmit(attri)}

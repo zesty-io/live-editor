@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import { Box } from "@mui/material"
+import { Box, Typography } from "@mui/material"
 import React from "react"
 
 export const CustomInput = styled.input`
@@ -98,9 +98,12 @@ const Index = ({
             padingLeft: ".5rem",
          }}
       >
-         <Box paddingLeft={2} sx={{ fontWeight: "bold", textTransform: "capitalize" }}>
+         <Typography
+            paddingLeft={2}
+            sx={{ fontWeight: "bold", textTransform: "capitalize", fontSize: "14px" }}
+         >
             {label}
-         </Box>
+         </Typography>
          {!textArea ? (
             <CustomInput
                type="text"
@@ -115,7 +118,7 @@ const Index = ({
             />
          ) : (
             <CustomTextArea
-               rows={10}
+               rows={5}
                cols={10}
                key={key}
                disabled={disabled}

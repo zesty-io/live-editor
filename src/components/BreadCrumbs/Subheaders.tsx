@@ -25,7 +25,7 @@ export const Subheaders = ({ theme, content, btnList = [], response }: Props) =>
          label: "Edit Schema",
          icon: (
             <>
-               <AccountBoxIcon fontSize="small" />
+               <AccountBoxIcon fontSize="inherit" />
             </>
          ),
          href: `https://${
@@ -37,7 +37,7 @@ export const Subheaders = ({ theme, content, btnList = [], response }: Props) =>
          label: "Edit Content",
          icon: (
             <>
-               <AddToPhotosIcon fontSize="small" />
+               <AddToPhotosIcon fontSize="inherit" />
             </>
          ),
          href: `https://${
@@ -62,7 +62,7 @@ export const Subheaders = ({ theme, content, btnList = [], response }: Props) =>
          name: "Edit Permission",
          icon: (
             <>
-               <ArchiveIcon fontSize="small" />
+               <ArchiveIcon fontSize="inherit" />
             </>
          ),
          label: "Edit Permission",
@@ -92,7 +92,12 @@ export const Subheaders = ({ theme, content, btnList = [], response }: Props) =>
                   <Box>
                      {e.label && (
                         <CustomLink onClick={() => handleClick(e.href)} theme={theme}>
-                           <span>{e?.icon}</span> <span>{e.label}</span>
+                           <Box
+                              sx={{ display: "flex", alignItems: "center", gap: ".5rem" }}
+                           >
+                              <Box style={{ fontSize: "22px" }}>{e?.icon}</Box>
+                              <Box paddingBottom={1}>{e.label}</Box>
+                           </Box>
                         </CustomLink>
                      )}
                   </Box>

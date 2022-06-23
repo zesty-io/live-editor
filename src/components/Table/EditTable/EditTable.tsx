@@ -15,10 +15,9 @@ import * as helper from "utils"
 import { CellStyle, TableContainerStyle, rowStyle } from "./Styles"
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
-import { CustomBtn, Subheaders } from "components"
+import { Subheaders } from "components"
 import EditIcon from "@mui/icons-material/Edit"
 import CancelIcon from "@mui/icons-material/Cancel"
-import SaveIcon from "@mui/icons-material/Save"
 
 // dom access highlight function
 function activateWorkingElement(match: string): any {
@@ -29,7 +28,7 @@ function activateWorkingElement(match: string): any {
       (v) => v.textContent == stringToTest,
    )
 
-   workingElement.style.border = "2px orange solid"
+   workingElement.style.border = "2px orange dashed"
    workingElement.setAttribute("contentEditable", true)
    workingElement.setAttribute("id", "activeEl")
    console.log("Activating", workingElement)
@@ -109,6 +108,36 @@ function Row({
       // @ts-ignore
       !workingElement?.innerText && setWorkingElement(activateWorkingElement(value))
    }
+   // for deletion later
+   // const cancelChanges = () => {
+   //    deactivateWorkingElement(
+   //       workingElement,
+   //       keyName,
+   //       metaData,
+   //       url,
+   //       token,
+   //       false,
+   //       getData,
+   //    )
+   //    setWorkingElement("")
+   //    settext("")
+   //    setloading()
+   // }
+
+   const saveChanges = () => {
+      deactivateWorkingElement(
+         workingElement,
+         keyName,
+         metaData,
+         url,
+         token,
+         true,
+         getData,
+      )
+      setloading()
+      setWorkingElement("")
+      settext("")
+   }
    return (
       <React.Fragment>
          <TableRow
@@ -124,8 +153,13 @@ function Row({
                   aria-label="expand row"
                   size="small"
                   onClick={() => setOpen(!open)}
+                  sx={{ fontSize: "22px" }}
                >
-                  {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                  {open ? (
+                     <KeyboardArrowUpIcon fontSize="inherit" />
+                  ) : (
+                     <KeyboardArrowDownIcon fontSize="inherit" />
+                  )}
                </IconButton>
             </TableCell>
             <TableCell component="th" scope="row" sx={rowStyle}>
@@ -135,106 +169,134 @@ function Row({
                {valueType}
             </TableCell>
             <TableCell
-               sx={{
-                  fontSize: "14px",
-                  cursor: "pointer",
-                  overflow: "auto",
-                  border: showCloseBtn
-                     ? `2px solid ${theme.palette.zesty.zestyOrange}`
-                     : "2px solid transparent",
-               }}
-               align="left"
+               align="center"
                onClick={() => {
                   helper.scrollToView("activeEl")
                }}
             >
-               <Box>
+               <Box
+                  padding={2}
+                  sx={{
+                     position: "relative",
+                     fontSize: "14px",
+                     cursor: "pointer",
+                     overflow: "visible",
+                     border: showCloseBtn ? `2px dashed orange` : "2px solid transparent",
+                  }}
+               >
                   {showCloseBtn && (
                      <Box
                         sx={{
+                           fontSize: "22px",
+                           position: "absolute",
+                           right: "0",
+                           top: "0",
                            display: "flex",
-                           gap: "1rem",
-                           justifyContent: "center",
-                           justifyItems: "center",
-                           paddingBottom: ".5rem",
                         }}
                      >
-                        <CustomBtn
-                           variant="error"
-                           theme={theme}
-                           title="Cancel Changes"
-                           onClick={() => {
-                              deactivateWorkingElement(
-                                 workingElement,
-                                 keyName,
-                                 metaData,
-                                 url,
-                                 token,
-                                 false,
-                                 getData,
-                              )
-                              setWorkingElement("")
-                              settext("")
-                              setloading()
-                           }}
-                        >
-                           <CancelIcon fontSize="small" titleAccess="Discard changes" />{" "}
-                           Cancel changes
-                        </CustomBtn>
+                        <Box onClick={saveChanges} sx={{ color: "#333333" }}>
+                           <CancelIcon
+                              titleAccess="Save Changes"
+                              color="inherit"
+                              fontSize="inherit"
+                           />
+                        </Box>
+                     </Box>
+                  )}
 
-                        <CustomBtn
-                           title="Save Changes"
-                           theme={theme}
-                           onClick={() => {
-                              deactivateWorkingElement(
-                                 workingElement,
-                                 keyName,
-                                 metaData,
-                                 url,
-                                 token,
-                                 true,
-                                 getData,
-                              )
-                              setloading()
-                              setWorkingElement("")
-                              settext("")
+                  {/* ****************for deletion********************* */}
+                  {/* <Box>
+                     {showCloseBtn && (
+                        <Box
+                           sx={{
+                              display: "flex",
+                              gap: "1rem",
+                              justifyContent: "center",
+                              justifyItems: "center",
+                              paddingBottom: ".5rem",
                            }}
                         >
-                           <SaveIcon fontSize="small" titleAccess="Save Changes" /> Save
-                           changes
-                        </CustomBtn>
-                     </Box>
-                  )}
-               </Box>
-               <Box
-                  sx={{
-                     display: "flex",
-                     gap: "1rem",
-                     flexDirection: "row-reverse",
-                     width: "15rem",
-                     maxHeight: "10rem",
-                     wordBreak: "break-word",
-                     overflow: "auto",
-                     justifyContent: "start",
-                     justifyItems: "start",
-                     textAlign: "left",
-                  }}
-               >
-                  <Box ref={ref1}>{value}</Box>
-                  {!showCloseBtn && value && (
-                     <Box onClick={editElement} sx={{}}>
-                        <EditIcon
-                           fontSize="medium"
-                           color="secondary"
-                           titleAccess="Edit Data"
-                        />
-                     </Box>
-                  )}
+                           <CustomBtn
+                              variant="error"
+                              theme={theme}
+                              title="Cancel Changes"
+                              onClick={() => {
+                                 deactivateWorkingElement(
+                                    workingElement,
+                                    keyName,
+                                    metaData,
+                                    url,
+                                    token,
+                                    false,
+                                    getData,
+                                 )
+                                 setWorkingElement("")
+                                 settext("")
+                                 setloading()
+                              }}
+                           >
+                              <CancelIcon
+                                 fontSize="small"
+                                 titleAccess="Discard changes"
+                              />{" "}
+                              Cancel changes
+                           </CustomBtn>
+
+                           <CustomBtn
+                              title="Save Changes"
+                              theme={theme}
+                              onClick={() => {
+                                 deactivateWorkingElement(
+                                    workingElement,
+                                    keyName,
+                                    metaData,
+                                    url,
+                                    token,
+                                    true,
+                                    getData,
+                                 )
+                                 setloading()
+                                 setWorkingElement("")
+                                 settext("")
+                              }}
+                           >
+                              <SaveIcon fontSize="small" titleAccess="Save Changes" />{" "}
+                              Save changes
+                           </CustomBtn>
+                        </Box>
+                     )}
+                  </Box> */}
+                  <Box
+                     sx={{
+                        // background:'aqua',
+                        display: "flex",
+                        gap: "1rem",
+                        flexDirection: "row-reverse",
+                        width: "100%",
+                        maxHeight: "10rem",
+                        wordBreak: "break-word",
+                        overflow: "auto",
+                        justifyContent: "start",
+                        justifyItems: "start",
+                        textAlign: "left",
+                     }}
+                  >
+                     <Box ref={ref1}>{value}</Box>
+                     {!showCloseBtn && value && (
+                        <Box onClick={editElement} sx={{ fontSize: "22px" }}>
+                           <EditIcon
+                              fontSize="inherit"
+                              color="secondary"
+                              titleAccess="Edit Data"
+                           />
+                        </Box>
+                     )}
+                  </Box>
                </Box>
             </TableCell>
-            <TableCell align="left" sx={rowStyle}>
+            {/* <TableCell align="left" sx={rowStyle}>
                {value.length}
-            </TableCell>
+            </TableCell> */}
          </TableRow>
 
          {/* Expanded Data */}
@@ -319,14 +381,14 @@ export const EditTable = ({
                      Type
                   </TableCell>
                   <TableCell
-                     align="left"
-                     sx={{ ...CellStyle, width: "15rem", paddingLeft: "3rem" }}
+                     align="center"
+                     sx={{ ...CellStyle, width: "15rem", paddingLeft: "0" }}
                   >
                      Content Example
                   </TableCell>
-                  <TableCell align="left" sx={CellStyle}>
+                  {/* <TableCell align="left" sx={CellStyle}>
                      Content Length
-                  </TableCell>
+                  </TableCell> */}
                </TableRow>
             </TableHead>
 

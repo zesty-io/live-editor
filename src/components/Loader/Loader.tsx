@@ -1,5 +1,5 @@
 import { Box, Card, CardContent } from "@mui/material"
-import { urls } from "constants"
+import { assets } from "constants"
 import React from "react"
 import loading from "../../assets/loading.svg"
 import zestyLogoName from "../../assets/zestyname.svg"
@@ -33,7 +33,7 @@ const Index = () => {
                   }}
                >
                   <img
-                     src={urls.zestyBrandLogo}
+                     src={assets.zestyLogo}
                      alt="Zesty Explorer"
                      width={"50"}
                      height={"50"}

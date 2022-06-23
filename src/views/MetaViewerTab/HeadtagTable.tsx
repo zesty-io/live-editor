@@ -28,34 +28,38 @@ function Row(props: any) {
                   aria-label="expand row"
                   size="small"
                   onClick={() => setOpen(!open)}
+                  sx={{ fontSize: "22px" }}
                >
-                  {/* {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />} */}
                   {open ? (
                      <AutoFixHighIcon
-                        fontSize="medium"
+                        fontSize="inherit"
                         color="secondary"
                         titleAccess="Edit Data"
                      />
                   ) : (
                      <EditIcon
                         sx={{ cursor: "pointer" }}
-                        fontSize="medium"
+                        fontSize="inherit"
                         color="secondary"
                         titleAccess="Edit Data"
                      />
                   )}
                </IconButton>
             </TableCell>
-            <TableCell component="th" scope="row">
+            <TableCell component="th" scope="row" sx={{ fontSize: "12px" }}>
                {row.type}
             </TableCell>
-            <TableCell align="left">{row.sort}</TableCell>
-            <TableCell align="left">{row.resourceZUID}</TableCell>
-            <TableCell align="left">
-               <Box paddingLeft={4}>
+            <TableCell align="left" sx={{ fontSize: "12px" }}>
+               {row.sort}
+            </TableCell>
+            <TableCell align="left" sx={{ fontSize: "12px" }}>
+               {row.resourceZUID}
+            </TableCell>
+            <TableCell align="left" sx={{ fontSize: "12px" }}>
+               <Box paddingLeft={4} sx={{ fontSize: "22px" }}>
                   <DeleteForeverIcon
                      sx={{ cursor: "pointer" }}
-                     fontSize="medium"
+                     fontSize="inherit"
                      color="secondary"
                      titleAccess="Delete Data"
                      onClick={handleDelete}
@@ -120,7 +124,11 @@ export const HeadTagTable = ({
                         return (
                            <TableCell
                               align="left"
-                              sx={{ fontWeight: "bold", textTransform: "capitalize" }}
+                              sx={{
+                                 fontSize: "14px",
+                                 fontWeight: "bold",
+                                 textTransform: "capitalize",
+                              }}
                            >
                               {e}
                            </TableCell>

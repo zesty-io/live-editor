@@ -1,6 +1,7 @@
 import styled from "@emotion/styled"
 import { withStyles } from "@material-ui/core"
 import { Button } from "@mui/material"
+import { assets } from "constants"
 import React from "react"
 import "./LaunchBtn.css"
 
@@ -40,12 +41,7 @@ const Pulse = styled.button`
 export const LaunchBtn = ({ onClick }: Props) => {
    return (
       <Pulse className="pulse" onClick={onClick}>
-         <img
-            src="https://storage.googleapis.com/brand-assets.zesty.io/zesty-io-app-icon-transparent.png"
-            width="32px"
-            height="32px"
-            alt="Zesty.io Logo"
-         />
+         <img src={assets.zestyLogo} width="32px" height="32px" alt="Zesty.io Logo" />
       </Pulse>
    )
 }
