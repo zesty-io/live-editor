@@ -98,6 +98,7 @@ function Row({
 
    const newText = text.replace(/<[^>]*>?/gm, "")
 
+   console.log(valueType)
    // @ts-ignore
    const showCloseBtn = newText === workingElement?.innerText
 
@@ -108,21 +109,6 @@ function Row({
       // @ts-ignore
       !workingElement?.innerText && setWorkingElement(activateWorkingElement(value))
    }
-   // for deletion later
-   // const cancelChanges = () => {
-   //    deactivateWorkingElement(
-   //       workingElement,
-   //       keyName,
-   //       metaData,
-   //       url,
-   //       token,
-   //       false,
-   //       getData,
-   //    )
-   //    setWorkingElement("")
-   //    settext("")
-   //    setloading()
-   // }
 
    const saveChanges = () => {
       deactivateWorkingElement(
@@ -165,9 +151,6 @@ function Row({
             <TableCell component="th" scope="row" sx={rowStyle}>
                {keyName}
             </TableCell>
-            <TableCell align="left" sx={rowStyle}>
-               {valueType}
-            </TableCell>
             <TableCell
                align="center"
                onClick={() => {
@@ -204,71 +187,8 @@ function Row({
                      </Box>
                   )}
 
-                  {/* ****************for deletion********************* */}
-                  {/* <Box>
-                     {showCloseBtn && (
-                        <Box
-                           sx={{
-                              display: "flex",
-                              gap: "1rem",
-                              justifyContent: "center",
-                              justifyItems: "center",
-                              paddingBottom: ".5rem",
-                           }}
-                        >
-                           <CustomBtn
-                              variant="error"
-                              theme={theme}
-                              title="Cancel Changes"
-                              onClick={() => {
-                                 deactivateWorkingElement(
-                                    workingElement,
-                                    keyName,
-                                    metaData,
-                                    url,
-                                    token,
-                                    false,
-                                    getData,
-                                 )
-                                 setWorkingElement("")
-                                 settext("")
-                                 setloading()
-                              }}
-                           >
-                              <CancelIcon
-                                 fontSize="small"
-                                 titleAccess="Discard changes"
-                              />{" "}
-                              Cancel changes
-                           </CustomBtn>
-
-                           <CustomBtn
-                              title="Save Changes"
-                              theme={theme}
-                              onClick={() => {
-                                 deactivateWorkingElement(
-                                    workingElement,
-                                    keyName,
-                                    metaData,
-                                    url,
-                                    token,
-                                    true,
-                                    getData,
-                                 )
-                                 setloading()
-                                 setWorkingElement("")
-                                 settext("")
-                              }}
-                           >
-                              <SaveIcon fontSize="small" titleAccess="Save Changes" />{" "}
-                              Save changes
-                           </CustomBtn>
-                        </Box>
-                     )}
-                  </Box> */}
                   <Box
                      sx={{
-                        // background:'aqua',
                         display: "flex",
                         gap: "1rem",
                         flexDirection: "row-reverse",
@@ -294,9 +214,6 @@ function Row({
                   </Box>
                </Box>
             </TableCell>
-            {/* <TableCell align="left" sx={rowStyle}>
-               {value.length}
-            </TableCell> */}
          </TableRow>
 
          {/* Expanded Data */}
@@ -377,18 +294,12 @@ export const EditTable = ({
                   <TableCell variant="head" sx={CellStyle}>
                      Field Name
                   </TableCell>
-                  <TableCell align="left" sx={CellStyle}>
-                     Type
-                  </TableCell>
                   <TableCell
                      align="center"
                      sx={{ ...CellStyle, width: "15rem", paddingLeft: "0" }}
                   >
                      Content Example
                   </TableCell>
-                  {/* <TableCell align="left" sx={CellStyle}>
-                     Content Length
-                  </TableCell> */}
                </TableRow>
             </TableHead>
 
