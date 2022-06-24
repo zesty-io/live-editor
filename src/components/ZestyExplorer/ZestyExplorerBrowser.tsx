@@ -63,7 +63,7 @@ export const ZestyExplorerBrowser = ({
 
    React.useEffect(() => {
       getFinalData()
-   }, [])
+   }, [url, token])
 
    // for loading of tabs
    React.useEffect(() => {

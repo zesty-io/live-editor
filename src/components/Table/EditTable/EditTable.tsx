@@ -279,6 +279,74 @@ export const EditTable = ({
 }: ITable) => {
    const [workingElement, setWorkingElement] = React.useState("")
 
+   function get_elements_by_inner(key: any, val: any) {
+      const res: any = []
+      const elems: any = [
+         // @ts-ignore
+         ...document.getElementsByTagName("p"),
+         // @ts-ignore
+         ...document.getElementsByTagName("div"),
+         // @ts-ignore
+         ...document.getElementsByTagName("h1"),
+         // // @ts-ignore
+         // ...document.getElementsByTagName("h2"),
+         // // @ts-ignore
+         // ...document.getElementsByTagName("h3"),
+         // // @ts-ignore
+         // ...document.getElementsByTagName("h4"),
+         // // @ts-ignore
+         // ...document.getElementsByTagName("h5"),
+         // // @ts-ignore
+         // ...document.getElementsByTagName("h6"),
+         // // @ts-ignore
+         // ...document.getElementsByTagName("a"),
+      ]
+      elems.forEach((elem: any) => {
+         if (elem.textContent === val) {
+            const div1 = document.createElement("p")
+            div1.innerText = "X"
+            div1.style.position = "absolute"
+            div1.style.background = "red"
+            div1.style.top = "0"
+            div1.style.right = "0"
+
+            div1.onclick = async function () {
+               await helper.handleEdit(metaData, url, token, {
+                  [key]: elem?.innerText,
+               })
+            }
+            // elem.setAttribute("contentEditable", true)
+            // elem.style.border = "2px orange dashed"
+            elem.style.position = "relative"
+            elem.onmouseover = function () {
+               elem.setAttribute("contentEditable", true)
+               elem.style.border = "2px orange dashed"
+               elem.appendChild(div1)
+            }
+            elem.onmouseleave = function () {
+               elem.setAttribute("contentEditable", false)
+               elem.style.border = "2px solid transparent"
+               elem.removeChild(div1)
+            }
+            res.push(elem.innerText)
+         }
+      })
+      return res
+   }
+
+   const runner = (content: any) => {
+      Object.entries(content).forEach((val: any) => {
+         if (typeof val[1] === "string") {
+            get_elements_by_inner(val[0], val[1])
+         }
+      })
+   }
+
+   React.useEffect(() => {
+      runner(content)
+      console.log(metaData, content, 333333)
+   }, [])
+
    return (
       <TableContainer onScroll={onScroll} component={Paper} style={TableContainerStyle}>
          <Subheaders response={response} content={content} theme={theme} />
