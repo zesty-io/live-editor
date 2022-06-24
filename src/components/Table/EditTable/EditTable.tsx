@@ -279,74 +279,18 @@ export const EditTable = ({
 }: ITable) => {
    const [workingElement, setWorkingElement] = React.useState("")
 
-   function get_elements_by_inner(key: any, val: any, metaData: any) {
-      const res: any = []
-      const newVal: string = val.replace(/<[^>]*>?/gm, "")
-      const elems: any = [
-         // @ts-ignore
-         ...document.getElementsByTagName("p"),
-         // @ts-ignore
-         ...document.getElementsByTagName("div"),
-         // @ts-ignore
-         ...document.getElementsByTagName("h1"),
-         // // @ts-ignore
-         // ...document.getElementsByTagName("h2"),
-         // // @ts-ignore
-         // ...document.getElementsByTagName("h3"),
-         // // @ts-ignore
-         // ...document.getElementsByTagName("h4"),
-         // // @ts-ignore
-         // ...document.getElementsByTagName("h5"),
-         // // @ts-ignore
-         // ...document.getElementsByTagName("h6"),
-         // // @ts-ignore
-         // ...document.getElementsByTagName("a"),
-      ]
-      elems.forEach((elem: any) => {
-         if (elem.textContent === newVal) {
-            const div1 = document.createElement("p")
-            div1.innerText = "X"
-            div1.style.position = "absolute"
-            div1.style.background = "red"
-            div1.style.top = "0"
-            div1.style.right = "0"
-
-            div1.onclick = async function () {
-               await helper.handleEdit(metaData, url, token, {
-                  [key]: elem?.innerText,
-               })
-            }
-            // elem.setAttribute("contentEditable", true)
-            // elem.style.border = "2px orange dashed"
-            elem.style.position = "relative"
-            elem.onmouseover = function () {
-               elem.setAttribute("contentEditable", true)
-               elem.style.border = "2px orange dashed"
-               elem.appendChild(div1)
-            }
-            elem.onmouseleave = function () {
-               elem.setAttribute("contentEditable", false)
-               elem.style.border = "2px solid transparent"
-               elem.removeChild(div1)
-            }
-            res.push(elem.innerText)
-         }
-      })
-      return res
-   }
-
-   const runner = (content: any, metaData: any) => {
+   const editMode = (content: any, metaData: any) => {
       Object.entries(content).forEach((val: any) => {
          if (typeof val[1] === "string") {
-            get_elements_by_inner(val[0], val[1], metaData)
+            helper.get_elements_by_inner(val[0], val[1], metaData, url, token)
          }
       })
    }
 
    React.useEffect(() => {
-      runner(content, metaData)
+      editMode(content, metaData)
       console.log(metaData, content, 333333)
-   }, [])
+   }, [content, metaData])
 
    return (
       <TableContainer onScroll={onScroll} component={Paper} style={TableContainerStyle}>

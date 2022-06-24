@@ -312,3 +312,73 @@ export const getUserAppSID = () => {
       return prod
    }
 }
+
+export const get_elements_by_inner = (
+   key: any,
+   val: any,
+   metaData: any,
+   url: string,
+   token: string,
+) => {
+   const res: any = []
+   const newVal: string = val.replace(/<[^>]*>?/gm, "")
+   const elems: any = [
+      // @ts-ignore
+      ...document.getElementsByTagName("p"),
+      // @ts-ignore
+      ...document.getElementsByTagName("div"),
+      // @ts-ignore
+      ...document.getElementsByTagName("h1"),
+      // @ts-ignore
+      ...document.getElementsByTagName("h2"),
+      // @ts-ignore
+      ...document.getElementsByTagName("h3"),
+      // @ts-ignore
+      ...document.getElementsByTagName("h4"),
+      // @ts-ignore
+      ...document.getElementsByTagName("h5"),
+      // @ts-ignore
+      ...document.getElementsByTagName("h6"),
+      // @ts-ignore
+      ...document.getElementsByTagName("a"),
+   ]
+   elems.forEach((elem: any) => {
+      if (elem.textContent === newVal) {
+         // const div1 = document.createElement("p")
+         // div1.innerText = "X"
+
+         const div1 = document.createElement("img")
+         div1.src = "https://upload.wikimedia.org/wikipedia/commons/2/27/White_check.svg"
+         div1.height = 20
+         div1.width = 20
+         div1.style.position = "absolute"
+         div1.style.cursor = "pointer"
+         div1.style.background = "#333333"
+         div1.style.top = "0"
+         div1.style.right = "0"
+         div1.style.borderRadius = "50%"
+         div1.style.padding = "3px"
+
+         div1.onclick = async function () {
+            await handleEdit(metaData, url, token, {
+               [key]: elem?.innerText,
+            })
+         }
+         // elem.setAttribute("contentEditable", true)
+         // elem.style.border = "2px orange dashed"
+         elem.style.position = "relative"
+         elem.onmouseover = function () {
+            elem.setAttribute("contentEditable", true)
+            elem.style.border = "2px orange dashed"
+            elem.appendChild(div1)
+         }
+         elem.onmouseleave = function () {
+            elem.setAttribute("contentEditable", false)
+            elem.style.border = "2px solid transparent"
+            elem.removeChild(div1)
+         }
+         res.push(elem.innerText)
+      }
+   })
+   return res
+}
