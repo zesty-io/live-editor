@@ -279,8 +279,9 @@ export const EditTable = ({
 }: ITable) => {
    const [workingElement, setWorkingElement] = React.useState("")
 
-   function get_elements_by_inner(key: any, val: any) {
+   function get_elements_by_inner(key: any, val: any, metaData: any) {
       const res: any = []
+      const newVal: string = val.replace(/<[^>]*>?/gm, "")
       const elems: any = [
          // @ts-ignore
          ...document.getElementsByTagName("p"),
@@ -302,7 +303,7 @@ export const EditTable = ({
          // ...document.getElementsByTagName("a"),
       ]
       elems.forEach((elem: any) => {
-         if (elem.textContent === val) {
+         if (elem.textContent === newVal) {
             const div1 = document.createElement("p")
             div1.innerText = "X"
             div1.style.position = "absolute"
@@ -334,16 +335,16 @@ export const EditTable = ({
       return res
    }
 
-   const runner = (content: any) => {
+   const runner = (content: any, metaData: any) => {
       Object.entries(content).forEach((val: any) => {
          if (typeof val[1] === "string") {
-            get_elements_by_inner(val[0], val[1])
+            get_elements_by_inner(val[0], val[1], metaData)
          }
       })
    }
 
    React.useEffect(() => {
-      runner(content)
+      runner(content, metaData)
       console.log(metaData, content, 333333)
    }, [])
 
