@@ -264,6 +264,10 @@ interface ITable {
    getData: any
    setloading: any
    response: any
+   openModal: any
+   setEditData: any
+   setkey: any
+   setisWysiwyg: any
 }
 export const EditTable = ({
    content,
@@ -276,13 +280,27 @@ export const EditTable = ({
    getData,
    setloading,
    response,
+   openModal,
+   setEditData,
+   setkey,
+   setisWysiwyg,
 }: ITable) => {
    const [workingElement, setWorkingElement] = React.useState("")
 
    const editMode = (content: any, metaData: any) => {
       Object.entries(content).forEach((val: any) => {
          if (typeof val[1] === "string") {
-            helper.get_elements_by_inner(val[0], val[1], metaData, url, token)
+            helper.get_elements_by_inner(
+               val[0],
+               val[1],
+               metaData,
+               url,
+               token,
+               openModal,
+               setEditData,
+               setkey,
+               setisWysiwyg,
+            )
          }
       })
    }

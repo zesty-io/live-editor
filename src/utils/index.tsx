@@ -319,8 +319,11 @@ export const get_elements_by_inner = (
    metaData: any,
    url: string,
    token: string,
+   openModal: any,
+   setEditData: any,
+   setkey: any,
+   setisWysiwyg: (e: any) => void,
 ) => {
-   const res: any = []
    const newVal: string = val.replace(/<[^>]*>?/gm, "")
    const elems: any = [
       // @ts-ignore
@@ -360,25 +363,34 @@ export const get_elements_by_inner = (
          div1.style.padding = "3px"
 
          div1.onclick = async function () {
-            await handleEdit(metaData, url, token, {
-               [key]: elem?.innerText,
-            })
+            console.log(val, 2222)
+
+            if (val.includes("<")) {
+               setisWysiwyg(true)
+            } else {
+               setisWysiwyg(false)
+            }
+
+            openModal()
+            setkey(key)
+            setEditData(val)
+            // await handleEdit(metaData, url, token, {
+            //    [key]: elem?.innerText,
+            // })
          }
          // elem.setAttribute("contentEditable", true)
          // elem.style.border = "2px orange dashed"
          elem.style.position = "relative"
          elem.onmouseover = function () {
-            elem.setAttribute("contentEditable", true)
+            // elem.setAttribute("contentEditable", true)
             elem.style.border = "2px orange dashed"
             elem.appendChild(div1)
          }
          elem.onmouseleave = function () {
-            elem.setAttribute("contentEditable", false)
+            // elem.setAttribute("contentEditable", false)
             elem.style.border = "2px solid transparent"
             elem.removeChild(div1)
          }
-         res.push(elem.innerText)
       }
    })
-   return res
 }

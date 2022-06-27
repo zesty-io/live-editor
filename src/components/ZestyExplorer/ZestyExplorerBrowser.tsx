@@ -104,6 +104,9 @@ export const ZestyExplorerBrowser = ({
       getData,
       setloading: () => settime(2),
       response,
+      modal,
+      onClose: () => setmodal(false),
+      openModal: () => setmodal(true),
    }
 
    const MetaProps = {
