@@ -152,6 +152,8 @@ export const ZestyExplorerBrowser = ({
       content,
       theme,
       response,
+      setloading: () => settime(2),
+      token,
    }
    // show loading
    if (loading && !verifyFailed && !verifySuccess) {
