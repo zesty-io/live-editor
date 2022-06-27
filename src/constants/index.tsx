@@ -55,6 +55,7 @@ export const tabList = [
    { id: 3, label: "Health", value: "Health" },
    { id: 4, label: "Code Helper", value: "Code Helper" },
    { id: 5, label: "JSON", value: "JSON" },
+   { id: 6, label: "Navigator", value: "Navigator" },
 ]
 
 export const urls = {
