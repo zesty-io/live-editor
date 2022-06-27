@@ -1,8 +1,9 @@
-import { Subheaders } from "components"
+import { MainInput, Subheaders } from "components"
 import React from "react"
 import { fetchJSON } from "services"
 import Fuse from "fuse.js"
 import { NavTable } from "./NavigatorTable"
+import { Box } from "@mui/system"
 
 interface Props {
    content: any
@@ -35,11 +36,12 @@ export const NavigatorTab = ({ content, theme, response, token, setloading }: Pr
       threshold: 0,
       isCaseSensitive: false,
       minMatchCharLength: 1,
-      keys: ["author", "uri"],
+      keys: ["title", "uri"],
    }
    // search func
    const fuse = new Fuse(data, options)
-   const result = fuse.search(search || "")
+   const result = fuse.search(search)
+
    React.useEffect(() => {
       fetchJsonData()
    }, [])
@@ -52,12 +54,31 @@ export const NavigatorTab = ({ content, theme, response, token, setloading }: Pr
    return (
       <>
          <Subheaders response={response} content={content} theme={theme} />
-         <input
-            type="text"
-            value={search}
-            onChange={(e: any) => setsearch(e.target.value)}
-         />
-         <NavTable />
+         <Box paddingX={10} paddingTop={4} sx={{}}>
+            <MainInput
+               theme={{
+                  main: theme.palette.primary.main,
+                  white: theme.palette.common.white,
+                  boxShadow: theme.palette.secondary.blueShadow,
+                  border: theme.palette.secondary.whiteSmoke,
+               }}
+               name={"Search"}
+               autoFocus={true}
+               key={1}
+               label={"Search"}
+               required={false}
+               value={search}
+               onChange={(e: any) => setsearch(e.target.value)}
+               placeholder={"Search for title, paths ..."}
+            />
+         </Box>
+         <Box paddingX={4}>
+            <NavTable
+               theme={theme}
+               data={search.length === 0 ? data : result}
+               search={search}
+            />
+         </Box>
       </>
    )
 }
