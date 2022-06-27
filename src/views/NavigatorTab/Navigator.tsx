@@ -4,6 +4,7 @@ import { fetchJSON } from "services"
 import Fuse from "fuse.js"
 import { NavTable } from "./NavigatorTable"
 import { Box } from "@mui/system"
+import { Typography } from "@mui/material"
 
 interface Props {
    content: any
@@ -12,6 +13,10 @@ interface Props {
    setloading: any
    token: string
 }
+
+// test url
+// const url = "https://kfg6bckb-dev.webengine.zesty.io/-/headless/routing.json"
+
 export const NavigatorTab = ({ content, theme, response, token, setloading }: Props) => {
    console.log(content, theme, response)
    const [data, setdata] = React.useState([])
@@ -20,11 +25,12 @@ export const NavigatorTab = ({ content, theme, response, token, setloading }: Pr
    const handleJsonData = (data: any) => {
       setdata(data)
    }
-   const url = "https://kfg6bckb-dev.webengine.zesty.io/-/headless/routing.json"
+
+   const url = window.location.origin + "/-/headless/routing.json"
    const fetchJsonData = async () => {
       // setloading(true)
       const res = await fetchJSON(url, setdata, token, setloading)
-      !res.error && handleJsonData(res.data)
+      res && handleJsonData(res.data)
    }
 
    const options = {
@@ -36,25 +42,41 @@ export const NavigatorTab = ({ content, theme, response, token, setloading }: Pr
       threshold: 0,
       isCaseSensitive: false,
       minMatchCharLength: 1,
-      keys: ["title", "uri"],
+      keys: ["title", "uri", "path_part"],
    }
-   // search func
+
    const fuse = new Fuse(data, options)
    const result = fuse.search(search)
 
    React.useEffect(() => {
-      fetchJsonData()
-   }, [])
-
-   React.useEffect(() => {
-      console.log(result, 2222)
-      console.log(data, 3333)
-   }, [data, result])
+      data.length === 0 && fetchJsonData()
+   }, [data])
 
    return (
       <>
          <Subheaders response={response} content={content} theme={theme} />
-         <Box paddingX={10} paddingTop={4} sx={{}}>
+         <Box paddingX={4}>
+            <Box
+               sx={{
+                  display: "flex",
+                  textAlign: "center",
+                  width: "100%",
+                  justifyContent: "center",
+                  justifyItems: "center",
+               }}
+            >
+               <Typography
+                  paddingTop={4}
+                  paddingBottom={4}
+                  sx={{
+                     fontSize: "24px",
+                     fontWeight: "bold",
+                     color: theme.palette.primary.main,
+                  }}
+               >
+                  Site Navigator
+               </Typography>
+            </Box>
             <MainInput
                theme={{
                   main: theme.palette.primary.main,
@@ -62,17 +84,15 @@ export const NavigatorTab = ({ content, theme, response, token, setloading }: Pr
                   boxShadow: theme.palette.secondary.blueShadow,
                   border: theme.palette.secondary.whiteSmoke,
                }}
-               name={"Search"}
+               name={" "}
                autoFocus={true}
                key={1}
-               label={"Search"}
+               label={" "}
                required={false}
                value={search}
                onChange={(e: any) => setsearch(e.target.value)}
                placeholder={"Search for title, paths ..."}
             />
-         </Box>
-         <Box paddingX={4}>
             <NavTable
                theme={theme}
                data={search.length === 0 ? data : result}
