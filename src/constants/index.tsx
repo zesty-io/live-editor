@@ -52,10 +52,10 @@ export const dummycontent = {
 export const tabList = [
    { id: 1, label: "Edit", value: "Edit" },
    { id: 2, label: "SEO", value: "SEO/Meta" },
-   { id: 3, label: "Health", value: "Health" },
-   { id: 4, label: "Code Helper", value: "Code Helper" },
-   { id: 5, label: "JSON", value: "JSON" },
-   { id: 6, label: "Navigator", value: "Navigator" },
+   { id: 3, label: "Navigator", value: "Navigator" },
+   { id: 4, label: "Health", value: "Health" },
+   { id: 5, label: "Code Helper", value: "Code Helper" },
+   { id: 6, label: "JSON", value: "JSON" },
 ]
 
 export const urls = {

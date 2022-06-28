@@ -184,10 +184,10 @@ export const ZestyExplorerBrowser = ({
             {time > 0 && <NewLoader />}
             {currentTab === 0 && <EditTab {...EditProps} />}
             {currentTab === 1 && <MetaViewerTab {...MetaProps} />}
-            {currentTab === 2 && <HealhTab {...HealthTabProps} />}
-            {currentTab === 3 && <CodeHelperTab {...CodeHelperProps} />}
-            {currentTab === 4 && <JsonDataViewerTab {...JSONProps} />}
-            {currentTab === 5 && <NavigatorTab {...NavigatorProps} />}
+            {currentTab === 2 && <NavigatorTab {...NavigatorProps} />}
+            {currentTab === 3 && <HealhTab {...HealthTabProps} />}
+            {currentTab === 4 && <CodeHelperTab {...CodeHelperProps} />}
+            {currentTab === 5 && <JsonDataViewerTab {...JSONProps} />}
          </Box>
       </Box>
    )

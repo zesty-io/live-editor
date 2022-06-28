@@ -5,6 +5,7 @@ import "react-quill/dist/quill.snow.css"
 import { Box, Typography } from "@mui/material"
 import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded"
 import { CustomBtn } from "components"
+import CloseIcon from "@mui/icons-material/Close"
 
 interface Props {
    onClose: () => any
@@ -47,7 +48,6 @@ export const EditModal = ({
    handleSubmit,
    editkey,
 }: Props) => {
-   console.log(onClose, editkey, 44444)
    return (
       <Modal onClose={() => {}}>
          <Box
@@ -62,6 +62,17 @@ export const EditModal = ({
             }}
             padding={2}
          >
+            <Box
+               sx={{
+                  position: "absolute",
+                  right: ".5rem",
+                  top: ".5rem",
+                  fontSize: "20px",
+                  cursor: "pointer",
+               }}
+            >
+               <CloseIcon onClick={onClose} color="secondary" fontSize="inherit" />
+            </Box>
             <Typography
                paddingBottom={4}
                sx={{
