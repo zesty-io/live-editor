@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { EditTable, GotoTopBtn } from "components"
 import { Box } from "@mui/material"
 import { EditModal } from "./EditModal"
@@ -18,6 +18,7 @@ interface Props {
    modal: any
    onClose: any
    openModal: any
+   getFinalData: any
 }
 
 export const EditTab = ({
@@ -35,29 +36,44 @@ export const EditTab = ({
    modal,
    onClose,
    openModal,
+   getFinalData,
 }: Props) => {
    const newData =
       Object.keys(data?.content).length === 0 ? metaData?.data?.data : data?.content
-   const [editData, seteditData] = React.useState("")
-   const [key, setkey] = React.useState("")
+   const [editValue, seteditValue] = React.useState("")
+   const [editkey, setEditkey] = React.useState("")
    const [isWysiwyg, setisWysiwyg] = React.useState(false)
+
    const handleSubmit = async () => {
-      const value = !isWysiwyg ? editData.replace(/<[^>]*>?/gm, "") : editData
-      console.log(key, value, 4242)
+      const value = !isWysiwyg ? editValue.replace(/<[^>]*>?/gm, "") : editValue
+      console.log(editkey, value, 4242)
 
       await handleEdit(metaData, url, token, {
-         [key]: value,
+         [editkey]: value,
       })
 
       onClose()
-      seteditData("")
+      // seteditValue("")
+      await getData()
+      await getFinalData()
    }
    const EditModalProps = {
       onClose,
-      data: editData,
-      setdata: seteditData,
+      data: editValue,
+      setdata: seteditValue,
       handleSubmit,
+      theme,
+      editkey,
    }
+
+   useEffect(() => {
+      console.log(metaData, data, 333333333)
+   }, [metaData, data])
+
+   useEffect(() => {
+      localStorage.removeItem("preVal")
+      localStorage.removeItem("preKey")
+   }, [])
    return (
       <Box
          sx={{
@@ -71,9 +87,10 @@ export const EditTab = ({
          <GotoTopBtn scrollPos={scrollPos} />
 
          <EditTable
-            setkey={setkey}
+            editValue={editValue}
+            setkey={setEditkey}
             openModal={openModal}
-            setEditData={seteditData}
+            setEditData={seteditValue}
             response={response}
             onScroll={scrollEvent}
             url={url}

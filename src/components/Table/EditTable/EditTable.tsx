@@ -268,6 +268,7 @@ interface ITable {
    setEditData: any
    setkey: any
    setisWysiwyg: any
+   editValue: string
 }
 export const EditTable = ({
    content,
@@ -284,6 +285,7 @@ export const EditTable = ({
    setEditData,
    setkey,
    setisWysiwyg,
+   editValue,
 }: ITable) => {
    const [workingElement, setWorkingElement] = React.useState("")
 
@@ -300,6 +302,7 @@ export const EditTable = ({
                setEditData,
                setkey,
                setisWysiwyg,
+               editValue,
             )
          }
       })
@@ -307,12 +310,19 @@ export const EditTable = ({
 
    React.useEffect(() => {
       editMode(content, metaData)
-      console.log(metaData, content, 333333)
+      console.log(metaData, content, editValue, 333333)
    }, [content, metaData])
 
    return (
       <TableContainer onScroll={onScroll} component={Paper} style={TableContainerStyle}>
          <Subheaders response={response} content={content} theme={theme} />
+         <button
+            onClick={() => {
+               editMode(content, metaData)
+            }}
+         >
+            ijijijiji
+         </button>
          <Table aria-label="collapsible table">
             {/* HEaders */}
             <TableHead

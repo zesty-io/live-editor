@@ -99,6 +99,7 @@ export const ZestyExplorerBrowser = ({
       data,
       url,
       token,
+      getFinalData,
       scrollPos: currentScroll,
       scrollEvent,
       getData,

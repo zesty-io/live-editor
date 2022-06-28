@@ -323,8 +323,11 @@ export const get_elements_by_inner = (
    setEditData: any,
    setkey: any,
    setisWysiwyg: (e: any) => void,
+   editValue: string,
 ) => {
    const newVal: string = val.replace(/<[^>]*>?/gm, "")
+   const newEditVal = val.replace(/<[^>]*>?/gm, "")
+   console.log(newEditVal, editValue)
    const elems: any = [
       // @ts-ignore
       ...document.getElementsByTagName("p"),
@@ -345,38 +348,66 @@ export const get_elements_by_inner = (
       // @ts-ignore
       ...document.getElementsByTagName("a"),
    ]
-   elems.forEach((elem: any) => {
-      if (elem.textContent === newVal) {
-         // const div1 = document.createElement("p")
-         // div1.innerText = "X"
+   elems.forEach(async (elem: any) => {
+      const res: any = []
+      const prevVal = localStorage.getItem("preVal")?.replaceAll("CLICK ME", "")
+      const prevKey = localStorage.getItem("preKey")
+      console.log(
+         "ELEM",
+         elem.textContent,
+         "new VAL",
+         newVal,
+         "prev  VAL",
+         prevVal,
+         9999999,
+         elem.textContent === prevVal,
+      )
+      console.log(
+         "TEXT::",
+         elem.textContent,
+         "NEW VAL::",
+         newVal,
+         "PREV VAL::",
+         prevVal,
+         "KEY:::",
+         key,
+         "PREV KEY:::",
+         prevKey,
+         "oop",
+         elem.textContent.trim() === prevVal?.trim(),
+         elem.textContent.trim() === newVal?.trim(),
+      )
+      res.push({ item: elem.textContent, val: newVal })
+      if (
+         elem.textContent === newVal ||
+         (elem.textContent.trim() === prevVal?.trim() && key == prevKey)
+      ) {
+         elem.innerHTML = `${val}`
+         console.log(elem.innerHTML, "RUN")
+         const btn = document.createElement("button")
+         btn.innerHTML = "CLICK ME"
+         btn.style.position = "absolute"
+         btn.style.cursor = "pointer"
+         btn.style.background = "#333333"
+         btn.style.top = "0"
+         btn.style.right = "0"
+         btn.style.borderRadius = "50%"
+         btn.style.padding = "3px"
 
-         const div1 = document.createElement("img")
-         div1.src = "https://upload.wikimedia.org/wikipedia/commons/2/27/White_check.svg"
-         div1.height = 20
-         div1.width = 20
-         div1.style.position = "absolute"
-         div1.style.cursor = "pointer"
-         div1.style.background = "#333333"
-         div1.style.top = "0"
-         div1.style.right = "0"
-         div1.style.borderRadius = "50%"
-         div1.style.padding = "3px"
-
-         div1.onclick = async function () {
-            console.log(val, 2222)
+         btn.onclick = async function () {
+            console.log("1:", elem.innerHTML, "2", val, "test12344")
 
             if (val.includes("<")) {
                setisWysiwyg(true)
             } else {
                setisWysiwyg(false)
             }
-
-            openModal()
             setkey(key)
             setEditData(val)
-            // await handleEdit(metaData, url, token, {
-            //    [key]: elem?.innerText,
-            // })
+            localStorage.setItem("preVal", elem.innerText)
+            localStorage.setItem("preKey", key)
+
+            openModal()
          }
          // elem.setAttribute("contentEditable", true)
          // elem.style.border = "2px orange dashed"
@@ -384,13 +415,14 @@ export const get_elements_by_inner = (
          elem.onmouseover = function () {
             // elem.setAttribute("contentEditable", true)
             elem.style.border = "2px orange dashed"
-            elem.appendChild(div1)
+            elem.appendChild(btn)
          }
          elem.onmouseleave = function () {
             // elem.setAttribute("contentEditable", false)
             elem.style.border = "2px solid transparent"
-            elem.removeChild(div1)
+            elem.removeChild(btn)
          }
       }
+      console.log(res, "resssss")
    })
 }
