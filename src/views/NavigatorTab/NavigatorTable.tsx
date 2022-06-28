@@ -57,7 +57,7 @@ export const NavTable = ({ data, theme, search }: IProps) => {
             overflow: "hidden",
          }}
       >
-         <TableContainer sx={{ height: "55vh" }}>
+         <TableContainer sx={{ height: "50vh" }}>
             <Table stickyHeader aria-label="sticky table">
                <TableHead
                   sx={{

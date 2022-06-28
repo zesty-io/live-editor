@@ -286,8 +286,9 @@ export const EditTable = ({
    setisWysiwyg,
 }: ITable) => {
    const [workingElement, setWorkingElement] = React.useState("")
+   const [editMode, seteditMode] = React.useState(false)
 
-   const editMode = (content: any) => {
+   const editModeFunc = (content: any, editMode: boolean) => {
       Object.entries(content).forEach((val: any) => {
          if (typeof val[1] === "string") {
             helper.get_elements_by_inner(
@@ -297,6 +298,7 @@ export const EditTable = ({
                setEditData,
                setkey,
                setisWysiwyg,
+               editMode,
             )
          }
       })
@@ -304,12 +306,18 @@ export const EditTable = ({
 
    // onload enable edit mode
    React.useEffect(() => {
-      editMode(content)
-   }, [content])
+      editModeFunc(content, editMode)
+   }, [editMode, content])
 
    return (
       <TableContainer onScroll={onScroll} component={Paper} style={TableContainerStyle}>
-         <Subheaders response={response} content={content} theme={theme} />
+         <Subheaders
+            editMode={editMode}
+            onClick={() => seteditMode(!editMode)}
+            response={response}
+            content={content}
+            theme={theme}
+         />
          <Table aria-label="collapsible table">
             {/* HEaders */}
             <TableHead
@@ -318,7 +326,7 @@ export const EditTable = ({
                }}
             >
                <TableRow>
-                  <TableCell />
+                  <TableCell variant="head" sx={CellStyle}></TableCell>
                   <TableCell variant="head" sx={CellStyle}>
                      Field Name
                   </TableCell>

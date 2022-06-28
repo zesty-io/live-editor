@@ -320,6 +320,7 @@ export const get_elements_by_inner = (
    setEditData: any,
    setkey: any,
    setisWysiwyg: (e: any) => void,
+   editMode: boolean,
 ) => {
    const newVal: string = val.replace(/<[^>]*>?/gm, "")
 
@@ -353,9 +354,10 @@ export const get_elements_by_inner = (
          elem.textContent === newVal ||
          (elem.textContent.trim() === prevVal?.trim() && key == prevKey)
       ) {
-         console.log(val, "test123::::::::::::::")
-         elem.innerHTML = `${val}`
-         elem.style.position = "relative"
+         if (editMode) {
+            elem.innerHTML = `${val}`
+            elem.style.position = "relative"
+         }
 
          const btn = document.createElement("button")
          btn.innerHTML = "EDIT"
@@ -377,21 +379,27 @@ export const get_elements_by_inner = (
             } else {
                setisWysiwyg(false)
             }
-            setkey(key)
-            setEditData(val)
-            localStorage.setItem("preVal", elem.innerText)
-            localStorage.setItem("preKey", key)
+            if (editMode) {
+               setkey(key)
+               setEditData(val)
+               localStorage.setItem("preVal", elem.innerText)
+               localStorage.setItem("preKey", key)
 
-            openModal()
+               openModal()
+            }
          }
 
          elem.onmouseover = function () {
-            elem.style.border = "2px orange dashed"
-            elem.appendChild(btn)
+            if (editMode) {
+               elem.style.border = "2px orange dashed"
+               elem.appendChild(btn)
+            }
          }
          elem.onmouseleave = function () {
-            elem.style.border = "2px solid transparent"
-            elem.removeChild(btn)
+            if (editMode) {
+               elem.style.border = "2px solid transparent"
+               elem.removeChild(btn)
+            }
          }
       }
    })

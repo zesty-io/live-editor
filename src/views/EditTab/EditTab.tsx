@@ -73,31 +73,37 @@ export const EditTab = ({
    return (
       <Box
          sx={{
-            background: "#fff",
-            overflow: "auto",
-            height: "100%",
-            position: "relative",
+            height: "100vh",
+            overflowY: "auto",
+            background: theme.palette.common.white,
+            fontSize: "14px !important",
          }}
       >
          {modal && <EditModal {...EditModalProps} />}
          <GotoTopBtn scrollPos={scrollPos} />
 
-         <EditTable
-            setkey={setEditkey}
-            openModal={openModal}
-            setEditData={seteditValue}
-            response={response}
-            onScroll={scrollEvent}
-            url={url}
-            token={token}
-            metaData={metaData}
-            data={newData}
-            content={content}
-            theme={theme}
-            getData={getData}
-            setloading={setloading}
-            setisWysiwyg={setisWysiwyg}
-         />
+         <Box
+            sx={{
+               filter: modal ? "blur(5px)" : "none",
+            }}
+         >
+            <EditTable
+               setkey={setEditkey}
+               openModal={openModal}
+               setEditData={seteditValue}
+               response={response}
+               onScroll={scrollEvent}
+               url={url}
+               token={token}
+               metaData={metaData}
+               data={newData}
+               content={content}
+               theme={theme}
+               getData={getData}
+               setloading={setloading}
+               setisWysiwyg={setisWysiwyg}
+            />
+         </Box>
       </Box>
    )
 }
