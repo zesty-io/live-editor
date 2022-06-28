@@ -257,8 +257,8 @@ interface ITable {
    content: any
    metaData: any
    data: any
-   url: any
-   token: any
+   url: string
+   token: string
    onScroll: any
    theme: any
    getData: any
@@ -268,7 +268,6 @@ interface ITable {
    setEditData: any
    setkey: any
    setisWysiwyg: any
-   editValue: string
 }
 export const EditTable = ({
    content,
@@ -285,44 +284,32 @@ export const EditTable = ({
    setEditData,
    setkey,
    setisWysiwyg,
-   editValue,
 }: ITable) => {
    const [workingElement, setWorkingElement] = React.useState("")
 
-   const editMode = (content: any, metaData: any) => {
+   const editMode = (content: any) => {
       Object.entries(content).forEach((val: any) => {
          if (typeof val[1] === "string") {
             helper.get_elements_by_inner(
                val[0],
                val[1],
-               metaData,
-               url,
-               token,
                openModal,
                setEditData,
                setkey,
                setisWysiwyg,
-               editValue,
             )
          }
       })
    }
 
+   // onload enable edit mode
    React.useEffect(() => {
-      editMode(content, metaData)
-      console.log(metaData, content, editValue, 333333)
-   }, [content, metaData])
+      editMode(content)
+   }, [content])
 
    return (
       <TableContainer onScroll={onScroll} component={Paper} style={TableContainerStyle}>
          <Subheaders response={response} content={content} theme={theme} />
-         <button
-            onClick={() => {
-               editMode(content, metaData)
-            }}
-         >
-            ijijijiji
-         </button>
          <Table aria-label="collapsible table">
             {/* HEaders */}
             <TableHead

@@ -56,6 +56,7 @@ export const EditModal = ({
                position: "relative",
                background: "#fff",
                height: "30rem",
+               width: "30vw",
                display: "flex",
                flexDirection: "column",
             }}

@@ -316,18 +316,13 @@ export const getUserAppSID = () => {
 export const get_elements_by_inner = (
    key: any,
    val: any,
-   metaData: any,
-   url: string,
-   token: string,
    openModal: any,
    setEditData: any,
    setkey: any,
    setisWysiwyg: (e: any) => void,
-   editValue: string,
 ) => {
    const newVal: string = val.replace(/<[^>]*>?/gm, "")
-   const newEditVal = val.replace(/<[^>]*>?/gm, "")
-   console.log(newEditVal, editValue)
+
    const elems: any = [
       // @ts-ignore
       ...document.getElementsByTagName("p"),
@@ -348,55 +343,35 @@ export const get_elements_by_inner = (
       // @ts-ignore
       ...document.getElementsByTagName("a"),
    ]
+
    elems.forEach(async (elem: any) => {
       const res: any = []
-      const prevVal = localStorage.getItem("preVal")?.replaceAll("CLICK ME", "")
+      const prevVal = localStorage.getItem("preVal")?.replaceAll("EDIT", "")
       const prevKey = localStorage.getItem("preKey")
-      console.log(
-         "ELEM",
-         elem.textContent,
-         "new VAL",
-         newVal,
-         "prev  VAL",
-         prevVal,
-         9999999,
-         elem.textContent === prevVal,
-      )
-      console.log(
-         "TEXT::",
-         elem.textContent,
-         "NEW VAL::",
-         newVal,
-         "PREV VAL::",
-         prevVal,
-         "KEY:::",
-         key,
-         "PREV KEY:::",
-         prevKey,
-         "oop",
-         elem.textContent.trim() === prevVal?.trim(),
-         elem.textContent.trim() === newVal?.trim(),
-      )
       res.push({ item: elem.textContent, val: newVal })
       if (
          elem.textContent === newVal ||
          (elem.textContent.trim() === prevVal?.trim() && key == prevKey)
       ) {
+         console.log(val, "test123::::::::::::::")
          elem.innerHTML = `${val}`
-         console.log(elem.innerHTML, "RUN")
+         elem.style.position = "relative"
+
          const btn = document.createElement("button")
-         btn.innerHTML = "CLICK ME"
+         btn.innerHTML = "EDIT"
          btn.style.position = "absolute"
          btn.style.cursor = "pointer"
          btn.style.background = "#333333"
          btn.style.top = "0"
          btn.style.right = "0"
-         btn.style.borderRadius = "50%"
-         btn.style.padding = "3px"
+         btn.style.fontSize = "12px"
+         btn.style.borderRadius = "5px"
+         btn.style.padding = ".5rem 1.5rem"
+         btn.style.color = "#fff"
+         btn.style.background = "orange"
 
          btn.onclick = async function () {
-            console.log("1:", elem.innerHTML, "2", val, "test12344")
-
+            // checker if value is richtext or string
             if (val.includes("<")) {
                setisWysiwyg(true)
             } else {
@@ -409,20 +384,15 @@ export const get_elements_by_inner = (
 
             openModal()
          }
-         // elem.setAttribute("contentEditable", true)
-         // elem.style.border = "2px orange dashed"
-         elem.style.position = "relative"
+
          elem.onmouseover = function () {
-            // elem.setAttribute("contentEditable", true)
             elem.style.border = "2px orange dashed"
             elem.appendChild(btn)
          }
          elem.onmouseleave = function () {
-            // elem.setAttribute("contentEditable", false)
             elem.style.border = "2px solid transparent"
             elem.removeChild(btn)
          }
       }
-      console.log(res, "resssss")
    })
 }

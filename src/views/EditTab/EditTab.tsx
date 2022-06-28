@@ -45,8 +45,8 @@ export const EditTab = ({
    const [isWysiwyg, setisWysiwyg] = React.useState(false)
 
    const handleSubmit = async () => {
+      setloading()
       const value = !isWysiwyg ? editValue.replace(/<[^>]*>?/gm, "") : editValue
-      console.log(editkey, value, 4242)
 
       await handleEdit(metaData, url, token, {
          [editkey]: value,
@@ -67,10 +67,6 @@ export const EditTab = ({
    }
 
    useEffect(() => {
-      console.log(metaData, data, 333333333)
-   }, [metaData, data])
-
-   useEffect(() => {
       localStorage.removeItem("preVal")
       localStorage.removeItem("preKey")
    }, [])
@@ -87,7 +83,6 @@ export const EditTab = ({
          <GotoTopBtn scrollPos={scrollPos} />
 
          <EditTable
-            editValue={editValue}
             setkey={setEditkey}
             openModal={openModal}
             setEditData={seteditValue}

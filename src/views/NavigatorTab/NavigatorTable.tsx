@@ -111,7 +111,7 @@ export const NavTable = ({ data, theme, search }: IProps) => {
                                        window.open(row?.item?.url || row?.url, "")
                                     }
                                  >
-                                    <OpenInNewIcon fontSize="inherit" /> Go to Page
+                                    Visit Page <OpenInNewIcon fontSize="inherit" />
                                  </CustomBtn>
                               </TableCell>
                            </TableRow>
