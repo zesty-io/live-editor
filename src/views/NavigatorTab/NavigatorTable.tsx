@@ -77,7 +77,18 @@ export const NavTable = ({ data, theme, search }: IProps) => {
                      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                      .map((row: any) => {
                         return (
-                           <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                           <TableRow
+                              sx={{
+                                 background:
+                                    (row?.item?.url || row?.url) === window.location.href
+                                       ? theme.palette.zesty.zestyGreen
+                                       : theme.palette.common.white,
+                              }}
+                              hover
+                              role="checkbox"
+                              tabIndex={-1}
+                              key={row.code}
+                           >
                               <TableCell
                                  align="left"
                                  component="th"
