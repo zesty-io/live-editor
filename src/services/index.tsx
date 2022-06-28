@@ -31,7 +31,6 @@ export const fetchData = async (
    setFunc: (e: any) => void,
    token: string | any,
 ) => {
-   console.log(token)
    const headers = {
       authorization: `Bearer ${token}`,
       "Content-Type": "application/x-www-form-urlencoded",
@@ -43,7 +42,7 @@ export const fetchData = async (
       credentials: "omit",
       headers,
    }).then((response) => response.json())
-   res && (await setFunc(res))
+   setFunc(res)
 }
 
 export const fetchJSON = async (

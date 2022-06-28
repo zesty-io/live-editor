@@ -257,13 +257,17 @@ interface ITable {
    content: any
    metaData: any
    data: any
-   url: any
-   token: any
+   url: string
+   token: string
    onScroll: any
    theme: any
    getData: any
    setloading: any
    response: any
+   openModal: any
+   setEditData: any
+   setkey: any
+   setisWysiwyg: any
 }
 export const EditTable = ({
    content,
@@ -276,12 +280,44 @@ export const EditTable = ({
    getData,
    setloading,
    response,
+   openModal,
+   setEditData,
+   setkey,
+   setisWysiwyg,
 }: ITable) => {
    const [workingElement, setWorkingElement] = React.useState("")
+   const [editMode, seteditMode] = React.useState(false)
+
+   const editModeFunc = (content: any, editMode: boolean) => {
+      Object.entries(content).forEach((val: any) => {
+         if (typeof val[1] === "string") {
+            helper.get_elements_by_inner(
+               val[0],
+               val[1],
+               openModal,
+               setEditData,
+               setkey,
+               setisWysiwyg,
+               editMode,
+            )
+         }
+      })
+   }
+
+   // onload enable edit mode
+   React.useEffect(() => {
+      editModeFunc(content, editMode)
+   }, [editMode, content])
 
    return (
       <TableContainer onScroll={onScroll} component={Paper} style={TableContainerStyle}>
-         <Subheaders response={response} content={content} theme={theme} />
+         <Subheaders
+            editMode={editMode}
+            onClick={() => seteditMode(!editMode)}
+            response={response}
+            content={content}
+            theme={theme}
+         />
          <Table aria-label="collapsible table">
             {/* HEaders */}
             <TableHead
@@ -290,7 +326,7 @@ export const EditTable = ({
                }}
             >
                <TableRow>
-                  <TableCell />
+                  <TableCell variant="head" sx={CellStyle}></TableCell>
                   <TableCell variant="head" sx={CellStyle}>
                      Field Name
                   </TableCell>
