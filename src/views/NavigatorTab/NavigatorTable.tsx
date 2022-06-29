@@ -90,6 +90,7 @@ export const NavTable = ({ data, theme, search }: IProps) => {
                                  component="th"
                                  scope="row"
                                  sx={{
+                                    fontWeight: isCurrentPage ? "bold" : "500",
                                     fontSize: "12px",
                                     width: "20rem",
                                     color: isCurrentPage
@@ -103,6 +104,7 @@ export const NavTable = ({ data, theme, search }: IProps) => {
                                  align="left"
                                  scope="row"
                                  sx={{
+                                    fontWeight: isCurrentPage ? "bold" : "500",
                                     fontSize: "12px",
                                     width: "20rem",
                                     color: isCurrentPage
@@ -146,7 +148,7 @@ export const NavTable = ({ data, theme, search }: IProps) => {
                                        <Typography
                                           sx={{
                                              fontSize: "14px",
-                                             fontWeight: "500",
+                                             fontWeight: "bold",
                                              whiteSpace: "nowrap",
                                           }}
                                        >
