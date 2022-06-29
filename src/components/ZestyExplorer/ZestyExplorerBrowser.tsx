@@ -6,7 +6,14 @@ import { fetchData } from "services"
 import { Box } from "@mui/material"
 import { containerStyle } from "./styles"
 import { Headers } from "components"
-import { CodeHelperTab, EditTab, HealhTab, JsonDataViewerTab, MetaViewerTab } from "views"
+import {
+   CodeHelperTab,
+   EditTab,
+   HealhTab,
+   JsonDataViewerTab,
+   MetaViewerTab,
+   NavigatorTab,
+} from "views"
 import { useTheme } from "@mui/material/styles"
 import { LoginPrompt } from "components/Ui"
 import { NewLoader } from "components/Loader/NewLoader"
@@ -63,7 +70,7 @@ export const ZestyExplorerBrowser = ({
 
    React.useEffect(() => {
       getFinalData()
-   }, [])
+   }, [url, token])
 
    // for loading of tabs
    React.useEffect(() => {
@@ -92,11 +99,15 @@ export const ZestyExplorerBrowser = ({
       data,
       url,
       token,
+      getFinalData,
       scrollPos: currentScroll,
       scrollEvent,
       getData,
       setloading: () => settime(2),
       response,
+      modal,
+      onClose: () => setmodal(false),
+      openModal: () => setmodal(true),
    }
 
    const MetaProps = {
@@ -141,6 +152,13 @@ export const ZestyExplorerBrowser = ({
       theme,
       response,
    }
+   const NavigatorProps = {
+      content,
+      theme,
+      response,
+      setloading: () => settime(2),
+      token,
+   }
    // show loading
    if (loading && !verifyFailed && !verifySuccess) {
       return (
@@ -166,9 +184,10 @@ export const ZestyExplorerBrowser = ({
             {time > 0 && <NewLoader />}
             {currentTab === 0 && <EditTab {...EditProps} />}
             {currentTab === 1 && <MetaViewerTab {...MetaProps} />}
-            {currentTab === 2 && <JsonDataViewerTab {...JSONProps} />}
-            {currentTab === 3 && <CodeHelperTab {...CodeHelperProps} />}
-            {currentTab === 4 && <HealhTab {...HealthTabProps} />}
+            {currentTab === 2 && <NavigatorTab {...NavigatorProps} />}
+            {currentTab === 3 && <HealhTab {...HealthTabProps} />}
+            {currentTab === 4 && <CodeHelperTab {...CodeHelperProps} />}
+            {currentTab === 5 && <JsonDataViewerTab {...JSONProps} />}
          </Box>
       </Box>
    )

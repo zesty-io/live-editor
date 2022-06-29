@@ -1,10 +1,12 @@
 import { Box, Button, Typography } from "@mui/material"
 import React from "react"
 import { headerZUID } from "utils"
-import { CustomLink } from "components/Buttons"
+import { CustomBtn, CustomLink } from "components/Buttons"
 import AccountBoxIcon from "@mui/icons-material/AccountBox"
 import AddToPhotosIcon from "@mui/icons-material/AddToPhotos"
 import ArchiveIcon from "@mui/icons-material/Archive"
+import EditIcon from "@mui/icons-material/Edit"
+import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh"
 
 interface Btn {
    name: string
@@ -17,8 +19,17 @@ interface Props {
    content: any
    btnList?: Btn[]
    response: any
+   editMode?: boolean
+   onClick?: any
 }
-export const Subheaders = ({ theme, content, btnList = [], response }: Props) => {
+export const Subheaders = ({
+   editMode,
+   theme,
+   content,
+   btnList = [],
+   response,
+   onClick,
+}: Props) => {
    const managerLinks = [
       {
          name: "Edit Schema",
@@ -135,6 +146,29 @@ export const Subheaders = ({ theme, content, btnList = [], response }: Props) =>
                </Typography>
             </Box>
             <Box sx={{ display: "flex", gap: ".5rem" }}>
+               {editMode !== undefined && (
+                  <CustomBtn
+                     padding="8px 16px"
+                     onClick={onClick}
+                     size="16px"
+                     theme={theme}
+                  >
+                     {editMode ? (
+                        <Box sx={{ alignItems: "center", display: "flex", gap: ".5rem" }}>
+                           <AutoFixHighIcon
+                              fontSize="inherit"
+                              titleAccess="Editing ..."
+                           />{" "}
+                           Edit Mode: On
+                        </Box>
+                     ) : (
+                        <Box sx={{ alignItems: "center", display: "flex", gap: ".5rem" }}>
+                           <EditIcon fontSize="inherit" titleAccess="Edit Now" />
+                           Edit Now!
+                        </Box>
+                     )}
+                  </CustomBtn>
+               )}
                {btnList.map((e) => {
                   return (
                      <Button

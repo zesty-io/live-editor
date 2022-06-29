@@ -19,7 +19,7 @@ export const Modal = ({ onClose, children }: Props) => {
             zIndex: "2147483646",
             height: "100%",
             width: "100%",
-            background: "rgba(1,2,3,.4)",
+            background: "rgba(1,2,3,.2)",
          }}
       >
          <Box
@@ -29,7 +29,7 @@ export const Modal = ({ onClose, children }: Props) => {
                flexDirection: "column",
                height: "100%",
                width: "100%",
-               background: "rgba(1,2,3,.4)",
+               background: "rgba(1,2,3,.2)",
                position: "relative",
             }}
             onClick={handleClose}

@@ -63,7 +63,7 @@ const ModalContent = ({
    setloading,
    getHeadTags,
 }: Props) => {
-   const [tag, settag] = useState("link")
+   const [tag, settag] = useState("meta")
    const [sort, setsort] = useState(0)
    const theme = useTheme()
 

@@ -23,7 +23,7 @@ const TypeStyle = {
    gap: ".3rem",
 } as const
 
-function Row({ keyName }: any) {
+function Row({ keyName, obj }: any) {
    const [showCopy, setShowCopy] = React.useState(false)
    const [showCopy2, setShowCopy2] = React.useState(false)
    const [showCopy3, setShowCopy3] = React.useState(false)
@@ -33,6 +33,14 @@ function Row({ keyName }: any) {
 
    const theme = useTheme()
 
+   let value = ""
+   let valueType = "string"
+
+   if (typeof obj === "string") {
+      value = obj
+   } else {
+      valueType = "object"
+   }
    return (
       <React.Fragment>
          <TableRow
@@ -45,6 +53,30 @@ function Row({ keyName }: any) {
             {/* Row Data  */}
             <TableCell component="th" scope="row" sx={rowStyle}>
                {keyName}
+            </TableCell>
+            <TableCell
+               component="th"
+               scope="row"
+               sx={{
+                  background: theme.palette.zesty.zestyDarkBlue,
+                  color: theme.palette.common.white,
+                  fontSize: "14px",
+                  position: "relative",
+               }}
+            >
+               {valueType}
+            </TableCell>
+            <TableCell
+               component="th"
+               scope="row"
+               sx={{
+                  background: theme.palette.zesty.zestyDarkBlue,
+                  color: theme.palette.common.white,
+                  fontSize: "14px",
+                  position: "relative",
+               }}
+            >
+               {value.length}
             </TableCell>
             <TableCell
                sx={{
@@ -275,6 +307,12 @@ export const CodeHelperTable = ({
                <TableRow>
                   <TableCell variant="head" sx={CellStyle}>
                      Reference Name
+                  </TableCell>
+                  <TableCell variant="head" sx={CellStyle}>
+                     Type
+                  </TableCell>
+                  <TableCell variant="head" sx={CellStyle}>
+                     Char length
                   </TableCell>
                   <TableCell align="left" sx={CellStyle}>
                      Parsely Example

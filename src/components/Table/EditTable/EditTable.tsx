@@ -98,6 +98,7 @@ function Row({
 
    const newText = text.replace(/<[^>]*>?/gm, "")
 
+   console.log(valueType)
    // @ts-ignore
    const showCloseBtn = newText === workingElement?.innerText
 
@@ -108,21 +109,6 @@ function Row({
       // @ts-ignore
       !workingElement?.innerText && setWorkingElement(activateWorkingElement(value))
    }
-   // for deletion later
-   // const cancelChanges = () => {
-   //    deactivateWorkingElement(
-   //       workingElement,
-   //       keyName,
-   //       metaData,
-   //       url,
-   //       token,
-   //       false,
-   //       getData,
-   //    )
-   //    setWorkingElement("")
-   //    settext("")
-   //    setloading()
-   // }
 
    const saveChanges = () => {
       deactivateWorkingElement(
@@ -165,9 +151,6 @@ function Row({
             <TableCell component="th" scope="row" sx={rowStyle}>
                {keyName}
             </TableCell>
-            <TableCell align="left" sx={rowStyle}>
-               {valueType}
-            </TableCell>
             <TableCell
                align="center"
                onClick={() => {
@@ -204,71 +187,8 @@ function Row({
                      </Box>
                   )}
 
-                  {/* ****************for deletion********************* */}
-                  {/* <Box>
-                     {showCloseBtn && (
-                        <Box
-                           sx={{
-                              display: "flex",
-                              gap: "1rem",
-                              justifyContent: "center",
-                              justifyItems: "center",
-                              paddingBottom: ".5rem",
-                           }}
-                        >
-                           <CustomBtn
-                              variant="error"
-                              theme={theme}
-                              title="Cancel Changes"
-                              onClick={() => {
-                                 deactivateWorkingElement(
-                                    workingElement,
-                                    keyName,
-                                    metaData,
-                                    url,
-                                    token,
-                                    false,
-                                    getData,
-                                 )
-                                 setWorkingElement("")
-                                 settext("")
-                                 setloading()
-                              }}
-                           >
-                              <CancelIcon
-                                 fontSize="small"
-                                 titleAccess="Discard changes"
-                              />{" "}
-                              Cancel changes
-                           </CustomBtn>
-
-                           <CustomBtn
-                              title="Save Changes"
-                              theme={theme}
-                              onClick={() => {
-                                 deactivateWorkingElement(
-                                    workingElement,
-                                    keyName,
-                                    metaData,
-                                    url,
-                                    token,
-                                    true,
-                                    getData,
-                                 )
-                                 setloading()
-                                 setWorkingElement("")
-                                 settext("")
-                              }}
-                           >
-                              <SaveIcon fontSize="small" titleAccess="Save Changes" />{" "}
-                              Save changes
-                           </CustomBtn>
-                        </Box>
-                     )}
-                  </Box> */}
                   <Box
                      sx={{
-                        // background:'aqua',
                         display: "flex",
                         gap: "1rem",
                         flexDirection: "row-reverse",
@@ -294,9 +214,6 @@ function Row({
                   </Box>
                </Box>
             </TableCell>
-            {/* <TableCell align="left" sx={rowStyle}>
-               {value.length}
-            </TableCell> */}
          </TableRow>
 
          {/* Expanded Data */}
@@ -340,13 +257,17 @@ interface ITable {
    content: any
    metaData: any
    data: any
-   url: any
-   token: any
+   url: string
+   token: string
    onScroll: any
    theme: any
    getData: any
    setloading: any
    response: any
+   openModal: any
+   setEditData: any
+   setkey: any
+   setisWysiwyg: any
 }
 export const EditTable = ({
    content,
@@ -359,12 +280,51 @@ export const EditTable = ({
    getData,
    setloading,
    response,
+   openModal,
+   setEditData,
+   setkey,
+   setisWysiwyg,
 }: ITable) => {
    const [workingElement, setWorkingElement] = React.useState("")
+   const [editMode, seteditMode] = React.useState(false)
+
+   const editModeFunc = (content: any, editMode: boolean) => {
+      Object.entries(content).forEach((val: any) => {
+         if (typeof val[1] === "string") {
+            helper.get_elements_by_inner(
+               val[0],
+               val[1],
+               openModal,
+               setEditData,
+               setkey,
+               setisWysiwyg,
+               editMode,
+            )
+         }
+      })
+   }
+
+   // onload enable edit mode
+   React.useEffect(() => {
+      editModeFunc(content, editMode)
+   }, [editMode, content])
+
+   React.useEffect(() => {
+      return () => {
+         seteditMode(false)
+         editModeFunc(content, editMode)
+      }
+   }, [])
 
    return (
       <TableContainer onScroll={onScroll} component={Paper} style={TableContainerStyle}>
-         <Subheaders response={response} content={content} theme={theme} />
+         <Subheaders
+            editMode={editMode}
+            onClick={() => seteditMode(!editMode)}
+            response={response}
+            content={content}
+            theme={theme}
+         />
          <Table aria-label="collapsible table">
             {/* HEaders */}
             <TableHead
@@ -373,12 +333,9 @@ export const EditTable = ({
                }}
             >
                <TableRow>
-                  <TableCell />
+                  <TableCell variant="head" sx={CellStyle}></TableCell>
                   <TableCell variant="head" sx={CellStyle}>
                      Field Name
-                  </TableCell>
-                  <TableCell align="left" sx={CellStyle}>
-                     Type
                   </TableCell>
                   <TableCell
                      align="center"
@@ -386,9 +343,6 @@ export const EditTable = ({
                   >
                      Content Example
                   </TableCell>
-                  {/* <TableCell align="left" sx={CellStyle}>
-                     Content Length
-                  </TableCell> */}
                </TableRow>
             </TableHead>
 

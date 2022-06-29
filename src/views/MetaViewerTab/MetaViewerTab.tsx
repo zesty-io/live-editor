@@ -210,7 +210,7 @@ export const MetaViewerTab = ({
                paddingY={4}
                paddingX={8}
                sx={{
-                  filter: modal ? "blur(5px)" : "none",
+                  filter: modal ? "blur(3px)" : "none",
                }}
             >
                <MetaTags arr={arr} theme={theme} handleSubmit={editMetaTags} />

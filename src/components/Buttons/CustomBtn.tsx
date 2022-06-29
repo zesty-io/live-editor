@@ -8,6 +8,7 @@ interface Props {
    variant?: string
    type?: any
    size?: string
+   padding?: string
 }
 
 export const CustomButton = styled.button`
@@ -17,7 +18,7 @@ export const CustomButton = styled.button`
       props.variant === "error"
          ? props.theme.palette.zesty.zestyLightBlue
          : props.theme.palette.zesty.zestyOrange};
-   padding: 0.5rem 0.5rem;
+   padding: ${(props: any) => props.padding};
    display: flex;
    justify-content: flex-start;
    justify-items: flex-start;
@@ -61,6 +62,7 @@ export const CustomBtn = ({
    theme,
    type = "button",
    size = "10px",
+   padding = "0.5rem 0.5rem",
 }: Props) => {
    return (
       <CustomButton
@@ -72,6 +74,7 @@ export const CustomBtn = ({
          theme={theme}
          title={title}
          onClick={onClick}
+         padding={padding}
       >
          {children}
       </CustomButton>

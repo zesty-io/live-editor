@@ -29,7 +29,7 @@ const Index = ({
    return (
       <AppBar
          sx={{
-            filter: modal ? "blur(5px)" : "none",
+            filter: modal ? "blur(3px)" : "none",
             background: "#fff",
             overflowX: "auto",
          }}
