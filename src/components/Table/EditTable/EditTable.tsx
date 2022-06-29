@@ -309,6 +309,13 @@ export const EditTable = ({
       editModeFunc(content, editMode)
    }, [editMode, content])
 
+   React.useEffect(() => {
+      return () => {
+         seteditMode(false)
+         editModeFunc(content, editMode)
+      }
+   }, [])
+
    return (
       <TableContainer onScroll={onScroll} component={Paper} style={TableContainerStyle}>
          <Subheaders

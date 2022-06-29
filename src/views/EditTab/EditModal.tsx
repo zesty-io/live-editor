@@ -49,8 +49,11 @@ export const EditModal = ({
    editkey,
 }: Props) => {
    return (
-      <Modal onClose={() => {}}>
+      <Modal onClose={onClose}>
          <Box
+            onClick={(e: any) => {
+               e.stopPropagation()
+            }}
             borderRadius={2}
             sx={{
                position: "relative",

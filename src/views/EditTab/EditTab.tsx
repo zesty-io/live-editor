@@ -84,7 +84,7 @@ export const EditTab = ({
 
          <Box
             sx={{
-               filter: modal ? "blur(5px)" : "none",
+               filter: modal ? "blur(3px)" : "none",
             }}
          >
             <EditTable
