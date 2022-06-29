@@ -346,10 +346,9 @@ export const get_elements_by_inner = (
    ]
 
    elems.forEach(async (elem: any) => {
-      const res: any = []
       const prevVal = localStorage.getItem("preVal")?.replaceAll("EDIT", "")
       const prevKey = localStorage.getItem("preKey")
-      res.push({ item: elem.textContent, val: newVal })
+
       if (
          elem.textContent === newVal ||
          (elem.textContent.trim() === prevVal?.trim() && key == prevKey)
@@ -363,14 +362,19 @@ export const get_elements_by_inner = (
          btn.innerHTML = "EDIT"
          btn.style.position = "absolute"
          btn.style.cursor = "pointer"
-         btn.style.background = "#333333"
-         btn.style.top = "0"
-         btn.style.right = "0"
-         btn.style.fontSize = "12px"
+         btn.style.top = "-1rem"
+         btn.style.right = "-1rem"
+         btn.style.fontSize = "10px"
          btn.style.borderRadius = "5px"
-         btn.style.padding = ".5rem 1.5rem"
+         btn.style.height = "2rem"
+         btn.style.width = "3rem"
          btn.style.color = "#fff"
          btn.style.background = "orange"
+         btn.style.display = "flex"
+         btn.style.justifyItems = "center"
+         btn.style.justifyContent = "center"
+         btn.style.textAlign = "center"
+         btn.style.alignItems = "center"
 
          btn.onclick = async function () {
             // checker if value is richtext or string

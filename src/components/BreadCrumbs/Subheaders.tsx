@@ -148,18 +148,22 @@ export const Subheaders = ({
             <Box sx={{ display: "flex", gap: ".5rem" }}>
                {editMode !== undefined && (
                   <CustomBtn
-                     padding="0.5rem 1rem"
+                     padding="8px 16px"
                      onClick={onClick}
                      size="16px"
                      theme={theme}
                   >
                      {editMode ? (
                         <Box sx={{ alignItems: "center", display: "flex", gap: ".5rem" }}>
-                           <AutoFixHighIcon fontSize="inherit" /> Edit Mode: On
+                           <AutoFixHighIcon
+                              fontSize="inherit"
+                              titleAccess="Editing ..."
+                           />{" "}
+                           Edit Mode: On
                         </Box>
                      ) : (
                         <Box sx={{ alignItems: "center", display: "flex", gap: ".5rem" }}>
-                           <EditIcon fontSize="inherit" />
+                           <EditIcon fontSize="inherit" titleAccess="Edit Now" />
                            Edit Now!
                         </Box>
                      )}

@@ -59,7 +59,7 @@ export const EditModal = ({
                position: "relative",
                background: "#fff",
                height: "30rem",
-               width: "30vw",
+               width: "30rem",
                display: "flex",
                flexDirection: "column",
             }}
@@ -89,7 +89,7 @@ export const EditModal = ({
             <Box>
                <Box sx={{ height: "100%" }}>
                   <ReactQuill
-                     style={{ height: "100%" }}
+                     style={{ height: "15rem" }}
                      modules={modules}
                      formats={formats}
                      theme="snow"

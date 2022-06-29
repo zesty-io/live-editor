@@ -9,6 +9,8 @@ import TablePagination from "@mui/material/TablePagination"
 import TableRow from "@mui/material/TableRow"
 import { CustomBtn } from "components"
 import OpenInNewIcon from "@mui/icons-material/OpenInNew"
+import { Box, Typography } from "@mui/material"
+import AddLocationIcon from "@mui/icons-material/AddLocation"
 
 const columns: any = [
    { id: "title", label: "Page Title", minWidth: 170 },
@@ -82,17 +84,7 @@ export const NavTable = ({ data, theme, search }: IProps) => {
                               ? true
                               : false
                         return (
-                           <TableRow
-                              sx={{
-                                 background: isCurrentPage
-                                    ? theme.palette.zesty.zestyGreen
-                                    : theme.palette.common.white,
-                              }}
-                              hover
-                              role="checkbox"
-                              tabIndex={-1}
-                              key={row.code}
-                           >
+                           <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                               <TableCell
                                  align="left"
                                  component="th"
@@ -100,6 +92,9 @@ export const NavTable = ({ data, theme, search }: IProps) => {
                                  sx={{
                                     fontSize: "12px",
                                     width: "20rem",
+                                    color: isCurrentPage
+                                       ? theme.palette.zesty.zestyOrange
+                                       : theme.palette.common.black,
                                  }}
                               >
                                  {row?.item?.title || row?.title}
@@ -110,6 +105,9 @@ export const NavTable = ({ data, theme, search }: IProps) => {
                                  sx={{
                                     fontSize: "12px",
                                     width: "20rem",
+                                    color: isCurrentPage
+                                       ? theme.palette.zesty.zestyOrange
+                                       : theme.palette.common.black,
                                  }}
                               >
                                  {row?.item?.path_part || row?.path_part}
@@ -117,9 +115,11 @@ export const NavTable = ({ data, theme, search }: IProps) => {
                               <TableCell
                                  align="center"
                                  scope="row"
-                                 sx={{ fontSize: "12px" }}
+                                 sx={{
+                                    fontSize: "12px",
+                                 }}
                               >
-                                 {!isCurrentPage && (
+                                 {!isCurrentPage ? (
                                     <CustomBtn
                                        title={row?.item?.title || row?.title}
                                        size="14px"
@@ -130,6 +130,30 @@ export const NavTable = ({ data, theme, search }: IProps) => {
                                     >
                                        Visit Page <OpenInNewIcon fontSize="inherit" />
                                     </CustomBtn>
+                                 ) : (
+                                    <Box
+                                       sx={{
+                                          display: "flex",
+                                          alignItems: "center",
+                                          gap: ".5rem",
+                                          fontSize: "22px",
+
+                                          color: isCurrentPage
+                                             ? theme.palette.zesty.zestyOrange
+                                             : theme.palette.common.black,
+                                       }}
+                                    >
+                                       <Typography
+                                          sx={{
+                                             fontSize: "14px",
+                                             fontWeight: "500",
+                                             whiteSpace: "nowrap",
+                                          }}
+                                       >
+                                          You are here
+                                       </Typography>
+                                       <AddLocationIcon fontSize="inherit" />
+                                    </Box>
                                  )}
                               </TableCell>
                            </TableRow>
