@@ -53,7 +53,7 @@ export const NavigatorTab = ({ content, theme, response, token, setloading }: Pr
    }, [data])
 
    return (
-      <>
+      <Box>
          <Subheaders response={response} content={content} theme={theme} />
          <Box paddingX={4}>
             <Box
@@ -66,8 +66,8 @@ export const NavigatorTab = ({ content, theme, response, token, setloading }: Pr
                }}
             >
                <Typography
-                  paddingTop={4}
-                  paddingBottom={4}
+                  paddingTop={2}
+                  paddingBottom={2}
                   sx={{
                      fontSize: "24px",
                      fontWeight: "bold",
@@ -95,10 +95,10 @@ export const NavigatorTab = ({ content, theme, response, token, setloading }: Pr
             />
             <NavTable
                theme={theme}
-               data={search.length === 0 ? data : result}
+               data={search?.length === 0 ? data : result}
                search={search}
             />
          </Box>
-      </>
+      </Box>
    )
 }

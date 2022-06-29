@@ -50,14 +50,15 @@ export const NavTable = ({ data, theme, search }: IProps) => {
    } as const
 
    const rows = data
+
    return (
       <Paper
          sx={{
             width: "100%",
-            overflow: "hidden",
+            overflow: "auto",
          }}
       >
-         <TableContainer sx={{ height: "50vh" }}>
+         <TableContainer sx={{ height: "53vh" }}>
             <Table stickyHeader aria-label="sticky table">
                <TableHead
                   sx={{
@@ -76,13 +77,16 @@ export const NavTable = ({ data, theme, search }: IProps) => {
                   {rows
                      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                      .map((row: any) => {
+                        const isCurrentPage =
+                           (row?.item?.url || row?.url) === window.location.href
+                              ? true
+                              : false
                         return (
                            <TableRow
                               sx={{
-                                 background:
-                                    (row?.item?.url || row?.url) === window.location.href
-                                       ? theme.palette.zesty.zestyGreen
-                                       : theme.palette.common.white,
+                                 background: isCurrentPage
+                                    ? theme.palette.zesty.zestyGreen
+                                    : theme.palette.common.white,
                               }}
                               hover
                               role="checkbox"
@@ -115,15 +119,18 @@ export const NavTable = ({ data, theme, search }: IProps) => {
                                  scope="row"
                                  sx={{ fontSize: "12px" }}
                               >
-                                 <CustomBtn
-                                    size="14px"
-                                    theme={theme}
-                                    onClick={() =>
-                                       window.open(row?.item?.url || row?.url, "")
-                                    }
-                                 >
-                                    Visit Page <OpenInNewIcon fontSize="inherit" />
-                                 </CustomBtn>
+                                 {!isCurrentPage && (
+                                    <CustomBtn
+                                       title={row?.item?.title || row?.title}
+                                       size="14px"
+                                       theme={theme}
+                                       onClick={() =>
+                                          window.open(row?.item?.url || row?.url, "")
+                                       }
+                                    >
+                                       Visit Page <OpenInNewIcon fontSize="inherit" />
+                                    </CustomBtn>
+                                 )}
                               </TableCell>
                            </TableRow>
                         )
