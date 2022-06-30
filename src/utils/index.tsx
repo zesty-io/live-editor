@@ -1,3 +1,6 @@
+export * from "./main"
+export * from "./edit"
+
 import { Box } from "@mui/system"
 import React from "react"
 import Fuse from "fuse.js"
@@ -119,49 +122,6 @@ export const scrollToView = (elementId: string) => {
       ?.scrollIntoView({ behavior: "smooth", block: "center" })
 }
 
-export const handleEdit = async (
-   origData: any,
-   url: string,
-   token: string,
-   dataToEdit: any,
-) => {
-   const content = origData.data
-
-   // const originalData: any = content.data
-   // remove not necessary fields
-   // @ts-ignore
-   // delete originalData?.meta
-   // delete originalData?.zestyBaseURL
-   // delete originalData?.zestyInstanceZUID
-   // delete originalData?.zestyProductionMode
-
-   const payload = {
-      data: { ...content.data, ...dataToEdit },
-      meta: content.meta,
-      web: content.web,
-   }
-   console.log(dataToEdit, "payload")
-
-   // const token = "f3555fb52bdd3c6e3b3ff5421b74b740bf41f4e5"
-
-   const putMethod = {
-      method: "PUT",
-      headers: {
-         "Content-type": "application/json; charset=UTF-8",
-         authorization: "Bearer " + token,
-      },
-      body: JSON.stringify(payload),
-   }
-
-   const res = await fetch(url, putMethod)
-
-   res.status === 200 &&
-      res.json().then((e) => {
-         console.log(e)
-         // window.location.reload()
-      })
-   res.status !== 200 && res.json().then((e) => console.log(e, "err"))
-}
 export const transformContent = (content: any, search: any) => {
    // convert obj to dot
    // @ts-ignore
@@ -311,106 +271,4 @@ export const getUserAppSID = () => {
    } else {
       return prod
    }
-}
-
-export const get_elements_by_inner = (
-   key: any,
-   val: any,
-   openModal: any,
-   setEditData: any,
-   setkey: any,
-   setisWysiwyg: (e: any) => void,
-   editMode: boolean,
-) => {
-   const newVal: string = val.replace(/<[^>]*>?/gm, "")
-
-   const elems: any = [
-      // @ts-ignore
-      ...document.getElementsByTagName("p"),
-      // @ts-ignore
-      ...document.getElementsByTagName("div"),
-      // @ts-ignore
-      ...document.getElementsByTagName("h1"),
-      // @ts-ignore
-      ...document.getElementsByTagName("h2"),
-      // @ts-ignore
-      ...document.getElementsByTagName("h3"),
-      // @ts-ignore
-      ...document.getElementsByTagName("h4"),
-      // @ts-ignore
-      ...document.getElementsByTagName("h5"),
-      // @ts-ignore
-      ...document.getElementsByTagName("h6"),
-      // @ts-ignore
-      ...document.getElementsByTagName("a"),
-   ]
-
-   elems.forEach(async (elem: any) => {
-      const prevVal = localStorage.getItem("preVal")?.replaceAll("EDIT", "")
-      const prevKey = localStorage.getItem("preKey")
-
-      if (
-         elem.textContent === newVal ||
-         (elem.textContent.trim() === prevVal?.trim() && key == prevKey)
-      ) {
-         if (editMode) {
-            elem.innerHTML = `${val}`
-            elem.style.position = "relative"
-         }
-
-         const btn = document.createElement("button")
-         btn.innerHTML = "EDIT"
-         btn.style.position = "absolute"
-         btn.style.cursor = "pointer"
-         btn.style.top = "-1rem"
-         btn.style.right = "-1rem"
-         btn.style.fontSize = "10px"
-         btn.style.borderRadius = "5px"
-         btn.style.height = "2rem"
-         btn.style.width = "3rem"
-         btn.style.color = "#fff"
-         btn.style.background = "orange"
-         btn.style.display = "flex"
-         btn.style.justifyItems = "center"
-         btn.style.justifyContent = "center"
-         btn.style.textAlign = "center"
-         btn.style.alignItems = "center"
-
-         btn.onclick = async function () {
-            // checker if value is richtext or string
-            if (val.includes("<")) {
-               setisWysiwyg(true)
-            } else {
-               setisWysiwyg(false)
-            }
-            if (editMode) {
-               setkey(key)
-               setEditData(val)
-               localStorage.setItem("preVal", elem.innerText)
-               localStorage.setItem("preKey", key)
-
-               openModal()
-            }
-         }
-
-         elem.onmouseover = function () {
-            if (editMode) {
-               elem.style.border = "2px orange dashed"
-               elem.appendChild(btn)
-            }
-         }
-         elem.onmouseleave = function () {
-            if (editMode) {
-               elem.style.border = "2px solid transparent"
-               elem.removeChild(btn)
-            }
-         }
-      }
-   })
-}
-
-export const createZestyDiv = () => {
-   const elem = document.createElement("div")
-   elem.id = "zesty-explorer"
-   document.body.appendChild(elem)
 }

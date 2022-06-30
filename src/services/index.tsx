@@ -164,3 +164,47 @@ export const headTagApi = async ({
       return err
    }
 }
+
+export const handleEdit = async (
+   origData: any,
+   url: string,
+   token: string,
+   dataToEdit: any,
+) => {
+   const content = origData.data
+
+   // const originalData: any = content.data
+   // remove not necessary fields
+   // @ts-ignore
+   // delete originalData?.meta
+   // delete originalData?.zestyBaseURL
+   // delete originalData?.zestyInstanceZUID
+   // delete originalData?.zestyProductionMode
+
+   const payload = {
+      data: { ...content.data, ...dataToEdit },
+      meta: content.meta,
+      web: content.web,
+   }
+   console.log(dataToEdit, "payload")
+
+   // const token = "f3555fb52bdd3c6e3b3ff5421b74b740bf41f4e5"
+
+   const putMethod = {
+      method: "PUT",
+      headers: {
+         "Content-type": "application/json; charset=UTF-8",
+         authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(payload),
+   }
+
+   const res = await fetch(url, putMethod)
+
+   res.status === 200 &&
+      res.json().then((e) => {
+         console.log(e)
+         // window.location.reload()
+      })
+   res.status !== 200 && res.json().then((e) => console.log(e, "err"))
+}

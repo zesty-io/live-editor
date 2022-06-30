@@ -9,7 +9,6 @@ import TableContainer from "@mui/material/TableContainer"
 import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
-import { PrettyPrintJson } from "utils"
 import { useTheme } from "@mui/system"
 import * as helper from "utils"
 import { CellStyle, TableContainerStyle, rowStyle } from "./Styles"
@@ -18,6 +17,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
 import { Subheaders } from "components"
 import EditIcon from "@mui/icons-material/Edit"
 import CancelIcon from "@mui/icons-material/Cancel"
+import { handleEdit } from "services"
 
 // dom access highlight function
 function activateWorkingElement(match: string): any {
@@ -48,7 +48,7 @@ const deactivateWorkingElement = async (
    if (undefined !== workingElement) {
       // @ts-ignore
       save &&
-         (await helper.handleEdit(metaData, url, token, {
+         (await handleEdit(metaData, url, token, {
             [`${keyName}`]: workingElement?.innerText,
          }))
       await getData()
@@ -240,7 +240,7 @@ function Row({
                         <TableHead>
                            <TableRow>
                               <TableCell sx={rowStyle}>
-                                 {PrettyPrintJson({ data: obj })}
+                                 {helper.PrettyPrintJson({ data: obj })}
                               </TableCell>
                            </TableRow>
                         </TableHead>
@@ -269,6 +269,7 @@ interface ITable {
    setkey: any
    setisWysiwyg: any
 }
+
 export const EditTable = ({
    content,
    metaData,
@@ -288,31 +289,22 @@ export const EditTable = ({
    const [workingElement, setWorkingElement] = React.useState("")
    const [editMode, seteditMode] = React.useState(false)
 
-   const editModeFunc = (content: any, editMode: boolean) => {
-      Object.entries(content).forEach((val: any) => {
-         if (typeof val[1] === "string") {
-            helper.get_elements_by_inner(
-               val[0],
-               val[1],
-               openModal,
-               setEditData,
-               setkey,
-               setisWysiwyg,
-               editMode,
-            )
-         }
-      })
-   }
-
    // onload enable edit mode
    React.useEffect(() => {
-      editModeFunc(content, editMode)
+      helper.editModeFunc(content, editMode, openModal, setEditData, setkey, setisWysiwyg)
    }, [editMode, content])
 
    React.useEffect(() => {
       return () => {
          seteditMode(false)
-         editModeFunc(content, editMode)
+         helper.editModeFunc(
+            content,
+            editMode,
+            openModal,
+            setEditData,
+            setkey,
+            setisWysiwyg,
+         )
       }
    }, [])
 
