@@ -167,16 +167,13 @@ export function toggleOpenState(bool: boolean, setOpen: any, expandBody: any) {
 }
 
 export const getJsonUrl = (customDomain = "") => {
-   console.log(customDomain, "customdomain")
-   // return "https://kfg6bckb-dev.preview.stage.zesty.io/?toJSON"
    if (
       window.location.href.match(/(:[0-9]+||localhost)/) !== null &&
       customDomain == ""
    ) {
-      return window.location.href + "?toJSON"
+      return getPathFromUrl(window.location.href) + "?toJSON"
    }
    return customDomain.replace(/\/$/, "") + window.location.pathname + "?toJSON"
-   // return customDomain + "/?toJSON"
 }
 
 export const generatedScript = ({ content, tags }: any) => {
@@ -271,4 +268,8 @@ export const getUserAppSID = () => {
    } else {
       return prod
    }
+}
+
+export const getPathFromUrl = (url: string) => {
+   return url.split(/[?#]/)[0]
 }
