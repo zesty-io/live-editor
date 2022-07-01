@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import { EditTable, GotoTopBtn } from "components"
 import { Box } from "@mui/material"
 import { EditModal } from "./EditModal"
-import { handleEdit } from "utils"
+import { handleEdit } from "services"
 interface Props {
    data: any
    metaData: any

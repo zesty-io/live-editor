@@ -11,6 +11,7 @@ import { CustomBtn } from "components"
 import OpenInNewIcon from "@mui/icons-material/OpenInNew"
 import { Box, Typography } from "@mui/material"
 import AddLocationIcon from "@mui/icons-material/AddLocation"
+import { getPathFromUrl } from "utils"
 
 const columns: any = [
    { id: "title", label: "Page Title", minWidth: 170 },
@@ -80,7 +81,8 @@ export const NavTable = ({ data, theme, search }: IProps) => {
                      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                      .map((row: any) => {
                         const isCurrentPage =
-                           (row?.item?.url || row?.url) === window.location.href
+                           (row?.item?.url || row?.url) ===
+                           getPathFromUrl(window.location.href)
                               ? true
                               : false
                         return (
