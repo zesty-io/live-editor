@@ -7,8 +7,6 @@ import AddToPhotosIcon from "@mui/icons-material/AddToPhotos"
 import ArchiveIcon from "@mui/icons-material/Archive"
 import EditIcon from "@mui/icons-material/Edit"
 import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh"
-import MobileFriendlyIcon from "@mui/icons-material/MobileFriendly"
-import DevicesIcon from "@mui/icons-material/Devices"
 
 interface Btn {
    name: string
@@ -32,7 +30,6 @@ export const Subheaders = ({
    response,
    onClick,
 }: Props) => {
-   const [isMobile, setisMobile] = React.useState(true)
    const managerLinks = [
       {
          name: "Edit Schema",
@@ -59,6 +56,20 @@ export const Subheaders = ({
          }.manager.zesty.io/content/${content?.meta?.model?.zuid}/${content?.meta?.zuid}`,
       },
       {
+         name: "",
+         label: "",
+         href: `https://${
+            content?.zestyInstanceZUID || headerZUID(response)
+         }.manager.zesty.io/content/${content?.meta?.model?.zuid}/${content?.meta?.zuid}`,
+      },
+      {
+         name: "",
+         label: "",
+         href: `https://${
+            content?.zestyInstanceZUID || headerZUID(response)
+         }.manager.zesty.io/content/${content?.meta?.model?.zuid}/${content?.meta?.zuid}`,
+      },
+      {
          name: "Edit Permission",
          icon: (
             <>
@@ -75,16 +86,6 @@ export const Subheaders = ({
       // @ts-ignore
       window.open(url, "_blank").focus()
    }
-
-   const handleDevPreview = (isMobile: boolean) => {
-      setisMobile(!isMobile)
-      if (isMobile) {
-         handleMobile()
-      } else {
-         handleDesktop()
-      }
-   }
-
    return (
       <>
          <Box
@@ -113,22 +114,6 @@ export const Subheaders = ({
                   </Box>
                )
             })}
-            <Box>
-               {
-                  <CustomLink onClick={() => handleDevPreview(isMobile)} theme={theme}>
-                     <Box sx={{ display: "flex", alignItems: "center", gap: ".5rem" }}>
-                        <Box style={{ fontSize: "22px" }}>
-                           {!isMobile ? (
-                              <MobileFriendlyIcon fontSize="inherit" />
-                           ) : (
-                              <DevicesIcon fontSize="inherit" />
-                           )}
-                        </Box>
-                        <Box paddingBottom={1}>{"Device Preview"}</Box>
-                     </Box>
-                  </CustomLink>
-               }
-            </Box>
          </Box>
          <Box
             paddingX={2}
@@ -202,29 +187,4 @@ export const Subheaders = ({
          </Box>
       </>
    )
-}
-
-export const handleMobile = (id = "__next") => {
-   const mainSite: any = typeof window !== "undefined" && document.getElementById(id)!
-   mainSite.style.width = "414px"
-   mainSite.style.height = "auto"
-   mainSite.style.overflow = "hidden"
-   mainSite.style.position = "absolute"
-   mainSite.style.left = "60vw"
-   mainSite.style.top = "10vh"
-
-   // @ts-ignore
-   document.getElementsByTagName("meta")["viewport"].content = "width= 400"
-}
-export const handleDesktop = (id = "__next") => {
-   const mainSite: any = typeof window !== "undefined" && document.getElementById(id)!
-   mainSite.style.width = "auto"
-   mainSite.style.height = "auto"
-   mainSite.style.overflow = "hidden"
-   mainSite.style.position = "relative"
-   mainSite.style.left = "0"
-   mainSite.style.top = "0"
-
-   // @ts-ignore
-   document.getElementsByTagName("meta")["viewport"].content = "width= auto"
 }
