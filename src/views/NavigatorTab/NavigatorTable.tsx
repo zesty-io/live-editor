@@ -15,7 +15,7 @@ import { getPathFromUrl } from "utils"
 
 const columns: any = [
    { id: "title", label: "Page Title", minWidth: 170 },
-   { id: "path", label: "Path", minWidth: 100 },
+   { id: "  ", label: "  ", minWidth: 100 },
    { id: "  ", label: "  ", minWidth: 100 },
 ]
 
@@ -100,7 +100,7 @@ export const NavTable = ({ data, theme, search }: IProps) => {
                                        : theme.palette.common.black,
                                  }}
                               >
-                                 {row?.item?.title || row?.title}
+                                 {row?.item?.uri || row?.uri}
                               </TableCell>
                               <TableCell
                                  align="left"
@@ -113,9 +113,7 @@ export const NavTable = ({ data, theme, search }: IProps) => {
                                        ? theme.palette.zesty.zestyOrange
                                        : theme.palette.common.black,
                                  }}
-                              >
-                                 {row?.item?.path_part || row?.path_part}
-                              </TableCell>
+                              ></TableCell>
                               <TableCell
                                  align="center"
                                  scope="row"
