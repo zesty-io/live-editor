@@ -30,6 +30,8 @@ export const Subheaders = ({
    response,
    onClick,
 }: Props) => {
+   console.log(content, "content::")
+   const version = content?.meta?.version
    const managerLinks = [
       {
          name: "Edit Schema",
@@ -126,24 +128,38 @@ export const Subheaders = ({
             }}
          >
             <Box sx={{ width: "100%" }}>
-               {" "}
-               <Typography
-                  id="gotoTop"
-                  sx={{ fontSize: "14px", whiteSpace: "normal" }}
-                  color={theme.palette.common.black}
-                  component={"h6"}
-               >
-                  Browsing item{" "}
-                  <strong style={{ color: theme.palette.zesty.zestyOrange }}>
-                     {" "}
-                     {content?.meta?.web?.seo_link_text}{" "}
-                  </strong>
-                  from the{" "}
-                  <strong style={{ color: theme.palette.zesty.zestyOrange }}>
-                     {content?.meta?.model_alternate_name}{" "}
-                  </strong>
-                  Content Model
-               </Typography>
+               <Box>
+                  <Typography
+                     id="gotoTop"
+                     sx={{ fontSize: "14px", whiteSpace: "normal" }}
+                     color={theme.palette.common.black}
+                     component={"h6"}
+                  >
+                     Browsing item{" "}
+                     <strong style={{ color: theme.palette.zesty.zestyOrange }}>
+                        {" "}
+                        {content?.meta?.web?.seo_link_text}{" "}
+                     </strong>
+                     from the{" "}
+                     <strong style={{ color: theme.palette.zesty.zestyOrange }}>
+                        {content?.meta?.model_alternate_name}{" "}
+                     </strong>
+                     Content Model
+                  </Typography>
+               </Box>
+               <Box>
+                  <Typography
+                     sx={{
+                        fontSize: "12px",
+                        fontWeight: "500",
+                        whiteSpace: "nowrap",
+                     }}
+                     color={theme.palette.common.black}
+                     component={"h6"}
+                  >
+                     Version: {version}
+                  </Typography>
+               </Box>
             </Box>
             <Box sx={{ display: "flex", gap: ".5rem" }}>
                {editMode !== undefined && (
