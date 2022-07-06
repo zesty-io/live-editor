@@ -25,13 +25,16 @@ const expandBody = (bool: boolean) => {
    ze.style.left = bool ? "0" : "-40vw"
 }
 
-// renanme content to contentData
+interface JsonData {
+   data: any
+   error: boolean
+}
 
 // Main ZESTY EXPLORER
 export const ZestyExplorer = ({ content = {} }: any) => {
    const [domain, setdomain] = React.useState("")
    const [jsonUrl, setjsonUrl] = React.useState(helper.getJsonUrl(domain))
-   const [jsonData, setJsonData] = React.useState<any>([])
+   const [jsonData, setJsonData] = React.useState<JsonData>({ data: null, error: false })
    const token = helper.getCookie("APP_SID") || process.env.ZESTY_TEST_APP_SID
    const [open, setOpen] = React.useState(false)
    const [pageData, setPageData] = React.useState<any>("")
@@ -40,7 +43,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
    const [loading, setloading] = React.useState(false)
    console.log(themeMode, mountedComponent)
 
-   const handleJSONData = (res: any) => {
+   const handleJSONData = (res: JsonData) => {
       setJsonData(res)
       setloading(false)
    }
@@ -103,7 +106,11 @@ export const ZestyExplorer = ({ content = {} }: any) => {
          </Box>
       )
    }
-   if (jsonData?.data === null || jsonData?.length == 0) {
+   if (
+      jsonData?.error ||
+      jsonData?.data === null ||
+      Object.keys(jsonData)?.length === 0
+   ) {
       return (
          <Box sx={verifyUserPrompt} zIndex={2147483647}>
             <Card
