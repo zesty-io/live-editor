@@ -63,21 +63,29 @@ export const fetchJSON = async (
       referrerPolicy: "no-referrer",
       credentials: "omit",
       headers,
-   }).catch((e) => {
-      console.log(e)
-      return e
    })
+      .then(async (e: any) => {
+         return { data: await e.json(), error: false, res: e }
+      })
+      .catch((e) => {
+         return { data: null, error: true, res: e }
+      })
 
-   if (res.status === 200) {
-      setloading(false)
-      return { data: await res.json(), res, error: false }
-      // data = await res.json()
-      // setFunc({ data, response: res })
-   } else {
-      setloading(false)
-      return { data: null, res, error: false }
-      // setFunc({ data: null, response: res, error: true })
-   }
+   setloading(false)
+   return res
+   // console.log(res, "res2:::")
+   // if (typeof res !== "string") {
+   //    setloading(false)
+   //    // console.log(data1, "res:::::::")
+
+   //    return { data: res, res, error: false }
+   //    // data = await res.json()
+   //    // setFunc({ data, response: res })
+   // } else {
+   //    setloading(false)
+   //    return { data: null, res, error: false }
+   //    // setFunc({ data: null, response: res, error: true })
+   // }
 }
 
 export const editSeoData = async ({ url, token, payload }: any) => {
