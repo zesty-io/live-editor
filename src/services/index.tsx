@@ -65,11 +65,10 @@ export const fetchJSON = async (
       headers,
    })
       .then(async (e: any) => {
-         return { data: await e.json(), error: false }
+         return { data: await e.json(), error: false, res: e }
       })
       .catch((e) => {
-         console.log(e, "Error")
-         return { data: null, error: true }
+         return { data: null, error: true, res: e }
       })
 
    setloading(false)

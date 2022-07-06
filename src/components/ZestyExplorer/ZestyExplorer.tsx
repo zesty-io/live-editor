@@ -15,26 +15,17 @@ import CloseFullscreenIcon from "@mui/icons-material/CloseFullscreen"
 import { Helmet } from "react-helmet"
 import { ZestyExplorerBrowser } from "./ZestyExplorerBrowser"
 import { LaunchBtn, Loader } from "components"
-
-// dom access highlight function
-const expandBody = (bool: boolean) => {
-   const body: any = document.querySelector("body")
-   body.style.marginLeft = bool ? "40vw" : "0"
-   body.style.transition = "margin 250ms ease"
-   const ze: any = document.getElementById("zestyExplorer")
-   ze.style.left = bool ? "0" : "-40vw"
-}
-
-interface JsonData {
-   data: any
-   error: boolean
-}
+import { JsonData, ZestyExplorerProps } from "types"
 
 // Main ZESTY EXPLORER
-export const ZestyExplorer = ({ content = {} }: any) => {
+export const ZestyExplorer = ({ content = {} }: ZestyExplorerProps) => {
    const [domain, setdomain] = React.useState("")
    const [jsonUrl, setjsonUrl] = React.useState(helper.getJsonUrl(domain))
-   const [jsonData, setJsonData] = React.useState<JsonData>({ data: null, error: false })
+   const [jsonData, setJsonData] = React.useState<JsonData>({
+      data: null,
+      error: false,
+      res: {},
+   })
    const token = helper.getCookie("APP_SID") || process.env.ZESTY_TEST_APP_SID
    const [open, setOpen] = React.useState(false)
    const [pageData, setPageData] = React.useState<any>("")
@@ -42,6 +33,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
    const [themeMode, themeToggler, mountedComponent] = useDarkMode()
    const [loading, setloading] = React.useState(false)
    console.log(themeMode, mountedComponent)
+   const isContentAvailable = Object.keys(content).length !== 0 ? true : false
 
    const handleJSONData = (res: JsonData) => {
       setJsonData(res)
@@ -49,15 +41,19 @@ export const ZestyExplorer = ({ content = {} }: any) => {
    }
    // get json data
    const fetchJsonData = async () => {
+      console.log("run1 jsjon::::")
       setloading(true)
       const res = await fetchJSON(jsonUrl, setJsonData, token, setloading)
       res && handleJSONData(res)
    }
 
    const getData = async () => {
-      const { data, response } = await getPageData()
-      data && setPageData(data)
-      response && setResponse(response)
+      if (!isContentAvailable) {
+         console.log("run2 jsjon::::")
+         const { data, response } = await getPageData()
+         data && setPageData(data)
+         response && setResponse(response)
+      }
    }
 
    // check if content is available
@@ -65,16 +61,17 @@ export const ZestyExplorer = ({ content = {} }: any) => {
       const fetchJsonData = async () => {
          const res = await fetchJSON(jsonUrl, setJsonData, token, setloading)
          res && setJsonData(res)
+         console.log("run3 jsjon::::")
       }
-
-      fetchJsonData().then((e) => {
-         console.log(e, "not use")
-         if (content && Object.keys(content).length === 0) {
-            getData()
-         } else {
-            setPageData(content)
-         }
-      })
+      !isContentAvailable &&
+         fetchJsonData().then((e) => {
+            console.log(e, "not use")
+            if (Object.keys(content).length === 0) {
+               getData()
+            } else {
+               setPageData(content)
+            }
+         })
    }, [])
 
    React.useEffect(() => {
@@ -82,18 +79,24 @@ export const ZestyExplorer = ({ content = {} }: any) => {
    }, [domain, jsonUrl])
 
    React.useEffect(() => {
-      fetchJsonData()
-   }, [jsonUrl])
+      !isContentAvailable && fetchJsonData()
+   }, [jsonUrl, isContentAvailable])
+
+   React.useEffect(() => {
+      isContentAvailable && setJsonData({ data: content, error: false, res: {} })
+      isContentAvailable && setPageData(content)
+      console.log(pageData, jsonData, "2:::")
+   }, [isContentAvailable])
 
    const handleCustomDomain = () => {
       setjsonUrl(helper.getJsonUrl(domain))
    }
 
-   const searchObject = { ...pageData }
-   // unset navigations for faster search
-   delete searchObject.navigationTree
-   // custom nav tree building
-   delete searchObject.navigationCustom
+   // const searchObject = { ...pageData }
+   // // unset navigations for faster search
+   // delete searchObject.navigationTree
+   // // custom nav tree building
+   // delete searchObject.navigationCustom
 
    if (!helper.canUseDOM()) {
       return null
@@ -136,7 +139,7 @@ export const ZestyExplorer = ({ content = {} }: any) => {
             {/* ZESTY LOGO  bottom right*/}
             {!open && (
                <LaunchBtn
-                  onClick={() => helper.toggleOpenState(true, setOpen, expandBody)}
+                  onClick={() => helper.toggleOpenState(true, setOpen, helper.expandBody)}
                />
             )}
 
@@ -145,12 +148,13 @@ export const ZestyExplorer = ({ content = {} }: any) => {
                   <ZestyExplorerBrowser
                      response={response}
                      pageData={pageData}
-                     contentData={searchObject}
                      jsonData={jsonData}
                      getData={getData}
                   >
                      <Button
-                        onClick={() => helper.toggleOpenState(false, setOpen, expandBody)}
+                        onClick={() =>
+                           helper.toggleOpenState(false, setOpen, helper.expandBody)
+                        }
                         variant="outlined"
                         size="small"
                      >
