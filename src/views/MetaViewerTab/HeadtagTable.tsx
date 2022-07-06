@@ -20,6 +20,51 @@ function Row(props: any) {
    const { row, theme, handleSubmit, handleDelete } = props
    const [open, setOpen] = React.useState(false)
 
+   const attribute = Object.entries(row?.attributes).map((e: any) => {
+      const key = e[0]
+      const value = e[1]
+      return (
+         <Box>
+            <Box
+               paddingBottom={1}
+               paddingLeft={2}
+               sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "100%",
+                  justifyItems: "flex-start",
+                  textAlign: "left",
+               }}
+            >
+               <Typography
+                  sx={{
+                     textAlign: "left",
+                     width: "5rem",
+                     fontSize: "12px",
+                     whiteSpace: "nowrap",
+                     display: "inline-block",
+                     textOverflow: "ellipsis",
+                  }}
+               >
+                  {key}
+               </Typography>
+               <Typography
+                  sx={{
+                     width: "10rem",
+                     textAlign: "left",
+                     overflow: "hidden",
+                     fontSize: "12px",
+                     whiteSpace: "nowrap",
+                     display: "inline-block",
+                     textOverflow: "ellipsis",
+                  }}
+               >
+                  {value}
+               </Typography>
+            </Box>
+         </Box>
+      )
+   })
    return (
       <React.Fragment>
          <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -50,10 +95,7 @@ function Row(props: any) {
                {row.type}
             </TableCell>
             <TableCell align="left" sx={{ fontSize: "12px" }}>
-               {row.sort}
-            </TableCell>
-            <TableCell align="left" sx={{ fontSize: "12px" }}>
-               {row.resourceZUID}
+               {attribute}
             </TableCell>
             <TableCell align="left" sx={{ fontSize: "12px" }}>
                <Box paddingLeft={4} sx={{ fontSize: "22px" }}>
@@ -120,11 +162,12 @@ export const HeadTagTable = ({
                <TableHead>
                   <TableRow>
                      <TableCell />
-                     {columns.map((e: any) => {
+                     {columns.map((e: any, index: number) => {
                         return (
                            <TableCell
-                              align="left"
+                              align={index === 1 ? "center" : "left"}
                               sx={{
+                                 width: index === 1 ? "15rem" : "auto",
                                  fontSize: "14px",
                                  fontWeight: "bold",
                                  textTransform: "capitalize",

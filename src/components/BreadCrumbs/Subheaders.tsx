@@ -30,7 +30,6 @@ export const Subheaders = ({
    response,
    onClick,
 }: Props) => {
-   console.log(content, "content::")
    const version = content?.meta?.version
    const managerLinks = [
       {

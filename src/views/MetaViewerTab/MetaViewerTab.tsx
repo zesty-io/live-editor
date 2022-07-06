@@ -170,9 +170,8 @@ export const MetaViewerTab = ({
       createHeadtagModal()
    }
    const HEADTAGS_COLUMNS = [
-      "type",
-      "sort",
-      "resource ZUID",
+      "Type",
+      "Attributes",
       <CustomBtn size="14px" theme={theme} onClick={handleCreateHeadTag}>
          <AddIcon fontSize="small" /> Create Head Tag
       </CustomBtn>,
