@@ -2,7 +2,6 @@ import React from "react"
 import { ZestyExplorer } from "./components"
 import { createRoot } from "react-dom/client"
 import { createZestyDiv } from "utils"
-// import { dummydata } from "constants"
 import * as helper from "utils/index"
 
 if (process.env.NODE_ENV === "production") {
@@ -13,7 +12,7 @@ if (process.env.NODE_ENV === "production") {
 
 console.log(" ********** Zesty live editor loaded ************ ")
 
-export const main = (content?: any) => {
+export const ZestyLiveEditor = (content?: any) => {
    if (!helper.canUseDOM()) {
       return null
    }
@@ -24,4 +23,4 @@ export const main = (content?: any) => {
    root.render(<ZestyExplorer content={content} />)
 }
 
-main()
+ZestyLiveEditor()
