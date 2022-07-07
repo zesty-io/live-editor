@@ -1,6 +1,6 @@
 {
    "name": "@zesty-io/live-editor",
-   "version": "2.0.16",
+   "version": "2.0.17",
    "description": "",
    "main": "./dist/live-editor.production.js",
    "scripts": {
