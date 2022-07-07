@@ -53,3 +53,9 @@ jobs:
            run: npm publish --access public
            env:
               NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+
+         # Purge cdn cache
+         - uses: gacts/purge-jsdelivr-cache@v1
+           with:
+              url: |
+                 https://cdn.jsdelivr.net/gh/zesty-io/live-editor@latest/dist/live-editor.production.js
