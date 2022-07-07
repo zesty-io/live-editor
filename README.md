@@ -167,5 +167,5 @@ git checkout main && npm run release
 -  Remove index.html from the browser file path
 -  use this override domain `https://qzp3zx5t-dev.webEngine.zesty.io/`
 
-   Updated on 
-Thu Jul  7 13:21:18 UTC 2022
+   Updated on
+   Thu Jul 7 13:21:18 UTC 2022
