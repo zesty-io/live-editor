@@ -52,15 +52,10 @@ Note, if your website has a strict content security policy or x-frame-options, y
 https://cdn.jsdelivr.net/gh/zesty-io/live-editor@latest/dist/live-editor.production.js
 ```
 
-## Live-Editor Sections
+# Publishing to NPM
 
--  Page Data Live-editor
--  Full Site Navigation and Live-editor
--  Inline Editing (phases)
--  Website and Page Health
--  Metadata
--  Link Scanning
--  Optimization Scanning
+-  Manually: `npm run manual-publish`
+-  Github flow: any merge to main will run a release and publish flow
 
 # Zesty Page Composer Application Overview
 
@@ -172,5 +167,5 @@ git checkout main && npm run release
 -  Remove index.html from the browser file path
 -  use this override domain `https://qzp3zx5t-dev.webEngine.zesty.io/`
 
-   Updated on 
-Thu Jul  7 11:49:22 UTC 2022
+   Updated on
+   Thu Jul 7 11:49:22 UTC 2022
