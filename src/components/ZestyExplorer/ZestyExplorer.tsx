@@ -5,7 +5,7 @@ import { ThemeProvider } from "@mui/material/styles"
 // import CssBaseline from "@mui/material/CssBaseline"
 import * as helper from "utils/index"
 import { fetchJSON, getPageData } from "services/index"
-import { OutlineCard as Card } from "components/Card"
+import { OutlineCard as Card, UnauthorizedCard } from "components/Card"
 import { verifyUserPrompt, zestyWrapper } from "./styles"
 import Button from "@mui/material/Button"
 import Box from "@mui/material/Box"
@@ -19,6 +19,7 @@ import { JsonData, ZestyExplorerProps } from "types"
 
 // Main ZESTY EXPLORER
 export const ZestyExplorer = ({ content = {} }: ZestyExplorerProps) => {
+   const [secretKey, setsecretKey] = React.useState("")
    const [domain, setdomain] = React.useState("")
    const [jsonUrl, setjsonUrl] = React.useState(helper.getJsonUrl(domain))
    const [jsonData, setJsonData] = React.useState<JsonData>({
@@ -26,7 +27,8 @@ export const ZestyExplorer = ({ content = {} }: ZestyExplorerProps) => {
       error: false,
       res: {},
    })
-   const token = helper.getCookie("APP_SID") || process.env.ZESTY_TEST_APP_SID
+   const token =
+      secretKey || helper.getCookie("APP_SID") || process.env.ZESTY_TEST_APP_SID
    const [open, setOpen] = React.useState(false)
    const [pageData, setPageData] = React.useState<any>("")
    const [response, setResponse] = React.useState<any>("")
@@ -50,11 +52,15 @@ export const ZestyExplorer = ({ content = {} }: ZestyExplorerProps) => {
    const getData = async () => {
       if (!isContentAvailable) {
          console.log("run2 jsjon::::")
-         const { data, response } = await getPageData()
+         const { data, response } = await getPageData(token)
          data && setPageData(data)
          response && setResponse(response)
       }
    }
+
+   React.useEffect(() => {
+      console.log(pageData, "page:::", jsonData, "JSONDATA:::::")
+   }, [pageData, jsonData])
 
    // check if content is available
    React.useEffect(() => {
@@ -92,6 +98,12 @@ export const ZestyExplorer = ({ content = {} }: ZestyExplorerProps) => {
       setjsonUrl(helper.getJsonUrl(domain))
    }
 
+   const handleUnauth = async () => {
+      console.log(secretKey, "222222")
+      const res = await getData()
+      const res1 = await fetchJsonData()
+      console.log(res, res1)
+   }
    // const searchObject = { ...pageData }
    // // unset navigations for faster search
    // delete searchObject.navigationTree
@@ -109,8 +121,20 @@ export const ZestyExplorer = ({ content = {} }: ZestyExplorerProps) => {
          </Box>
       )
    }
+   if (pageData?.status === 401 || jsonData?.status === 401) {
+      return (
+         <Box sx={verifyUserPrompt} zIndex={2147483647}>
+            <UnauthorizedCard
+               handleCustomDomain={handleUnauth}
+               value={secretKey}
+               onChange={(e: any) => setsecretKey(e.target.value)}
+            />
+         </Box>
+      )
+   }
    if (
       jsonData?.error ||
+      pageData?.error ||
       jsonData?.data === null ||
       Object.keys(jsonData)?.length === 0
    ) {
