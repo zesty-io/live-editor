@@ -16,7 +16,7 @@
       "test-all": "npm run check-format && npm run check-lint && npm run check-types",
       "submit": "npm run build && git add . && cz && npm run release",
       "release": "release-it",
-      "manual-publish": "git commit -am 'version release' && npm release",
+      "manual-publish": "npx prettier --write . && git commit -am 'version release' && npm run release",
       "clear-dist": "find dist ! -name 'live-editor.production.js' -type f -exec rm -f {} +",
       "watch": "webpack --watch  --mode=production --config=webpack.config.common.ts "
    },
