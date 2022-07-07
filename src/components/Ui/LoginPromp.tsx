@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material"
 import { NormalBtn } from "components"
-import { assets } from "constants"
+import { assets } from "constants/index"
 import React from "react"
 
 const loginPromp = {

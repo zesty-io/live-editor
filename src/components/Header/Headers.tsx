@@ -3,7 +3,7 @@ import { AppBar } from "@mui/material"
 import Box from "@mui/material/Box"
 import { useTheme } from "@mui/material/styles"
 import { TabContainer } from "components"
-import { assets } from "constants"
+import { assets } from "constants/index"
 interface Props {
    children: React.ReactNode
    content: any
