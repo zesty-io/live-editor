@@ -173,5 +173,5 @@ git checkout main && npm run release
    Updated on
    Thu Jul 7 13:23:57 UTC 2022
 
-   Updated on 
-Thu Jul  7 13:26:05 UTC 2022
+   Updated on
+   Thu Jul 7 13:26:05 UTC 2022
