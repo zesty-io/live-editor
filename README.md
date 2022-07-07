@@ -52,15 +52,10 @@ Note, if your website has a strict content security policy or x-frame-options, y
 https://cdn.jsdelivr.net/gh/zesty-io/live-editor@latest/dist/live-editor.production.js
 ```
 
-## Live-Editor Sections
+# Publishing to NPM
 
--  Page Data Live-editor
--  Full Site Navigation and Live-editor
--  Inline Editing (phases)
--  Website and Page Health
--  Metadata
--  Link Scanning
--  Optimization Scanning
+-  Manually: `npm run manual-publish`
+-  Github flow: any merge to main will run a release and publish flow
 
 # Zesty Page Composer Application Overview
 
