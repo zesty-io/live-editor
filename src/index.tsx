@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === "production") {
    console.debug = () => {}
 }
 
-console.log(" ********** Zesty live editor loaded v2 ************ ")
+console.log(" ********** Zesty live editor loaded v2.0.13 ************ ")
 
 export const ZestyLiveEditor = (content?: any) => {
    if (!helper.canUseDOM()) {
