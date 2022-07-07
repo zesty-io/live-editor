@@ -23,7 +23,12 @@ const TypeStyle = {
    gap: ".3rem",
 } as const
 
-function Row({ keyName, obj }: any) {
+interface Props {
+   keyName: string
+   obj: any
+   type: string
+}
+function Row({ keyName, obj, type }: Props) {
    const [showCopy, setShowCopy] = React.useState(false)
    const [showCopy2, setShowCopy2] = React.useState(false)
    const [showCopy3, setShowCopy3] = React.useState(false)
@@ -41,6 +46,7 @@ function Row({ keyName, obj }: any) {
    } else {
       valueType = "object"
    }
+   console.log(valueType)
    return (
       <React.Fragment>
          <TableRow
@@ -64,7 +70,7 @@ function Row({ keyName, obj }: any) {
                   position: "relative",
                }}
             >
-               {valueType}
+               {type}
             </TableCell>
             <TableCell
                component="th"
@@ -276,19 +282,19 @@ interface ITable {
    onScroll: any
    theme: any
    response: any
+   fields: any[]
 }
 export const CodeHelperTable = ({
    content,
-   metaData,
    data = {},
-   url,
-   token,
    onScroll,
    theme,
    response,
+   fields,
 }: ITable) => {
-   const [workingElement, setWorkingElement] = React.useState("")
-
+   const filterData = Object.keys(data).filter((e: any) => {
+      return e !== "meta" && e !== "status"
+   })
    return (
       <TableContainer onScroll={onScroll} component={Paper} style={TableContainerStyle}>
          <Subheaders
@@ -328,17 +334,10 @@ export const CodeHelperTable = ({
 
             {/* Table Row main  */}
             <TableBody>
-               {Object.keys(data)?.map((keyName: any) => (
-                  <Row
-                     obj={data && data[keyName]}
-                     keyName={keyName}
-                     workingElement={workingElement}
-                     setWorkingElement={setWorkingElement}
-                     metaData={metaData}
-                     url={url}
-                     token={token}
-                  />
-               ))}
+               {filterData?.map((keyName: any) => {
+                  const type = fields?.find((e: any) => e.name === keyName)?.datatype
+                  return <Row type={type} obj={data && data[keyName]} keyName={keyName} />
+               })}
             </TableBody>
          </Table>
       </TableContainer>

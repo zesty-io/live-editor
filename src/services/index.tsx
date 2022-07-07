@@ -1,7 +1,8 @@
-export const getPageData = async () => {
+export const getPageData = async (token?: string) => {
    let data = {
       error: true,
       production: true,
+      status: 500,
    }
    const queryString = window.location.search.substring(1)
 
@@ -14,14 +15,29 @@ export const getPageData = async () => {
 
    // for testing only
    // const uri = "https://www.zesty.io?toJSON&" + queryString
-
+   const headers = {
+      authorization: `Bearer ${token}`,
+      "Content-Type": "application/x-www-form-urlencoded",
+   }
+   const headersNoToken = {
+      "Content-Type": "application/x-www-form-urlencoded",
+   }
    // Fetch data from Zesty.io toJSON API
-   const res = await fetch(uri)
+   const res = await fetch(uri, {
+      method: "GET",
+      mode: "cors",
+      referrerPolicy: "no-referrer",
+      credentials: "omit",
+      headers: token ? headers : headersNoToken,
+   })
 
+   console.log(res, "res:::")
    // otherwise set response to data
    if (res.status === 200) {
       data = await res.json()
    }
+
+   data.status = res.status
 
    return { data, response: res }
 }
@@ -54,7 +70,11 @@ export const fetchJSON = async (
    console.log(token)
    const data = ""
    console.log(data, setFunc)
+   const headersNoToken = {
+      "Content-Type": "application/x-www-form-urlencoded",
+   }
    const headers = {
+      authorization: `Bearer ${token}`,
       "Content-Type": "application/x-www-form-urlencoded",
    }
    const res = await fetch(uri, {
@@ -62,22 +82,38 @@ export const fetchJSON = async (
       mode: "cors",
       referrerPolicy: "no-referrer",
       credentials: "omit",
-      headers,
-   }).catch((e) => {
-      console.log(e)
-      return e
+      headers: token ? headers : headersNoToken,
    })
+      .then(async (e: any) => {
+         if (e.status === 401) {
+            return {
+               data: null,
+               error: false,
+               res: await e.text(),
+               status: e.status,
+            }
+         }
+         return { data: await e.json(), error: false, res: e, status: e.status }
+      })
+      .catch((e) => {
+         return { data: null, error: true, res: e, status: 500 }
+      })
 
-   if (res.status === 200) {
-      setloading(false)
-      return { data: await res.json(), res, error: false }
-      // data = await res.json()
-      // setFunc({ data, response: res })
-   } else {
-      setloading(false)
-      return { data: null, res, error: false }
-      // setFunc({ data: null, response: res, error: true })
-   }
+   setloading(false)
+   return res
+   // console.log(res, "res2:::")
+   // if (typeof res !== "string") {
+   //    setloading(false)
+   //    // console.log(data1, "res:::::::")
+
+   //    return { data: res, res, error: false }
+   //    // data = await res.json()
+   //    // setFunc({ data, response: res })
+   // } else {
+   //    setloading(false)
+   //    return { data: null, res, error: false }
+   //    // setFunc({ data: null, response: res, error: true })
+   // }
 }
 
 export const editSeoData = async ({ url, token, payload }: any) => {

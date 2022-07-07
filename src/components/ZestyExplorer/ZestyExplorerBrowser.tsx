@@ -1,4 +1,4 @@
-import { dummydata, tabList } from "constants"
+import { tabList } from "constants"
 import * as helper from "utils"
 import React from "react"
 import { useFetchWrapper } from "hooks"
@@ -17,17 +17,24 @@ import {
 import { useTheme } from "@mui/material/styles"
 import { LoginPrompt } from "components/Ui"
 import { NewLoader } from "components/Loader/NewLoader"
+import { JsonData } from "types"
 
+interface Props {
+   pageData: any
+   response: any
+   children: any
+   jsonData: JsonData
+   getData: any
+}
 export const ZestyExplorerBrowser = ({
    pageData,
    response,
-   contentData,
    children,
    jsonData,
    getData,
-}: any) => {
+}: Props) => {
    const [modal, setmodal] = React.useState(false)
-   const content = contentData || dummydata
+   const content = pageData
    const [currentTab, setcurrentTab] = React.useState(0)
    const [search, setSearch] = React.useState()
    // this is the data for editing request

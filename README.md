@@ -20,6 +20,20 @@ The tool should be built in compiled JavaScript and execute in plain JavaScript 
 
 It should be distributed over npm package manager and yarn, it should also be able to be manually installed from a CDN link.
 
+Using NPM
+
+```jsx
+npm install @zesty-io/live-editor
+```
+
+```jsx
+import { ZestyLiveEditor } from "@zesty-io/live-editor"
+
+React.useEffect(() => {
+   ZestyLiveEditor(data)
+}, [])
+```
+
 Using CDN
 
 -  copy the script tag below and paste it in the head of your main.html file
