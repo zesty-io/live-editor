@@ -27,6 +27,7 @@ interface Props {
    getData: any
    token: string
    setlocalToken: (e: string) => void
+   isLocalContent: boolean
 }
 export const ZestyExplorerBrowser = ({
    pageData,
@@ -36,6 +37,7 @@ export const ZestyExplorerBrowser = ({
    getData,
    token,
    setlocalToken,
+   isLocalContent,
 }: Props) => {
    const [localLogin, setlocalLogin] = React.useState(false)
    const [modal, setmodal] = React.useState(false)
@@ -176,6 +178,7 @@ export const ZestyExplorerBrowser = ({
       response,
       setloading: () => settime(2),
       token,
+      isLocalContent,
    }
    if (localLogin) {
       return (
@@ -207,6 +210,7 @@ export const ZestyExplorerBrowser = ({
       )
    }
 
+   console.log(pageData, "page:::")
    return (
       <Box sx={containerStyle}>
          <Headers {...HeaderProps}>{children}</Headers>

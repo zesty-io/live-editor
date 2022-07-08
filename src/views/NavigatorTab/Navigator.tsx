@@ -12,17 +12,24 @@ interface Props {
    response: any
    setloading: any
    token: string
+   isLocalContent: boolean
 }
 
 // test url
 // const url = "https://kfg6bckb-dev.webengine.zesty.io/-/headless/routing.json"
 
-export const NavigatorTab = ({ content, theme, response, token, setloading }: Props) => {
+export const NavigatorTab = ({
+   content,
+   theme,
+   response,
+   token,
+   setloading,
+   isLocalContent,
+}: Props) => {
    console.log(content, theme, response)
    const [data, setdata] = React.useState([])
    const [search, setsearch] = React.useState("")
 
-   console.log(content, "content:::::")
    const handleJsonData = (data: any) => {
       setdata(data)
    }
@@ -50,9 +57,15 @@ export const NavigatorTab = ({ content, theme, response, token, setloading }: Pr
    const result = fuse.search(search)
 
    React.useEffect(() => {
-      data?.length === 0 && fetchJsonData()
-   }, [data])
+      if (isLocalContent) {
+         setdata(content?.navigationTree)
+      }
+      if (!isLocalContent && data?.length === 0) {
+         fetchJsonData()
+      }
+   }, [data, isLocalContent])
 
+   console.log(isLocalContent, "navcontent:::::")
    return (
       <Box>
          <Subheaders response={response} content={content} theme={theme} />

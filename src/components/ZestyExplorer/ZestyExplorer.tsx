@@ -175,6 +175,7 @@ export const ZestyExplorer = ({ content = {} }: ZestyExplorerProps) => {
             {open && (
                <Box>
                   <ZestyExplorerBrowser
+                     isLocalContent={isContentAvailable}
                      response={response}
                      pageData={pageData}
                      jsonData={jsonData}
