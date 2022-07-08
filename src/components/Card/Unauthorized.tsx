@@ -19,6 +19,7 @@ export const UnauthorizedCard = ({ handleCustomDomain, value, onChange }: Props)
       <React.Fragment>
          <CardContent>
             <Box
+               data-testid="unAuthorizeCard"
                paddingTop={1}
                sx={{
                   width: "100%",

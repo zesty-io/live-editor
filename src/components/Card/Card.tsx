@@ -18,6 +18,7 @@ export const OutlineCard = ({ handleCustomDomain, value, onChange }: Props) => {
       <React.Fragment>
          <CardContent>
             <Box
+               data-testid="domainNotValidCard"
                paddingTop={1}
                sx={{
                   width: "100%",

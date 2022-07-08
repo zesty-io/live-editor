@@ -73,7 +73,7 @@ const Index = () => {
    )
 
    return (
-      <Box sx={{ minWidth: 275 }}>
+      <Box sx={{ minWidth: 275 }} data-testid="miniLoading">
          <Card variant="outlined">{card}</Card>
       </Box>
    )
