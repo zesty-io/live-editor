@@ -4,6 +4,7 @@ import Box from "@mui/material/Box"
 import { useTheme } from "@mui/material/styles"
 import { TabContainer } from "components"
 import { assets } from "constants/index"
+import Cookies from "js-cookie"
 interface Props {
    children: React.ReactNode
    content: any
@@ -14,6 +15,8 @@ interface Props {
    modal: boolean
    token: string | undefined
    setlocalLogin: (e: boolean) => void
+   isLocalContent: boolean
+   settoken: (e: string | undefined) => void
 }
 
 const Index = ({
@@ -26,6 +29,8 @@ const Index = ({
    modal,
    token,
    setlocalLogin,
+   isLocalContent,
+   settoken,
 }: Props) => {
    const theme = useTheme()
    console.log(content, response)
@@ -70,9 +75,20 @@ const Index = ({
             </Box>
 
             <Box>
-               {!token && (
+               {!token && isLocalContent && (
                   <button data-testid="localLoginBtn" onClick={() => setlocalLogin(true)}>
                      Login
+                  </button>
+               )}
+               {token && isLocalContent && (
+                  <button
+                     data-testid="localLogoutBtn"
+                     onClick={() => {
+                        settoken("")
+                        Cookies.remove("LOCAL_APP_SID")
+                     }}
+                  >
+                     Logout
                   </button>
                )}
             </Box>

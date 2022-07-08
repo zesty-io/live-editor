@@ -105,6 +105,8 @@ export const ZestyExplorerBrowser = ({
       modal,
       token,
       setlocalLogin,
+      settoken,
+      isLocalContent,
    }
 
    const EditProps = {
