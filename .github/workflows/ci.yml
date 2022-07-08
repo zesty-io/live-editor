@@ -19,3 +19,5 @@ jobs:
            run: npm run test-all
          - name: Run build
            run: npm run build
+         - name: Run test
+           run: npm run test
