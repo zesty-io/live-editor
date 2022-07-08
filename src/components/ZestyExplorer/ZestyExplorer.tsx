@@ -16,11 +16,14 @@ import { Helmet } from "react-helmet"
 import { ZestyExplorerBrowser } from "./ZestyExplorerBrowser"
 import { LaunchBtn, Loader } from "components"
 import { JsonData, ZestyExplorerProps } from "types"
+import { LOCAL_DOMAINS } from "constants/index"
+import Cookies from "js-cookie"
 
 // Main ZESTY EXPLORER
 export const ZestyExplorer = ({ content = {} }: ZestyExplorerProps) => {
-   const [localToken, setlocalToken] = React.useState("")
+   const [token, settoken] = React.useState<string | undefined>("")
    const [secretKey, setsecretKey] = React.useState("")
+
    const [domain, setdomain] = React.useState("")
    const [jsonUrl, setjsonUrl] = React.useState(helper.getJsonUrl(domain))
    const [jsonData, setJsonData] = React.useState<JsonData>({
@@ -28,12 +31,6 @@ export const ZestyExplorer = ({ content = {} }: ZestyExplorerProps) => {
       error: false,
       res: {},
    })
-   const token =
-      localToken ||
-      secretKey ||
-      helper.getCookie("APP_SID") ||
-      helper.getUserAppSID() ||
-      process.env.ZESTY_TEST_APP_SID
    const [open, setOpen] = React.useState(false)
    const [pageData, setPageData] = React.useState<any>(content || {})
    const [response, setResponse] = React.useState<any>("")
@@ -41,11 +38,12 @@ export const ZestyExplorer = ({ content = {} }: ZestyExplorerProps) => {
    const [loading, setloading] = React.useState(false)
    console.log(themeMode, mountedComponent)
    const isContentAvailable = Object.keys(content).length !== 0 ? true : false
-
+   // const token = localToken || secretKey || helper.getUserAppSID()
    const handleJSONData = (res: JsonData) => {
       setJsonData(res)
       setloading(false)
    }
+
    // get json data
    const fetchJsonData = async () => {
       console.log("run1 jsjon::::")
@@ -63,10 +61,24 @@ export const ZestyExplorer = ({ content = {} }: ZestyExplorerProps) => {
       }
    }
 
+   // token switcher
    React.useEffect(() => {
-      console.log(pageData, "page:::", jsonData, "JSONDATA:::::")
-   }, [pageData, jsonData])
+      if (isContentAvailable && LOCAL_DOMAINS.includes(window.location.hostname)) {
+         settoken(Cookies.get("LOCAL_APP_SID"))
+      } else if (secretKey) {
+         settoken(secretKey)
+      } else {
+         settoken(helper.getUserAppSID)
+      }
+   }, [isContentAvailable, secretKey])
 
+   React.useEffect(() => {
+      console.log(
+         token,
+         isContentAvailable && LOCAL_DOMAINS.includes(window.location.hostname),
+         "token::::",
+      )
+   }, [isContentAvailable, secretKey, token])
    // check if content is available
    React.useEffect(() => {
       const fetchJsonData = async () => {
@@ -86,10 +98,6 @@ export const ZestyExplorer = ({ content = {} }: ZestyExplorerProps) => {
    }, [])
 
    React.useEffect(() => {
-      console.log(jsonUrl, domain, "domain")
-   }, [domain, jsonUrl])
-
-   React.useEffect(() => {
       !isContentAvailable && fetchJsonData()
    }, [jsonUrl, isContentAvailable])
 
@@ -104,16 +112,9 @@ export const ZestyExplorer = ({ content = {} }: ZestyExplorerProps) => {
    }
 
    const handleUnauth = async () => {
-      console.log(secretKey, "222222")
-      const res = await getData()
-      const res1 = await fetchJsonData()
-      console.log(res, res1)
+      await getData()
+      await fetchJsonData()
    }
-   // const searchObject = { ...pageData }
-   // // unset navigations for faster search
-   // delete searchObject.navigationTree
-   // // custom nav tree building
-   // delete searchObject.navigationCustom
 
    if (!helper.canUseDOM()) {
       return null
@@ -181,7 +182,6 @@ export const ZestyExplorer = ({ content = {} }: ZestyExplorerProps) => {
                      jsonData={jsonData}
                      getData={getData}
                      token={token}
-                     setlocalToken={setlocalToken}
                   >
                      <Button
                         onClick={() =>

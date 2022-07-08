@@ -23,7 +23,7 @@ interface ITabs {
    tabList: any[]
    settime: any
    setcurrentTab: any
-   token: string
+   token: string | undefined
 }
 
 const Index = ({ tabList, settime, setcurrentTab, token }: ITabs) => {

@@ -16,7 +16,7 @@ interface Props {
    theme: any
    metaData: any
    url: string
-   token: string
+   token: string | undefined
    getData: any
    setloading: any
    createHeadtagModal: any

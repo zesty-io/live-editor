@@ -12,7 +12,7 @@ interface Props {
    tabList: any
    settime: any
    modal: boolean
-   token: string
+   token: string | undefined
    setlocalLogin: (e: boolean) => void
 }
 

@@ -25,8 +25,7 @@ interface Props {
    children: any
    jsonData: JsonData
    getData: any
-   token: string
-   setlocalToken: (e: string) => void
+   token: string | undefined
    isLocalContent: boolean
 }
 export const ZestyExplorerBrowser = ({
@@ -36,7 +35,6 @@ export const ZestyExplorerBrowser = ({
    jsonData,
    getData,
    token,
-   setlocalToken,
    isLocalContent,
 }: Props) => {
    const [localLogin, setlocalLogin] = React.useState(false)
@@ -183,7 +181,7 @@ export const ZestyExplorerBrowser = ({
    if (localLogin) {
       return (
          <Box sx={containerStyle}>
-            <LocalAuthForm setlocalLogin={setlocalLogin} setlocalToken={setlocalToken} />
+            <LocalAuthForm setlocalLogin={setlocalLogin} />
          </Box>
       )
    }

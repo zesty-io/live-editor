@@ -7,17 +7,16 @@ import Button from "@mui/material/Button"
 import Typography from "@mui/material/Typography"
 import { TextField } from "@mui/material"
 import { assets } from "constants"
+import Cookies from "js-cookie"
 
 interface Props {
-   setlocalToken: (e: string) => void
    setlocalLogin: (e: boolean) => void
 }
-export const LocalAuthForm = ({ setlocalToken, setlocalLogin }: Props) => {
+export const LocalAuthForm = ({ setlocalLogin }: Props) => {
    const [email, setemail] = useState("")
    const [password, setpassword] = useState("")
    const handleSuccess = (data: any) => {
-      console.log(data, "d::")
-      setlocalToken(data.meta.token)
+      Cookies.set("LOCAL_APP_SID", data.meta.token)
       setlocalLogin(false)
    }
    const handleError = (error: any) => {

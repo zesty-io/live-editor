@@ -11,7 +11,7 @@ interface Props {
    theme: any
    response: any
    setloading: any
-   token: string
+   token: string | undefined
    isLocalContent: boolean
 }
 
