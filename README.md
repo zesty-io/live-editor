@@ -26,11 +26,26 @@ Using NPM
 npm install @zesty-io/live-editor
 ```
 
+# React
+
 ```jsx
 import { ZestyLiveEditor } from "@zesty-io/live-editor"
 
 React.useEffect(() => {
    ZestyLiveEditor(data)
+}, [])
+```
+
+# Next JS
+
+```jsx
+const someFunction = async (content) => {
+   const { ZestyLiveEditor } = await import("@zesty-io/live-editor")
+   ZestyLiveEditor(content)
+}
+
+React.useEffect(() => {
+   someFunction(content)
 }, [])
 ```
 

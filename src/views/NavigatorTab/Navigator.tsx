@@ -22,6 +22,7 @@ export const NavigatorTab = ({ content, theme, response, token, setloading }: Pr
    const [data, setdata] = React.useState([])
    const [search, setsearch] = React.useState("")
 
+   console.log(content, "content:::::")
    const handleJsonData = (data: any) => {
       setdata(data)
    }
@@ -42,14 +43,14 @@ export const NavigatorTab = ({ content, theme, response, token, setloading }: Pr
       threshold: 0,
       isCaseSensitive: false,
       minMatchCharLength: 1,
-      keys: ["title", "uri", "path_part"],
+      keys: ["title", "uri", "path_part", "url"],
    }
 
    const fuse = new Fuse(data, options)
    const result = fuse.search(search)
 
    React.useEffect(() => {
-      data.length === 0 && fetchJsonData()
+      data?.length === 0 && fetchJsonData()
    }, [data])
 
    return (

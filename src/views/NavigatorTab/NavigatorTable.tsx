@@ -169,7 +169,7 @@ export const NavTable = ({ data, theme, search }: IProps) => {
             rowsPerPageOptions={[]}
             // rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={rows.length}
+            count={rows?.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
