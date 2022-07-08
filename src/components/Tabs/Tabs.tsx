@@ -19,8 +19,14 @@ interface StyledTabsProps {
    value: number
    onChange: (event: React.SyntheticEvent, newValue: number) => void
 }
+interface ITabs {
+   tabList: any[]
+   settime: any
+   setcurrentTab: any
+   token: string
+}
 
-const Index = ({ tabList, settime, setcurrentTab }: any) => {
+const Index = ({ tabList, settime, setcurrentTab, token }: ITabs) => {
    const [value, setValue] = React.useState(0)
    const theme = useTheme()
    // @ts-ignore
@@ -47,10 +53,10 @@ const Index = ({ tabList, settime, setcurrentTab }: any) => {
       "& .MuiTabs-indicatorSpan": {
          maxWidth: 0,
          width: "100%",
-         backgroundColor: theme.palette.zesty.zestyOrange,
+         backgroundColor: theme.palette?.zesty?.zestyOrange,
       },
       "& .MuiTabScrollButton-root": {
-         color: theme.palette.primary.main,
+         color: theme?.palette?.primary?.main,
       },
    })
    const StyledTab = styled((props: StyledTabProps) => <Tab disableRipple {...props} />)(
@@ -60,24 +66,32 @@ const Index = ({ tabList, settime, setcurrentTab }: any) => {
          fontSize: "14px",
          // marginRight: theme.spacing(1),
          marginRight: "5px",
-         color: theme.palette.primary.main,
+         color: theme?.palette?.primary?.main,
          "&.Mui-selected": {
             // @ts-ignore
-            color: theme.palette.zesty.zestyOrange,
+            color: theme.palette?.zesty?.zestyOrange,
             fontWeight: theme.typography.fontWeightBold,
             // @ts-ignore
-            backgroundColor: theme.palette.secondary.mainRgb,
+            backgroundColor: theme.palette?.secondary?.mainRgb,
             borderRadius: "8px",
          },
          "&:hover, &.Mui-focusVisible": {
             // @ts-ignore
-            backgroundColor: theme.palette.alternate.main,
+            backgroundColor: theme.palette?.alternate?.main,
             borderRadius: "8px",
          },
       }),
    )
+
+   const filterTabs = token
+      ? tabList
+      : tabList.filter((e: any) => {
+           return (
+              e.label === "Navigator" || e.label === "JSON" || e.label === "Code Helper"
+           )
+        })
    return (
-      <Box>
+      <Box data-testid="tabContainer">
          <Box sx={{ maxWidth: { xs: 320, sm: 480 }, bgcolor: "#fff" }}>
             {" "}
             <StyledTabs
@@ -85,8 +99,8 @@ const Index = ({ tabList, settime, setcurrentTab }: any) => {
                onChange={handleChange}
                aria-label="scrollable auto tabs example"
             >
-               {tabList.map((e: any) => (
-                  <StyledTab label={e.label} />
+               {filterTabs.map((e: any) => (
+                  <StyledTab label={e.label} data-testid={e.label} />
                ))}
             </StyledTabs>
          </Box>

@@ -5,7 +5,7 @@ import { useFetchWrapper } from "hooks"
 import { fetchData } from "services"
 import { Box } from "@mui/material"
 import { containerStyle } from "./styles"
-import { Headers } from "components"
+import { Headers, LocalAuthForm } from "components"
 import {
    CodeHelperTab,
    EditTab,
@@ -25,6 +25,8 @@ interface Props {
    children: any
    jsonData: JsonData
    getData: any
+   token: string
+   setlocalToken: (e: string) => void
 }
 export const ZestyExplorerBrowser = ({
    pageData,
@@ -32,7 +34,10 @@ export const ZestyExplorerBrowser = ({
    children,
    jsonData,
    getData,
+   token,
+   setlocalToken,
 }: Props) => {
+   const [localLogin, setlocalLogin] = React.useState(false)
    const [modal, setmodal] = React.useState(false)
    const content = pageData
    const [currentTab, setcurrentTab] = React.useState(0)
@@ -50,14 +55,15 @@ export const ZestyExplorerBrowser = ({
       console.log("Current scroll position:", target.scrollTop)
    }
 
-   const userAppSID = helper.getUserAppSID()
-   const token = userAppSID
+   const userAppSID = token
+   // const token = userAppSID
    const itemZUID = jsonData?.data?.meta?.zuid
    const modelZUID = jsonData?.data?.meta?.model?.zuid
    const instanceZUID = helper.headerZUID(jsonData.res)
 
    const theme = useTheme()
    console.log(jsonData, "jsondata")
+   console.log(pageData, jsonData, token, "d::")
    // get the instance view models  on initial load
    const { loading, verifyFailed, verifySuccess, instances, views, models } =
       useFetchWrapper(userAppSID, instanceZUID)
@@ -79,6 +85,9 @@ export const ZestyExplorerBrowser = ({
       getFinalData()
    }, [url, token])
 
+   React.useEffect(() => {
+      console.log(localLogin, "d::")
+   }, [localLogin])
    // for loading of tabs
    React.useEffect(() => {
       const timer = setTimeout(() => {
@@ -97,6 +106,8 @@ export const ZestyExplorerBrowser = ({
       tabList,
       settime: () => settime(2),
       modal,
+      token,
+      setlocalLogin,
    }
 
    const EditProps = {
@@ -166,6 +177,14 @@ export const ZestyExplorerBrowser = ({
       setloading: () => settime(2),
       token,
    }
+   if (localLogin) {
+      return (
+         <Box sx={containerStyle}>
+            <LocalAuthForm setlocalLogin={setlocalLogin} setlocalToken={setlocalToken} />
+         </Box>
+      )
+   }
+
    // show loading
    if (loading && !verifyFailed && !verifySuccess) {
       return (
@@ -176,7 +195,11 @@ export const ZestyExplorerBrowser = ({
    }
 
    // show failed login prompt
-   if (!verifySuccess) {
+   if (
+      Object.keys(pageData).length === 0 &&
+      Object.keys(jsonData.data).length === 0 &&
+      !verifySuccess
+   ) {
       return (
          <Box sx={containerStyle}>
             <LoginPrompt />

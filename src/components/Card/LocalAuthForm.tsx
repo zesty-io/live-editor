@@ -8,14 +8,22 @@ import Typography from "@mui/material/Typography"
 import { TextField } from "@mui/material"
 import { assets } from "constants"
 
-// interface Props {
-//       handleCustomDomain: () => void
-//       value: string
-//       onChange: (e: any) => void
-// }
-export const LocalAuthForm = () => {
+interface Props {
+   setlocalToken: (e: string) => void
+   setlocalLogin: (e: boolean) => void
+}
+export const LocalAuthForm = ({ setlocalToken, setlocalLogin }: Props) => {
    const [email, setemail] = useState("")
    const [password, setpassword] = useState("")
+   const handleSuccess = (data: any) => {
+      console.log(data, "d::")
+      setlocalToken(data.meta.token)
+      setlocalLogin(false)
+   }
+   const handleError = (error: any) => {
+      console.log(error, "error::")
+      setlocalLogin(false)
+   }
 
    const postdata = async () => {
       const formData = new FormData()
@@ -32,9 +40,9 @@ export const LocalAuthForm = () => {
          headers,
          body: formData,
       })
-      const content = await rawResponse.json()
-
-      console.log(content, "ddd:::")
+      const res = await rawResponse.json()
+      res.code === 200 && handleSuccess(res)
+      res.code !== 200 && handleError(res)
    }
 
    const card = (

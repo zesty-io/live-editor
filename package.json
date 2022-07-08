@@ -19,7 +19,8 @@
       "manual-publish": "git pull origin main && npx prettier --write . && npm run release",
       "clear-dist": "find dist ! -name 'live-editor.production.js' -type f -exec rm -f {} +",
       "watch": "webpack --watch  --mode=production --config=webpack.config.common.ts ",
-      "test": "jest"
+      "test": "jest",
+      "test-dev": "jest --watch --silent"
    },
    "keywords": [
       "zesty-io",

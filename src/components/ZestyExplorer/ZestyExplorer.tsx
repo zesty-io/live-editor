@@ -19,18 +19,23 @@ import { JsonData, ZestyExplorerProps } from "types"
 
 // Main ZESTY EXPLORER
 export const ZestyExplorer = ({ content = {} }: ZestyExplorerProps) => {
+   const [localToken, setlocalToken] = React.useState("")
    const [secretKey, setsecretKey] = React.useState("")
    const [domain, setdomain] = React.useState("")
    const [jsonUrl, setjsonUrl] = React.useState(helper.getJsonUrl(domain))
    const [jsonData, setJsonData] = React.useState<JsonData>({
-      data: null,
+      data: content || null,
       error: false,
       res: {},
    })
    const token =
-      secretKey || helper.getCookie("APP_SID") || process.env.ZESTY_TEST_APP_SID
+      localToken ||
+      secretKey ||
+      helper.getCookie("APP_SID") ||
+      helper.getUserAppSID() ||
+      process.env.ZESTY_TEST_APP_SID
    const [open, setOpen] = React.useState(false)
-   const [pageData, setPageData] = React.useState<any>("")
+   const [pageData, setPageData] = React.useState<any>(content || {})
    const [response, setResponse] = React.useState<any>("")
    const [themeMode, themeToggler, mountedComponent] = useDarkMode()
    const [loading, setloading] = React.useState(false)
@@ -174,6 +179,8 @@ export const ZestyExplorer = ({ content = {} }: ZestyExplorerProps) => {
                      pageData={pageData}
                      jsonData={jsonData}
                      getData={getData}
+                     token={token}
+                     setlocalToken={setlocalToken}
                   >
                      <Button
                         onClick={() =>

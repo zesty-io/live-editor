@@ -12,6 +12,8 @@ interface Props {
    tabList: any
    settime: any
    modal: boolean
+   token: string
+   setlocalLogin: (e: boolean) => void
 }
 
 const Index = ({
@@ -22,6 +24,8 @@ const Index = ({
    tabList,
    settime,
    modal,
+   token,
+   setlocalLogin,
 }: Props) => {
    const theme = useTheme()
    console.log(content, response)
@@ -61,9 +65,17 @@ const Index = ({
                   setcurrentTab={setcurrentTab}
                   tabList={tabList}
                   settime={settime}
+                  token={token}
                />
             </Box>
 
+            <Box>
+               {!token && (
+                  <button data-testid="localLoginBtn" onClick={() => setlocalLogin(true)}>
+                     Login
+                  </button>
+               )}
+            </Box>
             <Box sx={{ display: "flex", alignItems: "center", gap: ".5rem" }}>
                {/* <BasicMenu list={list} /> */}
                {children}
