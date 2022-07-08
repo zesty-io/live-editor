@@ -22,7 +22,7 @@ interface StyledTabsProps {
 interface ITabs {
    tabList: any[]
    settime: any
-   setcurrentTab: any
+   setcurrentTab: (e: string | null) => void
    token: string | undefined
 }
 
@@ -31,7 +31,7 @@ const Index = ({ tabList, settime, setcurrentTab, token }: ITabs) => {
    const theme = useTheme()
    // @ts-ignore
    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-      setcurrentTab(newValue)
+      setcurrentTab(event.currentTarget.textContent)
       setValue(newValue)
       settime()
    }

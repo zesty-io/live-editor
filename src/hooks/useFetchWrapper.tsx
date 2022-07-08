@@ -48,10 +48,6 @@ export const useFetchWrapper = (userAppSID: any, instanceZUID: any) => {
       getViews()
    }, [])
 
-   //    React.useEffect(() => {
-   //       console.log(instances, views, models, "datas")
-   //    }, [instances, models, views])
-
    return {
       loading,
       verifyFailed,

@@ -72,13 +72,6 @@ export const ZestyExplorer = ({ content = {} }: ZestyExplorerProps) => {
       }
    }, [isContentAvailable, secretKey])
 
-   React.useEffect(() => {
-      console.log(
-         token,
-         isContentAvailable && LOCAL_DOMAINS.includes(window.location.hostname),
-         "token::::",
-      )
-   }, [isContentAvailable, secretKey, token])
    // check if content is available
    React.useEffect(() => {
       const fetchJsonData = async () => {
@@ -104,7 +97,6 @@ export const ZestyExplorer = ({ content = {} }: ZestyExplorerProps) => {
    React.useEffect(() => {
       isContentAvailable && setJsonData({ data: content, error: false, res: {} })
       isContentAvailable && setPageData(content)
-      console.log(pageData, jsonData, "2:::")
    }, [isContentAvailable])
 
    const handleCustomDomain = () => {
@@ -182,6 +174,7 @@ export const ZestyExplorer = ({ content = {} }: ZestyExplorerProps) => {
                      jsonData={jsonData}
                      getData={getData}
                      token={token}
+                     settoken={settoken}
                   >
                      <Button
                         onClick={() =>

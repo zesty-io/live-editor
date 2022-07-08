@@ -11,20 +11,26 @@ import Cookies from "js-cookie"
 
 interface Props {
    setlocalLogin: (e: boolean) => void
+   setloading: (e: boolean) => void
+   settoken: (e: string | undefined) => void
 }
-export const LocalAuthForm = ({ setlocalLogin }: Props) => {
+export const LocalAuthForm = ({ setlocalLogin, settoken, setloading }: Props) => {
    const [email, setemail] = useState("")
    const [password, setpassword] = useState("")
    const handleSuccess = (data: any) => {
       Cookies.set("LOCAL_APP_SID", data.meta.token)
+      settoken(data.meta.token)
+      setloading(false)
       setlocalLogin(false)
    }
    const handleError = (error: any) => {
+      setloading(false)
       console.log(error, "error::")
       setlocalLogin(false)
    }
 
    const postdata = async () => {
+      setloading(true)
       const formData = new FormData()
       formData.append("email", email)
       formData.append("password", password)
