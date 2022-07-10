@@ -112,6 +112,13 @@
       "webpack-cli": "^4.10.0",
       "webpack-dev-server": "^4.9.2"
    },
+   "publishConfig": {
+      "registry": "https://npm.pkg.github.com"
+   },
+   "repository": {
+      "type": "git",
+      "url": "git@github.com:zesty-io/live-editor.git"
+   },
    "browser": {
       "[module-name]": false
    },
