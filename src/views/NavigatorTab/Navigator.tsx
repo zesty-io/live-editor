@@ -77,6 +77,7 @@ export const NavigatorTab = ({
                   width: "100%",
                   justifyContent: "center",
                   justifyItems: "center",
+                  flexDirection: "column",
                }}
             >
                <Typography
@@ -90,23 +91,23 @@ export const NavigatorTab = ({
                >
                   Site Navigator
                </Typography>
+               <MainInput
+                  theme={{
+                     main: theme.palette.primary.main,
+                     white: theme.palette.common.white,
+                     boxShadow: theme.palette.secondary.blueShadow,
+                     border: theme.palette.secondary.whiteSmoke,
+                  }}
+                  name={" "}
+                  autoFocus={true}
+                  key={1}
+                  label={" "}
+                  required={false}
+                  value={search}
+                  onChange={(e: any) => setsearch(e.target.value)}
+                  placeholder={"Search for title, paths ..."}
+               />
             </Box>
-            <MainInput
-               theme={{
-                  main: theme.palette.primary.main,
-                  white: theme.palette.common.white,
-                  boxShadow: theme.palette.secondary.blueShadow,
-                  border: theme.palette.secondary.whiteSmoke,
-               }}
-               name={" "}
-               autoFocus={true}
-               key={1}
-               label={" "}
-               required={false}
-               value={search}
-               onChange={(e: any) => setsearch(e.target.value)}
-               placeholder={"Search for title, paths ..."}
-            />
             <NavTable
                theme={theme}
                data={search?.length === 0 ? data : result}
