@@ -62,7 +62,9 @@ export const ZestyExplorerBrowser = ({
    const userAppSID = token
    const itemZUID = jsonData?.data?.meta?.zuid
    const modelZUID = jsonData?.data?.meta?.model?.zuid
-   const instanceZUID = helper.headerZUID(jsonData.res)
+   const instanceZUID = isLocalContent
+      ? jsonData?.data?.meta?.zuid
+      : helper.headerZUID(jsonData.res)
 
    // get the instance view models  on initial load
    const { loading, verifyFailed, verifySuccess, instances, views, models } =
@@ -200,11 +202,7 @@ export const ZestyExplorerBrowser = ({
    }
 
    // show failed login prompt
-   if (
-      Object.keys(pageData).length === 0 &&
-      Object.keys(jsonData.data).length === 0 &&
-      !verifySuccess
-   ) {
+   if (!verifySuccess && !isLocalContent) {
       return (
          <Box sx={containerStyle}>
             <LoginPrompt />
