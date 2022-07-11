@@ -24,5 +24,5 @@ export const ZestyLiveEditor = (content?: any) => {
    root.render(<ZestyExplorer content={content} />)
 }
 
-// ZestyLiveEditor()
+ZestyLiveEditor()
 // ZestyLiveEditor(dummydata)
