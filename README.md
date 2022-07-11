@@ -16,6 +16,7 @@ Website/App Overlay Guide for Editing Zesty.io Content
 ![GitHub issues](https://img.shields.io/github/issues/zesty-io/live-editor?style=flat-square)
 
 </div>
+
 ## Overview
 
 Is that the explorer will be a website overlay tool that will guide the user around the data that loads on the page relative to the zesty content management system. The tool will have tabs for searchable on page data, full site navigation, inline editing, website and page health, metadata explorer, image optimization scanning, broken link scanning.
