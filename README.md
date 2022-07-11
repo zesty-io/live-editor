@@ -139,7 +139,7 @@ Check <a href="https://github.com/zesty-io/live-editor/blob/development/CONTRIBU
 
 # How to Commit
 
-Check <a href="https://github.com/zesty-io/live-editor/blob/development/CONTRIBUTING.md#Using-the-Project's-Standard-Commit Messages">here</a> on how to run locally</a>
+Check <a href="https://github.com/zesty-io/live-editor/blob/development/CONTRIBUTING.md#Using-the-Project's-Standard-Commit Messages">here</a>
 
 # Deploying in Production
 
