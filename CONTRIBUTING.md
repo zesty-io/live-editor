@@ -92,8 +92,3 @@ Great Feature Requests tend to have:
 -  A quick idea summary.
 -  What & why you wanted to add the specific feature.
 -  Additional context like images, links to resources to implement the feature etc, etc.
-
-## License
-
-By contributing to DogeHouse, you agree that your contributions will be licensed
-under the [LICENSE file](LICENSE).
