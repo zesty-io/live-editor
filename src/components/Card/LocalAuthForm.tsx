@@ -8,13 +8,15 @@ import Typography from "@mui/material/Typography"
 import { TextField } from "@mui/material"
 import { assets } from "constants"
 import Cookies from "js-cookie"
+import { NewLoader } from "components/Loader"
+import { containerStyle } from "components/ZestyExplorer/styles"
 
 interface Props {
    setlocalLogin: (e: boolean) => void
-   setloading: (e: boolean) => void
    settoken: (e: string | undefined) => void
 }
-export const LocalAuthForm = ({ setlocalLogin, settoken, setloading }: Props) => {
+export const LocalAuthForm = ({ setlocalLogin, settoken }: Props) => {
+   const [loading, setloading] = useState(false)
    const [email, setemail] = useState("")
    const [password, setpassword] = useState("")
    const handleSuccess = (data: any) => {
@@ -51,7 +53,14 @@ export const LocalAuthForm = ({ setlocalLogin, settoken, setloading }: Props) =>
    }
 
    const card = (
-      <React.Fragment>
+      <Box
+         sx={{
+            position: "absolute",
+            top: "40%",
+            left: "50%",
+            transform: "translate(-50%,-60%)",
+         }}
+      >
          <CardContent>
             <Box
                paddingTop={1}
@@ -68,14 +77,14 @@ export const LocalAuthForm = ({ setlocalLogin, settoken, setloading }: Props) =>
                <img
                   src={assets.zestyLogo}
                   alt="Zesty Explorer"
-                  width={"50"}
-                  height={"50"}
+                  width={"100"}
+                  height={"100"}
                />
                <img
                   src={assets.zestyName}
                   alt="Zesty Explorer"
-                  width={"100"}
-                  height={"100"}
+                  width={"150"}
+                  height={"150"}
                />
             </Box>
             <Typography color="text.secondary" gutterBottom sx={{ fontSize: "18px" }}>
@@ -120,8 +129,15 @@ export const LocalAuthForm = ({ setlocalLogin, settoken, setloading }: Props) =>
                Close
             </Button>
          </CardActions>
-      </React.Fragment>
+      </Box>
    )
+   if (loading) {
+      return (
+         <Box sx={containerStyle}>
+            <NewLoader />
+         </Box>
+      )
+   }
    return (
       <Box sx={{ minWidth: 275 }}>
          <Card variant="outlined">{card}</Card>

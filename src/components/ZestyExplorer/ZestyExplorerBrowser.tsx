@@ -40,7 +40,6 @@ export const ZestyExplorerBrowser = ({
    isLocalContent,
 }: Props) => {
    const theme = useTheme()
-   const [localLoading, setlocalLoading] = React.useState(false)
    const [localLogin, setlocalLogin] = React.useState(false)
    const [modal, setmodal] = React.useState(false)
    const content = pageData
@@ -183,11 +182,7 @@ export const ZestyExplorerBrowser = ({
    if (localLogin) {
       return (
          <Box sx={containerStyle}>
-            <LocalAuthForm
-               settoken={settoken}
-               setloading={setlocalLoading}
-               setlocalLogin={setlocalLogin}
-            />
+            <LocalAuthForm settoken={settoken} setlocalLogin={setlocalLogin} />
          </Box>
       )
    }
@@ -238,7 +233,7 @@ export const ZestyExplorerBrowser = ({
       <Box sx={containerStyle}>
          <Headers {...HeaderProps}>{children}</Headers>
          <Box sx={{ position: "" }}>
-            {(time > 0 || localLoading) && <NewLoader />}
+            {time > 0 && <NewLoader />}
             {switchView(currentTab)}
          </Box>
       </Box>
