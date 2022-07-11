@@ -93,7 +93,7 @@ const Index = ({
                         padding="5px 10px"
                         size="14px"
                         theme={theme}
-                        data-testid="localLoginBtn"
+                        testid="localLoginBtn"
                         onClick={() => setlocalLogin(true)}
                      >
                         <LoginIcon fontSize="inherit" titleAccess="Edit Now" />
@@ -105,7 +105,7 @@ const Index = ({
                         padding="5px 10px"
                         size="14px"
                         theme={theme}
-                        data-testid="localLogoutBtn"
+                        testid="localLogoutBtn"
                         onClick={() => {
                            settoken("")
                            Cookies.remove("LOCAL_APP_SID")
