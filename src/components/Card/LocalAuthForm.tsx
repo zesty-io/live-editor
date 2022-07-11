@@ -53,8 +53,10 @@ export const LocalAuthForm = ({ setlocalLogin, settoken }: Props) => {
    }
 
    const card = (
-      <Box
-         sx={{
+      <form
+         action="submit"
+         onSubmit={postdata}
+         style={{
             position: "absolute",
             top: "40%",
             left: "50%",
@@ -112,12 +114,13 @@ export const LocalAuthForm = ({ setlocalLogin, settoken }: Props) => {
          </CardContent>
          <CardActions>
             <Button
+               type={"submit"}
                size="small"
                variant="contained"
                onClick={postdata}
                sx={{ fontSize: "14px" }}
             >
-               Save
+               Login
             </Button>
             <Button
                size="small"
@@ -129,7 +132,7 @@ export const LocalAuthForm = ({ setlocalLogin, settoken }: Props) => {
                Close
             </Button>
          </CardActions>
-      </Box>
+      </form>
    )
    if (loading) {
       return (
