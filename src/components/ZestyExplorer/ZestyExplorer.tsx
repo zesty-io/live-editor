@@ -16,31 +16,34 @@ import { Helmet } from "react-helmet"
 import { ZestyExplorerBrowser } from "./ZestyExplorerBrowser"
 import { LaunchBtn, Loader } from "components"
 import { JsonData, ZestyExplorerProps } from "types"
+import { LOCAL_DOMAINS } from "constants/index"
+import Cookies from "js-cookie"
 
 // Main ZESTY EXPLORER
 export const ZestyExplorer = ({ content = {} }: ZestyExplorerProps) => {
+   const [token, settoken] = React.useState<string | undefined>("")
    const [secretKey, setsecretKey] = React.useState("")
+
    const [domain, setdomain] = React.useState("")
    const [jsonUrl, setjsonUrl] = React.useState(helper.getJsonUrl(domain))
    const [jsonData, setJsonData] = React.useState<JsonData>({
-      data: null,
+      data: content || null,
       error: false,
       res: {},
    })
-   const token =
-      secretKey || helper.getCookie("APP_SID") || process.env.ZESTY_TEST_APP_SID
    const [open, setOpen] = React.useState(false)
-   const [pageData, setPageData] = React.useState<any>("")
+   const [pageData, setPageData] = React.useState<any>(content || {})
    const [response, setResponse] = React.useState<any>("")
    const [themeMode, themeToggler, mountedComponent] = useDarkMode()
    const [loading, setloading] = React.useState(false)
    console.log(themeMode, mountedComponent)
    const isContentAvailable = Object.keys(content).length !== 0 ? true : false
-
+   // const token = localToken || secretKey || helper.getUserAppSID()
    const handleJSONData = (res: JsonData) => {
       setJsonData(res)
       setloading(false)
    }
+
    // get json data
    const fetchJsonData = async () => {
       console.log("run1 jsjon::::")
@@ -58,9 +61,16 @@ export const ZestyExplorer = ({ content = {} }: ZestyExplorerProps) => {
       }
    }
 
+   // token switcher
    React.useEffect(() => {
-      console.log(pageData, "page:::", jsonData, "JSONDATA:::::")
-   }, [pageData, jsonData])
+      if (isContentAvailable && LOCAL_DOMAINS.includes(window.location.hostname)) {
+         settoken(Cookies.get("LOCAL_APP_SID"))
+      } else if (secretKey) {
+         settoken(secretKey)
+      } else {
+         settoken(helper.getUserAppSID)
+      }
+   }, [isContentAvailable, secretKey])
 
    // check if content is available
    React.useEffect(() => {
@@ -81,17 +91,12 @@ export const ZestyExplorer = ({ content = {} }: ZestyExplorerProps) => {
    }, [])
 
    React.useEffect(() => {
-      console.log(jsonUrl, domain, "domain")
-   }, [domain, jsonUrl])
-
-   React.useEffect(() => {
       !isContentAvailable && fetchJsonData()
    }, [jsonUrl, isContentAvailable])
 
    React.useEffect(() => {
       isContentAvailable && setJsonData({ data: content, error: false, res: {} })
       isContentAvailable && setPageData(content)
-      console.log(pageData, jsonData, "2:::")
    }, [isContentAvailable])
 
    const handleCustomDomain = () => {
@@ -99,16 +104,9 @@ export const ZestyExplorer = ({ content = {} }: ZestyExplorerProps) => {
    }
 
    const handleUnauth = async () => {
-      console.log(secretKey, "222222")
-      const res = await getData()
-      const res1 = await fetchJsonData()
-      console.log(res, res1)
+      await getData()
+      await fetchJsonData()
    }
-   // const searchObject = { ...pageData }
-   // // unset navigations for faster search
-   // delete searchObject.navigationTree
-   // // custom nav tree building
-   // delete searchObject.navigationCustom
 
    if (!helper.canUseDOM()) {
       return null
@@ -150,7 +148,7 @@ export const ZestyExplorer = ({ content = {} }: ZestyExplorerProps) => {
    }
 
    return (
-      <Box id={"zestyExplorer"} sx={zestyWrapper}>
+      <Box id={"zestyExplorer"} data-testid="zestyExplorerMain" sx={zestyWrapper}>
          <Helmet>
             <script src="https://cdn.jsdelivr.net/gh/zesty-io/fetch-wrapper@latest/dist/index.js" />
             <link
@@ -170,10 +168,13 @@ export const ZestyExplorer = ({ content = {} }: ZestyExplorerProps) => {
             {open && (
                <Box>
                   <ZestyExplorerBrowser
+                     isLocalContent={isContentAvailable}
                      response={response}
                      pageData={pageData}
                      jsonData={jsonData}
                      getData={getData}
+                     token={token}
+                     settoken={settoken}
                   >
                      <Button
                         onClick={() =>

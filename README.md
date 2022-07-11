@@ -6,8 +6,16 @@
 <h1 align="center"> Zesty.io Live Editor </h1>
 <p align="center">
 Website/App Overlay Guide for Editing Zesty.io Content
-<p>
 
+<p>
+<div align="center">
+
+![npm](https://img.shields.io/npm/dw/@zesty-io/live-editor?style=flat-square)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/zesty-io/live-editor?style=flat-square)
+![NPM](https://img.shields.io/npm/l/@zesty-io/live-editor?style=flat-square)
+![GitHub issues](https://img.shields.io/github/issues/zesty-io/live-editor?style=flat-square)
+
+</div>
 ## Overview
 
 Is that the explorer will be a website overlay tool that will guide the user around the data that loads on the page relative to the zesty content management system. The tool will have tabs for searchable on page data, full site navigation, inline editing, website and page health, metadata explorer, image optimization scanning, broken link scanning.
@@ -26,11 +34,26 @@ Using NPM
 npm install @zesty-io/live-editor
 ```
 
+# React
+
 ```jsx
 import { ZestyLiveEditor } from "@zesty-io/live-editor"
 
 React.useEffect(() => {
    ZestyLiveEditor(data)
+}, [])
+```
+
+# Next JS
+
+```jsx
+const someFunction = async (content) => {
+   const { ZestyLiveEditor } = await import("@zesty-io/live-editor")
+   ZestyLiveEditor(content)
+}
+
+React.useEffect(() => {
+   someFunction(content)
 }, [])
 ```
 

@@ -1,6 +1,6 @@
 {
    "name": "@zesty-io/live-editor",
-   "version": "2.0.17",
+   "version": "2.0.18",
    "description": "",
    "main": "./dist/live-editor.production.js",
    "scripts": {
@@ -18,7 +18,9 @@
       "release": "release-it",
       "manual-publish": "git pull origin main && npx prettier --write . && npm run release",
       "clear-dist": "find dist ! -name 'live-editor.production.js' -type f -exec rm -f {} +",
-      "watch": "webpack --watch  --mode=production --config=webpack.config.common.ts "
+      "watch": "webpack --watch  --mode=production --config=webpack.config.common.ts ",
+      "test": "jest",
+      "test-dev": "jest --watch --silent"
    },
    "keywords": [
       "zesty-io",
@@ -33,6 +35,8 @@
       "crypto-browserify": "^3.12.0",
       "framer-motion": "^4.1.17",
       "global": "^4.4.0",
+      "jest-environment-jsdom": "^28.1.2",
+      "js-cookie": "^3.0.1",
       "react": "^18.0.12",
       "react-dom": "^18.0.12",
       "react-quill": "^2.0.0-beta.4",
@@ -51,8 +55,13 @@
       "@mui/icons-material": "^5.8.4",
       "@mui/material": "^5.8.6",
       "@swc/core": "^1.2.207",
+      "@testing-library/jest-dom": "^5.16.4",
+      "@testing-library/react": "^13.3.0",
       "@types/dotenv-webpack": "^7.0.3",
       "@types/fork-ts-checker-webpack-plugin": "^0.4.5",
+      "@types/jest": "^28.1.4",
+      "@types/js-cookie": "^3.0.2",
+      "@types/node": "^18.0.3",
       "@types/react": "^18.0.14",
       "@types/react-dom": "^18.0.5",
       "@types/react-helmet": "^6.1.5",
@@ -81,6 +90,8 @@
       "fuse.js": "^6.5.3",
       "html-webpack-plugin": "^5.5.0",
       "husky": "^7.0.4",
+      "identity-obj-proxy": "^3.0.0",
+      "jest": "^28.1.2",
       "prettier": "^2.7.1",
       "process": "^0.11.10",
       "react-code-blocks": "^0.0.9-0",
@@ -92,6 +103,7 @@
       "style-loader": "^3.3.1",
       "svg-url-loader": "^7.1.1",
       "terser-webpack-plugin": "^5.3.3",
+      "ts-jest": "^28.0.5",
       "ts-node": "^10.8.1",
       "typescript": "^4.7.4",
       "url-loader": "^4.1.1",
@@ -99,6 +111,10 @@
       "webpack-bundle-analyzer": "^4.5.0",
       "webpack-cli": "^4.10.0",
       "webpack-dev-server": "^4.9.2"
+   },
+   "repository": {
+      "type": "git",
+      "url": "git@github.com:zesty-io/live-editor.git"
    },
    "browser": {
       "[module-name]": false

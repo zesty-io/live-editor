@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 import { withStyles } from "@material-ui/core"
 import { Button } from "@mui/material"
-import { assets } from "constants"
+import { assets } from "constants/index"
 import React from "react"
 import "./LaunchBtn.css"
 

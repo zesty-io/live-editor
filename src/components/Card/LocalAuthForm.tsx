@@ -7,17 +7,32 @@ import Button from "@mui/material/Button"
 import Typography from "@mui/material/Typography"
 import { TextField } from "@mui/material"
 import { assets } from "constants"
+import Cookies from "js-cookie"
+import { NewLoader } from "components/Loader"
+import { containerStyle } from "components/ZestyExplorer/styles"
 
-// interface Props {
-//       handleCustomDomain: () => void
-//       value: string
-//       onChange: (e: any) => void
-// }
-export const LocalAuthForm = () => {
+interface Props {
+   setlocalLogin: (e: boolean) => void
+   settoken: (e: string | undefined) => void
+}
+export const LocalAuthForm = ({ setlocalLogin, settoken }: Props) => {
+   const [loading, setloading] = useState(false)
    const [email, setemail] = useState("")
    const [password, setpassword] = useState("")
+   const handleSuccess = (data: any) => {
+      Cookies.set("LOCAL_APP_SID", data.meta.token)
+      settoken(data.meta.token)
+      setloading(false)
+      setlocalLogin(false)
+   }
+   const handleError = (error: any) => {
+      setloading(false)
+      console.log(error, "error::")
+      setlocalLogin(false)
+   }
 
    const postdata = async () => {
+      setloading(true)
       const formData = new FormData()
       formData.append("email", email)
       formData.append("password", password)
@@ -32,13 +47,20 @@ export const LocalAuthForm = () => {
          headers,
          body: formData,
       })
-      const content = await rawResponse.json()
-
-      console.log(content, "ddd:::")
+      const res = await rawResponse.json()
+      res.code === 200 && handleSuccess(res)
+      res.code !== 200 && handleError(res)
    }
 
    const card = (
-      <React.Fragment>
+      <Box
+         sx={{
+            position: "absolute",
+            top: "40%",
+            left: "50%",
+            transform: "translate(-50%,-60%)",
+         }}
+      >
          <CardContent>
             <Box
                paddingTop={1}
@@ -55,14 +77,14 @@ export const LocalAuthForm = () => {
                <img
                   src={assets.zestyLogo}
                   alt="Zesty Explorer"
-                  width={"50"}
-                  height={"50"}
+                  width={"100"}
+                  height={"100"}
                />
                <img
                   src={assets.zestyName}
                   alt="Zesty Explorer"
-                  width={"100"}
-                  height={"100"}
+                  width={"150"}
+                  height={"150"}
                />
             </Box>
             <Typography color="text.secondary" gutterBottom sx={{ fontSize: "18px" }}>
@@ -107,8 +129,15 @@ export const LocalAuthForm = () => {
                Close
             </Button>
          </CardActions>
-      </React.Fragment>
+      </Box>
    )
+   if (loading) {
+      return (
+         <Box sx={containerStyle}>
+            <NewLoader />
+         </Box>
+      )
+   }
    return (
       <Box sx={{ minWidth: 275 }}>
          <Card variant="outlined">{card}</Card>

@@ -6,7 +6,7 @@ import CardContent from "@mui/material/CardContent"
 import Button from "@mui/material/Button"
 import Typography from "@mui/material/Typography"
 import { TextField } from "@mui/material"
-import { assets } from "constants"
+import { assets } from "constants/index"
 
 interface Props {
    handleCustomDomain: () => void
@@ -18,6 +18,7 @@ export const OutlineCard = ({ handleCustomDomain, value, onChange }: Props) => {
       <React.Fragment>
          <CardContent>
             <Box
+               data-testid="domainNotValidCard"
                paddingTop={1}
                sx={{
                   width: "100%",

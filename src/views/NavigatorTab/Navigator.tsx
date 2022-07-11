@@ -11,13 +11,21 @@ interface Props {
    theme: any
    response: any
    setloading: any
-   token: string
+   token: string | undefined
+   isLocalContent: boolean
 }
 
 // test url
 // const url = "https://kfg6bckb-dev.webengine.zesty.io/-/headless/routing.json"
 
-export const NavigatorTab = ({ content, theme, response, token, setloading }: Props) => {
+export const NavigatorTab = ({
+   content,
+   theme,
+   response,
+   token,
+   setloading,
+   isLocalContent,
+}: Props) => {
    console.log(content, theme, response)
    const [data, setdata] = React.useState([])
    const [search, setsearch] = React.useState("")
@@ -42,16 +50,22 @@ export const NavigatorTab = ({ content, theme, response, token, setloading }: Pr
       threshold: 0,
       isCaseSensitive: false,
       minMatchCharLength: 1,
-      keys: ["title", "uri", "path_part"],
+      keys: ["title", "uri", "path_part", "url"],
    }
 
    const fuse = new Fuse(data, options)
    const result = fuse.search(search)
 
    React.useEffect(() => {
-      data.length === 0 && fetchJsonData()
-   }, [data])
+      if (isLocalContent) {
+         setdata(content?.navigationTree)
+      }
+      if (!isLocalContent && data?.length === 0) {
+         fetchJsonData()
+      }
+   }, [data, isLocalContent])
 
+   console.log(isLocalContent, "navcontent:::::")
    return (
       <Box>
          <Subheaders response={response} content={content} theme={theme} />
@@ -63,6 +77,7 @@ export const NavigatorTab = ({ content, theme, response, token, setloading }: Pr
                   width: "100%",
                   justifyContent: "center",
                   justifyItems: "center",
+                  flexDirection: "column",
                }}
             >
                <Typography
@@ -76,23 +91,23 @@ export const NavigatorTab = ({ content, theme, response, token, setloading }: Pr
                >
                   Site Navigator
                </Typography>
+               <MainInput
+                  theme={{
+                     main: theme.palette.primary.main,
+                     white: theme.palette.common.white,
+                     boxShadow: theme.palette.secondary.blueShadow,
+                     border: theme.palette.secondary.whiteSmoke,
+                  }}
+                  name={" "}
+                  autoFocus={true}
+                  key={1}
+                  label={" "}
+                  required={false}
+                  value={search}
+                  onChange={(e: any) => setsearch(e.target.value)}
+                  placeholder={"Search for title, paths ..."}
+               />
             </Box>
-            <MainInput
-               theme={{
-                  main: theme.palette.primary.main,
-                  white: theme.palette.common.white,
-                  boxShadow: theme.palette.secondary.blueShadow,
-                  border: theme.palette.secondary.whiteSmoke,
-               }}
-               name={" "}
-               autoFocus={true}
-               key={1}
-               label={" "}
-               required={false}
-               value={search}
-               onChange={(e: any) => setsearch(e.target.value)}
-               placeholder={"Search for title, paths ..."}
-            />
             <NavTable
                theme={theme}
                data={search?.length === 0 ? data : result}

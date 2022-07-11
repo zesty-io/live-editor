@@ -80,9 +80,13 @@ export const NavTable = ({ data, theme, search }: IProps) => {
                   {rows
                      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                      .map((row: any) => {
+                        console.log(
+                           row?.item?.url || row?.url || row?.uri || row?.item?.uri,
+                           "pester",
+                        )
                         const isCurrentPage =
-                           (row?.item?.url || row?.url) ===
-                           getPathFromUrl(window.location.href)
+                           (row?.uri || row?.item?.uri || row?.item?.url || row?.url) ===
+                           getPathFromUrl(window.location.pathname)
                               ? true
                               : false
                         return (
@@ -100,7 +104,10 @@ export const NavTable = ({ data, theme, search }: IProps) => {
                                        : theme.palette.common.black,
                                  }}
                               >
-                                 {row?.item?.uri || row?.uri}
+                                 {row?.item?.uri ||
+                                    row?.item?.url ||
+                                    row?.uri ||
+                                    row?.url}
                               </TableCell>
                               <TableCell
                                  align="left"
@@ -169,7 +176,7 @@ export const NavTable = ({ data, theme, search }: IProps) => {
             rowsPerPageOptions={[]}
             // rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={rows.length}
+            count={rows?.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
