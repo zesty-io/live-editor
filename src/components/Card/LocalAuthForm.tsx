@@ -29,6 +29,7 @@ export const LocalAuthForm = ({ setlocalLogin, settoken }: Props) => {
       setloading(false)
       console.log(error, "error::")
       setlocalLogin(false)
+      alert("Error,try again")
    }
 
    const postdata = async () => {
