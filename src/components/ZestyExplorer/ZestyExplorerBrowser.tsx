@@ -25,8 +25,9 @@ interface Props {
    children: any
    jsonData: JsonData
    getData: any
-   token: string
-   setlocalToken: (e: string) => void
+   token: string | undefined
+   settoken: (e: string | undefined) => void
+   isLocalContent: boolean
 }
 export const ZestyExplorerBrowser = ({
    pageData,
@@ -35,12 +36,14 @@ export const ZestyExplorerBrowser = ({
    jsonData,
    getData,
    token,
-   setlocalToken,
+   settoken,
+   isLocalContent,
 }: Props) => {
+   const theme = useTheme()
    const [localLogin, setlocalLogin] = React.useState(false)
    const [modal, setmodal] = React.useState(false)
    const content = pageData
-   const [currentTab, setcurrentTab] = React.useState(0)
+   const [currentTab, setcurrentTab] = React.useState<string | null>("")
    const [search, setSearch] = React.useState()
    // this is the data for editing request
    const [metaData, setMetaData] = React.useState([])
@@ -56,14 +59,12 @@ export const ZestyExplorerBrowser = ({
    }
 
    const userAppSID = token
-   // const token = userAppSID
    const itemZUID = jsonData?.data?.meta?.zuid
    const modelZUID = jsonData?.data?.meta?.model?.zuid
-   const instanceZUID = helper.headerZUID(jsonData.res)
+   const instanceZUID = isLocalContent
+      ? jsonData?.data?.meta?.zuid
+      : helper.headerZUID(jsonData.res)
 
-   const theme = useTheme()
-   console.log(jsonData, "jsondata")
-   console.log(pageData, jsonData, token, "d::")
    // get the instance view models  on initial load
    const { loading, verifyFailed, verifySuccess, instances, views, models } =
       useFetchWrapper(userAppSID, instanceZUID)
@@ -72,11 +73,11 @@ export const ZestyExplorerBrowser = ({
 
    // this is for json data viewer
    const data = helper.transformContent(content, search)
-   console.log(pageData, url, "This the Pagedata")
 
    const getFinalData = async () => {
       await fetchData(url, setMetaData, token)
    }
+   // ????????????????
    React.useEffect(() => {
       console.log(instances, views, models, jsonData, "datas")
    }, [instances, models, views, jsonData])
@@ -85,9 +86,6 @@ export const ZestyExplorerBrowser = ({
       getFinalData()
    }, [url, token])
 
-   React.useEffect(() => {
-      console.log(localLogin, "d::")
-   }, [localLogin])
    // for loading of tabs
    React.useEffect(() => {
       const timer = setTimeout(() => {
@@ -108,6 +106,8 @@ export const ZestyExplorerBrowser = ({
       modal,
       token,
       setlocalLogin,
+      settoken,
+      isLocalContent,
    }
 
    const EditProps = {
@@ -176,11 +176,13 @@ export const ZestyExplorerBrowser = ({
       response,
       setloading: () => settime(2),
       token,
+      isLocalContent,
    }
+
    if (localLogin) {
       return (
          <Box sx={containerStyle}>
-            <LocalAuthForm setlocalLogin={setlocalLogin} setlocalToken={setlocalToken} />
+            <LocalAuthForm settoken={settoken} setlocalLogin={setlocalLogin} />
          </Box>
       )
    }
@@ -195,11 +197,7 @@ export const ZestyExplorerBrowser = ({
    }
 
    // show failed login prompt
-   if (
-      Object.keys(pageData).length === 0 &&
-      Object.keys(jsonData.data).length === 0 &&
-      !verifySuccess
-   ) {
+   if (!verifySuccess && !isLocalContent) {
       return (
          <Box sx={containerStyle}>
             <LoginPrompt />
@@ -207,17 +205,36 @@ export const ZestyExplorerBrowser = ({
       )
    }
 
+   console.log(pageData, "page:::")
+
+   const switchView = (name: string | null) => {
+      switch (name) {
+         case "Edit":
+            return <EditTab {...EditProps} />
+         case "SEO":
+            return <MetaViewerTab {...MetaProps} />
+         case "Navigator":
+            return <NavigatorTab {...NavigatorProps} />
+         case "Health":
+            return <HealhTab {...HealthTabProps} />
+         case "Code Helper":
+            return <CodeHelperTab {...CodeHelperProps} />
+         case "JSON":
+            return <JsonDataViewerTab {...JSONProps} />
+         default:
+            return !token ? (
+               <NavigatorTab {...NavigatorProps} />
+            ) : (
+               <EditTab {...EditProps} />
+            )
+      }
+   }
    return (
       <Box sx={containerStyle}>
          <Headers {...HeaderProps}>{children}</Headers>
          <Box sx={{ position: "" }}>
             {time > 0 && <NewLoader />}
-            {currentTab === 0 && <EditTab {...EditProps} />}
-            {currentTab === 1 && <MetaViewerTab {...MetaProps} />}
-            {currentTab === 2 && <NavigatorTab {...NavigatorProps} />}
-            {currentTab === 3 && <HealhTab {...HealthTabProps} />}
-            {currentTab === 4 && <CodeHelperTab {...CodeHelperProps} />}
-            {currentTab === 5 && <JsonDataViewerTab {...JSONProps} />}
+            {switchView(currentTab)}
          </Box>
       </Box>
    )

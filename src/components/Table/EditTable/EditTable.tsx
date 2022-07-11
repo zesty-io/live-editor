@@ -15,8 +15,8 @@ import { CellStyle, TableContainerStyle, rowStyle } from "./Styles"
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
 import { Subheaders } from "components"
-import EditIcon from "@mui/icons-material/Edit"
-import CancelIcon from "@mui/icons-material/Cancel"
+// import EditIcon from "@mui/icons-material/Edit"
+// import CancelIcon from "@mui/icons-material/Cancel"
 import { handleEdit } from "services"
 
 // dom access highlight function
@@ -124,6 +124,8 @@ function Row({
       setWorkingElement("")
       settext("")
    }
+
+   console.log(editElement, saveChanges, "null")
    return (
       <React.Fragment>
          <TableRow
@@ -167,7 +169,7 @@ function Row({
                      border: showCloseBtn ? `2px dashed orange` : "2px solid transparent",
                   }}
                >
-                  {showCloseBtn && (
+                  {/* {showCloseBtn && (
                      <Box
                         sx={{
                            fontSize: "22px",
@@ -185,7 +187,7 @@ function Row({
                            />
                         </Box>
                      </Box>
-                  )}
+                  )} */}
 
                   <Box
                      sx={{
@@ -202,7 +204,7 @@ function Row({
                      }}
                   >
                      <Box ref={ref1}>{value}</Box>
-                     {!showCloseBtn && value && (
+                     {/* {!showCloseBtn && value && (
                         <Box onClick={editElement} sx={{ fontSize: "22px" }}>
                            <EditIcon
                               fontSize="inherit"
@@ -210,7 +212,7 @@ function Row({
                               titleAccess="Edit Data"
                            />
                         </Box>
-                     )}
+                     )} */}
                   </Box>
                </Box>
             </TableCell>
@@ -331,7 +333,7 @@ export const EditTable = ({
                   </TableCell>
                   <TableCell
                      align="center"
-                     sx={{ ...CellStyle, width: "15rem", paddingLeft: "0" }}
+                     sx={{ ...CellStyle, width: "20rem", paddingLeft: "0" }}
                   >
                      Content Example
                   </TableCell>

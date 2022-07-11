@@ -22,8 +22,8 @@ interface StyledTabsProps {
 interface ITabs {
    tabList: any[]
    settime: any
-   setcurrentTab: any
-   token: string
+   setcurrentTab: (e: string | null) => void
+   token: string | undefined
 }
 
 const Index = ({ tabList, settime, setcurrentTab, token }: ITabs) => {
@@ -31,7 +31,7 @@ const Index = ({ tabList, settime, setcurrentTab, token }: ITabs) => {
    const theme = useTheme()
    // @ts-ignore
    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-      setcurrentTab(newValue)
+      setcurrentTab(event.currentTarget.textContent)
       setValue(newValue)
       settime()
    }
@@ -40,7 +40,7 @@ const Index = ({ tabList, settime, setcurrentTab, token }: ITabs) => {
       <Tabs
          variant="scrollable"
          scrollButtons="auto"
-         sx={{ width: "28vw" }}
+         sx={{ width: "26vw" }}
          {...props}
          TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
       />

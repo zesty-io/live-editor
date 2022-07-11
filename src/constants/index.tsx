@@ -71,3 +71,4 @@ export const assets = {
    zestyLogo,
    zestyName,
 }
+export const LOCAL_DOMAINS = ["localhost", "127.0.0.1", "test.zesty.io"]

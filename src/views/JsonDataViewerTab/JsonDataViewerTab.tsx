@@ -25,7 +25,7 @@ export const JsonDataViewerTab = ({
          <SearchAppBar value={search} onChange={setSearch} />
          <ReactJson
             style={{
-               height: "70vh",
+               height: "68vh",
                overflowY: "scroll",
                fontSize: "14px !important",
                fontFamily: "Mulish",

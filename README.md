@@ -6,7 +6,19 @@
 <h1 align="center"> Zesty.io Live Editor </h1>
 <p align="center">
 Website/App Overlay Guide for Editing Zesty.io Content
+
 <p>
+<div align="center">
+
+![npm](https://img.shields.io/npm/dw/@zesty-io/live-editor?style=flat-square)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/zesty-io/live-editor?style=flat-square)
+![GitHub issues](https://img.shields.io/github/issues/zesty-io/live-editor?style=flat-square)
+![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/mnkmogppmhhmafgfljgckpkapodofjob?style=flat-square)
+![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/zesty-io/live-editor/react?style=flat-square)
+![npm type definitions](https://img.shields.io/npm/types/@zesty-io/live-editor?style=flat-square)
+![NPM](https://img.shields.io/npm/l/@zesty-io/live-editor?style=flat-square)
+
+</div>
 
 ## Overview
 
@@ -26,11 +38,26 @@ Using NPM
 npm install @zesty-io/live-editor
 ```
 
+# React
+
 ```jsx
 import { ZestyLiveEditor } from "@zesty-io/live-editor"
 
 React.useEffect(() => {
    ZestyLiveEditor(data)
+}, [])
+```
+
+# Next JS
+
+```jsx
+const someFunction = async (content) => {
+   const { ZestyLiveEditor } = await import("@zesty-io/live-editor")
+   ZestyLiveEditor(content)
+}
+
+React.useEffect(() => {
+   someFunction(content)
 }, [])
 ```
 
