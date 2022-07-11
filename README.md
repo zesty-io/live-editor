@@ -14,6 +14,8 @@ Website/App Overlay Guide for Editing Zesty.io Content
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/zesty-io/live-editor?style=flat-square)
 ![GitHub issues](https://img.shields.io/github/issues/zesty-io/live-editor?style=flat-square)
 ![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/mnkmogppmhhmafgfljgckpkapodofjob?style=flat-square)
+![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/zesty-io/live-editor/react?style=flat-square)
+![npm type definitions](https://img.shields.io/npm/types/@zesty-io/live-editor?style=flat-square)
 ![NPM](https://img.shields.io/npm/l/@zesty-io/live-editor?style=flat-square)
 
 </div>
