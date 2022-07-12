@@ -15,7 +15,6 @@ Website/App Overlay Guide for Editing Zesty.io Content
 ![GitHub issues](https://img.shields.io/github/issues/zesty-io/live-editor?style=for-the-badge)
 ![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/mnkmogppmhhmafgfljgckpkapodofjob?label=Chrome%20Web%20Store%20Rating&style=for-the-badge)
 ![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/zesty-io/live-editor/react?style=for-the-badge)
-![NPM](https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![MUI](https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white)
 ![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black)

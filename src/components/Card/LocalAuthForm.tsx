@@ -19,6 +19,7 @@ export const LocalAuthForm = ({ setlocalLogin, settoken }: Props) => {
    const [loading, setloading] = useState(false)
    const [email, setemail] = useState("")
    const [password, setpassword] = useState("")
+   const [error, seterror] = useState("")
    const handleSuccess = (data: any) => {
       Cookies.set("LOCAL_APP_SID", data.meta.token)
       settoken(data.meta.token)
@@ -28,8 +29,8 @@ export const LocalAuthForm = ({ setlocalLogin, settoken }: Props) => {
    const handleError = (error: any) => {
       setloading(false)
       console.log(error, "error::")
-      setlocalLogin(false)
-      alert("Error,try again")
+      seterror(error?.message)
+      // setlocalLogin(false)
    }
 
    const postdata = async () => {
@@ -135,6 +136,74 @@ export const LocalAuthForm = ({ setlocalLogin, settoken }: Props) => {
          </CardActions>
       </form>
    )
+
+   const cardError = (
+      <Box
+         style={{
+            position: "absolute",
+            top: "40%",
+            left: "50%",
+            transform: "translate(-50%,-60%)",
+         }}
+      >
+         <CardContent>
+            <Box
+               paddingTop={1}
+               sx={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyItems: "center",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: ".5rem",
+               }}
+            >
+               <img
+                  src={assets.zestyLogo}
+                  alt="Zesty Explorer"
+                  width={"100"}
+                  height={"100"}
+               />
+               <img
+                  src={assets.zestyName}
+                  alt="Zesty Explorer"
+                  width={"150"}
+                  height={"150"}
+               />
+            </Box>
+            <Typography color="text.secondary" gutterBottom sx={{ fontSize: "18px" }}>
+               {error}
+            </Typography>
+         </CardContent>
+         <CardActions
+            sx={{
+               display: "flex",
+               justifyContent: "center",
+               justifyItems: "center",
+               width: "100%",
+            }}
+         >
+            <Button
+               type={"submit"}
+               size="small"
+               variant="contained"
+               onClick={() => {
+                  setlocalLogin(false)
+                  seterror("")
+               }}
+               sx={{ fontSize: "14px" }}
+            >
+               Ok
+            </Button>
+         </CardActions>
+      </Box>
+   )
+
+   if (error?.length > 0) {
+      return <Box sx={containerStyle}>{cardError}</Box>
+   }
+
    if (loading) {
       return (
          <Box sx={containerStyle}>
@@ -142,6 +211,7 @@ export const LocalAuthForm = ({ setlocalLogin, settoken }: Props) => {
          </Box>
       )
    }
+
    return (
       <Box sx={{ minWidth: 275 }}>
          <Card variant="outlined">{card}</Card>
