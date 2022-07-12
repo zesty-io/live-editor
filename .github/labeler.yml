@@ -1,0 +1,18 @@
+assets:
+   - any: ["src/assets/**/*"]
+components:
+   - any: ["src/components/**/*"]
+constants:
+   - any: ["src/constants/**/*"]
+hooks:
+   - any: ["src/hooks/**/*"]
+services:
+   - any: ["src/services/**/*"]
+views:
+   - any: ["src/views/**/*"]
+types:
+   - any: ["src/types/**/*"]
+utils:
+   - any: ["src/utils/**/*"]
+themes:
+   - any: ["src/themes/**/*"]
