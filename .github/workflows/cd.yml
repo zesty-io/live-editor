@@ -31,7 +31,7 @@ jobs:
               git push origin version-branch:main
 
          # Create Release
-         - name: Release
+         - name: Create Release
            uses: justincy/github-action-npm-release@2.0.2
            id: release
          - name: Print release output
@@ -39,16 +39,16 @@ jobs:
            run: echo Release ID ${{ steps.release.outputs.release_id }}
 
          # Publish to NPM
-         - name: 🟢 Publish Npm
+         - name: 🟢 Setup Node
            uses: actions/setup-node@v1
            with:
               node-version: "14.x"
               registry-url: https://registry.npmjs.org
-         - name: 🚀 ci
+         - name: 🚀 Install Dependencies
            run: npm ci
-         - name: 🚀 build
+         - name: 🚀 Build Project
            run: npm run build
-         - name: 🚀 publish
+         - name: 🚀 Publish to Npm
            run: npm publish --access public
            env:
               NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
