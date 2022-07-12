@@ -10,13 +10,16 @@ Website/App Overlay Guide for Editing Zesty.io Content
 <p>
 <div align="center">
 
-![npm](https://img.shields.io/npm/dt/@zesty-io/live-editor?style=flat-square)
-![GitHub package.json version](https://img.shields.io/github/package-json/v/zesty-io/live-editor?style=flat-square)
-![GitHub issues](https://img.shields.io/github/issues/zesty-io/live-editor?style=flat-square)
-![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/mnkmogppmhhmafgfljgckpkapodofjob?style=flat-square)
-![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/zesty-io/live-editor/react?style=flat-square)
-![npm type definitions](https://img.shields.io/npm/types/@zesty-io/live-editor?style=flat-square)
-![NPM](https://img.shields.io/npm/l/@zesty-io/live-editor?style=flat-square)
+![npm](https://img.shields.io/npm/dt/@zesty-io/live-editor?label=NPM%20Downloads&style=for-the-badge)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/zesty-io/live-editor?style=for-the-badge)
+![GitHub issues](https://img.shields.io/github/issues/zesty-io/live-editor?style=for-the-badge)
+![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/mnkmogppmhhmafgfljgckpkapodofjob?label=Chrome%20Web%20Store%20Rating&style=for-the-badge)
+![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/zesty-io/live-editor/react?style=for-the-badge)
+![NPM](https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![MUI](https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white)
+![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black)
+![NPM](https://img.shields.io/npm/l/@zesty-io/live-editor?style=for-the-badge)
 
 </div>
 
