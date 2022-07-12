@@ -1,7 +1,7 @@
 assets:
    - any: ["src/assets/**/*"]
 components:
-   - any: ["src/components/**/*"]
+   - src/components/**/*
 constants:
    - any: ["src/constants/**/*"]
 hooks:
