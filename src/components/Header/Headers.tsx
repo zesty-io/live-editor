@@ -2,8 +2,11 @@ import React from "react"
 import { AppBar } from "@mui/material"
 import Box from "@mui/material/Box"
 import { useTheme } from "@mui/material/styles"
-import { TabContainer } from "components"
-import { assets } from "constants"
+import { TabContainer, CustomBtn } from "components"
+import { assets } from "constants/index"
+import Cookies from "js-cookie"
+import LoginIcon from "@mui/icons-material/Login"
+import LogoutIcon from "@mui/icons-material/Logout"
 interface Props {
    children: React.ReactNode
    content: any
@@ -12,6 +15,10 @@ interface Props {
    tabList: any
    settime: any
    modal: boolean
+   token: string | undefined
+   setlocalLogin: (e: boolean) => void
+   isLocalContent: boolean
+   settoken: (e: string | undefined) => void
 }
 
 const Index = ({
@@ -22,6 +29,10 @@ const Index = ({
    tabList,
    settime,
    modal,
+   token,
+   setlocalLogin,
+   isLocalContent,
+   settoken,
 }: Props) => {
    const theme = useTheme()
    console.log(content, response)
@@ -29,6 +40,7 @@ const Index = ({
    return (
       <AppBar
          sx={{
+            boxSizing: "border-box",
             filter: modal ? "blur(3px)" : "none",
             background: "#fff",
             overflowX: "auto",
@@ -40,6 +52,7 @@ const Index = ({
             paddingRight={1}
             paddingY={2}
             style={{
+               boxSizing: "border-box",
                display: "flex",
                justifyContent: "space-between",
                width: "100%",
@@ -48,7 +61,7 @@ const Index = ({
             }}
          >
             <Box paddingTop={1} sx={{ display: "flex", alignItems: "center" }}>
-               <Box sx={{ cursor: "pointer" }} paddingRight={4}>
+               <Box sx={{ cursor: "pointer" }} paddingRight={2}>
                   <img
                      onClick={() => window.location.reload()}
                      src={assets.zestyLogo}
@@ -61,11 +74,48 @@ const Index = ({
                   setcurrentTab={setcurrentTab}
                   tabList={tabList}
                   settime={settime}
+                  token={token}
                />
             </Box>
 
-            <Box sx={{ display: "flex", alignItems: "center", gap: ".5rem" }}>
-               {/* <BasicMenu list={list} /> */}
+            <Box
+               sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  boxSizing: "border-box",
+                  alignItems: "center",
+                  gap: ".5rem",
+               }}
+            >
+               <Box>
+                  {!token && isLocalContent && (
+                     <CustomBtn
+                        padding="5px 10px"
+                        size="14px"
+                        theme={theme}
+                        testid="localLoginBtn"
+                        onClick={() => setlocalLogin(true)}
+                     >
+                        <LoginIcon fontSize="inherit" titleAccess="Edit Now" />
+                        Login
+                     </CustomBtn>
+                  )}
+                  {token && isLocalContent && (
+                     <CustomBtn
+                        padding="5px 10px"
+                        size="14px"
+                        theme={theme}
+                        testid="localLogoutBtn"
+                        onClick={() => {
+                           settoken("")
+                           Cookies.remove("LOCAL_APP_SID")
+                        }}
+                     >
+                        <LogoutIcon fontSize="inherit" titleAccess="Edit Now" />
+                        Logout
+                     </CustomBtn>
+                  )}
+               </Box>
                {children}
             </Box>
          </Box>

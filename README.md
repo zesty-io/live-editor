@@ -6,7 +6,19 @@
 <h1 align="center"> Zesty.io Live Editor </h1>
 <p align="center">
 Website/App Overlay Guide for Editing Zesty.io Content
+
 <p>
+<div align="center">
+
+![npm](https://img.shields.io/npm/dt/@zesty-io/live-editor?style=flat-square)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/zesty-io/live-editor?style=flat-square)
+![GitHub issues](https://img.shields.io/github/issues/zesty-io/live-editor?style=flat-square)
+![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/mnkmogppmhhmafgfljgckpkapodofjob?style=flat-square)
+![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/zesty-io/live-editor/react?style=flat-square)
+![npm type definitions](https://img.shields.io/npm/types/@zesty-io/live-editor?style=flat-square)
+![NPM](https://img.shields.io/npm/l/@zesty-io/live-editor?style=flat-square)
+
+</div>
 
 ## Overview
 
@@ -20,11 +32,13 @@ The tool should be built in compiled JavaScript and execute in plain JavaScript 
 
 It should be distributed over npm package manager and yarn, it should also be able to be manually installed from a CDN link.
 
-Using NPM
+### Using NPM
 
 ```jsx
 npm install @zesty-io/live-editor
 ```
+
+-  Example Usage in React
 
 ```jsx
 import { ZestyLiveEditor } from "@zesty-io/live-editor"
@@ -34,7 +48,20 @@ React.useEffect(() => {
 }, [])
 ```
 
-Using CDN
+-  Example Usage in Nextjs
+
+```jsx
+const initLiveEditor = async (content) => {
+   const { ZestyLiveEditor } = await import("@zesty-io/live-editor")
+   ZestyLiveEditor(content)
+}
+
+React.useEffect(() => {
+   initLiveEditor(content)
+}, [])
+```
+
+### Using CDN
 
 -  copy the script tag below and paste it in the head of your main.html file
 
@@ -108,53 +135,19 @@ A view of the pages SEO and meta values which can be edited, this is not limited
 
 # How to run locally
 
-Edit the hostfile in linux or MacOs
-
-```jsx
-sudo vim /etc/hosts
-```
-
-then add the line
-
-```jsx
-127.0.0.1 test.zesty.io
-```
-
-Clone the Zesty Live-Editor and Zesty Chrome Extension on same folder :
-
-```jsx
-git clone https://github.com/zesty-io/live-editor.git
-```
-
-```jsx
-git clone https://github.com/zesty-io/chrome-ext.git
-```
-
-on the Zesty Chrome Extension Directory run
-
-Chrome Extension Repo https://github.com/zesty-io/chrome-ext
-
-```jsx
-git checkout development
-```
-
-then install the extension locally [here](https://webkul.com/blog/how-to-install-the-unpacked-extension-in-chrome/)
-
-after that change directory to the Zesty Live-editor folder then run the following command
-
-```jsx
-git checkout development && npm install && npm start
-```
-
-assuming the extension is already installed go to a zesty domain website ex `https://www.zesty.io/` the double click the zesty chrome extension to run it.
+Check <a href="https://github.com/zesty-io/live-editor/blob/development/CONTRIBUTING.md#quickstart-local-frontend-development">here</a> on how to run locally</a>
 
 # How to Commit
 
-```jsx
-npm run commit
-```
+Check <a href="https://github.com/zesty-io/live-editor/blob/development/CONTRIBUTING.md#Using-the-Project's-Standard-Commit Messages">here</a>
 
 # Deploying in Production
+
+### Automated
+
+-  All successfull merge to main will create a release and publish to npm
+
+### Manually
 
 ```jsx
 git checkout main && npm run release
@@ -166,6 +159,7 @@ git checkout main && npm run release
 -  Open /test/index.html in your browser
 -  Remove index.html from the browser file path
 -  use this override domain `https://qzp3zx5t-dev.webEngine.zesty.io/`
+   <<<<<<< HEAD
 
    Updated on
    Thu Jul 7 13:21:18 UTC 2022
@@ -178,3 +172,6 @@ git checkout main && npm run release
 
    Updated on
    Thu Jul 7 13:36:27 UTC 2022
+   =======
+
+   > > > > > > > 38aa76b56caebca2f9e0b2efbc3d985a59779eb8

@@ -6,7 +6,7 @@ export const CellStyle = {
 } as const
 export const TableContainerStyle = {
    // maxHeight: 780,
-   height: "80vh",
+   height: "85vh",
    overflow: "auto",
    scrollBehavior: "smooth",
 } as const

@@ -3,6 +3,7 @@ import { Box, Typography } from "@mui/material"
 import React from "react"
 
 export const CustomInput = styled.input`
+   box-sizing: border-box;
    padding: 0.6rem 2rem 0.6rem 1rem;
    overflow: hidden;
    background: ${(props: any) => props.theme.white};
@@ -31,6 +32,7 @@ export const CustomInput = styled.input`
    }
 `
 export const CustomTextArea = styled.textarea`
+   box-sizing: border-box;
    padding: 0.6rem 2rem 0.6rem 1rem;
    overflow: hidden;
    background: ${(props: any) => props.theme.white};

@@ -1,5 +1,7 @@
 name: Live editor CI Dev
 on:
+   push:
+      branches: [main]
    pull_request:
       branches: [main]
    workflow_dispatch:
@@ -17,3 +19,5 @@ jobs:
            run: npm run test-all
          - name: Run build
            run: npm run build
+         - name: Run test
+           run: npm run test

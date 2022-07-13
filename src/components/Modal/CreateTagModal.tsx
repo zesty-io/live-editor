@@ -11,7 +11,7 @@ interface Props {
    onClose: () => any
    resourceZUID: string
    instanceZUID: string
-   token: string
+   token: string | undefined
    setloading: any
    getHeadTags: any
 }

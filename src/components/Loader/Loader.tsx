@@ -1,5 +1,5 @@
 import { Box, Card, CardContent } from "@mui/material"
-import { assets } from "constants"
+import { assets } from "constants/index"
 import React from "react"
 import loading from "../../assets/loading.svg"
 import zestyLogoName from "../../assets/zestyname.svg"
@@ -73,7 +73,7 @@ const Index = () => {
    )
 
    return (
-      <Box sx={{ minWidth: 275 }}>
+      <Box sx={{ minWidth: 275 }} data-testid="miniLoading">
          <Card variant="outlined">{card}</Card>
       </Box>
    )
