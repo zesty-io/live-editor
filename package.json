@@ -5,6 +5,7 @@
    "main": "./dist/live-editor.production.js",
    "scripts": {
       "start": "webpack-dev-server --hot --open --mode=development --config=webpack.config.dev.ts",
+      "start-prod": "webpack-dev-server --hot --open --mode=production --config=webpack.config.prod.ts",
       "commit": "npm run build  &&  git add . && cz",
       "build": "webpack --mode=production --config=webpack.config.prod.ts && npm run clear-dist",
       "build-dev": "webpack --config=webpack.config.dev.ts",
