@@ -7,6 +7,7 @@ interface Props {
 }
 
 export const GotoTopBtn = ({ scrollPos, id = "#gotoTop" }: Props) => {
+   console.log(id)
    return (
       <Zoom in={scrollPos >= 200 ? true : false}>
          <Fab

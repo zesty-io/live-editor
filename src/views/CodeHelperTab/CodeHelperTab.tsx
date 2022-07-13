@@ -33,8 +33,7 @@ export const CodeHelperTab = ({
    const modelZUID = newData?.meta?.model?.zuid
    const instanceZUID = helper.headerZUID(response)
 
-   // @ts-ignore
-   const ZestyAPI = new Zesty.FetchWrapper(
+   const ZestyAPI = new (window as any).Zesty.FetchWrapper(
       instanceZUID,
       userAppSID,
       helper.fetchWrapperOptions(),

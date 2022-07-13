@@ -5,6 +5,7 @@
    "main": "./dist/live-editor.production.js",
    "scripts": {
       "start": "webpack-dev-server --hot --open --mode=development --config=webpack.config.dev.ts",
+      "start-prod": "webpack-dev-server --hot --open --mode=production --config=webpack.config.dev.ts",
       "commit": "npm run build  &&  git add . && cz",
       "build": "webpack --mode=production --config=webpack.config.prod.ts && npm run clear-dist",
       "build-dev": "webpack --config=webpack.config.dev.ts",
@@ -20,7 +21,12 @@
       "clear-dist": "find dist ! -name 'live-editor.production.js' -type f -exec rm -f {} +",
       "watch": "webpack --watch  --mode=production --config=webpack.config.common.ts ",
       "test": "jest",
-      "test-dev": "jest --watch --silent"
+      "test-dev": "jest --watch --silent",
+      "cy:install": "cypress install",
+      "cy:run": "cypress run --headless --browser chrome",
+      "cy:open": "cypress open --browser chrome",
+      "cy:test": "start-cy:run 9000",
+      "test:e2e:ci": " START_SERVER_AND_TEST_INSECURE=1 start-server-and-test start https://127.0.0.1:9000/ cy:run"
    },
    "keywords": [
       "zesty-io",
@@ -33,6 +39,7 @@
    "license": "ISC",
    "dependencies": {
       "crypto-browserify": "^3.12.0",
+      "cypress": "^10.3.0",
       "framer-motion": "^4.1.17",
       "global": "^4.4.0",
       "jest-environment-jsdom": "^28.1.2",
@@ -40,7 +47,8 @@
       "react": "^18.0.12",
       "react-dom": "^18.0.12",
       "react-quill": "^2.0.0-beta.4",
-      "react-tooltip": "^4.2.21"
+      "react-tooltip": "^4.2.21",
+      "start-server-and-test": "^1.14.0"
    },
    "devDependencies": {
       "@babel/core": "^7.18.6",
