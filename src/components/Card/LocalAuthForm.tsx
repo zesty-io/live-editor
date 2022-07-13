@@ -33,7 +33,8 @@ export const LocalAuthForm = ({ setlocalLogin, settoken }: Props) => {
       // setlocalLogin(false)
    }
 
-   const postdata = async () => {
+   const postdata = async (e: any) => {
+      e.preventDefault()
       setloading(true)
       const formData = new FormData()
       formData.append("email", email)

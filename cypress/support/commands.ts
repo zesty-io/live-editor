@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-namespace */
 /// <reference types="cypress" />
 // ***********************************************
 // This example commands.ts shows you how to
@@ -35,3 +37,31 @@
 //     }
 //   }
 // }
+// const { ZestyLiveEditor } = require("../../src/index")
+declare namespace Cypress {
+   interface Chainable<Subject> {
+      login(): Chainable<Subject>
+   }
+}
+
+Cypress.Commands.add("login", () => {
+   const formBody = new FormData()
+
+   formBody.append("email", Cypress.env("email"))
+   formBody.append("password", Cypress.env("password"))
+
+   // @ts-ignore
+   return cy
+      .request({
+         url: `${Cypress.env("API_AUTH")}/login`,
+         method: "POST",
+         credentials: "include",
+         body: formBody,
+      })
+      .then(async (res) => {
+         const response = await new Response(res.body).json()
+         // We need the cookie value returned reset so it is unsecure and
+         // accessible by javascript
+         cy.setCookie(Cypress.env("COOKIE_NAME"), response.meta.token)
+      })
+})

@@ -10,8 +10,7 @@ export const useFetchWrapper = (userAppSID: any, instanceZUID: any) => {
    // for verify user loading
    const [loading, setloading] = React.useState(false)
 
-   // @ts-ignore
-   const ZestyAPI = new Zesty.FetchWrapper(
+   const ZestyAPI = new (window as any).Zesty.FetchWrapper(
       instanceZUID,
       userAppSID,
       fetchWrapperOptions(),
