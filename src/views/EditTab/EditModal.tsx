@@ -81,7 +81,7 @@ export const EditModal = ({
                sx={{
                   fontSize: "24px",
                   fontWeight: "bold",
-                  color: theme.palette.primary.main,
+                  color: theme?.palette?.primary?.main,
                }}
             >
                Editing {JSON.stringify(editkey)}

@@ -57,7 +57,7 @@ export const DomReport = ({ theme }: any) => {
             sx={{
                fontSize: "24px",
                fontWeight: "bold",
-               color: theme.palette.primary.main,
+               color: theme?.palette?.primary?.main,
             }}
          >
             DOM Report

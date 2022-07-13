@@ -15,7 +15,7 @@ export const MetaTags = ({ arr, handleSubmit, theme }: Props) => {
             sx={{
                fontSize: "24px",
                fontWeight: "bold",
-               color: theme.palette.primary.main,
+               color: theme?.palette?.primary?.main,
             }}
          >
             Meta Tags
@@ -25,17 +25,17 @@ export const MetaTags = ({ arr, handleSubmit, theme }: Props) => {
             padding={4}
             boxShadow={1}
             sx={{
-               backgroundColor: theme.palette.alternate.main,
+               backgroundColor: theme?.palette?.alternate?.main,
             }}
          >
             {arr?.map((e: any, i: number) => {
                return (
                   <MainInput
                      theme={{
-                        main: theme.palette.primary.main,
-                        white: theme.palette.common.white,
-                        boxShadow: theme.palette.secondary.blueShadow,
-                        border: theme.palette.secondary.whiteSmoke,
+                        main: theme?.palette?.primary?.main,
+                        white: theme?.palette?.common?.white,
+                        boxShadow: theme?.palette?.secondary?.blueShadow,
+                        border: theme?.palette?.secondary?.whiteSmoke,
                      }}
                      autoFocus={i === 0 ? true : false}
                      key={e.key}

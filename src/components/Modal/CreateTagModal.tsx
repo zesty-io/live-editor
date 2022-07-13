@@ -151,7 +151,7 @@ const ModalContent = ({
                fontSize: "24px",
                fontWeight: "bold",
                // @ts-ignore
-               color: theme.palette.primary.main,
+               color: theme?.palette?.primary?.main,
             }}
          >
             Create Head Tags

@@ -86,17 +86,17 @@ export const NavigatorTab = ({
                   sx={{
                      fontSize: "24px",
                      fontWeight: "bold",
-                     color: theme.palette.primary.main,
+                     color: theme?.palette?.primary?.main,
                   }}
                >
                   Site Navigator
                </Typography>
                <MainInput
                   theme={{
-                     main: theme.palette.primary.main,
-                     white: theme.palette.common.white,
-                     boxShadow: theme.palette.secondary.blueShadow,
-                     border: theme.palette.secondary.whiteSmoke,
+                     main: theme?.palette?.primary?.main,
+                     white: theme?.palette?.common?.white,
+                     boxShadow: theme?.palette?.secondary?.blueShadow,
+                     border: theme?.palette?.secondary?.whiteSmoke,
                   }}
                   name={" "}
                   autoFocus={true}
