@@ -96,7 +96,7 @@ export const Subheaders = ({
                flexWrap: "wrap",
                justifyContent: "space-evenly",
                color: "black",
-               backgroundColor: theme.palette.common.white,
+               backgroundColor: theme?.palette?.common?.white,
             }}
          >
             {managerLinks.map((e: any) => {
@@ -123,7 +123,7 @@ export const Subheaders = ({
                display: "flex",
                justifyContent: "space-between",
                alignItems: "center",
-               backgroundColor: theme.palette.alternate.main,
+               backgroundColor: theme?.palette?.alternate?.main,
             }}
          >
             <Box sx={{ width: "100%" }}>
@@ -131,16 +131,16 @@ export const Subheaders = ({
                   <Typography
                      id="gotoTop"
                      sx={{ fontSize: "14px", whiteSpace: "normal" }}
-                     color={theme.palette.common.black}
+                     color={theme?.palette?.common?.black}
                      component={"h6"}
                   >
                      Browsing item{" "}
-                     <strong style={{ color: theme.palette.zesty.zestyOrange }}>
+                     <strong style={{ color: theme?.palette?.zesty?.zestyOrange }}>
                         {" "}
                         {content?.meta?.web?.seo_link_text}{" "}
                      </strong>
                      from the{" "}
-                     <strong style={{ color: theme.palette.zesty.zestyOrange }}>
+                     <strong style={{ color: theme?.palette?.zesty?.zestyOrange }}>
                         {content?.meta?.model_alternate_name}{" "}
                      </strong>
                      Content Model
@@ -153,7 +153,7 @@ export const Subheaders = ({
                         fontWeight: "500",
                         whiteSpace: "nowrap",
                      }}
-                     color={theme.palette.common.black}
+                     color={theme?.palette?.common?.black}
                      component={"h6"}
                   >
                      Version: {version}

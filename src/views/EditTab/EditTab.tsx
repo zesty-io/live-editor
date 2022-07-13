@@ -75,7 +75,7 @@ export const EditTab = ({
          sx={{
             height: "100vh",
             overflowY: "auto",
-            background: theme.palette.common.white,
+            background: theme?.palette?.common?.white,
             fontSize: "14px !important",
          }}
       >
