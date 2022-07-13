@@ -25,7 +25,7 @@
       "cy:run": "cypress run --headless --browser chrome",
       "cy:open": "cypress open --browser chrome",
       "cy:test": "start-cy:run 9000",
-      "test:e2e:ci": " START_SERVER_AND_TEST_INSECURE=1 start-server-and-test start https://test.zesty.io:9000/ cy:run"
+      "test:e2e:ci": " START_SERVER_AND_TEST_INSECURE=1 start-server-and-test start https://127.0.0.1:9000/ cy:run"
    },
    "keywords": [
       "zesty-io",
