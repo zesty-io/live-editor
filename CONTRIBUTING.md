@@ -68,7 +68,7 @@ then install the extension locally [here](https://webkul.com/blog/how-to-install
 after that change directory to the Zesty Live-editor folder then run the following command
 
 ```jsx
-git checkout development && npm install && npm start
+git checkout development && npm install && npm run prod
 ```
 
 assuming the extension is already installed go to a zesty domain website ex `https://www.zesty.io/` then double click the zesty chrome extension to run it.

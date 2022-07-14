@@ -157,7 +157,7 @@ git checkout main && npm run release
 
 ## Testing Locally in the browser
 
--  run `npm start` to start the application locally
+-  run `npm run dev` to start the application locally
 -  Open /test/index.html in your browser
 -  Remove index.html from the browser file path
 -  use this override domain `https://qzp3zx5t-dev.webEngine.zesty.io/`
