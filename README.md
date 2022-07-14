@@ -34,13 +34,19 @@ The tool should be built in compiled JavaScript and execute in plain JavaScript 
 
 It should be distributed over npm package manager and yarn, it should also be able to be manually installed from a CDN link.
 
-### Using NPM
+## Using NPM
 
 ```jsx
 npm install @zesty-io/live-editor
 ```
 
--  Example Usage in React
+## Using Yarn
+
+```jsx
+yarn add  @zesty-io/live-editor
+```
+
+### Example Usage in React
 
 ```jsx
 import { ZestyLiveEditor } from "@zesty-io/live-editor"
@@ -50,7 +56,7 @@ React.useEffect(() => {
 }, [])
 ```
 
--  Example Usage in Nextjs
+### Example Usage in Nextjs
 
 ```jsx
 const initLiveEditor = async (content) => {
@@ -63,7 +69,7 @@ React.useEffect(() => {
 }, [])
 ```
 
-### Using CDN
+## Using CDN
 
 -  copy the script tag below and paste it in the head of your main.html file
 
@@ -81,7 +87,7 @@ Note, if your website has a strict content security policy or x-frame-options, y
 https://cdn.jsdelivr.net/gh/zesty-io/live-editor@latest/dist/live-editor.production.js
 ```
 
-# Publishing to NPM
+## Publishing to NPM
 
 -  Manually: `npm run manual-publish`
 -  Github flow: any merge to main will run a release and publish flow
@@ -135,15 +141,15 @@ Zesty Overlay using the Rest API (instances-api) to write both content and files
 
 A view of the pages SEO and meta values which can be edited, this is not limited to SEO meta tags, but open graph tags, scripts, and other head tags. Head tags are injected into the page though WebEngine, prior to Search Engines reading it.
 
-# How to run locally
+## How to run locally
 
 Check <a href="https://github.com/zesty-io/live-editor/blob/development/CONTRIBUTING.md#quickstart-local-frontend-development">here</a> on how to run locally</a>
 
-# How to Commit
+## How to Commit
 
 Check <a href="https://github.com/zesty-io/live-editor/blob/development/CONTRIBUTING.md#Using-the-Project's-Standard-Commit Messages">here</a>
 
-# Deploying in Production
+## Deploying in Production
 
 ### Automated
 
