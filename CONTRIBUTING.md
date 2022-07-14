@@ -18,7 +18,7 @@ All changes happen through pull requests. Pull requests are the best way to prop
 
 ## Using the Project's Standard Commit Messages
 
-This project is using the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0-beta.2/) standard. Please follow these steps to ensure your
+This project is using the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0-beta.2/) standard. Please run the following command to ensure your
 commit messages are standardized:
 
 ```jsx
