@@ -37,6 +37,28 @@ const Index = ({
    const theme = useTheme()
    console.log(content, response)
 
+   const logoutApi = async () => {
+      const headers = {
+         "x-www-form-urlencoded": "application/json",
+         Authorization: "Bearer " + token,
+      }
+      const rawResponse = await fetch("https://auth.api.zesty.io/logout", {
+         method: "POST",
+         mode: "cors",
+         referrerPolicy: "no-referrer",
+         credentials: "omit",
+         headers,
+      })
+      const res = await rawResponse.json()
+      console.log(res)
+   }
+
+   const handleLogout = async () => {
+      settime()
+      settoken("")
+      Cookies.remove("LOCAL_APP_SID")
+      await logoutApi()
+   }
    return (
       <AppBar
          sx={{
@@ -106,10 +128,7 @@ const Index = ({
                         size="14px"
                         theme={theme}
                         testid="localLogoutBtn"
-                        onClick={() => {
-                           settoken("")
-                           Cookies.remove("LOCAL_APP_SID")
-                        }}
+                        onClick={handleLogout}
                      >
                         <LogoutIcon fontSize="inherit" titleAccess="Edit Now" />
                         Logout
