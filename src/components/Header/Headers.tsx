@@ -3,10 +3,11 @@ import { AppBar } from "@mui/material"
 import Box from "@mui/material/Box"
 import { useTheme } from "@mui/material/styles"
 import { TabContainer, CustomBtn } from "components"
-import { assets } from "constants/index"
+import { assets, baseUrls } from "constants/index"
 import Cookies from "js-cookie"
 import LoginIcon from "@mui/icons-material/Login"
 import LogoutIcon from "@mui/icons-material/Logout"
+import { authApi } from "services"
 interface Props {
    children: React.ReactNode
    content: any
@@ -37,27 +38,20 @@ const Index = ({
    const theme = useTheme()
    console.log(content, response)
 
-   const logoutApi = async () => {
-      const headers = {
-         "x-www-form-urlencoded": "application/json",
-         Authorization: "Bearer " + token,
-      }
-      const rawResponse = await fetch("https://auth.api.zesty.io/logout", {
-         method: "POST",
-         mode: "cors",
-         referrerPolicy: "no-referrer",
-         credentials: "omit",
-         headers,
-      })
-      const res = await rawResponse.json()
-      console.log(res)
+   const handleSuccess = (data: any) => {
+      console.log(data)
    }
+   const handleError = (error: any) => {
+      console.log(error)
+   }
+
+   const url = baseUrls.auth + "/logout"
 
    const handleLogout = async () => {
       settime()
       settoken("")
       Cookies.remove("LOCAL_APP_SID")
-      await logoutApi()
+      await authApi({ url, token, handleError, handleSuccess })
    }
    return (
       <AppBar

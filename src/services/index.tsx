@@ -1,3 +1,5 @@
+export * from "./auth"
+
 export const getPageData = async (token?: string) => {
    let data = {
       error: true,

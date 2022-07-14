@@ -72,3 +72,7 @@ export const assets = {
    zestyName,
 }
 export const LOCAL_DOMAINS = ["localhost", "127.0.0.1", "test.zesty.io"]
+
+export const baseUrls = {
+   auth: "https://auth.api.zesty.io",
+}
