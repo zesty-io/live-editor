@@ -36,7 +36,7 @@ Using Yarn
 yarn add  @zesty-io/live-editor
 ```
 
-Using CDN
+Using jsDelivr CDN
 
 ```jsx
 <script
@@ -44,6 +44,12 @@ Using CDN
    src="https://cdn.jsdelivr.net/gh/zesty-io/live-editor@latest/dist/live-editor.production.js"
    defer="defer"
 ></script>
+```
+
+Note, if your website has a strict content security policy or x-frame-options, you will need to add this url to your white list
+
+```
+https://cdn.jsdelivr.net/gh/zesty-io/live-editor@latest/dist/live-editor.production.js
 ```
 
 # ✨ Quickstart
@@ -69,12 +75,6 @@ const initLiveEditor = async (content) => {
 React.useEffect(() => {
    initLiveEditor(content)
 }, [])
-```
-
-Note, if your website has a strict content security policy or x-frame-options, you will need to add this url to your white list
-
-```
-https://cdn.jsdelivr.net/gh/zesty-io/live-editor@latest/dist/live-editor.production.js
 ```
 
 ## 💡 Overview
