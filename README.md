@@ -46,9 +46,9 @@ Using CDN
 ></script>
 ```
 
-# ✨ Example
+# ✨ Quickstart
 
-Example Usage in React
+Using React
 
 ```jsx
 import { ZestyLiveEditor } from "@zesty-io/live-editor"
@@ -58,7 +58,7 @@ React.useEffect(() => {
 }, [])
 ```
 
-Example Usage in Nextjs
+Using Nextjs
 
 ```jsx
 const initLiveEditor = async (content) => {
