@@ -91,6 +91,7 @@ const Index = ({
                   tabList={tabList}
                   settime={settime}
                   token={token}
+                  isLocalContent={isLocalContent}
                />
             </Box>
 
