@@ -260,7 +260,7 @@ interface ITable {
    metaData: any
    data: any
    url: string
-   token: string
+   token: string | undefined
    onScroll: any
    theme: any
    getData: any
