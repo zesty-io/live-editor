@@ -67,14 +67,32 @@ React.useEffect(() => {
 Using Nextjs
 
 ```jsx
-const initLiveEditor = async (content) => {
+const initLiveEditor = async (data) => {
    const { ZestyLiveEditor } = await import("@zesty-io/live-editor")
-   ZestyLiveEditor(content)
+   ZestyLiveEditor(data)
 }
 
 React.useEffect(() => {
-   initLiveEditor(content)
+   initLiveEditor(data)
 }, [])
+```
+
+Using Vuejs
+
+```html
+<script>
+
+   import { ZestyLiveEditor } from "@zesty-io/live-editor"
+
+    methods:{
+        initLiveEditor: function(data) {
+            ZestyLiveEditor(data)
+        }
+    },
+    beforeMount(){
+       this.initLiveEditor(data)
+    },
+</script>
 ```
 
 ## 💡 Overview
