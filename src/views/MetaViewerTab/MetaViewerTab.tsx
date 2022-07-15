@@ -17,10 +17,10 @@ interface Props {
    metaData: any
    url: string
    token: string | undefined
-   getData: any
-   setloading: any
-   createHeadtagModal: any
-   onClose: any
+   getData: () => void
+   setloading: () => void
+   createHeadtagModal: () => void
+   onClose: () => void
    resourceZUID: any
    instanceZUID: any
    modal: boolean
