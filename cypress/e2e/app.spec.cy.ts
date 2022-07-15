@@ -1,10 +1,10 @@
 /// <reference types="cypress" />
 
-describe("Test when content is pass", () => {
+describe("Test when content is pass as props and user is not login", () => {
    beforeEach("start", () => {
       cy.visit("https://test.zesty.io:9000")
    })
-   it("locate zesty launc btn", () => {
+   it("testing user interactions ", () => {
       cy.wait(5000)
       cy.get("button").click()
       cy.contains("Site Navigator")
