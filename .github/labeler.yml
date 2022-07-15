@@ -20,3 +20,6 @@ api:
 
 e2e:
    - any: ["cypress/**/*"]
+
+workflow:
+   - any: [".github/**/*"]
