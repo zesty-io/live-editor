@@ -10,43 +10,45 @@ Website/App Overlay Guide for Editing Zesty.io Content
 <p>
 <div align="center">
 
-![npm](https://img.shields.io/npm/dt/@zesty-io/live-editor?label=NPM%20Downloads&style=for-the-badge)
-![GitHub package.json version](https://img.shields.io/github/package-json/v/zesty-io/live-editor?style=for-the-badge)
-![GitHub issues](https://img.shields.io/github/issues/zesty-io/live-editor?style=for-the-badge)
-![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/mnkmogppmhhmafgfljgckpkapodofjob?label=Chrome%20Web%20Store%20Rating&style=for-the-badge)
-![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/zesty-io/live-editor/react?style=for-the-badge)
-![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
-![MUI](https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white)
-![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black)
-![NPM](https://img.shields.io/npm/l/@zesty-io/live-editor?style=for-the-badge)
+![npm](https://img.shields.io/npm/dt/@zesty-io/live-editor?label=NPM%20Downloads&style=flat-square)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/zesty-io/live-editor?style=flat-square)
+![GitHub issues](https://img.shields.io/github/issues/zesty-io/live-editor?style=flat-square)
+![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/mnkmogppmhhmafgfljgckpkapodofjob?label=Chrome%20Web%20Store%20Rating&style=flat-square)
+![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/zesty-io/live-editor/react?style=flat-square)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=flat-square&logo=typescript&logoColor=white)
+![MUI](https://img.shields.io/badge/MUI-%230081CB.svg?style=flat-square&logo=mui&logoColor=white)
+![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=flat-square&logo=webpack&logoColor=black)
+![NPM](https://img.shields.io/npm/l/@zesty-io/live-editor?style=flat-square)
 
 </div>
 
-## Overview
+# ⚡ Installing
 
-Is that the explorer will be a website overlay tool that will guide the user around the data that loads on the page relative to the zesty content management system. The tool will have tabs for searchable on page data, full site navigation, inline editing, website and page health, metadata explorer, image optimization scanning, broken link scanning.
-
-## How to Implement
-
-The tool should be built in compiled JavaScript and execute in plain JavaScript so it can run over any installation of zesty, whether it's parsley templating, next js, nuxt, or any custom build.
-
-## Distribution
-
-It should be distributed over npm package manager and yarn, it should also be able to be manually installed from a CDN link.
-
-## Using NPM
+Using NPM
 
 ```jsx
 npm install @zesty-io/live-editor
 ```
 
-## Using Yarn
+Using Yarn
 
 ```jsx
 yarn add  @zesty-io/live-editor
 ```
 
-### Example Usage in React
+Using CDN
+
+```jsx
+<script
+   type="text/javascript"
+   src="https://cdn.jsdelivr.net/gh/zesty-io/live-editor@latest/dist/live-editor.production.js"
+   defer="defer"
+></script>
+```
+
+# ✨ Example
+
+Example Usage in React
 
 ```jsx
 import { ZestyLiveEditor } from "@zesty-io/live-editor"
@@ -56,7 +58,7 @@ React.useEffect(() => {
 }, [])
 ```
 
-### Example Usage in Nextjs
+Example Usage in Nextjs
 
 ```jsx
 const initLiveEditor = async (content) => {
@@ -69,23 +71,23 @@ React.useEffect(() => {
 }, [])
 ```
 
-## Using CDN
-
--  copy the script tag below and paste it in the head of your main.html file
-
-```jsx
-<script
-   type="text/javascript"
-   src="https://cdn.jsdelivr.net/gh/zesty-io/live-editor@latest/dist/live-editor.production.js"
-   defer="defer"
-></script>
-```
-
 Note, if your website has a strict content security policy or x-frame-options, you will need to add this url to your white list
 
 ```
 https://cdn.jsdelivr.net/gh/zesty-io/live-editor@latest/dist/live-editor.production.js
 ```
+
+## 💡 Overview
+
+Is that the explorer will be a website overlay tool that will guide the user around the data that loads on the page relative to the zesty content management system. The tool will have tabs for searchable on page data, full site navigation, inline editing, website and page health, metadata explorer, image optimization scanning, broken link scanning.
+
+## 💡How to Implement
+
+The tool should be built in compiled JavaScript and execute in plain JavaScript so it can run over any installation of zesty, whether it's parsley templating, next js, nuxt, or any custom build.
+
+## Distribution
+
+It should be distributed over npm package manager and yarn, it should also be able to be manually installed from a CDN link.
 
 ## Publishing to NPM
 
@@ -96,7 +98,7 @@ https://cdn.jsdelivr.net/gh/zesty-io/live-editor@latest/dist/live-editor.product
 
 Zesty is an application that can make any website or text base document on the internet editable. It runs as javascript application and is powered by a Zesty's multi-tenant cloud based API. It would by piping any directing any live domain with a website through WebEngine. Webengine serves the application through and inject content with Parsley, a templating language that connects to the the Zesty API.
 
-## Design
+##💡 Design
 
 Figma file https://www.figma.com/file/TsOMa4gbWHgMzWyXH8MXpt/Explorer?node-id=0%3A1
 
@@ -104,9 +106,9 @@ Figma file https://www.figma.com/file/TsOMa4gbWHgMzWyXH8MXpt/Explorer?node-id=0%
 
 A domain is pointed to Zesty Webengine, and the Zesty Overlay Editor is injected into the page when it renders. The overlay tool lets the user select portions of the page they need to edit, and also gives the user the option to add sections into the page. This is made possible by storing a document which HTML markup and Parlsey is written to. When the document is served, WebEngine will render it by processing and compiling Parsley into a final web document, injecting SEO and webpage needed functionality.
 
-### Tools in the WebSite Overlay tool
+### 💡 Tools in the WebSite Overlay tool
 
-## Content
+## 💡 Content
 
 A tablar view of the content editable on the page, when an item is selected, it scrolls you the approate area, highlights it on page, and allows the user to change and save the page. When the content view is selected, a user may select an area on page where they would like to edit contnet, or add a new block to the page (like a image and text block).
 
@@ -141,15 +143,15 @@ Zesty Overlay using the Rest API (instances-api) to write both content and files
 
 A view of the pages SEO and meta values which can be edited, this is not limited to SEO meta tags, but open graph tags, scripts, and other head tags. Head tags are injected into the page though WebEngine, prior to Search Engines reading it.
 
-## How to run locally
+## 💡 How to run locally
 
 Check <a href="https://github.com/zesty-io/live-editor/blob/development/CONTRIBUTING.md#quickstart-local-frontend-development">here</a> on how to run locally</a>
 
-## How to Commit
+## 💡 How to Commit
 
 Check <a href="https://github.com/zesty-io/live-editor/blob/development/CONTRIBUTING.md#Using-the-Project's-Standard-Commit Messages">here</a>
 
-## Deploying in Production
+## 💡 Deploying in Production
 
 ### Automated
 
