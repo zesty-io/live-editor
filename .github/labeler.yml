@@ -5,6 +5,7 @@ repo:
 # Add 'test' label to any change to *.spec.js files within the source dir
 test:
    - src/**/*.test.tsx
+   - any:['cypress/**/*']
 
 # Add 'source' label to any change to src files within the source dir EXCEPT for the docs sub-folder
 source:
@@ -14,3 +15,6 @@ source:
 frontend:
    - any: ["src/**/*.tsx"]
      all: ["!src/index.tsx"]
+
+api:
+   - any: ["src/services/*.tsx"]
