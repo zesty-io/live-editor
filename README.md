@@ -24,6 +24,8 @@ Website/App Overlay Guide for Editing Zesty.io Content
 
 # ⚡ Installing
 
+Requires `node version ^14.x.x` and `npm version 6`
+
 Using NPM
 
 ```jsx
@@ -54,7 +56,7 @@ https://cdn.jsdelivr.net/gh/zesty-io/live-editor@latest/dist/live-editor.product
 
 # ✨ Quickstart
 
-Using React
+Using React, place this code in your app.js or app loading file
 
 ```jsx
 import { ZestyLiveEditor } from "@zesty-io/live-editor"
@@ -64,16 +66,18 @@ React.useEffect(() => {
 }, [])
 ```
 
-Using Nextjs
+Using Nextjs, place this in `ZestyView.js`, or for custom builds, `_document.js` or `_app.js`
 
 ```jsx
+// outside the component near imports
 const initLiveEditor = async (data) => {
    const { ZestyLiveEditor } = await import("@zesty-io/live-editor")
    ZestyLiveEditor(data)
 }
 
+// inside the component's function just before the return statement
 React.useEffect(() => {
-   initLiveEditor(data)
+   initLiveEditor(props.content)
 }, [])
 ```
 
