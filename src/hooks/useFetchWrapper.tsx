@@ -1,7 +1,11 @@
 import React from "react"
 import { fetchWrapperOptions } from "utils"
 
-export const useFetchWrapper = (userAppSID: any, instanceZUID: any) => {
+export const useFetchWrapper = (
+   userAppSID: any,
+   instanceZUID: any,
+   isLocalContent: boolean,
+) => {
    const [verifySuccess, setverifySuccess] = React.useState("")
    const [verifyFailed, setverifyFailed] = React.useState("")
    const [instances, setinstances] = React.useState([])
@@ -41,11 +45,13 @@ export const useFetchWrapper = (userAppSID: any, instanceZUID: any) => {
    }
 
    React.useEffect(() => {
-      verifyUser()
-      getInstances()
-      getModels()
-      getViews()
-   }, [])
+      if (!isLocalContent) {
+         verifyUser()
+         getInstances()
+         getModels()
+         getViews()
+      }
+   }, [isLocalContent])
 
    return {
       loading,
