@@ -18,6 +18,7 @@ const MetaProps = {
    getData: myMock1,
    createHeadtagModal: myMock1,
    setloading: myMock1,
+   isLocalContent: true,
 }
 describe("Meta Tab", () => {
    beforeEach(() => {

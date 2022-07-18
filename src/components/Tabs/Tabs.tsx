@@ -24,9 +24,10 @@ interface ITabs {
    settime: any
    setcurrentTab: (e: string | null) => void
    token: string | undefined
+   isLocalContent: boolean
 }
 
-const Index = ({ tabList, settime, setcurrentTab, token }: ITabs) => {
+const Index = ({ tabList, settime, setcurrentTab, token, isLocalContent }: ITabs) => {
    const [value, setValue] = React.useState(0)
    const theme = useTheme()
    // @ts-ignore
@@ -40,7 +41,7 @@ const Index = ({ tabList, settime, setcurrentTab, token }: ITabs) => {
       <Tabs
          variant="scrollable"
          scrollButtons="auto"
-         sx={{ width: "26vw" }}
+         sx={{ width: isLocalContent ? "25vw" : "29vw" }}
          {...props}
          TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
       />

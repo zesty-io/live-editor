@@ -18,7 +18,7 @@ All changes happen through pull requests. Pull requests are the best way to prop
 
 ## Using the Project's Standard Commit Messages
 
-This project is using the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0-beta.2/) standard. Please follow these steps to ensure your
+This project is using the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0-beta.2/) standard. Please run the following command to ensure your
 commit messages are standardized:
 
 ```jsx
@@ -68,7 +68,7 @@ then install the extension locally [here](https://webkul.com/blog/how-to-install
 after that change directory to the Zesty Live-editor folder then run the following command
 
 ```jsx
-git checkout development && npm install && npm start
+git checkout development && npm install && npm run prod
 ```
 
 assuming the extension is already installed go to a zesty domain website ex `https://www.zesty.io/` then double click the zesty chrome extension to run it.

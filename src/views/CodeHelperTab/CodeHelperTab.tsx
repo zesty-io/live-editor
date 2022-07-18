@@ -12,6 +12,7 @@ interface Props {
    scrollPos: number
    scrollEvent: any
    response: any
+   isLocalContent: boolean
 }
 
 export const CodeHelperTab = ({
@@ -24,6 +25,7 @@ export const CodeHelperTab = ({
    url,
    token,
    response,
+   isLocalContent,
 }: Props) => {
    const [fields, setfields] = React.useState([])
    const newData =
@@ -44,8 +46,10 @@ export const CodeHelperTab = ({
    }
 
    React.useEffect(() => {
-      fields?.length === 0 && getFields()
-   }, [fields])
+      if (!isLocalContent) {
+         fields?.length === 0 && getFields()
+      }
+   }, [fields, isLocalContent])
 
    return (
       <Box

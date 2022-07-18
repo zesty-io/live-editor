@@ -57,7 +57,7 @@ export const ZestyExplorerBrowser = ({
 
    // get the instance view models  on initial load
    const { loading, verifyFailed, verifySuccess, instances, views, models } =
-      useFetchWrapper(userAppSID, instanceZUID)
+      useFetchWrapper(userAppSID, instanceZUID, isLocalContent)
 
    const url = `https://${instanceZUID}.api.zesty.io/v1/content/models/${modelZUID}/items/${itemZUID}`
 
@@ -73,7 +73,9 @@ export const ZestyExplorerBrowser = ({
    }, [instances, models, views, jsonData])
 
    React.useEffect(() => {
-      getFinalData()
+      if (!isLocalContent) {
+         getFinalData()
+      }
    }, [url, token])
 
    // for loading of tabs
@@ -132,6 +134,7 @@ export const ZestyExplorerBrowser = ({
       getData,
       createHeadtagModal: () => setmodal(true),
       setloading: () => settime(2),
+      isLocalContent,
    }
 
    const JSONProps = {
@@ -153,6 +156,7 @@ export const ZestyExplorerBrowser = ({
       scrollPos: currentScroll,
       scrollEvent,
       response,
+      isLocalContent,
    }
 
    const HealthTabProps = {

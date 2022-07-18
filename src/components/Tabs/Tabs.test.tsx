@@ -12,6 +12,7 @@ describe("Tab container ", () => {
             settime={myMock1}
             tabList={tabList}
             token={""}
+            isLocalContent={false}
          />,
       )
    })
@@ -37,6 +38,7 @@ describe("Tab container v2 ", () => {
    beforeEach(() => {
       render(
          <TabContainer
+            isLocalContent={false}
             setcurrentTab={myMock1}
             settime={myMock1}
             tabList={tabList}
