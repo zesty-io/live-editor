@@ -215,7 +215,7 @@ export const ZestyExplorerBrowser = ({
             return <JsonDataViewerTab {...JSONProps} />
          default:
             return !token ? (
-               <NavigatorTab {...NavigatorProps} />
+               <CodeHelperTab {...CodeHelperProps} />
             ) : (
                <EditTab {...EditProps} />
             )
