@@ -7,7 +7,7 @@ describe("Test when content is pass as props and user is not login", () => {
    it("testing user interactions ", () => {
       cy.wait(5000)
       cy.get("button").click()
-      cy.contains("Site Navigator")
+      cy.contains("Code Helper")
       cy.contains("Login")
       cy.wait(3000)
       cy.get("[data-testid='Code Helper']").should("be.visible").click()
