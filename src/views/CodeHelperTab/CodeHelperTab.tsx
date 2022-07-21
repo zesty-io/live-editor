@@ -63,6 +63,7 @@ export const CodeHelperTab = ({
          <GotoTopBtn scrollPos={scrollPos} />
 
          <CodeHelperTable
+            isLocalContent={isLocalContent}
             fields={fields}
             response={response}
             content={content}

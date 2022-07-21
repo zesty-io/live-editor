@@ -27,8 +27,9 @@ interface Props {
    keyName: string
    obj: any
    type: string
+   isLocalContent: boolean
 }
-function Row({ keyName, obj, type }: Props) {
+function Row({ keyName, obj, type, isLocalContent }: Props) {
    const [showCopy, setShowCopy] = React.useState(false)
    const [showCopy2, setShowCopy2] = React.useState(false)
    const [showCopy3, setShowCopy3] = React.useState(false)
@@ -60,18 +61,20 @@ function Row({ keyName, obj, type }: Props) {
             <TableCell component="th" scope="row" sx={rowStyle}>
                {keyName}
             </TableCell>
-            <TableCell
-               component="th"
-               scope="row"
-               sx={{
-                  background: theme.palette.zesty.zestyDarkBlue,
-                  color: theme.palette.common.white,
-                  fontSize: "14px",
-                  position: "relative",
-               }}
-            >
-               {type}
-            </TableCell>
+            {!isLocalContent && (
+               <TableCell
+                  component="th"
+                  scope="row"
+                  sx={{
+                     background: theme.palette.zesty.zestyDarkBlue,
+                     color: theme.palette.common.white,
+                     fontSize: "14px",
+                     position: "relative",
+                  }}
+               >
+                  {type}
+               </TableCell>
+            )}
             <TableCell
                component="th"
                scope="row"
@@ -277,12 +280,13 @@ interface ITable {
    content: any
    metaData: any
    data: any
-   url: any
-   token: any
+   url: string
+   token: string
    onScroll: any
    theme: any
    response: any
    fields: any[]
+   isLocalContent: boolean
 }
 export const CodeHelperTable = ({
    content,
@@ -291,6 +295,7 @@ export const CodeHelperTable = ({
    theme,
    response,
    fields,
+   isLocalContent,
 }: ITable) => {
    const filterData = Object.keys(data).filter((e: any) => {
       return e !== "meta" && e !== "status"
@@ -314,9 +319,11 @@ export const CodeHelperTable = ({
                   <TableCell variant="head" sx={CellStyle}>
                      Reference Name
                   </TableCell>
-                  <TableCell variant="head" sx={CellStyle}>
-                     Type
-                  </TableCell>
+                  {!isLocalContent && (
+                     <TableCell variant="head" sx={CellStyle}>
+                        Type
+                     </TableCell>
+                  )}
                   <TableCell variant="head" sx={CellStyle}>
                      Char length
                   </TableCell>
@@ -336,7 +343,14 @@ export const CodeHelperTable = ({
             <TableBody>
                {filterData?.map((keyName: any) => {
                   const type = fields?.find((e: any) => e.name === keyName)?.datatype
-                  return <Row type={type} obj={data && data[keyName]} keyName={keyName} />
+                  return (
+                     <Row
+                        isLocalContent={isLocalContent}
+                        type={type}
+                        obj={data && data[keyName]}
+                        keyName={keyName}
+                     />
+                  )
                })}
             </TableBody>
          </Table>
