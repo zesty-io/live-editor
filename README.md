@@ -24,7 +24,7 @@ Website/App Overlay Guide for Editing Zesty.io Content
 
 # ⚡ Installing
 
-Requires `node version ^14.x.x` and `npm version 6`
+Requires `node version ^16.x.x`
 
 Using NPM
 
