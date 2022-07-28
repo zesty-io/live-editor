@@ -6,18 +6,22 @@ on:
       branches: [main]
    workflow_dispatch:
 jobs:
-   build:
+   end-to-end-tests:
       runs-on: ubuntu-latest
       steps:
          - uses: actions/checkout@v2
          - uses: actions/setup-node@v1
            with:
-              node-version: "14.x"
-         - name: Install
+              node-version: "16.x"
+         - name: Setup custom host for mylocal
+           run: echo "127.0.0.1 test.zesty.io" | sudo tee -a /etc/hosts
+         - name: Install Dependencies
            run: npm ci
-         - name: Check eslint types prettier
-           run: npm run test-all
-         - name: Run build
+         - name: Build Project
            run: npm run build
-         - name: Run test
+         - name: Check Eslint Types Prettier
+           run: npm run test-all
+         - name: Run Unit Tests
            run: npm run test
+         - name: Run Integration Tests
+           run: npm run test:e2e:ci

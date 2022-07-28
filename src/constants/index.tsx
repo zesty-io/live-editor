@@ -52,9 +52,9 @@ export const dummycontent = {
 export const tabList = [
    { id: 1, label: "Edit", value: "Edit" },
    { id: 2, label: "SEO", value: "SEO/Meta" },
-   { id: 3, label: "Navigator", value: "Navigator" },
+   { id: 3, label: "Code Helper", value: "Code Helper" },
    { id: 4, label: "Health", value: "Health" },
-   { id: 5, label: "Code Helper", value: "Code Helper" },
+   { id: 5, label: "Navigator", value: "Navigator" },
    { id: 6, label: "JSON", value: "JSON" },
 ]
 
@@ -72,3 +72,7 @@ export const assets = {
    zestyName,
 }
 export const LOCAL_DOMAINS = ["localhost", "127.0.0.1", "test.zesty.io"]
+
+export const baseUrls = {
+   auth: "https://auth.api.zesty.io",
+}

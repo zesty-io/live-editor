@@ -6,7 +6,7 @@ module.exports = {
    moduleDirectories: ["node_modules", "src"],
    collectCoverageFrom: ["**/*.{js,jsx,ts,tsx}", "!**/*.d.ts", "!**/node_modules/**"],
    moduleNameMapper: {
-      "constants/(.*)": "<rootDir>/src/constants/$1",
+      // "constants/(.*)": "<rootDir>/src/constants/$1",
       /* Handle CSS imports (with CSS modules)
     https://jestjs.io/docs/webpack#mocking-css-modules */
       "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",

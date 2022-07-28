@@ -6,19 +6,19 @@ import { handleEdit } from "services"
 interface Props {
    data: any
    metaData: any
-   url: any
-   token: any
+   url: string
+   token: string | undefined
    content: any
    theme: any
    scrollPos: number
-   scrollEvent: any
-   getData: any
-   setloading: any
+   scrollEvent: (e: any) => void
+   getData: () => void
+   setloading: () => void
    response: any
-   modal: any
-   onClose: any
-   openModal: any
-   getFinalData: any
+   modal: boolean
+   onClose: () => void
+   openModal: () => void
+   getFinalData: () => void
 }
 
 export const EditTab = ({
@@ -75,7 +75,7 @@ export const EditTab = ({
          sx={{
             height: "100vh",
             overflowY: "auto",
-            background: theme.palette.common.white,
+            background: theme?.palette?.common?.white,
             fontSize: "14px !important",
          }}
       >

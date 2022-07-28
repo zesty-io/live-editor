@@ -12,6 +12,7 @@ interface Props {
    scrollPos: number
    scrollEvent: any
    response: any
+   isLocalContent: boolean
 }
 
 export const CodeHelperTab = ({
@@ -24,6 +25,7 @@ export const CodeHelperTab = ({
    url,
    token,
    response,
+   isLocalContent,
 }: Props) => {
    const [fields, setfields] = React.useState([])
    const newData =
@@ -33,8 +35,7 @@ export const CodeHelperTab = ({
    const modelZUID = newData?.meta?.model?.zuid
    const instanceZUID = helper.headerZUID(response)
 
-   // @ts-ignore
-   const ZestyAPI = new Zesty.FetchWrapper(
+   const ZestyAPI = new (window as any).Zesty.FetchWrapper(
       instanceZUID,
       userAppSID,
       helper.fetchWrapperOptions(),
@@ -45,8 +46,10 @@ export const CodeHelperTab = ({
    }
 
    React.useEffect(() => {
-      fields?.length === 0 && getFields()
-   }, [fields])
+      if (!isLocalContent) {
+         fields?.length === 0 && getFields()
+      }
+   }, [fields, isLocalContent])
 
    return (
       <Box
@@ -60,6 +63,7 @@ export const CodeHelperTab = ({
          <GotoTopBtn scrollPos={scrollPos} />
 
          <CodeHelperTable
+            isLocalContent={isLocalContent}
             fields={fields}
             response={response}
             content={content}

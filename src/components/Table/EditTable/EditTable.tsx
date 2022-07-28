@@ -224,7 +224,7 @@ function Row({
                style={{
                   paddingBottom: 0,
                   paddingTop: 0,
-                  background: theme.palette.zesty.zestyBackgroundBlue,
+                  background: theme?.palette?.zesty?.zestyBackgroundBlue,
                }}
                colSpan={6}
             >
@@ -260,7 +260,7 @@ interface ITable {
    metaData: any
    data: any
    url: string
-   token: string
+   token: string | undefined
    onScroll: any
    theme: any
    getData: any
@@ -323,7 +323,7 @@ export const EditTable = ({
             {/* HEaders */}
             <TableHead
                sx={{
-                  backgroundColor: theme.palette.zesty.zestyOrange,
+                  backgroundColor: theme?.palette?.zesty?.zestyOrange,
                }}
             >
                <TableRow>

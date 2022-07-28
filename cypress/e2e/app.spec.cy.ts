@@ -1,0 +1,30 @@
+/// <reference types="cypress" />
+
+describe("Test when content is pass as props and user is not login", () => {
+   beforeEach("start", () => {
+      cy.visit("https://test.zesty.io:9000")
+   })
+   it("testing user interactions ", () => {
+      cy.wait(5000)
+      cy.get("button").click()
+      cy.contains("Code Helper")
+      cy.contains("Login")
+      cy.wait(3000)
+      cy.get("[data-testid='Code Helper']").should("be.visible").click()
+      cy.wait(3000)
+      cy.contains("Reference Name")
+      cy.wait(3000)
+      cy.get("[data-testid='JSON']").click()
+      cy.wait(3000)
+      cy.get(".pretty-json-container")
+      cy.contains("Login").click()
+      cy.contains("Please Login")
+      cy.get("input[type='text']").type("test")
+      cy.get("input[type='Password']").type("test")
+      cy.get("button[type='submit']").click()
+      cy.wait(5000)
+      cy.contains("Invalid")
+      cy.get("button").click()
+      cy.contains("Login")
+   })
+})

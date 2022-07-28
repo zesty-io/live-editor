@@ -110,7 +110,7 @@ export const HealhTab = ({ content, theme, response }: Props) => {
                                  sx={{
                                     fontSize: "16px",
                                     fontWeight: "bold",
-                                    color: theme.palette.primary.main,
+                                    color: theme?.palette?.primary?.main,
                                  }}
                               >
                                  {e.label}

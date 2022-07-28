@@ -1,5 +1,5 @@
 import React from "react"
-import ReactJson from "react-json-view-ssr"
+import ReactJson from "react-json-view"
 import { SearchAppBar, Subheaders } from "components"
 import { Box } from "@mui/material"
 interface Props {

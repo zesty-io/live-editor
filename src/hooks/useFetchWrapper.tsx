@@ -1,7 +1,11 @@
 import React from "react"
 import { fetchWrapperOptions } from "utils"
 
-export const useFetchWrapper = (userAppSID: any, instanceZUID: any) => {
+export const useFetchWrapper = (
+   userAppSID: any,
+   instanceZUID: any,
+   isLocalContent: boolean,
+) => {
    const [verifySuccess, setverifySuccess] = React.useState("")
    const [verifyFailed, setverifyFailed] = React.useState("")
    const [instances, setinstances] = React.useState([])
@@ -10,8 +14,7 @@ export const useFetchWrapper = (userAppSID: any, instanceZUID: any) => {
    // for verify user loading
    const [loading, setloading] = React.useState(false)
 
-   // @ts-ignore
-   const ZestyAPI = new Zesty.FetchWrapper(
+   const ZestyAPI = new (window as any).Zesty.FetchWrapper(
       instanceZUID,
       userAppSID,
       fetchWrapperOptions(),
@@ -42,11 +45,13 @@ export const useFetchWrapper = (userAppSID: any, instanceZUID: any) => {
    }
 
    React.useEffect(() => {
-      verifyUser()
-      getInstances()
-      getModels()
-      getViews()
-   }, [])
+      if (!isLocalContent) {
+         verifyUser()
+         getInstances()
+         getModels()
+         getViews()
+      }
+   }, [isLocalContent])
 
    return {
       loading,

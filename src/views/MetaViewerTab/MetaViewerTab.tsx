@@ -17,13 +17,14 @@ interface Props {
    metaData: any
    url: string
    token: string | undefined
-   getData: any
-   setloading: any
-   createHeadtagModal: any
-   onClose: any
+   getData: () => void
+   setloading: () => void
+   createHeadtagModal: () => void
+   onClose: () => void
    resourceZUID: any
    instanceZUID: any
    modal: boolean
+   isLocalContent: boolean
 }
 export const MetaViewerTab = ({
    content,
@@ -39,6 +40,7 @@ export const MetaViewerTab = ({
    resourceZUID,
    instanceZUID,
    modal,
+   isLocalContent,
 }: Props) => {
    const [title, settitle] = useState(content?.meta?.web?.seo_meta_title || "")
    const [desc, setdesc] = useState(content?.meta?.web?.seo_meta_description || "")
@@ -163,8 +165,10 @@ export const MetaViewerTab = ({
    }
 
    useEffect(() => {
-      getHeadTags()
-   }, [])
+      if (!isLocalContent) {
+         getHeadTags()
+      }
+   }, [isLocalContent])
 
    const handleCreateHeadTag = () => {
       createHeadtagModal()
@@ -193,7 +197,7 @@ export const MetaViewerTab = ({
          sx={{
             height: "100vh",
             overflowY: "auto",
-            background: theme.palette.common.white,
+            background: theme?.palette?.common?.white,
             fontSize: "14px !important",
          }}
       >

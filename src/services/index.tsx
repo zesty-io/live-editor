@@ -1,3 +1,5 @@
+export * from "./auth"
+
 export const getPageData = async (token?: string) => {
    let data = {
       error: true,
@@ -204,7 +206,7 @@ export const headTagApi = async ({
 export const handleEdit = async (
    origData: any,
    url: string,
-   token: string,
+   token: string | undefined,
    dataToEdit: any,
 ) => {
    const content = origData.data
