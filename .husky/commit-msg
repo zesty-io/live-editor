@@ -6,7 +6,7 @@ npx --no -- commitlint --edit ||
     echo '
 
     🤡😂❌🤡 ################ Commit Message ERROR. ##################### 🤡😂❌🤡
-    ❌❌❌❌❌❌ Are you seriously trying to write that? ❌❌❌❌❌❌❌
+    ❌❌❌❌❌❌ i           Solution: "npm run commit"             ❌❌❌❌❌❌❌
     🤡😂❌🤡 ################ Commit Message ERROR. ##################### 🤡😂❌🤡
 
             '
