@@ -35,6 +35,8 @@ echo '⌛⌛⌛Loading.......😅😅😅'
 echo '⌛⌛⌛Loading.......😅😅😅'
 echo '⌛⌛⌛Loading.......😅😅😅'
 echo ' '
+
+
 npm run check-types ||
 (
     echo '
