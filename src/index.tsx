@@ -2,7 +2,7 @@ import React from "react"
 import { ZestyExplorer } from "./components"
 import { createZestyDiv } from "utils"
 import * as helper from "utils/index"
-import { dummydata } from "constants"
+// import { dummydata } from "constants"
 import { render } from "react-dom"
 
 if (process.env.NODE_ENV === "production") {
@@ -23,5 +23,5 @@ export const ZestyLiveEditor = (content?: any) => {
    render(<ZestyExplorer content={content} />, container)
 }
 
-process.env.NODE_ENV === "development" ? ZestyLiveEditor(dummydata) : ZestyLiveEditor()
-// ZestyLiveEditor(dummydata)
+// process.env.NODE_ENV === "development" ? ZestyLiveEditor(dummydata) : ZestyLiveEditor()
+ZestyLiveEditor()
