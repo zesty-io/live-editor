@@ -46,7 +46,7 @@
       "js-cookie": "^3.0.1",
       "react": "^18.0.12",
       "react-dom": "^18.0.12",
-      "react-quill": "^2.0.0-beta.4",
+      "react-quill": "^2.0.0",
       "react-tooltip": "^4.2.21",
       "start-server-and-test": "^1.14.0"
    },
