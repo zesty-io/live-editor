@@ -1,20 +1,7 @@
 import styled from "@emotion/styled"
-import { withStyles } from "@material-ui/core"
-import { Button } from "@mui/material"
 import { assets } from "constants/index"
 import React from "react"
 import "./LaunchBtn.css"
-
-export const LaunchBtnStyle = withStyles({
-   root: {
-      backgroundColor: "#1b202c",
-      color: "#fff",
-      "&:hover": {
-         backgroundColor: "#1b202c",
-         color: "#fff",
-      },
-   },
-})(Button)
 
 interface Props {
    onClick: any
