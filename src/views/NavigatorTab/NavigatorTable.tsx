@@ -78,8 +78,8 @@ export const NavTable = ({ data, theme, search }: IProps) => {
                </TableHead>
                <TableBody>
                   {rows
-                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                     .map((row: any) => {
+                     ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                     ?.map((row: any) => {
                         console.log(
                            row?.item?.url || row?.url || row?.uri || row?.item?.uri,
                            "pester",
