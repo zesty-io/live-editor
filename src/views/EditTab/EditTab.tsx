@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { EditTable, GotoTopBtn } from "components"
+import { EditTable } from "components"
 import { Box } from "@mui/material"
 import { EditModal } from "./EditModal"
 import { handleEdit } from "services"
@@ -44,6 +44,7 @@ export const EditTab = ({
    const [editkey, setEditkey] = React.useState("")
    const [isWysiwyg, setisWysiwyg] = React.useState(false)
 
+   console.log(scrollPos)
    const handleSubmit = async () => {
       setloading()
       const value = !isWysiwyg ? editValue.replace(/<[^>]*>?/gm, "") : editValue
@@ -80,7 +81,7 @@ export const EditTab = ({
          }}
       >
          {modal && <EditModal {...EditModalProps} />}
-         <GotoTopBtn scrollPos={scrollPos} />
+         {/* <GotoTopBtn scrollPos={scrollPos} /> */}
 
          <Box
             sx={{

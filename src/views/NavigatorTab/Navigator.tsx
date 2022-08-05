@@ -58,7 +58,7 @@ export const NavigatorTab = ({
 
    React.useEffect(() => {
       if (isLocalContent) {
-         setdata(content?.navigationTree)
+         setdata(content?.navigationTree || content?.zestyNavigationTree)
       }
       if (!isLocalContent && data?.length === 0) {
          fetchJsonData()

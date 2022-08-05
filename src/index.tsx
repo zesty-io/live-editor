@@ -7,8 +7,8 @@ import { render } from "react-dom"
 
 if (process.env.NODE_ENV === "production") {
    console.log = () => {}
-   console.error = () => {}
-   console.debug = () => {}
+   // console.error = () => {}
+   // console.debug = () => {}
 }
 
 console.log(" ********** Zesty live editor loaded v1 ************ ")
@@ -24,4 +24,4 @@ export const ZestyLiveEditor = (content?: any) => {
 }
 
 process.env.NODE_ENV === "development" ? ZestyLiveEditor(dummydata) : ZestyLiveEditor()
-// ZestyLiveEditor(dummydata)
+// ZestyLiveEditor()
