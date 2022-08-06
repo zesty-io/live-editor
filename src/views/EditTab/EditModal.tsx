@@ -1,11 +1,10 @@
 import React from "react"
 import { Modal } from "components/Modal"
-import ReactQuill from "react-quill"
-import "react-quill/dist/quill.snow.css"
 import { Box, Typography } from "@mui/material"
 import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded"
 import { CustomBtn } from "components"
 import CloseIcon from "@mui/icons-material/Close"
+import { TinyMce } from "../../components/Ui/TinyMce"
 
 interface Props {
    onClose: () => any
@@ -15,30 +14,6 @@ interface Props {
    theme: any
    editkey: string
 }
-
-const modules = {
-   toolbar: [
-      [{ header: [1, 2, false] }],
-      ["bold", "italic", "underline", "strike", "blockquote"],
-      [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
-      ["link", "image"],
-      ["clean"],
-   ],
-}
-
-const formats = [
-   "header",
-   "bold",
-   "italic",
-   "underline",
-   "strike",
-   "blockquote",
-   "list",
-   "bullet",
-   "indent",
-   "link",
-   "image",
-]
 
 export const EditModal = ({
    theme,
@@ -55,11 +30,12 @@ export const EditModal = ({
                e.stopPropagation()
             }}
             borderRadius={2}
+            paddingBottom={4}
             sx={{
                position: "relative",
                background: "#fff",
-               height: "30rem",
-               width: "30rem",
+               height: "50vh",
+               width: "35vw",
                display: "flex",
                flexDirection: "column",
             }}
@@ -86,24 +62,10 @@ export const EditModal = ({
             >
                Editing {JSON.stringify(editkey)}
             </Typography>
-            <Box>
-               <Box sx={{ height: "100%" }}>
-                  <ReactQuill
-                     style={{ height: "15rem" }}
-                     modules={modules}
-                     formats={formats}
-                     theme="snow"
-                     value={data}
-                     onChange={(e: any) => setdata(e)}
-                  />
-               </Box>
-            </Box>
+            <TinyMce value={data} onChange={(e: any) => setdata(e)} />
             <Box
                paddingY={2}
                sx={{
-                  position: "absolute",
-                  bottom: 0,
-                  left: 0,
                   width: "100%",
                   display: "flex",
                   justifyContent: "center",
