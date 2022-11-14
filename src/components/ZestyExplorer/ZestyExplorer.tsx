@@ -53,7 +53,7 @@ export const ZestyExplorer = ({ content = {} }: ZestyExplorerProps) => {
    }
 
    const getData = async () => {
-      if (!isContentAvailable && secretKey) {
+      if (!isContentAvailable) {
          console.log("run2 jsjon::::")
          const { data, response } = await getPageData(secretKey)
          data && setPageData(data)

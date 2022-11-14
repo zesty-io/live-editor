@@ -31,8 +31,8 @@ export const getPageData = async (token?: string) => {
    const res = await fetch(uri, {
       method: "GET",
       mode: "cors",
-      referrerPolicy: "no-referrer",
-      credentials: "omit",
+      // referrerPolicy: "no-referrer",
+      // credentials: "omit",
       headers: token ? headers : headersNoToken,
    })
 
