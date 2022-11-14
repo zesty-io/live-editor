@@ -12,7 +12,10 @@ export const getPageData = async (token?: string) => {
       ? process.env.DOMAIN_OVERRIDE
       : window.location.origin
 
-   const uri = domain + window.location.pathname + "?toJSON&" + queryString
+   let uri = domain + window.location.pathname + "?toJSON"
+   if (queryString) {
+      uri = domain + window.location.pathname + "?toJSON&" + queryString
+   }
    // const uri = window.location.href + "?toJSON&" + queryString;
 
    // for testing only
@@ -82,8 +85,8 @@ export const fetchJSON = async (
    const res = await fetch(uri, {
       method: "GET",
       mode: "cors",
-      referrerPolicy: "no-referrer",
-      credentials: "omit",
+      // referrerPolicy: "no-referrer",
+      // credentials: "omit",
       headers: token ? headers : headersNoToken,
    })
       .then(async (e: any) => {
