@@ -49,7 +49,7 @@ export const LoginPrompt = () => {
             Please Login
          </Typography>
          <NormalBtn href={`https://accounts.zesty.io/login`}>
-            Sign in to Zesty.io
+            Log In to Zesty.io
          </NormalBtn>
       </Box>
    )
