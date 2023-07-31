@@ -48,9 +48,7 @@ export const LoginPrompt = () => {
          <Typography sx={{ fontSize: "32px", fontWeight: "bold" }}>
             Please Login
          </Typography>
-         <NormalBtn href={`https://accounts.zesty.io/login`}>
-            Log In to Zesty.io
-         </NormalBtn>
+         <NormalBtn href={`https://www.zesty.io/login/`}>Log In to Zesty.io</NormalBtn>
       </Box>
    )
 }
